@@ -13,6 +13,9 @@
 		840F269A24187C0D0085FBA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 840F269924187C0D0085FBA6 /* Assets.xcassets */; };
 		840F269D24187C0D0085FBA6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 840F269C24187C0D0085FBA6 /* Preview Assets.xcassets */; };
 		840F26A024187C0D0085FBA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840F269E24187C0D0085FBA6 /* LaunchScreen.storyboard */; };
+		840F26A924187C3B0085FBA6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26A824187C3B0085FBA6 /* LoginView.swift */; };
+		840F26AB2418842D0085FBA6 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26AA2418842D0085FBA6 /* AppTheme.swift */; };
+		840F26AE24188B490085FBA6 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26AD24188B490085FBA6 /* Extension+Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		840F269C24187C0D0085FBA6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		840F269F24187C0D0085FBA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		840F26A124187C0D0085FBA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		840F26A824187C3B0085FBA6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		840F26AA2418842D0085FBA6 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		840F26AD24188B490085FBA6 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,9 @@
 				840F269324187C0B0085FBA6 /* AppDelegate.swift */,
 				840F269524187C0B0085FBA6 /* SceneDelegate.swift */,
 				840F269724187C0B0085FBA6 /* ContentView.swift */,
+				840F26AA2418842D0085FBA6 /* AppTheme.swift */,
+				840F26AC24188B3B0085FBA6 /* Extension */,
+				840F26A724187C1C0085FBA6 /* Login */,
 				840F269924187C0D0085FBA6 /* Assets.xcassets */,
 				840F269E24187C0D0085FBA6 /* LaunchScreen.storyboard */,
 				840F26A124187C0D0085FBA6 /* Info.plist */,
@@ -73,6 +82,22 @@
 				840F269C24187C0D0085FBA6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		840F26A724187C1C0085FBA6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				840F26A824187C3B0085FBA6 /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		840F26AC24188B3B0085FBA6 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				840F26AD24188B490085FBA6 /* Extension+Color.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,8 +172,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				840F269424187C0B0085FBA6 /* AppDelegate.swift in Sources */,
+				840F26AE24188B490085FBA6 /* Extension+Color.swift in Sources */,
 				840F269624187C0B0085FBA6 /* SceneDelegate.swift in Sources */,
+				840F26A924187C3B0085FBA6 /* LoginView.swift in Sources */,
 				840F269824187C0B0085FBA6 /* ContentView.swift in Sources */,
+				840F26AB2418842D0085FBA6 /* AppTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,10 +7,11 @@
 //
 
 import SwiftUI
-
+// https://colorhunt.co/palette/167893
 struct ContentView: View {
     var body: some View {
         Text("Hello, World!")
+
     }
 }
 
