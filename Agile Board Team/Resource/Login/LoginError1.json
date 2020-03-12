@@ -1,0 +1,15 @@
+{
+    "meta": {
+        "success": false,
+        "statusCode": 400,
+        "message": "The email field is required.",
+        "errors": {
+            "email": [
+                "The email field is required."
+            ],
+            "password": [
+                "The password field is required."
+            ]
+        }
+    }
+}

@@ -16,7 +16,32 @@
 		840F26A924187C3B0085FBA6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26A824187C3B0085FBA6 /* LoginView.swift */; };
 		840F26AB2418842D0085FBA6 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26AA2418842D0085FBA6 /* AppTheme.swift */; };
 		840F26AE24188B490085FBA6 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26AD24188B490085FBA6 /* Extension+Color.swift */; };
+		840F26B12418C2470085FBA6 /* LoginModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26B02418C2470085FBA6 /* LoginModelView.swift */; };
+		840F26B52418CBEE0085FBA6 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26B42418CBED0085FBA6 /* ProjectView.swift */; };
+		840F26B72418DA8B0085FBA6 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26B62418DA8B0085FBA6 /* APIRequest.swift */; };
+		840F26B92418DEE40085FBA6 /* Demo in Resources */ = {isa = PBXBuildFile; fileRef = 840F26B82418DEE40085FBA6 /* Demo */; };
+		840F26BB24193F0E0085FBA6 /* LoginSucceeded.json in Resources */ = {isa = PBXBuildFile; fileRef = 840F26BA24193F0E0085FBA6 /* LoginSucceeded.json */; };
+		840FDB63241A284800C395E8 /* APILoginRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FDB62241A284800C395E8 /* APILoginRequestTest.swift */; };
+		840FDB68241A2AB600C395E8 /* LoginError2.json in Resources */ = {isa = PBXBuildFile; fileRef = 840FDB67241A2AB600C395E8 /* LoginError2.json */; };
+		840FDB6A241A370000C395E8 /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FDB69241A370000C395E8 /* URLSession+Extension.swift */; };
+		840FDB6C241A381800C395E8 /* URLSessionUploadTask+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FDB6B241A381800C395E8 /* URLSessionUploadTask+Extension.swift */; };
+		84204959241A7A9E001FE724 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84204958241A7A9E001FE724 /* URLSessionMock.swift */; };
+		8420495C241A7AE6001FE724 /* MockURLSessionUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420495B241A7AE6001FE724 /* MockURLSessionUploadTask.swift */; };
+		8420495E241A9136001FE724 /* LoginModelViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420495D241A9136001FE724 /* LoginModelViewTest.swift */; };
+		846ECCA52419BF7600C8DFA3 /* LoginError1.json in Resources */ = {isa = PBXBuildFile; fileRef = 846ECCA42419BF7600C8DFA3 /* LoginError1.json */; };
+		846ECCA82419EDF400C8DFA3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846ECCA72419EDF400C8DFA3 /* User.swift */; };
+		846ECCAA2419F05000C8DFA3 /* APILoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846ECCA92419F05000C8DFA3 /* APILoginRequest.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		840FDB5C241A27E000C395E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 840F268824187C0B0085FBA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 840F268F24187C0B0085FBA6;
+			remoteInfo = "Agile Board Team";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		840F269024187C0B0085FBA6 /* Agile Board Team.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Agile Board Team.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,10 +55,36 @@
 		840F26A824187C3B0085FBA6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		840F26AA2418842D0085FBA6 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		840F26AD24188B490085FBA6 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
+		840F26AF241893470085FBA6 /* Agile Board Team.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Agile Board Team.entitlements"; sourceTree = "<group>"; };
+		840F26B02418C2470085FBA6 /* LoginModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModelView.swift; sourceTree = "<group>"; };
+		840F26B42418CBED0085FBA6 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		840F26B62418DA8B0085FBA6 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		840F26B82418DEE40085FBA6 /* Demo */ = {isa = PBXFileReference; lastKnownFileType = text; path = Demo; sourceTree = "<group>"; };
+		840F26BA24193F0E0085FBA6 /* LoginSucceeded.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoginSucceeded.json; sourceTree = "<group>"; };
+		840FDB57241A27E000C395E8 /* Agile Board TeamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Agile Board TeamTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		840FDB5B241A27E000C395E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		840FDB61241A284800C395E8 /* Agile Board TeamTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Agile Board TeamTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		840FDB62241A284800C395E8 /* APILoginRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILoginRequestTest.swift; sourceTree = "<group>"; };
+		840FDB67241A2AB600C395E8 /* LoginError2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoginError2.json; sourceTree = "<group>"; };
+		840FDB69241A370000C395E8 /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
+		840FDB6B241A381800C395E8 /* URLSessionUploadTask+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSessionUploadTask+Extension.swift"; sourceTree = "<group>"; };
+		84204958241A7A9E001FE724 /* URLSessionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
+		8420495B241A7AE6001FE724 /* MockURLSessionUploadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionUploadTask.swift; sourceTree = "<group>"; };
+		8420495D241A9136001FE724 /* LoginModelViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModelViewTest.swift; sourceTree = "<group>"; };
+		846ECCA42419BF7600C8DFA3 /* LoginError1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoginError1.json; sourceTree = "<group>"; };
+		846ECCA72419EDF400C8DFA3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		846ECCA92419F05000C8DFA3 /* APILoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILoginRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		840F268D24187C0B0085FBA6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		840FDB54241A27E000C395E8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -47,7 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				840F269224187C0B0085FBA6 /* Agile Board Team */,
+				840FDB58241A27E000C395E8 /* Agile Board TeamTests */,
 				840F269124187C0B0085FBA6 /* Products */,
+				840FDB61241A284800C395E8 /* Agile Board TeamTests-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				840F269024187C0B0085FBA6 /* Agile Board Team.app */,
+				840FDB57241A27E000C395E8 /* Agile Board TeamTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -62,16 +116,21 @@
 		840F269224187C0B0085FBA6 /* Agile Board Team */ = {
 			isa = PBXGroup;
 			children = (
+				840F26AF241893470085FBA6 /* Agile Board Team.entitlements */,
 				840F269324187C0B0085FBA6 /* AppDelegate.swift */,
 				840F269524187C0B0085FBA6 /* SceneDelegate.swift */,
 				840F269724187C0B0085FBA6 /* ContentView.swift */,
 				840F26AA2418842D0085FBA6 /* AppTheme.swift */,
+				846ECCAB2419F12400C8DFA3 /* API Request */,
 				840F26AC24188B3B0085FBA6 /* Extension */,
 				840F26A724187C1C0085FBA6 /* Login */,
+				846ECCA62419EDDD00C8DFA3 /* Model */,
 				840F269924187C0D0085FBA6 /* Assets.xcassets */,
 				840F269E24187C0D0085FBA6 /* LaunchScreen.storyboard */,
 				840F26A124187C0D0085FBA6 /* Info.plist */,
+				840F26BC24193F1C0085FBA6 /* Resource */,
 				840F269B24187C0D0085FBA6 /* Preview Content */,
+				8420495A241A7AB3001FE724 /* Mock */,
 			);
 			path = "Agile Board Team";
 			sourceTree = "<group>";
@@ -87,7 +146,9 @@
 		840F26A724187C1C0085FBA6 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				840F26B42418CBED0085FBA6 /* ProjectView.swift */,
 				840F26A824187C3B0085FBA6 /* LoginView.swift */,
+				840F26B02418C2470085FBA6 /* LoginModelView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -96,8 +157,65 @@
 			isa = PBXGroup;
 			children = (
 				840F26AD24188B490085FBA6 /* Extension+Color.swift */,
+				840FDB69241A370000C395E8 /* URLSession+Extension.swift */,
+				840FDB6B241A381800C395E8 /* URLSessionUploadTask+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		840F26BC24193F1C0085FBA6 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				840FDB66241A2A5600C395E8 /* Login */,
+				840F26B82418DEE40085FBA6 /* Demo */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		840FDB58241A27E000C395E8 /* Agile Board TeamTests */ = {
+			isa = PBXGroup;
+			children = (
+				8420495D241A9136001FE724 /* LoginModelViewTest.swift */,
+				840FDB62241A284800C395E8 /* APILoginRequestTest.swift */,
+				840FDB5B241A27E000C395E8 /* Info.plist */,
+			);
+			path = "Agile Board TeamTests";
+			sourceTree = "<group>";
+		};
+		840FDB66241A2A5600C395E8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				846ECCA42419BF7600C8DFA3 /* LoginError1.json */,
+				840FDB67241A2AB600C395E8 /* LoginError2.json */,
+				840F26BA24193F0E0085FBA6 /* LoginSucceeded.json */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		8420495A241A7AB3001FE724 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				84204958241A7A9E001FE724 /* URLSessionMock.swift */,
+				8420495B241A7AE6001FE724 /* MockURLSessionUploadTask.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		846ECCA62419EDDD00C8DFA3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				846ECCA72419EDF400C8DFA3 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		846ECCAB2419F12400C8DFA3 /* API Request */ = {
+			isa = PBXGroup;
+			children = (
+				840F26B62418DA8B0085FBA6 /* APIRequest.swift */,
+				846ECCA92419F05000C8DFA3 /* APILoginRequest.swift */,
+			);
+			path = "API Request";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +238,24 @@
 			productReference = 840F269024187C0B0085FBA6 /* Agile Board Team.app */;
 			productType = "com.apple.product-type.application";
 		};
+		840FDB56241A27E000C395E8 /* Agile Board TeamTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 840FDB60241A27E000C395E8 /* Build configuration list for PBXNativeTarget "Agile Board TeamTests" */;
+			buildPhases = (
+				840FDB53241A27E000C395E8 /* Sources */,
+				840FDB54241A27E000C395E8 /* Frameworks */,
+				840FDB55241A27E000C395E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				840FDB5D241A27E000C395E8 /* PBXTargetDependency */,
+			);
+			name = "Agile Board TeamTests";
+			productName = "Agile Board TeamTests";
+			productReference = 840FDB57241A27E000C395E8 /* Agile Board TeamTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -132,6 +268,11 @@
 				TargetAttributes = {
 					840F268F24187C0B0085FBA6 = {
 						CreatedOnToolsVersion = 11.3.1;
+					};
+					840FDB56241A27E000C395E8 = {
+						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
+						TestTargetID = 840F268F24187C0B0085FBA6;
 					};
 				};
 			};
@@ -149,6 +290,7 @@
 			projectRoot = "";
 			targets = (
 				840F268F24187C0B0085FBA6 /* Agile Board Team */,
+				840FDB56241A27E000C395E8 /* Agile Board TeamTests */,
 			);
 		};
 /* End PBXProject section */
@@ -158,9 +300,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846ECCA52419BF7600C8DFA3 /* LoginError1.json in Resources */,
 				840F26A024187C0D0085FBA6 /* LaunchScreen.storyboard in Resources */,
+				840FDB68241A2AB600C395E8 /* LoginError2.json in Resources */,
+				840F26BB24193F0E0085FBA6 /* LoginSucceeded.json in Resources */,
+				840F26B92418DEE40085FBA6 /* Demo in Resources */,
 				840F269D24187C0D0085FBA6 /* Preview Assets.xcassets in Resources */,
 				840F269A24187C0D0085FBA6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		840FDB55241A27E000C395E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,16 +324,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84204959241A7A9E001FE724 /* URLSessionMock.swift in Sources */,
 				840F269424187C0B0085FBA6 /* AppDelegate.swift in Sources */,
 				840F26AE24188B490085FBA6 /* Extension+Color.swift in Sources */,
 				840F269624187C0B0085FBA6 /* SceneDelegate.swift in Sources */,
+				840F26B12418C2470085FBA6 /* LoginModelView.swift in Sources */,
+				8420495C241A7AE6001FE724 /* MockURLSessionUploadTask.swift in Sources */,
 				840F26A924187C3B0085FBA6 /* LoginView.swift in Sources */,
+				846ECCAA2419F05000C8DFA3 /* APILoginRequest.swift in Sources */,
 				840F269824187C0B0085FBA6 /* ContentView.swift in Sources */,
+				840F26B52418CBEE0085FBA6 /* ProjectView.swift in Sources */,
+				840F26B72418DA8B0085FBA6 /* APIRequest.swift in Sources */,
+				840FDB6C241A381800C395E8 /* URLSessionUploadTask+Extension.swift in Sources */,
+				840FDB6A241A370000C395E8 /* URLSession+Extension.swift in Sources */,
+				846ECCA82419EDF400C8DFA3 /* User.swift in Sources */,
 				840F26AB2418842D0085FBA6 /* AppTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		840FDB53241A27E000C395E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8420495E241A9136001FE724 /* LoginModelViewTest.swift in Sources */,
+				840FDB63241A284800C395E8 /* APILoginRequestTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		840FDB5D241A27E000C395E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 840F268F24187C0B0085FBA6 /* Agile Board Team */;
+			targetProxy = 840FDB5C241A27E000C395E8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		840F269E24187C0D0085FBA6 /* LaunchScreen.storyboard */ = {
@@ -312,6 +491,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Agile Board Team/Agile Board Team.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Agile Board Team/Preview Content\"";
 				DEVELOPMENT_TEAM = 9RUFVFAF79;
@@ -323,6 +504,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "filesoft.co.Agile-Board-Team";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -332,6 +514,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Agile Board Team/Agile Board Team.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Agile Board Team/Preview Content\"";
 				DEVELOPMENT_TEAM = 9RUFVFAF79;
@@ -343,8 +527,54 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "filesoft.co.Agile-Board-Team";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		840FDB5E241A27E000C395E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9RUFVFAF79;
+				INFOPLIST_FILE = "Agile Board TeamTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "filesoft.co.Agile-Board-TeamTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Agile Board TeamTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Agile Board Team.app/Agile Board Team";
+			};
+			name = Debug;
+		};
+		840FDB5F241A27E000C395E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9RUFVFAF79;
+				INFOPLIST_FILE = "Agile Board TeamTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "filesoft.co.Agile-Board-TeamTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Agile Board TeamTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Agile Board Team.app/Agile Board Team";
 			};
 			name = Release;
 		};
@@ -365,6 +595,15 @@
 			buildConfigurations = (
 				840F26A524187C0D0085FBA6 /* Debug */,
 				840F26A624187C0D0085FBA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		840FDB60241A27E000C395E8 /* Build configuration list for PBXNativeTarget "Agile Board TeamTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				840FDB5E241A27E000C395E8 /* Debug */,
+				840FDB5F241A27E000C395E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

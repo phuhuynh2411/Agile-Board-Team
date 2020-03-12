@@ -10,19 +10,20 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @State var username: String = ""
-    @State var password: String = ""
+    @ObservedObject var loginMV: LoginModelView
     
     var body: some View {
         VStack {
             WelcomeText()
             PersonImage()
-            UserNameTextField(username: $username)
-            PasswordSecureField(password: $password)
+            UserNameTextField(username: $loginMV.username)
+            PasswordSecureField(password: $loginMV.password)
             
-            Button(action: {
-                print("Tapped on the butotn")
-            }) {
+            if loginMV.loginDidFail {
+                ErrorText(errorMessage: $loginMV.errorMessage)
+            }
+            
+            Button(action: { self.loginMV.login() }) {
                 ButtonContentView()
             }
         }
@@ -33,7 +34,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(loginMV: LoginModelView())
     }
 }
 
@@ -89,5 +90,15 @@ struct ButtonContentView: View {
             .foregroundColor(.white)
             .cornerRadius(15)
             .background(Color.green)
+    }
+}
+
+struct ErrorText: View {
+    @Binding var errorMessage: String
+    var body: some View {
+        Text(errorMessage)
+            .foregroundColor(.red)
+            .font(.system(size: 17))
+            .padding(.bottom, 20)
     }
 }
