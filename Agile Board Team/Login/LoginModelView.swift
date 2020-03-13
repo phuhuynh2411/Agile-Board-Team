@@ -7,7 +7,7 @@
 //
 
 import Combine
-import Foundation
+import SwiftUI
 
 class LoginModelView: ObservableObject {
     
@@ -17,7 +17,7 @@ class LoginModelView: ObservableObject {
     @Published var loginDidSucceed = false
     @Published var errorMessage = ""
     @Published var isStarted = false
-    
+        
     var session: URLSessionProtocol = URLSession.shared
     var request: APILoginRequest?
     
@@ -62,8 +62,11 @@ class LoginModelView: ObservableObject {
     }
     
     func completedLogin() {
-       self.loginDidSucceed = true
-       self.loginDidFail = false
+        DispatchQueue.main.async {
+            self.loginDidSucceed = true
+            self.loginDidFail = false
+            ViewRouter.shared.managedView = .main
+        }
     }
     
     func completedLogin(with error: Error) {

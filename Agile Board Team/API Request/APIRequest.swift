@@ -59,7 +59,7 @@ class APIRequest {
         let statusCode: Int
         let message: String
         
-        //let errors: [String: [String]]?
+        let errors: [String: [String]]?
     }
 
     struct Entry<T: Codable>: Codable {

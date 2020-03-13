@@ -11,6 +11,7 @@ import SwiftUI
 struct LoginView: View {
     
     @ObservedObject var loginMV: LoginModelView
+    @EnvironmentObject var contentMV: ViewRouter
     
     var body: some View {
         ZStack {

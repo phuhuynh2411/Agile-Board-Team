@@ -7,16 +7,33 @@
 //
 
 import SwiftUI
-// https://colorhunt.co/palette/167893
-struct ContentView: View {
-    var body: some View {
-        Text("Hello, World!")
 
+struct ContentView: View {
+    
+   @EnvironmentObject var contentMV: ViewRouter
+    
+    var body: some View {
+        ZStack {
+            if self.contentMV.managedView == .main {
+                withAnimation(.easeIn){
+                    MainView()
+                }
+                
+            } else {
+                LoginView(loginMV: LoginModelView())
+            }
+        }
+        
     }
+}
+
+enum ManagedView {
+    case login
+    case main
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(ViewRouter())
     }
 }
