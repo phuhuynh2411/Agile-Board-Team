@@ -44,6 +44,7 @@
 		849DBC95241B6A820026E23B /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC94241B6A820026E23B /* ProjectListView.swift */; };
 		849DBC97241B6AA30026E23B /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC96241B6AA30026E23B /* ProjectRowView.swift */; };
 		849DBC9D241B88D20026E23B /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 849DBC9C241B88D20026E23B /* SwiftUIRefresh */; };
+		849DBC9F241B8DEF0026E23B /* ProjectListModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC9E241B8DEF0026E23B /* ProjectListModelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		849DBC92241B6A280026E23B /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		849DBC94241B6A820026E23B /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		849DBC96241B6AA30026E23B /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
+		849DBC9E241B8DEF0026E23B /* ProjectListModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListModelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +269,7 @@
 			children = (
 				840F26B42418CBED0085FBA6 /* ProjectView.swift */,
 				849DBC94241B6A820026E23B /* ProjectListView.swift */,
+				849DBC9E241B8DEF0026E23B /* ProjectListModelView.swift */,
 				849DBC96241B6AA30026E23B /* ProjectRowView.swift */,
 			);
 			path = Project;
@@ -417,6 +420,7 @@
 				849DBC97241B6AA30026E23B /* ProjectRowView.swift in Sources */,
 				840F26B12418C2470085FBA6 /* LoginModelView.swift in Sources */,
 				849DBC95241B6A820026E23B /* ProjectListView.swift in Sources */,
+				849DBC9F241B8DEF0026E23B /* ProjectListModelView.swift in Sources */,
 				8420495C241A7AE6001FE724 /* MockURLSessionUploadTask.swift in Sources */,
 				849DBC93241B6A280026E23B /* Data.swift in Sources */,
 				840F26A924187C3B0085FBA6 /* LoginView.swift in Sources */,

@@ -11,7 +11,7 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         TabView {
-            ProjectListView(projects: projectData)
+            ProjectListView(projectMV: ProjectListModelView())
                 .tabItem {
                     Image(systemName: "folder")
                     Text("Project")

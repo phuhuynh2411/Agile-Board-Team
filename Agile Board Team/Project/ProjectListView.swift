@@ -10,13 +10,14 @@ import SwiftUI
 import SwiftUIRefresh
 
 struct ProjectListView: View {
-    var projects: [Project]
+    
     @State var search: String = ""
-    var filteredProjects: [Project]?
+    @ObservedObject var projectMV: ProjectListModelView
     
     @State private var isShowing = false
     
     var isFiltering: Bool {
+        projectMV.filter(searchText: search)
         return search.count > 0
     }
     
@@ -24,7 +25,7 @@ struct ProjectListView: View {
         NavigationView {
             VStack {
                 SearchView(search: $search)
-                List(isFiltering ? [] : projects) { project in
+                List(isFiltering ? projectMV.filteredProjects ?? [] : projectMV.projects ?? []) { project in
                     ProjectRowView(project: project)
                 }
                 .pullToRefresh(isShowing: $isShowing) {
@@ -37,14 +38,12 @@ struct ProjectListView: View {
         }
     }
     
-    func test() {
-        
-    }
+   
 }
 
 struct ProjectListView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectListView(projects: projectData)
+        ProjectListView(projectMV: ProjectListModelView())
     }
 }
 
