@@ -38,6 +38,7 @@ class APILoginRequest: APIRequest {
     override func parseJSON(with data: Data) throws {
         try super.parseJSON(with: data)
         self.entry = try jsonDecoder.decode(Entry<ResponseData>.self, from: data)
+        self.startSession()
     }
     
     func isLoginSucceeded(_ data: Data?,_ response: URLResponse?, _ error: Error?) throws {
@@ -45,6 +46,16 @@ class APILoginRequest: APIRequest {
         if  let entry = self.entry{
             guard entry.meta.success && entry.meta.statusCode == 200 else { throw RequestError.invalidCredentials }
         }
+    }
+    
+    func startSession() {
+        guard let data = self.entry?.data else { return }
+        let session = AppSession(accessToken: data.accessToken,
+                                 tokenType: data.tokenType,
+                                 expiresIn: data.expiresIn)
+        
+        AppState.shared.session = session
+        AppState.shared.user = data.user
     }
     
     struct ResponseData: Codable {

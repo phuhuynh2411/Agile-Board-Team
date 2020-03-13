@@ -48,17 +48,5 @@ class LoginModelViewTest: XCTestCase {
         loginModelView.username = "plato"
         XCTAssertTrue(loginModelView.loginDidFail)
     }
-    
-    func testLoginSucceeded() {
-        session.jsonFileName = "LoginSucceeded"
-        let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: ["Content-type": "application/json"])
-        session.urlResponse = response
-        
-        loginModelView.password = "plato"
-        loginModelView.username = "plato"
-        loginModelView.login()
-    
-        XCTAssertTrue(loginModelView.loginDidSucceed)
-    }
 
 }

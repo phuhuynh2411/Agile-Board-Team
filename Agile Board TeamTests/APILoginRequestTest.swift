@@ -56,6 +56,9 @@ class APILoginRequestTest: XCTestCase {
             
             XCTAssertNotNil(self.loginRequest.entry)
             XCTAssertNotNil(self.loginRequest.entry?.data)
+            
+            XCTAssertNotNil(AppState.shared.session)
+            XCTAssertNotNil(AppState.shared.user)
         }
     }
     
