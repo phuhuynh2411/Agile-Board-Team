@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,6 +43,7 @@
 		849DBC93241B6A280026E23B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC92241B6A280026E23B /* Data.swift */; };
 		849DBC95241B6A820026E23B /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC94241B6A820026E23B /* ProjectListView.swift */; };
 		849DBC97241B6AA30026E23B /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC96241B6AA30026E23B /* ProjectRowView.swift */; };
+		849DBC9D241B88D20026E23B /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 849DBC9C241B88D20026E23B /* SwiftUIRefresh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849DBC9D241B88D20026E23B /* SwiftUIRefresh in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +312,9 @@
 			dependencies = (
 			);
 			name = "Agile Board Team";
+			packageProductDependencies = (
+				849DBC9C241B88D20026E23B /* SwiftUIRefresh */,
+			);
 			productName = "Agile Board Team";
 			productReference = 840F269024187C0B0085FBA6 /* Agile Board Team.app */;
 			productType = "com.apple.product-type.application";
@@ -361,6 +366,9 @@
 				Base,
 			);
 			mainGroup = 840F268724187C0B0085FBA6;
+			packageReferences = (
+				849DBC9B241B88D20026E23B /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
+			);
 			productRefGroup = 840F269124187C0B0085FBA6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -697,6 +705,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		849DBC9B241B88D20026E23B /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/timbersoftware/SwiftUIRefresh.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		849DBC9C241B88D20026E23B /* SwiftUIRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 849DBC9B241B88D20026E23B /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */;
+			productName = SwiftUIRefresh;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 840F268824187C0B0085FBA6 /* Project object */;
 }
