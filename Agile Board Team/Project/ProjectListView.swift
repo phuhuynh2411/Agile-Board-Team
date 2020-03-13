@@ -54,7 +54,7 @@ struct SearchView: View {
         ZStack {
             HStack {
                 Image(systemName: "magnifyingglass")
-                TextField("Search project", text: $search)
+                TextField("Search project", text: $search).modifier(ClearButton(text: $search))
             }
             .padding(.vertical, 10)
             .padding(.horizontal, 10)
@@ -63,6 +63,29 @@ struct SearchView: View {
                     .stroke(Color.lightGreyColor, lineWidth: 1)
             )
                 .padding()
+        }
+    }
+}
+
+struct ClearButton: ViewModifier
+{
+    @Binding var text: String
+    
+    public func body(content: Content) -> some View
+    {
+        ZStack(alignment: .trailing)
+        {
+            content
+            
+            if !text.isEmpty
+            {
+                Button(action: { self.text = "" })
+                {
+                    Image(systemName: "delete.left")
+                        .foregroundColor(Color(UIColor.opaqueSeparator))
+                }
+                .padding(.trailing, 8)
+            }
         }
     }
 }
