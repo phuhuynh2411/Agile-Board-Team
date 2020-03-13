@@ -16,9 +16,10 @@ class LoginModelView: ObservableObject {
     @Published var loginDidFail = false
     @Published var loginDidSucceed = false
     @Published var errorMessage = ""
+    @Published var isStarted = false
     
     var session: URLSessionProtocol = URLSession.shared
-    var loginRequest: APILoginRequest?
+    var request: APILoginRequest?
     
     func login() {
         do {
@@ -36,20 +37,40 @@ class LoginModelView: ObservableObject {
     }
     
     func submit() {
-        loginRequest = APILoginRequest(session: session)
+        request = APILoginRequest(session: session)
+        self.startProgressBar()
         
-        loginRequest?.login(username, password) { (data, response, error) in
+        request?.login(username, password) { (data, response, error) in
             do {
-                try self.loginRequest?.isLoginSucceeded(data, response, error)
-                self.loginDidSucceed = true
-                self.loginDidFail = false
+                try self.request?.isLoginSucceeded(data, response, error)
+                self.completedLogin()
             } catch {
-                DispatchQueue.main.async {
-                    self.loginDidFail = true
-                    self.errorMessage = error.localizedDescription
-                    print(error)
-                }
+                self.completedLogin(with: error)
             }
+            self.stopProgressBar()
+        }
+    }
+    
+    func startProgressBar() {
+        self.isStarted = true
+    }
+    
+    func stopProgressBar() {
+        DispatchQueue.main.async {
+            self.isStarted = false
+        }
+    }
+    
+    func completedLogin() {
+       self.loginDidSucceed = true
+       self.loginDidFail = false
+    }
+    
+    func completedLogin(with error: Error) {
+        DispatchQueue.main.async {
+            self.loginDidFail = true
+            self.errorMessage = error.localizedDescription
+            print(error)
         }
     }
     

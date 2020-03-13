@@ -31,6 +31,7 @@
 		846ECCA52419BF7600C8DFA3 /* LoginError1.json in Resources */ = {isa = PBXBuildFile; fileRef = 846ECCA42419BF7600C8DFA3 /* LoginError1.json */; };
 		846ECCA82419EDF400C8DFA3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846ECCA72419EDF400C8DFA3 /* User.swift */; };
 		846ECCAA2419F05000C8DFA3 /* APILoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846ECCA92419F05000C8DFA3 /* APILoginRequest.swift */; };
+		848D53A5241B17F900BAB5E6 /* InfiniteProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848D53A4241B17F800BAB5E6 /* InfiniteProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		846ECCA42419BF7600C8DFA3 /* LoginError1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoginError1.json; sourceTree = "<group>"; };
 		846ECCA72419EDF400C8DFA3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		846ECCA92419F05000C8DFA3 /* APILoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILoginRequest.swift; sourceTree = "<group>"; };
+		848D53A4241B17F800BAB5E6 /* InfiniteProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				840F26B42418CBED0085FBA6 /* ProjectView.swift */,
 				840F26A824187C3B0085FBA6 /* LoginView.swift */,
 				840F26B02418C2470085FBA6 /* LoginModelView.swift */,
+				848D53A4241B17F800BAB5E6 /* InfiniteProgressView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				840F269824187C0B0085FBA6 /* ContentView.swift in Sources */,
 				840F26B52418CBEE0085FBA6 /* ProjectView.swift in Sources */,
 				840F26B72418DA8B0085FBA6 /* APIRequest.swift in Sources */,
+				848D53A5241B17F900BAB5E6 /* InfiniteProgressView.swift in Sources */,
 				840FDB6C241A381800C395E8 /* URLSessionUploadTask+Extension.swift in Sources */,
 				840FDB6A241A370000C395E8 /* URLSession+Extension.swift in Sources */,
 				846ECCA82419EDF400C8DFA3 /* User.swift in Sources */,

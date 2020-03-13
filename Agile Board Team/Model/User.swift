@@ -10,7 +10,7 @@ import Foundation
 
 class User: Codable {
     
-    var id: Int
+    var id: String
     var status: Int
     var isAdmin: Bool
     var gender: Int

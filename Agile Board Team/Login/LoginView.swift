@@ -13,21 +13,28 @@ struct LoginView: View {
     @ObservedObject var loginMV: LoginModelView
     
     var body: some View {
-        VStack {
-            WelcomeText()
-            PersonImage()
-            UserNameTextField(username: $loginMV.username)
-            PasswordSecureField(password: $loginMV.password)
-            
-            if loginMV.loginDidFail {
-                ErrorText(errorMessage: $loginMV.errorMessage)
+        ZStack {
+            VStack {
+                WelcomeText()
+                PersonImage()
+                UserNameTextField(username: $loginMV.username)
+                PasswordSecureField(password: $loginMV.password)
+                
+                if loginMV.loginDidFail {
+                    ErrorText(errorMessage: $loginMV.errorMessage)
+                }
+                
+                Button(action: { self.loginMV.login() }) {
+                    ButtonContentView()
+                }
             }
+            .padding()
             
-            Button(action: { self.loginMV.login() }) {
-                ButtonContentView()
+            if loginMV.isStarted {
+                InfiniteProgressView()
             }
         }
-        .padding()
+        
     }
     
 }
