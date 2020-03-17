@@ -16,7 +16,8 @@ class ProjectListModelView: ObservableObject {
     
     func filter(searchText: String) {
         self.filteredProjects = projects?.filter({ (project) -> Bool in
-            project.name.lowercased().contains(searchText.lowercased())
+            project.name.lowercased().contains(searchText.lowercased()) ||
+            project.description.lowercased().contains(searchText.lowercased())
         })
     }
 }

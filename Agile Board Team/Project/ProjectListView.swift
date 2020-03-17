@@ -16,6 +16,9 @@ struct ProjectListView: View {
     
     @State private var isShowing = false
     
+    @State private var isLoadingMore = false
+    //@State private var isLastRow = false
+    
     var isFiltering: Bool {
         projectMV.filter(searchText: search)
         return search.count > 0
@@ -25,13 +28,19 @@ struct ProjectListView: View {
         NavigationView {
             VStack {
                 SearchView(search: $search)
-                List(isFiltering ? projectMV.filteredProjects ?? [] : projectMV.projects ?? []) { project in
-                    ProjectRowView(project: project)
-                }
-                .pullToRefresh(isShowing: $isShowing) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        self.isShowing = false
+                List {
+                    ForEach(isFiltering ? projectMV.filteredProjects ?? [] : projectMV.projects ?? []) { project in
+                        ProjectRowView(project: project).onAppear { self.onAppear(project) }
                     }
+                    .pullToRefresh(isShowing: $isShowing) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            self.isShowing = false
+                        }
+                    }
+                }
+                
+                if self.isLoadingMore {
+                    LastRowView(isLoadingMore: $isLoadingMore).onAppear { self.loadMoreItems() }
                 }
             }
             .navigationBarTitle("Projects")
@@ -39,10 +48,26 @@ struct ProjectListView: View {
     }
     
    
+    func onAppear(_ project: Project) {
+        guard let lastProject = self.projectMV.projects?.last else { return }
+        if project.id == lastProject.id {
+            self.isLoadingMore = true
+        }
+    }
+    
+    func loadMoreItems() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.isLoadingMore = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.isLoadingMore = false
+            //self.isLastRow = false
+        }
+    }
 }
 
 struct ProjectListView_Previews: PreviewProvider {
-    static var previews: some View {
+    static var previews: some View {    
         ProjectListView(projectMV: ProjectListModelView())
     }
 }
@@ -67,8 +92,7 @@ struct SearchView: View {
     }
 }
 
-struct ClearButton: ViewModifier
-{
+struct ClearButton: ViewModifier {
     @Binding var text: String
     
     public func body(content: Content) -> some View
@@ -85,6 +109,22 @@ struct ClearButton: ViewModifier
                         .foregroundColor(Color(UIColor.opaqueSeparator))
                 }
                 .padding(.trailing, 8)
+            }
+        }
+    }
+}
+
+struct LastRowView: View {
+    
+    @Binding var isLoadingMore: Bool
+    
+    var body: some View {
+        ZStack {
+            Rectangle()
+                .frame(height: 70)
+                .foregroundColor(.white)
+            if self.isLoadingMore {
+                InfiniteProgressView()
             }
         }
     }

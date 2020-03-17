@@ -7,10 +7,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct LoginView: View {
     
-    @ObservedObject var loginMV: LoginModelView
+    @ObservedObject var loginMV: TestModelView
     
     var body: some View {
         ZStack {
@@ -20,19 +21,19 @@ struct LoginView: View {
                 UserNameTextField(username: $loginMV.username)
                 PasswordSecureField(password: $loginMV.password)
                 
-                if loginMV.loginDidFail {
-                    ErrorText(errorMessage: $loginMV.errorMessage)
-                }
+//                if loginMV.loginDidFail {
+//                    ErrorText(errorMessage: $loginMV.errorMessage)
+//                }
                 
                 Button(action: { self.loginMV.login() }) {
-                    ButtonContentView()
-                }
+                    ButtonContentView(disabled: $loginMV.loginDisabled)
+                }.disabled(loginMV.loginDisabled)
             }
             .padding()
             
-            if loginMV.isStarted {
-                InfiniteProgressView()
-            }
+//            if loginMV.isStarted {
+//                InfiniteProgressView()
+//            }
         }
         
     }
@@ -41,7 +42,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(loginMV: LoginModelView())
+        LoginView(loginMV: TestModelView())
     }
 }
 
@@ -90,13 +91,14 @@ struct PasswordSecureField: View {
 }
 
 struct ButtonContentView: View {
+    @Binding var disabled: Bool
     var body: some View {
         Text("LOGIN")
             .font(.headline)
             .frame(width: 200, height: 60)
             .foregroundColor(.white)
             .cornerRadius(15)
-            .background(Color.green)
+            .background(disabled ? Color.gray : Color.green)
     }
 }
 

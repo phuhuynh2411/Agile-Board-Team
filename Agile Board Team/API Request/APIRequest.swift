@@ -53,19 +53,6 @@ class APIRequest {
         case wrongMineType
         case emptyData
     }
-    
-    struct MetaData: Codable {
-        let success: Bool
-        let statusCode: Int
-        let message: String
-        
-        let errors: [String: [String]]?
-    }
-
-    struct Entry<T: Codable>: Codable {
-        let meta: MetaData
-        let data: T?
-    }
 }
 
 extension APIRequest.RequestError: LocalizedError {
