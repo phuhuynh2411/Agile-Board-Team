@@ -16,7 +16,7 @@
 		840F26A924187C3B0085FBA6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26A824187C3B0085FBA6 /* LoginView.swift */; };
 		840F26AB2418842D0085FBA6 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26AA2418842D0085FBA6 /* AppTheme.swift */; };
 		840F26AE24188B490085FBA6 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26AD24188B490085FBA6 /* Extension+Color.swift */; };
-		840F26B12418C2470085FBA6 /* LoginModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26B02418C2470085FBA6 /* LoginModelView.swift */; };
+		840F26B12418C2470085FBA6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26B02418C2470085FBA6 /* LoginViewModel.swift */; };
 		840F26B52418CBEE0085FBA6 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26B42418CBED0085FBA6 /* ProjectView.swift */; };
 		840F26B72418DA8B0085FBA6 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26B62418DA8B0085FBA6 /* APIRequest.swift */; };
 		840F26B92418DEE40085FBA6 /* Demo in Resources */ = {isa = PBXBuildFile; fileRef = 840F26B82418DEE40085FBA6 /* Demo */; };
@@ -25,6 +25,8 @@
 		840FDB68241A2AB600C395E8 /* LoginError2.json in Resources */ = {isa = PBXBuildFile; fileRef = 840FDB67241A2AB600C395E8 /* LoginError2.json */; };
 		840FDB6A241A370000C395E8 /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FDB69241A370000C395E8 /* URLSession+Extension.swift */; };
 		840FDB6C241A381800C395E8 /* URLSessionUploadTask+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FDB6B241A381800C395E8 /* URLSessionUploadTask+Extension.swift */; };
+		8417CD0F24226A3D0029B7E6 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417CD0E24226A3D0029B7E6 /* ImageLoader.swift */; };
+		8417CD1124226BA70029B7E6 /* URLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417CD1024226BA70029B7E6 /* URLImage.swift */; };
 		84204959241A7A9E001FE724 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84204958241A7A9E001FE724 /* URLSessionMock.swift */; };
 		8420495C241A7AE6001FE724 /* MockURLSessionUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420495B241A7AE6001FE724 /* MockURLSessionUploadTask.swift */; };
 		8420495E241A9136001FE724 /* LoginModelViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420495D241A9136001FE724 /* LoginModelViewTest.swift */; };
@@ -47,7 +49,10 @@
 		849DBC95241B6A820026E23B /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC94241B6A820026E23B /* ProjectListView.swift */; };
 		849DBC97241B6AA30026E23B /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC96241B6AA30026E23B /* ProjectRowView.swift */; };
 		849DBC9D241B88D20026E23B /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 849DBC9C241B88D20026E23B /* SwiftUIRefresh */; };
-		849DBC9F241B8DEF0026E23B /* ProjectListModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC9E241B8DEF0026E23B /* ProjectListModelView.swift */; };
+		849DBC9F241B8DEF0026E23B /* ProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC9E241B8DEF0026E23B /* ProjectListViewModel.swift */; };
+		84B6E5F72421DC5600DD92C8 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6E5F62421DC5600DD92C8 /* BaseViewModel.swift */; };
+		84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3724221A00008EA929 /* ErrorBannerView.swift */; };
+		84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3824221A00008EA929 /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +78,7 @@
 		840F26AA2418842D0085FBA6 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		840F26AD24188B490085FBA6 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
 		840F26AF241893470085FBA6 /* Agile Board Team.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Agile Board Team.entitlements"; sourceTree = "<group>"; };
-		840F26B02418C2470085FBA6 /* LoginModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModelView.swift; sourceTree = "<group>"; };
+		840F26B02418C2470085FBA6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		840F26B42418CBED0085FBA6 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		840F26B62418DA8B0085FBA6 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		840F26B82418DEE40085FBA6 /* Demo */ = {isa = PBXFileReference; lastKnownFileType = text; path = Demo; sourceTree = "<group>"; };
@@ -85,6 +90,8 @@
 		840FDB67241A2AB600C395E8 /* LoginError2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoginError2.json; sourceTree = "<group>"; };
 		840FDB69241A370000C395E8 /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		840FDB6B241A381800C395E8 /* URLSessionUploadTask+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSessionUploadTask+Extension.swift"; sourceTree = "<group>"; };
+		8417CD0E24226A3D0029B7E6 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		8417CD1024226BA70029B7E6 /* URLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImage.swift; sourceTree = "<group>"; };
 		84204958241A7A9E001FE724 /* URLSessionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		8420495B241A7AE6001FE724 /* MockURLSessionUploadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionUploadTask.swift; sourceTree = "<group>"; };
 		8420495D241A9136001FE724 /* LoginModelViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModelViewTest.swift; sourceTree = "<group>"; };
@@ -106,7 +113,10 @@
 		849DBC92241B6A280026E23B /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		849DBC94241B6A820026E23B /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		849DBC96241B6AA30026E23B /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
-		849DBC9E241B8DEF0026E23B /* ProjectListModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListModelView.swift; sourceTree = "<group>"; };
+		849DBC9E241B8DEF0026E23B /* ProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewModel.swift; sourceTree = "<group>"; };
+		84B6E5F62421DC5600DD92C8 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		84FFDD3724221A00008EA929 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorBannerView.swift; path = "Agile Board Team/Error/ErrorBannerView.swift"; sourceTree = SOURCE_ROOT; };
+		84FFDD3824221A00008EA929 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = "Agile Board Team/Error/ErrorView.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,8 +168,11 @@
 				840F26AA2418842D0085FBA6 /* AppTheme.swift */,
 				849DBC87241B3AD00026E23B /* MainView.swift */,
 				849DBC8B241B3FB90026E23B /* AppState.swift */,
+				8417CD0E24226A3D0029B7E6 /* ImageLoader.swift */,
+				8417CD1024226BA70029B7E6 /* URLImage.swift */,
 				846ECCAB2419F12400C8DFA3 /* API Request */,
 				840F26AC24188B3B0085FBA6 /* Extension */,
+				84384A6C2422174200C8F492 /* Error */,
 				848D53A6241B27C800BAB5E6 /* Progress */,
 				840F26A724187C1C0085FBA6 /* Login */,
 				848D53A7241B27EA00BAB5E6 /* Project */,
@@ -188,8 +201,9 @@
 			isa = PBXGroup;
 			children = (
 				840F26A824187C3B0085FBA6 /* LoginView.swift */,
-				840F26B02418C2470085FBA6 /* LoginModelView.swift */,
+				840F26B02418C2470085FBA6 /* LoginViewModel.swift */,
 				84741C1D2420B021004F3663 /* TestModelView.swift */,
+				84B6E5F62421DC5600DD92C8 /* BaseViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -243,6 +257,16 @@
 			path = Mock;
 			sourceTree = "<group>";
 		};
+		84384A6C2422174200C8F492 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				84FFDD3724221A00008EA929 /* ErrorBannerView.swift */,
+				84FFDD3824221A00008EA929 /* ErrorView.swift */,
+			);
+			name = Error;
+			path = "Errỏ";
+			sourceTree = "<group>";
+		};
 		846ECCA62419EDDD00C8DFA3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,7 +302,7 @@
 			children = (
 				840F26B42418CBED0085FBA6 /* ProjectView.swift */,
 				849DBC94241B6A820026E23B /* ProjectListView.swift */,
-				849DBC9E241B8DEF0026E23B /* ProjectListModelView.swift */,
+				849DBC9E241B8DEF0026E23B /* ProjectListViewModel.swift */,
 				849DBC96241B6AA30026E23B /* ProjectRowView.swift */,
 			);
 			path = Project;
@@ -425,16 +449,18 @@
 				840F269424187C0B0085FBA6 /* AppDelegate.swift in Sources */,
 				840F26AE24188B490085FBA6 /* Extension+Color.swift in Sources */,
 				848D53AB241B285100BAB5E6 /* SettingView.swift in Sources */,
+				84B6E5F72421DC5600DD92C8 /* BaseViewModel.swift in Sources */,
 				840F269624187C0B0085FBA6 /* SceneDelegate.swift in Sources */,
 				849DBC97241B6AA30026E23B /* ProjectRowView.swift in Sources */,
-				840F26B12418C2470085FBA6 /* LoginModelView.swift in Sources */,
+				840F26B12418C2470085FBA6 /* LoginViewModel.swift in Sources */,
 				849DBC95241B6A820026E23B /* ProjectListView.swift in Sources */,
-				849DBC9F241B8DEF0026E23B /* ProjectListModelView.swift in Sources */,
+				849DBC9F241B8DEF0026E23B /* ProjectListViewModel.swift in Sources */,
 				8420495C241A7AE6001FE724 /* MockURLSessionUploadTask.swift in Sources */,
 				849DBC93241B6A280026E23B /* Data.swift in Sources */,
 				840F26A924187C3B0085FBA6 /* LoginView.swift in Sources */,
 				846ECCAA2419F05000C8DFA3 /* APILoginRequest.swift in Sources */,
 				849DBC8A241B3EE30026E23B /* AppSession.swift in Sources */,
+				84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */,
 				84741C222420B1B9004F3663 /* MetaData.swift in Sources */,
 				840F269824187C0B0085FBA6 /* ContentView.swift in Sources */,
 				840F26B52418CBEE0085FBA6 /* ProjectView.swift in Sources */,
@@ -443,9 +469,12 @@
 				848D53A9241B283E00BAB5E6 /* IssueListView.swift in Sources */,
 				849DBC91241B68CA0026E23B /* Project.swift in Sources */,
 				849DBC88241B3AD00026E23B /* MainView.swift in Sources */,
+				84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */,
 				848D53A5241B17F900BAB5E6 /* InfiniteProgressView.swift in Sources */,
 				840FDB6C241A381800C395E8 /* URLSessionUploadTask+Extension.swift in Sources */,
 				84741C1E2420B021004F3663 /* TestModelView.swift in Sources */,
+				8417CD1124226BA70029B7E6 /* URLImage.swift in Sources */,
+				8417CD0F24226A3D0029B7E6 /* ImageLoader.swift in Sources */,
 				849DBC8C241B3FB90026E23B /* AppState.swift in Sources */,
 				840FDB6A241A370000C395E8 /* URLSession+Extension.swift in Sources */,
 				849DBC86241B32180026E23B /* ViewRouter.swift in Sources */,

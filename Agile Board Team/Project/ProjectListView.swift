@@ -12,35 +12,38 @@ import SwiftUIRefresh
 struct ProjectListView: View {
     
     @State var search: String = ""
-    @ObservedObject var projectMV: ProjectListModelView
+    @ObservedObject var viewModel: ProjectListViewModel
     
     @State private var isShowing = false
     
     @State private var isLoadingMore = false
-    //@State private var isLastRow = false
     
     var isFiltering: Bool {
-        projectMV.filter(searchText: search)
+        viewModel.filter(searchText: search)
         return search.count > 0
     }
     
     var body: some View {
         NavigationView {
-            VStack {
-                SearchView(search: $search)
-                List {
-                    ForEach(isFiltering ? projectMV.filteredProjects ?? [] : projectMV.projects ?? []) { project in
-                        ProjectRowView(project: project).onAppear { self.onAppear(project) }
+            ZStack {
+                VStack {
+                    if viewModel.isFailed {
+                        ErrorBannerView(message: viewModel.errorMessage, display: $viewModel.isFailed)
                     }
-                    .pullToRefresh(isShowing: $isShowing) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            self.isShowing = false
+                    SearchView(search: $search)
+                    List {
+                        ForEach(isFiltering ? viewModel.filteredProjects ?? [] : viewModel.projects ?? []) { project in
+                            ProjectRowView(project: project).onAppear { self.onAppear(project) }
+                        }
+                        .pullToRefresh(isShowing: $isShowing) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                self.isShowing = false
+                            }
                         }
                     }
                 }
-                
-                if self.isLoadingMore {
-                    LastRowView(isLoadingMore: $isLoadingMore).onAppear { self.loadMoreItems() }
+                if viewModel.isInprogress {
+                    InfiniteProgressView()
                 }
             }
             .navigationBarTitle("Projects")
@@ -49,7 +52,7 @@ struct ProjectListView: View {
     
    
     func onAppear(_ project: Project) {
-        guard let lastProject = self.projectMV.projects?.last else { return }
+        guard let lastProject = self.viewModel.projects?.last else { return }
         if project.id == lastProject.id {
             self.isLoadingMore = true
         }
@@ -68,7 +71,7 @@ struct ProjectListView: View {
 
 struct ProjectListView_Previews: PreviewProvider {
     static var previews: some View {    
-        ProjectListView(projectMV: ProjectListModelView())
+        ProjectListView(viewModel: ProjectListViewModel())
     }
 }
 

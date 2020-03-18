@@ -12,4 +12,8 @@ extension Color {
     static var lightGreyColor: Color {
         Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0)
     }
+    
+    static var darkBlue: Color {
+        Color(red: 15.0/255.0, green: 76.0/255.0, blue: 117.0/255.0, opacity: 1.0)
+    }
 }

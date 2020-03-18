@@ -9,24 +9,14 @@
 import Foundation
 import Combine
 
-class TestModelView: ObservableObject {
+class TestModelView: BaseViewModel {
     
     @Published var username = ""
     @Published var password = ""
-    @Published var loginDisabled = true
-    
-    var loginRequest: AnyCancellable?
     
     var loginButtonStream: AnyCancellable?
     
-    let url = "https://task.huuhienqt.dev/api/v1/login"
-    
-    var jsonDecoder: JSONDecoder {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
-    }
+    var url: URL { baseURL.appendingPathComponent("api/v1/login") }
     
     var validatedCredentials: AnyPublisher<(String, String)?, Never> {
         return $username.combineLatest($password) { username, password in
@@ -35,37 +25,71 @@ class TestModelView: ObservableObject {
         }.eraseToAnyPublisher()
     }
     
-    init() {
+    override init() {
+        super.init()
+        
         self.loginButtonStream = self.validatedCredentials
             .map { $0 == nil }
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { print($0) },
                   receiveValue: {
-                    self.loginDisabled = $0
+                    self.isValidated = $0
             })
     }
     
     func login() {
-        var request = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "POST"
+        self.startsRequest()
+        
+        var request = self.postRequest(url: self.url)
         let json = [
-            "username": username,
+            "email": username,
             "password": password
         ]
         let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
         request.httpBody = jsonData
 
-        loginRequest = URLSession.shared.dataTaskPublisher(for: request)
+        self.networkRequest = URLSession.shared.dataTaskPublisher(for: request)
             .retry(3)
-            .map { $0.data }
+            .map {
+                $0.data
+            }
             .decode(type: Entry<ResponseData>.self, decoder: jsonDecoder)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { (error) in
-                print(error)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished: break
+                case .failure(let error):
+                    self.completed(with: error)
+                }
             }) { (entry) in
-                print(entry)
+                self.completed(with: entry)
+
         }
+    }
+    
+    private func completed(with entry: Entry<ResponseData>) {
+        print(entry)
         
+        if entry.meta.success && entry.meta.statusCode == 200 {
+            self.toggle(with: true)
+            self.startSession(with: entry)
+        } else {
+            self.toggle(with: false)
+            self.error(with: entry.meta.message)
+        }
+    }
+    
+    func startSession(with entry: Entry<ResponseData>) {
+        guard let data = entry.data else { return }
+        let session = AppSession(
+                        accessToken: data.accessToken,
+                        tokenType: data.tokenType,
+                        expiresIn: data.expiresIn)
+        
+        self.appState.session = session
+        self.appState.user = data.user
+        
+        self.appState.viewRouter.managedView = .main
     }
     
     struct ResponseData: Codable {

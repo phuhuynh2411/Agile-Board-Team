@@ -14,11 +14,11 @@ class LoginModelViewTest: XCTestCase {
     var loginRequest: APILoginRequest!
     var baseURL: URL { URL(string: "https://task.huuhienqt.dev/")! }
     var session: MockURLSession!
-    var loginModelView: LoginModelView!
+    var loginModelView: LoginViewModel!
     
     override func setUp() {
         session = MockURLSession()
-        loginModelView = LoginModelView()
+        loginModelView = LoginViewModel()
         loginModelView.session = session
     }
     

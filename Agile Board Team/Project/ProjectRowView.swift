@@ -14,7 +14,7 @@ struct ProjectRowView: View {
     var body: some View {
         HStack(spacing: 10) {
             if project.image != nil {
-                ProjectIconView()
+                ProjectIconView(stringURL: project.image!)
             } else {
                 PlaceholderView(project: $project)
             }
@@ -23,7 +23,7 @@ struct ProjectRowView: View {
                 Text(project.name)
                     .font(.system(size: 18))
                     .fontWeight(.semibold)
-                Text(project.description)
+                Text(project.description ?? "")
             }
             Spacer()
         }
@@ -52,9 +52,11 @@ struct PlaceholderView: View {
 }
 
 struct ProjectIconView: View {
+    var stringURL: String
+    
     var body: some View {
-        Image("project_shield")
-            .resizable()
+        URLImage(stringURL: self.stringURL)
+            //.resizable()
             .frame(width: 40, height: 40)
             .cornerRadius(7)
     }

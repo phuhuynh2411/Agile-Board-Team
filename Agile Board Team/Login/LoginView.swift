@@ -21,19 +21,19 @@ struct LoginView: View {
                 UserNameTextField(username: $loginMV.username)
                 PasswordSecureField(password: $loginMV.password)
                 
-//                if loginMV.loginDidFail {
-//                    ErrorText(errorMessage: $loginMV.errorMessage)
-//                }
+                if loginMV.isFailed {
+                    ErrorView(errorMessage: loginMV.errorMessage)
+                }
                 
                 Button(action: { self.loginMV.login() }) {
-                    ButtonContentView(disabled: $loginMV.loginDisabled)
-                }.disabled(loginMV.loginDisabled)
+                    ButtonContentView(disabled: $loginMV.isValidated)
+                }.disabled(loginMV.isValidated || loginMV.isInprogress)
             }
             .padding()
             
-//            if loginMV.isStarted {
-//                InfiniteProgressView()
-//            }
+            if loginMV.isInprogress {
+                InfiniteProgressView()
+            }
         }
         
     }
@@ -99,15 +99,5 @@ struct ButtonContentView: View {
             .foregroundColor(.white)
             .cornerRadius(15)
             .background(disabled ? Color.gray : Color.green)
-    }
-}
-
-struct ErrorText: View {
-    @Binding var errorMessage: String
-    var body: some View {
-        Text(errorMessage)
-            .foregroundColor(.red)
-            .font(.system(size: 17))
-            .padding(.bottom, 20)
     }
 }
