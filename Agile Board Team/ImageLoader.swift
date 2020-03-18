@@ -27,6 +27,7 @@ class ImageLoader: ObservableObject {
                     print(error)
                 }
             }, receiveValue: { data in
+                print("Got remote image")
                 self.downloadedImage = UIImage(data: data)
             })
     }

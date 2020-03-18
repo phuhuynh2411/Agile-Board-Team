@@ -55,7 +55,7 @@ struct ProjectIconView: View {
     var stringURL: String
     
     var body: some View {
-        URLImage(stringURL: self.stringURL)
+        RemoteImage(stringURL: stringURL)
             //.resizable()
             .frame(width: 40, height: 40)
             .cornerRadius(7)
