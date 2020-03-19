@@ -8,8 +8,14 @@
 
 import Foundation
 
-class APISetting {
-    let baseURL = URL(string: "https://task.huuhienqt.dev")!
+protocol URLSetting {
+    var baseURL: URL{get}
+    var loginURL: URL { get}
+    var projectURL: URL { get}
+}
+
+extension URLSetting {
+    var baseURL: URL { URL(string: "https://task.huuhienqt.dev")! }
     var loginURL: URL { baseURL.appendingPathComponent("api/v1/login") }
     var projectURL: URL { baseURL.appendingPathComponent("api/v1/projects") }
 }

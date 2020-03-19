@@ -20,7 +20,6 @@
 		840F26B72418DA8B0085FBA6 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F26B62418DA8B0085FBA6 /* APIRequest.swift */; };
 		840F26B92418DEE40085FBA6 /* Demo in Resources */ = {isa = PBXBuildFile; fileRef = 840F26B82418DEE40085FBA6 /* Demo */; };
 		840F26BB24193F0E0085FBA6 /* LoginSucceeded.json in Resources */ = {isa = PBXBuildFile; fileRef = 840F26BA24193F0E0085FBA6 /* LoginSucceeded.json */; };
-		840FDB63241A284800C395E8 /* APILoginRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FDB62241A284800C395E8 /* APILoginRequestTest.swift */; };
 		840FDB68241A2AB600C395E8 /* LoginError2.json in Resources */ = {isa = PBXBuildFile; fileRef = 840FDB67241A2AB600C395E8 /* LoginError2.json */; };
 		840FDB6A241A370000C395E8 /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FDB69241A370000C395E8 /* URLSession+Extension.swift */; };
 		840FDB6C241A381800C395E8 /* URLSessionUploadTask+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FDB6B241A381800C395E8 /* URLSessionUploadTask+Extension.swift */; };
@@ -31,8 +30,8 @@
 		8417CD1724227A480029B7E6 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417CD1624227A480029B7E6 /* RemoteImage.swift */; };
 		84204959241A7A9E001FE724 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84204958241A7A9E001FE724 /* URLSessionMock.swift */; };
 		8420495C241A7AE6001FE724 /* MockURLSessionUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420495B241A7AE6001FE724 /* MockURLSessionUploadTask.swift */; };
-		8420495E241A9136001FE724 /* LoginModelViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420495D241A9136001FE724 /* LoginModelViewTest.swift */; };
-		8438B47C24236F4600E39464 /* APISetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8438B47B24236F4600E39464 /* APISetting.swift */; };
+		8421319724237466008716FE /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421319624237466008716FE /* NetworkModel.swift */; };
+		8438B47C24236F4600E39464 /* URLSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8438B47B24236F4600E39464 /* URLSetting.swift */; };
 		8438B47E2423702B00E39464 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8438B47D2423702B00E39464 /* NetworkRequest.swift */; };
 		843C34D1242311CC00C112F9 /* TestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C34D0242311CC00C112F9 /* TestList.swift */; };
 		846ECCA52419BF7600C8DFA3 /* LoginError1.json in Resources */ = {isa = PBXBuildFile; fileRef = 846ECCA42419BF7600C8DFA3 /* LoginError1.json */; };
@@ -90,7 +89,6 @@
 		840FDB57241A27E000C395E8 /* Agile Board TeamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Agile Board TeamTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		840FDB5B241A27E000C395E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		840FDB61241A284800C395E8 /* Agile Board TeamTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Agile Board TeamTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		840FDB62241A284800C395E8 /* APILoginRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILoginRequestTest.swift; sourceTree = "<group>"; };
 		840FDB67241A2AB600C395E8 /* LoginError2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoginError2.json; sourceTree = "<group>"; };
 		840FDB69241A370000C395E8 /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		840FDB6B241A381800C395E8 /* URLSessionUploadTask+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSessionUploadTask+Extension.swift"; sourceTree = "<group>"; };
@@ -101,8 +99,8 @@
 		8417CD1624227A480029B7E6 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		84204958241A7A9E001FE724 /* URLSessionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		8420495B241A7AE6001FE724 /* MockURLSessionUploadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionUploadTask.swift; sourceTree = "<group>"; };
-		8420495D241A9136001FE724 /* LoginModelViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModelViewTest.swift; sourceTree = "<group>"; };
-		8438B47B24236F4600E39464 /* APISetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISetting.swift; sourceTree = "<group>"; };
+		8421319624237466008716FE /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
+		8438B47B24236F4600E39464 /* URLSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSetting.swift; sourceTree = "<group>"; };
 		8438B47D2423702B00E39464 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		843C34D0242311CC00C112F9 /* TestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestList.swift; sourceTree = "<group>"; };
 		846ECCA42419BF7600C8DFA3 /* LoginError1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoginError1.json; sourceTree = "<group>"; };
@@ -216,7 +214,8 @@
 				840F26A824187C3B0085FBA6 /* LoginView.swift */,
 				84741C1D2420B021004F3663 /* LoginModel.swift */,
 				84B6E5F62421DC5600DD92C8 /* BaseViewModel.swift */,
-				8438B47B24236F4600E39464 /* APISetting.swift */,
+				8438B47B24236F4600E39464 /* URLSetting.swift */,
+				8421319624237466008716FE /* NetworkModel.swift */,
 				8438B47D2423702B00E39464 /* NetworkRequest.swift */,
 			);
 			path = Login;
@@ -245,8 +244,6 @@
 		840FDB58241A27E000C395E8 /* Agile Board TeamTests */ = {
 			isa = PBXGroup;
 			children = (
-				8420495D241A9136001FE724 /* LoginModelViewTest.swift */,
-				840FDB62241A284800C395E8 /* APILoginRequestTest.swift */,
 				840FDB5B241A27E000C395E8 /* Info.plist */,
 			);
 			path = "Agile Board TeamTests";
@@ -463,6 +460,7 @@
 				84204959241A7A9E001FE724 /* URLSessionMock.swift in Sources */,
 				840F269424187C0B0085FBA6 /* AppDelegate.swift in Sources */,
 				840F26AE24188B490085FBA6 /* Extension+Color.swift in Sources */,
+				8421319724237466008716FE /* NetworkModel.swift in Sources */,
 				848D53AB241B285100BAB5E6 /* SettingView.swift in Sources */,
 				84B6E5F72421DC5600DD92C8 /* BaseViewModel.swift in Sources */,
 				8417CD1724227A480029B7E6 /* RemoteImage.swift in Sources */,
@@ -474,7 +472,7 @@
 				849DBC93241B6A280026E23B /* Data.swift in Sources */,
 				840F26A924187C3B0085FBA6 /* LoginView.swift in Sources */,
 				846ECCAA2419F05000C8DFA3 /* APILoginRequest.swift in Sources */,
-				8438B47C24236F4600E39464 /* APISetting.swift in Sources */,
+				8438B47C24236F4600E39464 /* URLSetting.swift in Sources */,
 				849DBC8A241B3EE30026E23B /* AppSession.swift in Sources */,
 				84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */,
 				84741C222420B1B9004F3663 /* MetaData.swift in Sources */,
@@ -507,8 +505,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8420495E241A9136001FE724 /* LoginModelViewTest.swift in Sources */,
-				840FDB63241A284800C395E8 /* APILoginRequestTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

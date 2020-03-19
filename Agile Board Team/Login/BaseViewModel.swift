@@ -32,14 +32,14 @@ class BaseViewModel: ObservableObject {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }
-           
+
     func postRequest(url: URL) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         return request
     }
-    
+
     func getRequest(url: URL, addAuthenticationHeader: Bool = false) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

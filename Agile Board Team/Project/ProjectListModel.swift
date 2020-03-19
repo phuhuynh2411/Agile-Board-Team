@@ -9,15 +9,12 @@
 import SwiftUI
 import Combine
 
-class ProjectListModel: BaseViewModel {
+class ProjectListModel: NetworkModel<ProjectListModel.ResponseData>, URLSetting {
     
     @Published var projects: [Project] = []
     var filteredProjects: [Project]?
     
-    var url: URL { baseURL.appendingPathComponent("api/v1/projects") }
-    
     var page = 0
-    var entry: Entry<ResponseData>?
     var numberOfItems: Int {
         self.entry?.data?.perPage ?? 15
     }
@@ -39,29 +36,18 @@ class ProjectListModel: BaseViewModel {
     }
     
     func download() -> AnyPublisher<Entry<ResponseData>, Error> {
-        var urlComponent = URLComponents(url: self.url, resolvingAgainstBaseURL: true)!
+        var urlComponent = URLComponents(url: self.projectURL, resolvingAgainstBaseURL: true)!
         urlComponent.queryItems = [
             URLQueryItem(name: "page", value: "\(self.page + 1)"),
             URLQueryItem(name: "limit", value: "\(self.numberOfItems)")
         ]
         
-        let request = self.getRequest(url: urlComponent.url!, addAuthenticationHeader: true)
-        
-        return URLSession
-            .shared
-            .dataTaskPublisher(for: request)
-            .retry(3)
-            .map {
-                self.printJSON(data: $0.data)
-                return $0.data
-        }
-        .decode(type: Entry<ResponseData>.self, decoder: jsonDecoder)
-        .mapError { error in error }
-        .eraseToAnyPublisher()
+        let request = self.get(url: urlComponent.url!, authen: true)
+        return send(request: request)
     }
     
     func get() {
-        self.networkRequest = self.download()
+        self.cancelable = self.download()
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -78,7 +64,7 @@ class ProjectListModel: BaseViewModel {
         self.reset()
         
         self.completion = completion
-        if animated { self.displaysProgressBar() }
+        if animated { self.displayProgressbar(true)}
         self.get()
     }
     
@@ -99,12 +85,10 @@ class ProjectListModel: BaseViewModel {
         self.completion?()
     }
     
-    func completed(with entry: Entry<ResponseData>) {
-        print(entry)
-        self.entry = entry
+    override func completed(with entry: Entry<ResponseData>) {
+        super.completed(with: entry)
         
         if entry.meta.success && entry.meta.statusCode == 200 {
-            self.toggle(with: true)
             guard let downloadedProjects = entry.data?.data else { return }
             self.projects.append(contentsOf: downloadedProjects)
             self.page += 1
