@@ -11,7 +11,7 @@ import Combine
 
 struct LoginView: View {
     
-    @ObservedObject var loginMV: TestModelView
+    @ObservedObject var loginMV: LoginModel
     
     var body: some View {
         ZStack {
@@ -42,7 +42,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(loginMV: TestModelView())
+        LoginView(loginMV: LoginModel())
     }
 }
 

@@ -9,10 +9,11 @@
 import Foundation
 import Combine
 
-class TestModelView: BaseViewModel {
+class LoginModel: BaseViewModel {
     
     @Published var username = ""
     @Published var password = ""
+    @Published var isValidated = true
     
     var loginButtonStream: AnyCancellable?
     

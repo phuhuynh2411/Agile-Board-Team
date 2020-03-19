@@ -13,7 +13,7 @@ private let fakeToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwcz
 
 class BaseViewModel: ObservableObject {
     
-    @Published var isValidated = true
+    
     @Published var isFailed = false
     @Published var isSucceeded = false
     
