@@ -13,6 +13,7 @@ private var timer: Timer?
 struct InfiniteProgressView: View {
     
     @State var progressDegree: Double = 10
+    @State var isAnimating = false
     
     var body: some View {
         VStack {
@@ -21,28 +22,14 @@ struct InfiniteProgressView: View {
                 .stroke(lineWidth: 3)
                 .foregroundColor(.blue)
                 .frame(width: 50, height: 50, alignment: .center)
-                .rotationEffect(.degrees(progressDegree))
+                .rotationEffect(Angle(degrees: self.isAnimating ? 360 : 0))
                 .padding()
-        }.onAppear {
-            self.start()
-        }.onDisappear {
-            self.stop()
+                .onAppear {
+                    withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {
+                        self.isAnimating = true
+                    }
+                }
         }
-    }
-    
-    func start() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { (timer) in
-            withAnimation {
-                self.progressDegree += 10
-            }
-            if self.progressDegree >= 360 {
-                self.progressDegree = 0
-            }
-        }
-    }
-    
-    func stop() {
-        timer?.invalidate()
     }
 }
 

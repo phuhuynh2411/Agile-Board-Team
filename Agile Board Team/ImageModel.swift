@@ -18,6 +18,7 @@ class ImageModel: ObservableObject {
     
     init(url: URL?) {
         guard let url = url else { return }
+        
         cacheSubscription = ImageCache
             .image(for: url)
             .replaceError(with: nil)

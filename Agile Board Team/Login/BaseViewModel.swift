@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-private let fakeToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvdGFzay5odXVoaWVucXQuZGV2XC9hcGlcL3YxXC9sb2dpbiIsImlhdCI6MTU4NDU0NDA0MCwiZXhwIjoxNTg0NTQ3NjQwLCJuYmYiOjE1ODQ1NDQwNDAsImp0aSI6IlJYN0JHbUc5VmdCODBhM24iLCJzdWIiOiI4ZDdjNWFkMC02OTFhLTExZWEtYmIyNS0yNWMzYmVlMDA0MzciLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.BAUKg_Ann3enAUlStADCW4FqYwkGBaxEsHCQl9Rqkwo"
+private let fakeToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvdGFzay5odXVoaWVucXQuZGV2XC9hcGlcL3YxXC9sb2dpbiIsImlhdCI6MTU4NDU0OTgwOCwiZXhwIjoxNTg1MTU0NjA4LCJuYmYiOjE1ODQ1NDk4MDgsImp0aSI6IlNseXlaMjhmak9tWThlcFUiLCJzdWIiOiI4ZDdjNWFkMC02OTFhLTExZWEtYmIyNS0yNWMzYmVlMDA0MzciLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4sxk1QQ7cAMhzHuMOcKBQW6ucQbWooq-EgwGatdceCI"
 
 class BaseViewModel: ObservableObject {
     
@@ -25,14 +25,14 @@ class BaseViewModel: ObservableObject {
     let baseURL = URL(string: "https://task.huuhienqt.dev")!
     
     let appState = AppState.shared
-
+    
     var jsonDecoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }
-       
+           
     func postRequest(url: URL) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -62,7 +62,7 @@ class BaseViewModel: ObservableObject {
         self.isInprogress = false
     }
     
-    func startsRequest() {
+    func displaysProgressBar() {
         self.isInprogress = true
     }
     

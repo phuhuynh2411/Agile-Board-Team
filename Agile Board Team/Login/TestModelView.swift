@@ -38,7 +38,7 @@ class TestModelView: BaseViewModel {
     }
     
     func login() {
-        self.startsRequest()
+        self.displaysProgressBar()
         
         var request = self.postRequest(url: self.url)
         let json = [

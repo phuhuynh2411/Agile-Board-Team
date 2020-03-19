@@ -12,7 +12,7 @@ import SwiftUIRefresh
 struct ProjectListView: View {
     
     @State var search: String = ""
-    @ObservedObject var viewModel: ProjectListViewModel
+    @ObservedObject var viewModel: ProjectListModel
     
     @State private var isShowing = false
     
@@ -32,13 +32,18 @@ struct ProjectListView: View {
                     }
                     SearchView(search: $search)
                     List {
-                        ForEach(isFiltering ? viewModel.filteredProjects ?? [] : viewModel.projects ?? []) { project in
-                            ProjectRowView(project: project).onAppear { self.onAppear(project) }
-                        }
-                        .pullToRefresh(isShowing: $isShowing) {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                self.isShowing = false
+                        ForEach(isFiltering ? viewModel.filteredProjects ?? [] : viewModel.projects) { project in
+                            ProjectRowView(project: project).onAppear {
+                                self.onAppear(project)
                             }
+                        }
+                        if self.isLoadingMore {
+                            LastRowView(isLoadingMore: $isLoadingMore)
+                        }
+                        
+                    }.pullToRefresh(isShowing: $isShowing) {
+                        self.viewModel.reload(animated: false) {
+                            self.isShowing = false
                         }
                     }
                 }
@@ -52,26 +57,29 @@ struct ProjectListView: View {
     
    
     func onAppear(_ project: Project) {
-        guard let lastProject = self.viewModel.projects?.last else { return }
+        guard let lastProject = self.viewModel.projects.last else { return }
+        
         if project.id == lastProject.id {
-            self.isLoadingMore = true
+             print("Last row.")
+            self.loadMore()
         }
     }
     
-    func loadMoreItems() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.isLoadingMore = true
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+    func loadMore() {
+        guard !self.isLoadingMore else { return }
+    
+        self.isLoadingMore = true
+       
+        self.viewModel.loadMore {
             self.isLoadingMore = false
-            //self.isLastRow = false
         }
     }
+
 }
 
 struct ProjectListView_Previews: PreviewProvider {
     static var previews: some View {    
-        ProjectListView(viewModel: ProjectListViewModel())
+        ProjectListView(viewModel: ProjectListModel())
     }
 }
 
@@ -127,7 +135,7 @@ struct LastRowView: View {
                 .frame(height: 70)
                 .foregroundColor(.white)
             if self.isLoadingMore {
-                InfiniteProgressView()
+                InfiniteProgressView().id(UUID().uuidString)
             }
         }
     }

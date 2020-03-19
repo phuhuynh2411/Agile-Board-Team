@@ -33,6 +33,7 @@
 		84204959241A7A9E001FE724 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84204958241A7A9E001FE724 /* URLSessionMock.swift */; };
 		8420495C241A7AE6001FE724 /* MockURLSessionUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420495B241A7AE6001FE724 /* MockURLSessionUploadTask.swift */; };
 		8420495E241A9136001FE724 /* LoginModelViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420495D241A9136001FE724 /* LoginModelViewTest.swift */; };
+		843C34D1242311CC00C112F9 /* TestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C34D0242311CC00C112F9 /* TestList.swift */; };
 		846ECCA52419BF7600C8DFA3 /* LoginError1.json in Resources */ = {isa = PBXBuildFile; fileRef = 846ECCA42419BF7600C8DFA3 /* LoginError1.json */; };
 		846ECCA82419EDF400C8DFA3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846ECCA72419EDF400C8DFA3 /* User.swift */; };
 		846ECCAA2419F05000C8DFA3 /* APILoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846ECCA92419F05000C8DFA3 /* APILoginRequest.swift */; };
@@ -52,7 +53,7 @@
 		849DBC95241B6A820026E23B /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC94241B6A820026E23B /* ProjectListView.swift */; };
 		849DBC97241B6AA30026E23B /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC96241B6AA30026E23B /* ProjectRowView.swift */; };
 		849DBC9D241B88D20026E23B /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 849DBC9C241B88D20026E23B /* SwiftUIRefresh */; };
-		849DBC9F241B8DEF0026E23B /* ProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC9E241B8DEF0026E23B /* ProjectListViewModel.swift */; };
+		849DBC9F241B8DEF0026E23B /* ProjectListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC9E241B8DEF0026E23B /* ProjectListModel.swift */; };
 		84B6E5F72421DC5600DD92C8 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6E5F62421DC5600DD92C8 /* BaseViewModel.swift */; };
 		84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3724221A00008EA929 /* ErrorBannerView.swift */; };
 		84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3824221A00008EA929 /* ErrorView.swift */; };
@@ -101,6 +102,7 @@
 		84204958241A7A9E001FE724 /* URLSessionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		8420495B241A7AE6001FE724 /* MockURLSessionUploadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionUploadTask.swift; sourceTree = "<group>"; };
 		8420495D241A9136001FE724 /* LoginModelViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModelViewTest.swift; sourceTree = "<group>"; };
+		843C34D0242311CC00C112F9 /* TestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestList.swift; sourceTree = "<group>"; };
 		846ECCA42419BF7600C8DFA3 /* LoginError1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoginError1.json; sourceTree = "<group>"; };
 		846ECCA72419EDF400C8DFA3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		846ECCA92419F05000C8DFA3 /* APILoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILoginRequest.swift; sourceTree = "<group>"; };
@@ -119,7 +121,7 @@
 		849DBC92241B6A280026E23B /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		849DBC94241B6A820026E23B /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		849DBC96241B6AA30026E23B /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
-		849DBC9E241B8DEF0026E23B /* ProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewModel.swift; sourceTree = "<group>"; };
+		849DBC9E241B8DEF0026E23B /* ProjectListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListModel.swift; sourceTree = "<group>"; };
 		84B6E5F62421DC5600DD92C8 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		84FFDD3724221A00008EA929 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorBannerView.swift; path = "Agile Board Team/Error/ErrorBannerView.swift"; sourceTree = SOURCE_ROOT; };
 		84FFDD3824221A00008EA929 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = "Agile Board Team/Error/ErrorView.swift"; sourceTree = SOURCE_ROOT; };
@@ -311,8 +313,9 @@
 			children = (
 				840F26B42418CBED0085FBA6 /* ProjectView.swift */,
 				849DBC94241B6A820026E23B /* ProjectListView.swift */,
-				849DBC9E241B8DEF0026E23B /* ProjectListViewModel.swift */,
+				849DBC9E241B8DEF0026E23B /* ProjectListModel.swift */,
 				849DBC96241B6AA30026E23B /* ProjectRowView.swift */,
+				843C34D0242311CC00C112F9 /* TestList.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -464,7 +467,7 @@
 				849DBC97241B6AA30026E23B /* ProjectRowView.swift in Sources */,
 				840F26B12418C2470085FBA6 /* LoginViewModel.swift in Sources */,
 				849DBC95241B6A820026E23B /* ProjectListView.swift in Sources */,
-				849DBC9F241B8DEF0026E23B /* ProjectListViewModel.swift in Sources */,
+				849DBC9F241B8DEF0026E23B /* ProjectListModel.swift in Sources */,
 				8420495C241A7AE6001FE724 /* MockURLSessionUploadTask.swift in Sources */,
 				849DBC93241B6A280026E23B /* Data.swift in Sources */,
 				840F26A924187C3B0085FBA6 /* LoginView.swift in Sources */,
@@ -478,6 +481,7 @@
 				840F26B72418DA8B0085FBA6 /* APIRequest.swift in Sources */,
 				848D53A9241B283E00BAB5E6 /* IssueListView.swift in Sources */,
 				8417CD1524227A0B0029B7E6 /* ImageModel.swift in Sources */,
+				843C34D1242311CC00C112F9 /* TestList.swift in Sources */,
 				849DBC91241B68CA0026E23B /* Project.swift in Sources */,
 				849DBC88241B3AD00026E23B /* MainView.swift in Sources */,
 				84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */,
@@ -651,6 +655,7 @@
 				DEVELOPMENT_TEAM = 9RUFVFAF79;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Agile Board Team/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -674,6 +679,7 @@
 				DEVELOPMENT_TEAM = 9RUFVFAF79;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Agile Board Team/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
