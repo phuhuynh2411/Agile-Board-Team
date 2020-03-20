@@ -9,19 +9,17 @@
 import Foundation
 import Combine
 
-class LoginModel: BaseViewModel {
+class LoginModel: NetworkModel<LoginModel.ResponseData>, URLSetting {
     
     @Published var username = ""
     @Published var password = ""
-    @Published var isValidated = true
+    
     
     var loginButtonStream: AnyCancellable?
     
-    var url: URL { baseURL.appendingPathComponent("api/v1/login") }
-    
     var validatedCredentials: AnyPublisher<(String, String)?, Never> {
         return $username.combineLatest($password) { username, password in
-            guard username.count > 0, password.count > 0 else { return nil}
+            guard username.count > 0, password.count > 0 else { return nil }
             return (username, password)
         }.eraseToAnyPublisher()
     }
@@ -30,7 +28,7 @@ class LoginModel: BaseViewModel {
         super.init()
         
         self.loginButtonStream = self.validatedCredentials
-            .map { $0 == nil }
+            .map { $0 != nil }
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { print($0) },
                   receiveValue: {
@@ -38,10 +36,10 @@ class LoginModel: BaseViewModel {
             })
     }
     
-    func login() {
-        self.displaysProgressBar()
-        
-        var request = self.postRequest(url: self.url)
+    func login(animated: Bool = true) {
+        if animated { self.displayProgressbar(true) }
+    
+        var request = self.post(url: loginURL)
         let json = [
             "email": username,
             "password": password
@@ -49,13 +47,8 @@ class LoginModel: BaseViewModel {
         let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
         request.httpBody = jsonData
 
-        self.networkRequest = URLSession.shared.dataTaskPublisher(for: request)
-            .retry(3)
-            .map {
-                $0.data
-            }
-            .decode(type: Entry<ResponseData>.self, decoder: jsonDecoder)
-            .receive(on: DispatchQueue.main)
+        self.cancelable = self.send(request: request)
+            .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished: break
@@ -64,15 +57,13 @@ class LoginModel: BaseViewModel {
                 }
             }) { (entry) in
                 self.completed(with: entry)
-
         }
     }
     
-    private func completed(with entry: Entry<ResponseData>) {
-        print(entry)
+    override func completed(with entry: Entry<ResponseData>) {
+        super.completed(with: entry)
         
         if entry.meta.success && entry.meta.statusCode == 200 {
-            self.toggle(with: true)
             self.startSession(with: entry)
         } else {
             self.toggle(with: false)

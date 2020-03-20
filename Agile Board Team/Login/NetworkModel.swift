@@ -15,9 +15,11 @@ class NetworkModel<ResponseData:Codable>: ObservableObject, NetworkRequest {
     
     @Published var errorMessage = ""
     @Published var isInprogress = false
+    @Published var isValidated = false
     
     var entry: Entry<ResponseData>?
     var cancelable: AnyCancellable?
+    let appState = AppState.shared
     
     func send(request: URLRequest) -> AnyPublisher<Entry<ResponseData>, Error> {
         return URLSession

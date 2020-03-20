@@ -16,4 +16,8 @@ extension Color {
     static var darkBlue: Color {
         Color(red: 15.0/255.0, green: 76.0/255.0, blue: 117.0/255.0, opacity: 1.0)
     }
+    
+    static var circleGray: Color {
+        Color(red: 222.0/255.0, green: 227.0/255.0, blue: 226.0/255.0, opacity: 1.0)
+    }
 }

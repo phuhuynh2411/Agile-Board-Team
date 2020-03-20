@@ -12,6 +12,7 @@ import SwiftUIRefresh
 struct ProjectListView: View {
     
     @State var search: String = ""
+    @State var showCancelButton = false
     @ObservedObject var viewModel: ProjectListModel
     
     @State private var isShowing = false
@@ -30,7 +31,10 @@ struct ProjectListView: View {
                     if viewModel.isFailed {
                         ErrorBannerView(message: viewModel.errorMessage, display: $viewModel.isFailed)
                     }
-                    SearchView(search: $search)
+                    SearchView(search: $search, showCancelButton: $showCancelButton)
+                    .navigationBarTitle("Projects")
+                    .navigationBarHidden(self.showCancelButton).animation(.default)
+                    
                     List {
                         ForEach(isFiltering ? viewModel.filteredProjects ?? [] : viewModel.projects) { project in
                             ProjectRowView(project: project).onAppear {
@@ -45,14 +49,17 @@ struct ProjectListView: View {
                         self.viewModel.reload(animated: false) {
                             self.isShowing = false
                         }
-                    }
+                    }//.resignKeyboardOnDragGesture()
                 }
+               
+                
                 if viewModel.isInprogress {
                     InfiniteProgressView()
                 }
             }
-            .navigationBarTitle("Projects")
+           
         }
+        
     }
     
    
@@ -85,21 +92,41 @@ struct ProjectListView_Previews: PreviewProvider {
 
 struct SearchView: View {
     @Binding var search: String
+    @Binding var showCancelButton: Bool
     
     var body: some View {
-        ZStack {
+        
+        HStack {
             HStack {
                 Image(systemName: "magnifyingglass")
-                TextField("Search project", text: $search).modifier(ClearButton(text: $search))
+                TextField("Search project", text: $search, onEditingChanged: { (isEditing) in
+                    self.showCancelButton = true
+                }) {
+                    print("on commit")
+                }
+                
+                Button(action: {
+                    self.search = ""
+                }) {
+                    Image(systemName: "xmark.circle.fill").opacity(search == "" ? 0 : 1)
+                }
             }
-            .padding(.vertical, 10)
-            .padding(.horizontal, 10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 15)
-                    .stroke(Color.lightGreyColor, lineWidth: 1)
-            )
-                .padding()
+            .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+            .foregroundColor(.secondary)
+            .background(Color(.secondarySystemBackground))
+            .cornerRadius(10.0)
+           
+            if showCancelButton  {
+                Button("Cancel") {
+                    UIApplication.shared.endEditing(true)
+                    self.search = ""
+                    self.showCancelButton = false
+                }
+                .foregroundColor(Color(.systemBlue))
+            }
+            
         }
+    .padding()
     }
 }
 

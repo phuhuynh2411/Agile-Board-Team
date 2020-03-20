@@ -27,7 +27,7 @@ struct LoginView: View {
                 
                 Button(action: { self.loginMV.login() }) {
                     ButtonContentView(disabled: $loginMV.isValidated)
-                }.disabled(loginMV.isValidated || loginMV.isInprogress)
+                }.disabled(!loginMV.isValidated)
             }
             .padding()
             
@@ -98,6 +98,6 @@ struct ButtonContentView: View {
             .frame(width: 200, height: 60)
             .foregroundColor(.white)
             .cornerRadius(15)
-            .background(disabled ? Color.gray : Color.green)
+            .background(!disabled ? Color.gray : Color.green)
     }
 }
