@@ -16,6 +16,7 @@ class NetworkModel<ResponseData:Codable>: ObservableObject, NetworkRequest {
     @Published var errorMessage = ""
     @Published var isInprogress = false
     @Published var isValidated = false
+   // @Published var search: String = ""
     
     var entry: Entry<ResponseData>?
     var cancelable: AnyCancellable?

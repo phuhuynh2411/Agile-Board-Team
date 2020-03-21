@@ -11,55 +11,40 @@ import SwiftUIRefresh
 
 struct ProjectListView: View {
     
-    @State var search: String = ""
     @State var showCancelButton = false
-    @ObservedObject var viewModel: ProjectListModel
-    
+    @EnvironmentObject var viewModel: ProjectListModel
     @State private var isShowing = false
+    //@State private var isLoadingMore = false
     
-    @State private var isLoadingMore = false
-    
-    var isFiltering: Bool {
-        viewModel.filter(searchText: search)
-        return search.count > 0
-    }
-    
+
     var body: some View {
         NavigationView {
-            ZStack {
-                VStack {
-                    if viewModel.isFailed {
-                        ErrorBannerView(message: viewModel.errorMessage, display: $viewModel.isFailed)
-                    }
-                    SearchView(search: $search, showCancelButton: $showCancelButton)
+            VStack {
+                if viewModel.isFailed {
+                    ErrorBannerView(message: viewModel.errorMessage, display: $viewModel.isFailed)
+                }
+                SearchView(search: $viewModel.search, showCancelButton: $showCancelButton)
                     .navigationBarTitle("Projects")
                     .navigationBarHidden(self.showCancelButton).animation(.default)
+                List {
+                    ForEach(viewModel.isFiltering ? viewModel.filteredProjects : viewModel.projects) { (project)  in
+                        ProjectRowView(project: project).onAppear {
+                            self.onAppear(project)
+                        }
+                    }
                     
-                    List {
-                        ForEach(isFiltering ? viewModel.filteredProjects ?? [] : viewModel.projects) { project in
-                            ProjectRowView(project: project).onAppear {
-                                self.onAppear(project)
-                            }
-                        }
-                        if self.isLoadingMore {
-                            LastRowView(isLoadingMore: $isLoadingMore)
-                        }
-                        
-                    }.pullToRefresh(isShowing: $isShowing) {
-                        self.viewModel.reload(animated: false) {
-                            self.isShowing = false
-                        }
-                    }//.resignKeyboardOnDragGesture()
-                }
-               
-                
-                if viewModel.isInprogress {
-                    InfiniteProgressView()
-                }
+                    if viewModel.isLoadingMore {
+                        LastRowView(isLoadingMore: $viewModel.isLoadingMore)
+                    }
+                    
+                }.pullToRefresh(isShowing: $isShowing) {
+                    self.viewModel.reload(animated: false) {
+                        self.isShowing = false
+                    }
+                }.resignKeyboardOnDragGesture()
             }
-           
+            .overlay(ProgressBarView(display: $viewModel.isInprogress))
         }
-        
     }
     
    
@@ -73,12 +58,12 @@ struct ProjectListView: View {
     }
     
     func loadMore() {
-        guard !self.isLoadingMore else { return }
+        guard !viewModel.isLoadingMore else { return }
     
-        self.isLoadingMore = true
+        viewModel.isLoadingMore = true
        
         self.viewModel.loadMore {
-            self.isLoadingMore = false
+            self.viewModel.isLoadingMore = false
         }
     }
 
@@ -86,7 +71,7 @@ struct ProjectListView: View {
 
 struct ProjectListView_Previews: PreviewProvider {
     static var previews: some View {    
-        ProjectListView(viewModel: ProjectListModel())
+        ProjectListView().environmentObject(ProjectListModel())
     }
 }
 
@@ -163,6 +148,19 @@ struct LastRowView: View {
                 .foregroundColor(.white)
             if self.isLoadingMore {
                 InfiniteProgressView().id(UUID().uuidString)
+            }
+        }
+    }
+}
+
+
+struct ProgressBarView: View {
+    @Binding var display: Bool
+    
+    var body: some View {
+        Group {
+            if display {
+                InfiniteProgressView()
             }
         }
     }
