@@ -15,20 +15,21 @@ class ProjectListModel: NetworkModel<ProjectListModel.ResponseData>, URLSetting 
     @Published var filteredProjects: [Project] = []
     @Published var search: String = ""
     @Published var isLoadingMore = false
-    
+    @Published var showCancelButton = false
+    @Published var isShowing = false
+
     var page = 0
     var numberOfItems: Int {
         self.entry?.data?.perPage ?? 15
     }
     
-    typealias Completion = ()->Void
-    var completion: Completion?
-    var searchStream: AnyCancellable?
     var remoteSearchStream: AnyCancellable?
     
     var isFiltering: Bool {
         return self.search.count > 0
     }
+    var searchPage = 0
+    var keyword: String?
     
     override init() {
         super.init()
@@ -36,26 +37,15 @@ class ProjectListModel: NetworkModel<ProjectListModel.ResponseData>, URLSetting 
         
         self.reload(animated: true)
         
-        self.searchStream = $search
-            .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { (completion) in
-                print(completion)
-            }, receiveValue: { (searchText) in
-                self.filteredProjects = self.projects.filter {
-                     $0.name.lowercased().contains(searchText.lowercased())
-                }
-            })
-        
         self.remoteSearchStream = $search
             .debounce(for: 0.5, scheduler: RunLoop.main)
             .removeDuplicates()
             .setFailureType(to: Error.self)
             .map {
-                self.isLoadingMore = true
                 return $0
             }
             .flatMap { searchText in
-                self.download(page: 1, numberOfItems: self.numberOfItems, keyword: searchText)
+               self.search(page: 1, numberOfItems: self.numberOfItems, keyword: searchText)
             }
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
@@ -67,13 +57,11 @@ class ProjectListModel: NetworkModel<ProjectListModel.ResponseData>, URLSetting 
                 }
             }) { entry in
                 print(entry)
-                let foundProjects = entry.data?.data.filter { lhs in
-                    !self.projects.contains { rhs in
-                        lhs.id == rhs.id
-                    }
-                }
-                self.filteredProjects.append(contentsOf: foundProjects ?? [])
+                let foundProjects = entry.data?.data ?? []
+                
+                self.filteredProjects = foundProjects
                 self.isLoadingMore = false
+                self.searchPage = 1
         }
     }
     
@@ -94,58 +82,90 @@ class ProjectListModel: NetworkModel<ProjectListModel.ResponseData>, URLSetting 
         return send(request: request)
     }
     
-    func get() {
-        self.cancelable = self.download(page: self.page + 1, numberOfItems: self.numberOfItems)
+    func search(page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> AnyPublisher<Entry<ResponseData>, Error> {
+        guard let searchText = keyword, searchText.count > 0 else {
+            return Empty(outputType: Entry<ResponseData>.self, failureType: Error.self).eraseToAnyPublisher()
+        }
+        
+        self.isLoadingMore = true
+        self.keyword = keyword
+        return self.download(page: 1, numberOfItems: self.numberOfItems, keyword: searchText)
+    }
+    
+    func get(callback: @escaping (Entry<ResponseData>?, Error?)->Void) {
+        self.cancelable = self.download(
+            page: isFiltering ? self.searchPage + 1 : self.page + 1,
+            numberOfItems: self.numberOfItems,
+            keyword: isFiltering ? self.keyword : nil
+        )
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished: break
                 case .failure(let error):
-                    self.completed(with: error)
+                    callback(nil, error)
                 }
             }) { entry in
-                self.completed(with: entry)
+                callback(entry, nil)
         }
     }
     
-    func reload(animated: Bool = false, completion: Completion? = nil) {
-        self.reset()
-        
-        self.completion = completion
+    func reload(animated: Bool = false) {
+        self.resetPageNumber()
         if animated { self.displayProgressbar(true)}
-        self.get()
+        self.get { (entry, error) in
+            if let error = error {
+                self.completed(with: error)
+            } else {
+                self.completed(with: entry!)
+            }
+            self.isShowing = false
+        }
     }
     
-    func reset() {
-        self.page = 0
-        self.projects.removeAll()
-        self.entry = nil
-        self.completion = nil
+    private func resetPageNumber() {
+        if isFiltering {
+            self.searchPage = 0
+            self.filteredProjects.removeAll()
+        } else {
+            self.page = 0
+            self.projects.removeAll()
+        }
     }
     
-    func loadMore(completion: Completion? = nil) {
-        self.completion = completion
-        self.get()
-    }
-    
-    override func completed(with error: Error) {
-        super.completed(with: error)
-        self.completion?()
+    func loadMore(animated: Bool = true) {
+        if animated { self.isLoadingMore = true }
+        self.get { (entry, error) in
+            if let error = error {
+                self.completed(with: error)
+            } else {
+                self.completed(with: entry!)
+                self.isLoadingMore = false
+            }
+        }
     }
     
     override func completed(with entry: Entry<ResponseData>) {
         super.completed(with: entry)
         
         if entry.meta.success && entry.meta.statusCode == 200 {
-            guard let downloadedProjects = entry.data?.data else { return }
-            self.projects.append(contentsOf: downloadedProjects)
-            self.page += 1
+            guard let downloadedProjects = entry.data?.data, downloadedProjects.count > 0 else { return }
+            if isFiltering {
+                self.filteredProjects.append(contentsOf: downloadedProjects)
+                self.searchPage += 1
+            } else {
+                self.projects.append(contentsOf: downloadedProjects)
+                self.page += 1
+            }
         } else {
             self.toggle(with: false)
             self.error(with: entry.meta.message)
         }
-        
-        self.completion?()
+    }
+    
+    func isLastRow(id: String) -> Bool {
+        guard let lastProject = isFiltering ? self.filteredProjects.last : self.projects.last else { return false }
+        return lastProject.id == id
     }
     
     struct ResponseData: Codable {
@@ -153,5 +173,9 @@ class ProjectListModel: NetworkModel<ProjectListModel.ResponseData>, URLSetting 
         let data: [Project]
         let perPage: Int
         let total: Int
+    }
+    
+    enum RequestError: Error {
+        case emptySearch
     }
 }

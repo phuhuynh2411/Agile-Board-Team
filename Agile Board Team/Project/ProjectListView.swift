@@ -11,21 +11,21 @@ import SwiftUIRefresh
 
 struct ProjectListView: View {
     
-    @State var showCancelButton = false
     @EnvironmentObject var viewModel: ProjectListModel
-    @State private var isShowing = false
-    //@State private var isLoadingMore = false
     
-
+    init() {
+        UITableView.appearance().separatorStyle = .none
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
                 if viewModel.isFailed {
                     ErrorBannerView(message: viewModel.errorMessage, display: $viewModel.isFailed)
                 }
-                SearchView(search: $viewModel.search, showCancelButton: $showCancelButton)
+                SearchView(search: $viewModel.search, showCancelButton: $viewModel.showCancelButton)
                     .navigationBarTitle("Projects")
-                    .navigationBarHidden(self.showCancelButton).animation(.default)
+                    .navigationBarHidden(self.viewModel.showCancelButton).animation(.default)
                 List {
                     ForEach(viewModel.isFiltering ? viewModel.filteredProjects : viewModel.projects) { (project)  in
                         ProjectRowView(project: project).onAppear {
@@ -37,10 +37,8 @@ struct ProjectListView: View {
                         LastRowView(isLoadingMore: $viewModel.isLoadingMore)
                     }
                     
-                }.pullToRefresh(isShowing: $isShowing) {
-                    self.viewModel.reload(animated: false) {
-                        self.isShowing = false
-                    }
+                }.pullToRefresh(isShowing: $viewModel.isShowing) {
+                    self.viewModel.reload(animated: false)
                 }.resignKeyboardOnDragGesture()
             }
             .overlay(ProgressBarView(display: $viewModel.isInprogress))
@@ -49,24 +47,10 @@ struct ProjectListView: View {
     
    
     func onAppear(_ project: Project) {
-        guard let lastProject = self.viewModel.projects.last else { return }
-        
-        if project.id == lastProject.id {
-             print("Last row.")
-            self.loadMore()
-        }
+        guard viewModel.isLastRow(id: project.id) else { return }
+        print("Last row.")
+        viewModel.loadMore(animated: true)
     }
-    
-    func loadMore() {
-        guard !viewModel.isLoadingMore else { return }
-    
-        viewModel.isLoadingMore = true
-       
-        self.viewModel.loadMore {
-            self.viewModel.isLoadingMore = false
-        }
-    }
-
 }
 
 struct ProjectListView_Previews: PreviewProvider {
