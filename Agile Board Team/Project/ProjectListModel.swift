@@ -30,6 +30,7 @@ class ProjectListModel: NetworkModel<ProjectListModel.ResponseData>, URLSetting 
     }
     var searchPage = 0
     var keyword: String?
+    @Published var emptySearchResult = false
     
     override init() {
         super.init()
@@ -62,6 +63,7 @@ class ProjectListModel: NetworkModel<ProjectListModel.ResponseData>, URLSetting 
                 self.filteredProjects = foundProjects
                 self.isLoadingMore = false
                 self.searchPage = 1
+                self.emptySearchResult = foundProjects.count == 0
         }
     }
     
@@ -83,6 +85,7 @@ class ProjectListModel: NetworkModel<ProjectListModel.ResponseData>, URLSetting 
     }
     
     func search(page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> AnyPublisher<Entry<ResponseData>, Error> {
+        self.emptySearchResult = false
         guard let searchText = keyword, searchText.count > 0 else {
             return Empty(outputType: Entry<ResponseData>.self, failureType: Error.self).eraseToAnyPublisher()
         }

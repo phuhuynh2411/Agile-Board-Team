@@ -42,6 +42,7 @@ struct ProjectListView: View {
                 }.resignKeyboardOnDragGesture()
             }
             .overlay(ProgressBarView(display: $viewModel.isInprogress))
+            .overlay(NotFoundView())
         }
     }
     
@@ -145,6 +146,18 @@ struct ProgressBarView: View {
         Group {
             if display {
                 InfiniteProgressView()
+            }
+        }
+    }
+}
+
+struct NotFoundView: View {
+    @EnvironmentObject var viewModel: ProjectListModel
+    
+    var body: some View {
+        Group {
+            if viewModel.emptySearchResult && viewModel.isFiltering {
+                ProjectNotFoundView()
             }
         }
     }

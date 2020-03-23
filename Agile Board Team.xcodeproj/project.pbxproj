@@ -56,6 +56,7 @@
 		849DBC97241B6AA30026E23B /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC96241B6AA30026E23B /* ProjectRowView.swift */; };
 		849DBC9D241B88D20026E23B /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 849DBC9C241B88D20026E23B /* SwiftUIRefresh */; };
 		849DBC9F241B8DEF0026E23B /* ProjectListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC9E241B8DEF0026E23B /* ProjectListModel.swift */; };
+		84ABC0E824286D9F0083EF34 /* ProjectNotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ABC0E724286D9F0083EF34 /* ProjectNotFoundView.swift */; };
 		84B6E5F72421DC5600DD92C8 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6E5F62421DC5600DD92C8 /* BaseViewModel.swift */; };
 		84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3724221A00008EA929 /* ErrorBannerView.swift */; };
 		84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3824221A00008EA929 /* ErrorView.swift */; };
@@ -126,6 +127,7 @@
 		849DBC94241B6A820026E23B /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		849DBC96241B6AA30026E23B /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
 		849DBC9E241B8DEF0026E23B /* ProjectListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListModel.swift; sourceTree = "<group>"; };
+		84ABC0E724286D9F0083EF34 /* ProjectNotFoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNotFoundView.swift; sourceTree = "<group>"; };
 		84B6E5F62421DC5600DD92C8 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		84FFDD3724221A00008EA929 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorBannerView.swift; path = "Agile Board Team/Error/ErrorBannerView.swift"; sourceTree = SOURCE_ROOT; };
 		84FFDD3824221A00008EA929 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = "Agile Board Team/Error/ErrorView.swift"; sourceTree = SOURCE_ROOT; };
@@ -322,6 +324,7 @@
 				849DBC9E241B8DEF0026E23B /* ProjectListModel.swift */,
 				849DBC96241B6AA30026E23B /* ProjectRowView.swift */,
 				843C34D0242311CC00C112F9 /* TestList.swift */,
+				84ABC0E724286D9F0083EF34 /* ProjectNotFoundView.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				8417CD13242279DD0029B7E6 /* ImageCache.swift in Sources */,
 				8438B47E2423702B00E39464 /* NetworkRequest.swift in Sources */,
 				849DBC8C241B3FB90026E23B /* AppState.swift in Sources */,
+				84ABC0E824286D9F0083EF34 /* ProjectNotFoundView.swift in Sources */,
 				840FDB6A241A370000C395E8 /* URLSession+Extension.swift in Sources */,
 				849DBC86241B32180026E23B /* ViewRouter.swift in Sources */,
 				846ECCA82419EDF400C8DFA3 /* User.swift in Sources */,
