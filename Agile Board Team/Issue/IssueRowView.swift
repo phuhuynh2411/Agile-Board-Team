@@ -20,7 +20,7 @@ struct IssueRowView: View {
             Image(systemName: "doc")
                 .resizable()
                 .frame(width: 30, height: 30, alignment: .center)
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text(self.issue.name)
                     .font(.headline)
                 HStack {

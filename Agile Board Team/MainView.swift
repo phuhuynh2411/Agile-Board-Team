@@ -17,7 +17,7 @@ struct MainView: View {
                     Text("Project")
             }
             
-            IssueListView().environmentObject(IssueListModel(issues: issueData))
+            IssueListView().environmentObject(IssueListModel())
                 .tabItem {
                     Image(systemName: "list.bullet.below.rectangle")
                     Text("Issue")

@@ -9,14 +9,21 @@
 import Foundation
 import Combine
 
-class IssueListModel: ObservableObject {
-    @Published var search = ""
-    @Published var showCancelButton = false
+class IssueListModel: BaseListModel<Issue, IssueListModel.IssueResponse> {
     
-    @Published var issues: [Issue] = []
-    @Published var isShowing = false
+    override var url: URL { issueURL }
+    
+    override init() {
+        super.init()
+        
+        self.reload(animated: true)
+    }
     
     init(issues: [Issue]) {
-        self.issues = issues
+        super.init(items: issues)
+    }
+    
+    struct IssueResponse: ResponseData {
+        var data: [Issue]
     }
 }

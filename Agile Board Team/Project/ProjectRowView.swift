@@ -27,7 +27,7 @@ struct ProjectRowView: View {
             }
             Spacer()
         }
-        .padding()
+        //.padding()
         .frame(height: 70)
     }
 }
