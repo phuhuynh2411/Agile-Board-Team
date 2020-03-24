@@ -11,4 +11,10 @@ import Foundation
 struct Entry<T: Codable>: Codable {
     let meta: MetaData
     let data: T?
+    
+    static func placeholder(message: String)-> Entry {
+        return Entry(meta: MetaData(success: false, statusCode: 400, message: message, errors: nil), data: nil)
+    }
+    
+    struct Empty: Codable {}
 }

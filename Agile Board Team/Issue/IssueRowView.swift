@@ -17,14 +17,17 @@ struct IssueRowView: View {
     
     var body: some View {
         HStack(spacing: 16) {
-            Image(systemName: "doc")
-                .resizable()
-                .frame(width: 30, height: 30, alignment: .center)
+            if issue.type?.icon != nil {
+                RemoteImage(stringURL: (issue.type?.icon)!)
+                    .frame(width: 30, height: 30, alignment: .center)
+            } else {
+                IssueTypePlaceholder()
+            }
             VStack(alignment: .leading, spacing: 8) {
                 Text(self.issue.name)
                     .font(.headline)
                 HStack {
-                    Text("FT-0001")
+                    Text(issue.issueNumber)
                         .foregroundColor(.secondary)
                         .font(.system(size: 14))
                     Image(systemName: "star")
@@ -51,5 +54,24 @@ struct IssueRowView: View {
 struct IssueRowView_Previews: PreviewProvider {
     static var previews: some View {
         IssueRowView(issue: issueData[0])
+    }
+}
+
+struct IssueTypeView: View {
+    var stringURL: String
+    
+    var body: some View {
+        RemoteImage(stringURL: stringURL)
+            //.resizable()
+            .frame(width: 30, height: 30)
+            .cornerRadius(7)
+    }
+}
+
+struct IssueTypePlaceholder: View {
+    var body: some View {
+        Image(systemName: "doc.plaintext")
+            .resizable()
+            .frame(width: 30, height: 30, alignment: .center)
     }
 }

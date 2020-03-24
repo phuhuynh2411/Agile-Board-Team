@@ -33,7 +33,7 @@ struct IssueListView: View {
                     
                 }
                 .pullToRefresh(isShowing: $issueListModel.isPulling) {
-                    self.issueListModel.reload(animated: false)
+                    self.issueListModel.reload(byUsing: .pull, animated: true)
                 }
                 .resignKeyboardOnDragGesture()
             }
@@ -44,7 +44,7 @@ struct IssueListView: View {
     
     func onAppear(_ issue: Issue) {
         guard issueListModel.isLastRow(id: issue.id) else { return }
-        issueListModel.loadMore(animated: true)
+        issueListModel.loadData(byUsing: .loadMore)
     }
 }
 

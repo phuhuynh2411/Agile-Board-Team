@@ -20,16 +20,34 @@ extension NetworkModel {
         return URLSession
             .shared
             .dataTaskPublisher(for: request)
-            .retry(3)
             .map {
                 self.printJSON(data: $0.data)
                 return $0.data
         }
-        .decode(type: Entry<ResponseData>.self, decoder: jsonDecoder )
+        .decode(type: Entry<ResponseData>.self, decoder: self.jsonDecoder )
         .eraseToAnyPublisher()
     }
     
-    func get(from url: URL, page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> AnyPublisher<Entry<ResponseData>, Error> {
+    func search(request: URLRequest) -> AnyPublisher<Entry<ResponseData>, Error> {
+        return send(request: request)
+            .catch{ error in
+                Just(Entry.placeholder(message: error.localizedDescription))
+                    .setFailureType(to: Error.self)
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func getData(from url: URL, page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> AnyPublisher<Entry<ResponseData>, Error> {
+        let request = self.parasWith(url: url, page: page, numberOfItems: numberOfItems, keyword: keyword)
+        return send(request: request)
+    }
+    
+    func searchData(from url: URL, page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> AnyPublisher<Entry<ResponseData>, Error> {
+        let request = self.parasWith(url: url, page: page, numberOfItems: numberOfItems, keyword: keyword)
+        return search(request: request)
+    }
+    
+    private func parasWith(url: URL, page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> URLRequest {
         var urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         urlComponent.queryItems = []
         if let page = page {
@@ -41,8 +59,8 @@ extension NetworkModel {
         if let keyword = keyword {
             urlComponent.queryItems?.append(URLQueryItem(name: "keyword", value: "\(keyword)") )
         }
-    
-        let request = self.get(url: urlComponent.url!, authen: true)
-        return send(request: request)
+        
+        return self.get(url: urlComponent.url!, authen: true)
     }
+    
 }

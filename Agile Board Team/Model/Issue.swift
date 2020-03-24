@@ -18,8 +18,11 @@ class Issue: Codable, Identifiable {
     let assigneeId: String
     let name: String
     let description: String?
-    let startDate: Date
-    let endDate: Date
+    let startDate: Date?
+    let endDate: Date?
     let createdAt: Date
     let updatedAt: Date
+    let issueNumber: String
+    
+    var type: IssueType?
 }

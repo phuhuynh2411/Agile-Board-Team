@@ -39,7 +39,7 @@ struct ProjectListView: View {
                     
                 }
                 .pullToRefresh(isShowing: $viewModel.isPulling) {
-                    self.viewModel.reload(animated: false)
+                    self.viewModel.reload(byUsing: .pull, animated: true)
                 }
                 .resignKeyboardOnDragGesture()
                 
@@ -52,7 +52,7 @@ struct ProjectListView: View {
    
     func onAppear(_ project: Project) {
         guard viewModel.isLastRow(id: project.id) else { return }
-        viewModel.loadMore(animated: true)
+        viewModel.loadData(byUsing: .loadMore)
     }
 }
 
