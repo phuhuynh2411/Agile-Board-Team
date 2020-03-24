@@ -9,13 +9,27 @@
 import SwiftUI
 
 struct IssueListView: View {
+    @EnvironmentObject var issueListModel: IssueListModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            VStack {
+                SearchView(search: $issueListModel.search, showCancelButton: $issueListModel.showCancelButton)
+                List(issueListModel.issues) { issue in
+                    IssueRowView(issue: issue)
+                }.pullToRefresh(isShowing: $issueListModel.isShowing) {
+                    //self.viewModel.reload(animated: false)
+                }.resignKeyboardOnDragGesture()
+            }
+                
+            .navigationBarTitle("Issues")
+        }
+        
     }
 }
 
 struct IssueListView_Previews: PreviewProvider {
     static var previews: some View {
-        IssueListView()
+        IssueListView().environmentObject(IssueListModel(issues: issueData))
     }
 }

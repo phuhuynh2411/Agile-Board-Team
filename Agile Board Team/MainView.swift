@@ -17,10 +17,16 @@ struct MainView: View {
                     Text("Project")
             }
             
-            IssueListView()
+            IssueListView().environmentObject(IssueListModel(issues: issueData))
                 .tabItem {
                     Image(systemName: "list.bullet.below.rectangle")
                     Text("Issue")
+            }
+            
+            Text("Notification")
+                .tabItem {
+                    Image(systemName: "bell")
+                    Text("Notification")
             }
             
             SettingView()

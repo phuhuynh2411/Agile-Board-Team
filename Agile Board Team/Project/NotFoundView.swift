@@ -8,7 +8,9 @@
 
 import SwiftUI
 
-struct ProjectNotFoundView: View {
+struct NotFoundView: View {
+    @State var title: String = "Not Found"
+    @State var description: String = "Try changing your search criteria"
     var body: some View {
         VStack {
             ZStack {
@@ -24,18 +26,18 @@ struct ProjectNotFoundView: View {
                     .foregroundColor(.gray)
             }
             
-            Text("No projects found")
+            Text(title)
                 .font(.headline)
                 .padding()
             
-            Text("Try changing the search criteria")
+            Text(description)
                 .foregroundColor(.secondary)
         }
     }
 }
 
-struct ProjectNotFoundView_Previews: PreviewProvider {
+struct NotFoundView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectNotFoundView()
+        NotFoundView()
     }
 }

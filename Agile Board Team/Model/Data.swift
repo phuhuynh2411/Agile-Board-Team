@@ -10,6 +10,7 @@ import SwiftUI
 import CoreLocation
 
 let projectData: [Project] = load("projects")
+let issueData: [Issue] = load("issues")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
