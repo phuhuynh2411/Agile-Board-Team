@@ -27,7 +27,7 @@ struct ProjectListView: View {
                     .navigationBarTitle("Projects")
                     .navigationBarHidden(self.viewModel.showCancelButton).animation(.default)
                 List {
-                    ForEach(viewModel.isFiltering ? viewModel.filteredProjects : viewModel.projects) { (project)  in
+                    ForEach(viewModel.isFiltering ? viewModel.filtedItems : viewModel.items) { (project)  in
                         ProjectRowView(project: project).onAppear {
                             self.onAppear(project)
                         }
@@ -38,13 +38,13 @@ struct ProjectListView: View {
                     }
                     
                 }
-                .pullToRefresh(isShowing: $viewModel.isShowing) {
+                .pullToRefresh(isShowing: $viewModel.isPulling) {
                     self.viewModel.reload(animated: false)
                 }
                 .resignKeyboardOnDragGesture()
                 
             }
-            .overlay(CircleProgressView(display: $viewModel.isInprogress))
+            .overlay(CircleProgressView(display: $viewModel.isRefreshing))
             .overlay(ProjectNotFoundView())
         }
     }

@@ -11,9 +11,7 @@ import Combine
 
 private let fakeToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvdGFzay5odXVoaWVucXQuZGV2XC9hcGlcL3YxXC9sb2dpbiIsImlhdCI6MTU4NDU0OTgwOCwiZXhwIjoxNTg1MTU0NjA4LCJuYmYiOjE1ODQ1NDk4MDgsImp0aSI6IlNseXlaMjhmak9tWThlcFUiLCJzdWIiOiI4ZDdjNWFkMC02OTFhLTExZWEtYmIyNS0yNWMzYmVlMDA0MzciLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4sxk1QQ7cAMhzHuMOcKBQW6ucQbWooq-EgwGatdceCI"
 
-protocol NetworkRequest {
-    
-}
+protocol NetworkRequest {}
 
 extension NetworkRequest {
     

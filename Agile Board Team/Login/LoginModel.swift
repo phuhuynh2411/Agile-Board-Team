@@ -9,13 +9,23 @@
 import Foundation
 import Combine
 
-class LoginModel: NetworkModel<LoginModel.ResponseData>, URLSetting {
+class LoginModel: ObservableObject, NetworkModel {
     
     @Published var username = ""
     @Published var password = ""
     
+    @Published var isValidated = false
+    @Published var isFailed = false
+    @Published var isSucceeded = false
+    
+    @Published var errorMessage = ""
+    @Published var isInprogress = false
+    
+    let appState = AppState.shared
     
     var loginButtonStream: AnyCancellable?
+    var loginStream: AnyCancellable?
+    var entry: Entry<LoginModel.ResponseData>?
     
     var validatedCredentials: AnyPublisher<(String, String)?, Never> {
         return $username.combineLatest($password) { username, password in
@@ -24,9 +34,7 @@ class LoginModel: NetworkModel<LoginModel.ResponseData>, URLSetting {
         }.eraseToAnyPublisher()
     }
     
-    override init() {
-        super.init()
-        
+    init() {
         self.loginButtonStream = self.validatedCredentials
             .map { $0 != nil }
             .receive(on: RunLoop.main)
@@ -36,9 +44,8 @@ class LoginModel: NetworkModel<LoginModel.ResponseData>, URLSetting {
             })
     }
     
-    func login(animated: Bool = true) {
-        if animated { self.displayProgressbar(true) }
-    
+    func signIn(animated: Bool = true) {
+        if animated { self.isInprogress = true }
         var request = self.post(url: loginURL)
         let json = [
             "email": username,
@@ -47,27 +54,23 @@ class LoginModel: NetworkModel<LoginModel.ResponseData>, URLSetting {
         let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
         request.httpBody = jsonData
 
-        self.cancelable = self.send(request: request)
+        self.loginStream = self.send(request: request)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished: break
                 case .failure(let error):
-                    self.completed(with: error)
+                    self.isFailed = true
+                    self.errorMessage = error.localizedDescription
                 }
             }) { (entry) in
-                self.completed(with: entry)
-        }
-    }
-    
-    override func completed(with entry: Entry<ResponseData>) {
-        super.completed(with: entry)
-        
-        if entry.meta.success && entry.meta.statusCode == 200 {
-            self.startSession(with: entry)
-        } else {
-            self.toggle(with: false)
-            self.error(with: entry.meta.message)
+                if entry.meta.success && entry.meta.statusCode == 200 {
+                    self.isSucceeded = true
+                    self.startSession(with: entry)
+                } else {
+                    self.isFailed = true
+                    self.errorMessage = entry.meta.message
+                }
         }
     }
     

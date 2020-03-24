@@ -9,18 +9,12 @@
 import Foundation
 import Combine
 
-class NetworkModel<ResponseData:Codable>: ObservableObject, NetworkRequest {
-    @Published var isFailed = false
-    @Published var isSucceeded = false
-    
-    @Published var errorMessage = ""
-    @Published var isInprogress = false
-    @Published var isValidated = false
-   // @Published var search: String = ""
-    
-    var entry: Entry<ResponseData>?
-    var cancelable: AnyCancellable?
-    let appState = AppState.shared
+protocol NetworkModel: NetworkRequest, URLSetting, ObservableObject {
+    associatedtype ResponseData:Codable
+    var entry: Entry<ResponseData>? {get set}
+}
+
+extension NetworkModel {
     
     func send(request: URLRequest) -> AnyPublisher<Entry<ResponseData>, Error> {
         return URLSession
@@ -35,29 +29,20 @@ class NetworkModel<ResponseData:Codable>: ObservableObject, NetworkRequest {
         .eraseToAnyPublisher()
     }
     
-    func completed(with error: Error) {
-        print(error)
-        self.toggle(with: false)
-        self.errorMessage = error.localizedDescription
-    }
+    func get(from url: URL, page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> AnyPublisher<Entry<ResponseData>, Error> {
+        var urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)!
+        urlComponent.queryItems = []
+        if let page = page {
+            urlComponent.queryItems?.append(URLQueryItem(name: "page", value: "\(page)"))
+        }
+        if let numberOfItems = numberOfItems {
+            urlComponent.queryItems?.append(URLQueryItem(name: "limit", value: "\(numberOfItems)") )
+        }
+        if let keyword = keyword {
+            urlComponent.queryItems?.append(URLQueryItem(name: "keyword", value: "\(keyword)") )
+        }
     
-    func completed(with entry: Entry<ResponseData>) {
-        print(entry)
-        self.entry = entry
-        self.toggle(with: true)
-    }
-    
-    func toggle(with status: Bool) {
-        self.isSucceeded = status
-        self.isFailed = !status
-        self.isInprogress = false
-    }
-
-    func error(with message: String) {
-        self.errorMessage = message
-    }
-    
-    func displayProgressbar(_ status: Bool) {
-        self.isInprogress = status
+        let request = self.get(url: urlComponent.url!, authen: true)
+        return send(request: request)
     }
 }

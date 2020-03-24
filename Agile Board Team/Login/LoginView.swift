@@ -25,7 +25,7 @@ struct LoginView: View {
                     ErrorView(errorMessage: loginMV.errorMessage)
                 }
                 
-                Button(action: { self.loginMV.login() }) {
+                Button(action: { self.loginMV.signIn() }) {
                     ButtonContentView(disabled: $loginMV.isValidated)
                 }.disabled(!loginMV.isValidated)
             }
