@@ -17,10 +17,8 @@ struct SearchView: View {
         HStack {
             HStack {
                 Image(systemName: "magnifyingglass")
-                TextField("Search project", text: $search, onEditingChanged: { (isEditing) in
-                    self.showCancelButton = true
-                }) {
-                    print("on commit")
+                TextField("Search project", text: $search).introspectTextField { textField in
+                        print("we got a text field here \(textField)")
                 }
                 
                 Button(action: {

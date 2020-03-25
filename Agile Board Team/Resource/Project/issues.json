@@ -67,7 +67,7 @@
          "id": "69da6630-6dcc-11ea-bd19-cd4a328a3450",
          "parent_id": null,
          "status": 1,
-         "icon": "https://task.huuhienqt.dev/images/issue-type/story.svg",
+         "icon": "https://task.huuhienqt.dev/images/issue-type/story.png",
          "name": "Story",
          "description": "Illum qui optio atque sit nemo sed autem. Eos est dolores dolorum aliquid. Est commodi et nisi praesentium et assumenda.",
          "created_at": "2020-03-24T12:38:50+00:00",
@@ -78,7 +78,7 @@
          "name": "Todo",
          "status": 1,
          "icon": "Eos iste ut non vitae excepturi aut aliquid.",
-         "color": "green",
+         "color": "#00bfff",
          "description": "Maiores perferendis explicabo iste facilis quo et nemo. Consectetur autem soluta ipsam illo. Illo sapiente vero temporibus est et in dolore. Earum et quia ullam dignissimos.",
          "created_at": "2020-03-24T12:38:50+00:00",
          "updated_at": "2020-03-24T12:38:50+00:00"
@@ -91,6 +91,27 @@
          "description": "Ab et qui dolore quia. Ea debitis cupiditate numquam autem optio rerum. Est qui dolorem necessitatibus eos blanditiis libero quisquam. Assumenda et ea vitae eligendi aut aut.",
          "created_at": "2020-03-24T12:38:50+00:00",
          "updated_at": "2020-03-24T12:38:50+00:00"
+      },
+      "supporter": {
+          "id": "7f9a25c0-6e43-11ea-9ec3-a57aaa82286d",
+          "status": 1,
+          "is_admin": false,
+          "gender": 0,
+          "is_notify": true,
+          "is_blocked": false,
+          "is_online": false,
+          "first_name": null,
+          "last_name": null,
+          "name": "Leann Grady",
+          "email": "reyes.gaylord@example.org",
+          "email_verified_at": "2020-03-25T02:51:17+00:00",
+          "address": null,
+          "avatar": null,
+          "phone_number": null,
+          "birthday": null,
+          "bio": null,
+          "created_at": "2020-03-25T02:51:17+00:00",
+          "updated_at": "2020-03-25T02:51:17+00:00"
       }
    },
    {

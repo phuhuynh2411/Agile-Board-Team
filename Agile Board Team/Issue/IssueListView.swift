@@ -12,25 +12,29 @@ struct IssueListView: View {
     @EnvironmentObject var issueListModel: IssueListModel
     
     var body: some View {
+        
         NavigationView {
             VStack {
                 if issueListModel.isFailed {
                     ErrorBannerView(message: issueListModel.errorMessage, display: $issueListModel.isFailed)
                 }
-                SearchView(search: $issueListModel.search, showCancelButton: $issueListModel.showCancelButton)
-                    .navigationBarTitle("Issues")
-                    .navigationBarHidden(self.issueListModel.showCancelButton).animation(.default)
+                if issueListModel.showCancelButton {
+                    SearchView(search: $issueListModel.search, showCancelButton: $issueListModel.showCancelButton)
+                }
+                IssueNotFoundView()
+                NavigationBar()
                 List {
                     ForEach(issueListModel.isFiltering ? issueListModel.filtedItems : issueListModel.items) { (issue)  in
-                        IssueRowView(issue: issue).onAppear{
-                            self.onAppear(issue)
+                        NavigationLink(destination: IssueDetailView(issue: issue)) {
+                            IssueRowView(issue: issue).onAppear{
+                                self.onAppear(issue)
+                            }
                         }
                     }
                     
                     if issueListModel.isLoadingMore {
                         LastRowView(isLoadingMore: $issueListModel.isLoadingMore)
                     }
-                    
                 }
                 .pullToRefresh(isShowing: $issueListModel.isPulling) {
                     self.issueListModel.reload(byUsing: .pull, animated: true)
@@ -38,7 +42,6 @@ struct IssueListView: View {
                 .resignKeyboardOnDragGesture()
             }
             .overlay(CircleProgressView(display: $issueListModel.isRefreshing))
-            .overlay(IssueNotFoundView())
         }
     }
     
@@ -63,5 +66,41 @@ struct IssueNotFoundView: View {
                 NotFoundView(title: "Issue Not Found")
             }
         }
+    }
+}
+
+private struct NavTrailingView: View {
+    @EnvironmentObject var issueListModel: IssueListModel
+    
+    var body: some View {
+   
+        HStack (spacing: 25) {
+            Button(action: {
+                withAnimation(.easeInOut(duration: 1)) {
+                    self.issueListModel.showCancelButton = true
+                }
+            }) {
+                Image(systemName: "magnifyingglass")
+            }
+            
+            Button(action: {
+                
+            }) {
+                Image(systemName: "plus")
+            }
+        }
+    }
+}
+
+private struct NavigationBar: View {
+    @EnvironmentObject var issueListModel: IssueListModel
+    
+    var body: some View {
+        
+        Rectangle()
+            .frame(height: 0, alignment: .center)
+            .navigationBarTitle("Issues", displayMode: .inline)
+            .navigationBarItems(trailing: NavTrailingView() )
+            .navigationBarHidden(issueListModel.showCancelButton)
     }
 }

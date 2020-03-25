@@ -27,4 +27,6 @@ class Issue: Codable, Identifiable {
     var type: IssueType?
     var priority: IssuePriority?
     var status: IssueStatus?
+    var project: Project
+    var supporter: IssueReporter?
 }

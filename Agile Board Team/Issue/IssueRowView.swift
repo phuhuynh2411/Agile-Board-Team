@@ -19,14 +19,14 @@ struct IssueRowView: View {
         HStack(spacing: 16) {
             if issue.type?.icon != nil {
                 RemoteImage(stringURL: (issue.type?.icon)!)
-                    .frame(width: 30, height: 30, alignment: .center)
+                    .frame(width: 20, height: 20, alignment: .center)
                     .foregroundColor(.lightGreyColor)
             } else {
                 IssueTypePlaceholder()
             }
             VStack(alignment: .leading, spacing: 8) {
                 Text(self.issue.name)
-                    .font(.headline)
+                    .font(.system(size: 17))
                 HStack {
                     Text(issue.issueNumber)
                         .foregroundColor(.secondary)
@@ -34,16 +34,17 @@ struct IssueRowView: View {
                     // Priority
                     if issue.priority?.icon != nil {
                         RemoteImage(stringURL: (issue.priority?.icon)!)
-                            .frame(width: 20, height: 20, alignment: .center)
+                            .frame(width: 12, height: 12, alignment: .center)
                             .foregroundColor(.lightGreyColor)
                     } else {
                         PriorityPlaceholder()
                     }
-                    Text(issue.status?.name ?? "")
+                    Text(issue.status?.name.uppercased() ?? "")
+                        .font(.system(size: 14))
                         .foregroundColor(.white)
-                        .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
+                        .padding(EdgeInsets(top: 3, leading: 8, bottom: 3, trailing: 8))
                         .background(Color(hex: issue.status?.color ?? "#cecece"))
-                        .cornerRadius(7.0)
+                        .cornerRadius(3.0)
                     Spacer()
                     //Text("Due today")
                       //  .font(.system(size: 14))
@@ -51,7 +52,7 @@ struct IssueRowView: View {
                 }
             }
         }
-        .frame(height: 70, alignment: .leading)
+        .frame(height: 60, alignment: .leading)
         //.padding()
     }
 }
@@ -68,7 +69,7 @@ struct IssueTypeView: View {
     var body: some View {
         RemoteImage(stringURL: stringURL)
             //.resizable()
-            .frame(width: 30, height: 30)
+            .frame(width: 20, height: 20)
             .cornerRadius(7)
     }
 }
@@ -77,7 +78,7 @@ struct IssueTypePlaceholder: View {
     var body: some View {
         Image(systemName: "doc.plaintext")
             .resizable()
-            .frame(width: 30, height: 30, alignment: .center)
+            .frame(width: 20, height: 20, alignment: .center)
     }
 }
 

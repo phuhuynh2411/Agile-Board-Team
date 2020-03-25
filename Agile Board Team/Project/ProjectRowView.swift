@@ -21,14 +21,16 @@ struct ProjectRowView: View {
         
             VStack(alignment: .leading, spacing: 10) {
                 Text(project.name)
-                    .font(.system(size: 18))
-                    .fontWeight(.semibold)
+                    .font(.system(size: 17))
                 Text(project.description ?? "")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                
             }
             Spacer()
         }
         //.padding()
-        .frame(height: 70)
+        .frame(height: 60)
     }
 }
 
@@ -59,5 +61,6 @@ struct ProjectIconView: View {
             //.resizable()
             .frame(width: 40, height: 40)
             .cornerRadius(7)
+            .foregroundColor(.lightGreyColor)
     }
 }

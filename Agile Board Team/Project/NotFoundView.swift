@@ -12,7 +12,7 @@ struct NotFoundView: View {
     @State var title: String = "Not Found"
     @State var description: String = "Try changing your search criteria"
     var body: some View {
-        VStack {
+        VStack(spacing: 8){
             ZStack {
                 Image(systemName: "magnifyingglass")
                     .resizable()
@@ -28,10 +28,9 @@ struct NotFoundView: View {
             
             Text(title)
                 .font(.headline)
-                .padding()
-            
             Text(description)
                 .foregroundColor(.secondary)
+            Spacer()
         }
     }
 }

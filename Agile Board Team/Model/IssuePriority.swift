@@ -8,7 +8,7 @@
 
 import Foundation
 
-class IssuePriority:Codable {
+class IssuePriority:Codable, Identifiable {
     let id: String
     let icon: String?
     let name: String

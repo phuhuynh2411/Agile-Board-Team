@@ -15,6 +15,7 @@ class IssueListModel: BaseListModel<Issue, IssueListModel.IssueResponse> {
     
     override init() {
         super.init()
+        // _ = self.objectWillChange.append(super.objectWillChange)
         
         self.reload(animated: true)
     }

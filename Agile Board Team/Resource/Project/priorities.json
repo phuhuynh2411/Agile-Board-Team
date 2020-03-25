@@ -1,0 +1,53 @@
+
+[
+    {
+        "id": "7f66f050-6e43-11ea-862b-0f966d730beb",
+        "parent_id": null,
+        "status": 1,
+        "icon": "https://task.huuhienqt.dev/images/priorities/highest.png",
+        "name": "Highest",
+        "description": "Repudiandae suscipit eos harum quia est. Aut qui velit in non commodi repellendus provident.",
+        "created_at": "2020-03-25T02:51:16+00:00",
+        "updated_at": "2020-03-25T02:51:16+00:00"
+    },
+    {
+        "id": "7f672220-6e43-11ea-a6f1-8360e5975619",
+        "parent_id": null,
+        "status": 1,
+        "icon": "https://task.huuhienqt.dev/images/priorities/high.png",
+        "name": "High",
+        "description": "Nobis dolores in et aut. Est sed ullam corrupti sed.",
+        "created_at": "2020-03-25T02:51:16+00:00",
+        "updated_at": "2020-03-25T02:51:16+00:00"
+    },
+    {
+        "id": "7f673de0-6e43-11ea-9dd8-93af49e34966",
+        "parent_id": null,
+        "status": 1,
+        "icon": "https://task.huuhienqt.dev/images/priorities/medium.png",
+        "name": "Medium",
+        "description": "Neque soluta perferendis earum earum similique est natus. Esse ipsa natus perferendis qui. Unde laborum quo accusamus cumque voluptatem.",
+        "created_at": "2020-03-25T02:51:16+00:00",
+        "updated_at": "2020-03-25T02:51:16+00:00"
+    },
+    {
+        "id": "7f675760-6e43-11ea-bd29-b715d880c8ae",
+        "parent_id": null,
+        "status": 1,
+        "icon": "https://task.huuhienqt.dev/images/priorities/low.png",
+        "name": "Low",
+        "description": "Repellat corrupti aut quia et velit non est quo. Asperiores praesentium ut harum corrupti. Vel consectetur magnam consequatur qui adipisci omnis beatae. Quos in commodi non animi facere architecto cupiditate. Voluptatem et aperiam cum voluptatem quibusdam voluptatem ducimus.",
+        "created_at": "2020-03-25T02:51:16+00:00",
+        "updated_at": "2020-03-25T02:51:16+00:00"
+    },
+    {
+        "id": "7f676fc0-6e43-11ea-82e8-99c67cf099e7",
+        "parent_id": null,
+        "status": 1,
+        "icon": "https://task.huuhienqt.dev/images/priorities/lowest.png",
+        "name": "Lowest",
+        "description": "Sed dolorem pariatur consequuntur hic est omnis ut. Placeat ea tenetur mollitia rerum rerum nesciunt et. Quos saepe praesentium omnis sint nihil autem.",
+        "created_at": "2020-03-25T02:51:16+00:00",
+        "updated_at": "2020-03-25T02:51:16+00:00"
+    }
+]

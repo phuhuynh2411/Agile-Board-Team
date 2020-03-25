@@ -11,8 +11,10 @@ import SwiftUI
 
 struct RemoteImage : View {
     @ObservedObject var imageModel: ImageModel
+    var placeholder: Image
     
-    init(stringURL: String) {
+    init(stringURL: String, placeholder: Image = Image(systemName: "photo")) {
+        self.placeholder = placeholder
         if let url = URL(string: stringURL) {
             imageModel = ImageModel(url: url)
             return
@@ -24,7 +26,7 @@ struct RemoteImage : View {
         imageModel
             .image
             .map { Image(uiImage:$0).resizable() }
-            ?? Image(systemName: "photo")
+            ?? placeholder
                 .resizable()
                 
     }

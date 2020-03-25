@@ -20,12 +20,14 @@ struct ProjectListView: View {
     var body: some View {
         NavigationView {
             VStack {
+                NavigationBar()
                 if viewModel.isFailed {
                     ErrorBannerView(message: viewModel.errorMessage, display: $viewModel.isFailed)
                 }
-                SearchView(search: $viewModel.search, showCancelButton: $viewModel.showCancelButton)
-                    .navigationBarTitle("Projects")
-                    .navigationBarHidden(self.viewModel.showCancelButton).animation(.default)
+                if viewModel.showCancelButton {
+                    SearchView(search: $viewModel.search, showCancelButton: $viewModel.showCancelButton)
+                }
+                ProjectNotFoundView()
                 List {
                     ForEach(viewModel.isFiltering ? viewModel.filtedItems : viewModel.items) { (project)  in
                         ProjectRowView(project: project).onAppear {
@@ -45,7 +47,6 @@ struct ProjectListView: View {
                 
             }
             .overlay(CircleProgressView(display: $viewModel.isRefreshing))
-            .overlay(ProjectNotFoundView())
         }
     }
     
@@ -71,5 +72,42 @@ struct ProjectNotFoundView: View {
                 NotFoundView(title: "Project Not Found")
             }
         }
+    }
+}
+
+
+private struct NavTrailingView: View {
+    @EnvironmentObject var viewModel: ProjectListModel
+    
+    var body: some View {
+   
+        HStack (spacing: 25) {
+            Button(action: {
+                withAnimation(.easeInOut(duration: 1)) {
+                    self.viewModel.showCancelButton = true
+                }
+            }) {
+                Image(systemName: "magnifyingglass")
+            }
+            
+            Button(action: {
+                
+            }) {
+                Image(systemName: "plus")
+            }
+        }
+    }
+}
+
+private struct NavigationBar: View {
+    @EnvironmentObject var viewModel: ProjectListModel
+    
+    var body: some View {
+        
+        Rectangle()
+            .frame(height: 0, alignment: .center)
+            .navigationBarTitle("Projects", displayMode: .large)
+            .navigationBarItems(trailing: NavTrailingView() )
+            .navigationBarHidden(viewModel.showCancelButton)
     }
 }
