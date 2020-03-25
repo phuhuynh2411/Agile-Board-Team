@@ -52,7 +52,7 @@ struct ProjectListView: View {
    
     func onAppear(_ project: Project) {
         guard viewModel.isLastRow(id: project.id) else { return }
-        viewModel.loadData(byUsing: .loadMore)
+        viewModel.loadMore()
     }
 }
 

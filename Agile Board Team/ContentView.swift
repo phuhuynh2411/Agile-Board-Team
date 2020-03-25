@@ -20,7 +20,7 @@ struct ContentView: View {
                 }
                 
             } else {
-                MainView() //LoginView(loginMV: LoginModel())
+               MainView() //LoginView(loginMV: LoginModel())
             }
         }
     }

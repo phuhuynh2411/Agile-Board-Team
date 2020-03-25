@@ -20,6 +20,7 @@ struct IssueRowView: View {
             if issue.type?.icon != nil {
                 RemoteImage(stringURL: (issue.type?.icon)!)
                     .frame(width: 30, height: 30, alignment: .center)
+                    .foregroundColor(.lightGreyColor)
             } else {
                 IssueTypePlaceholder()
             }
@@ -30,19 +31,23 @@ struct IssueRowView: View {
                     Text(issue.issueNumber)
                         .foregroundColor(.secondary)
                         .font(.system(size: 14))
-                    Image(systemName: "star")
-                        .resizable()
-                        .frame(width: 20, height: 20, alignment: .center)
-                        .foregroundColor(.yellow)
-                    Text("TODO")
+                    // Priority
+                    if issue.priority?.icon != nil {
+                        RemoteImage(stringURL: (issue.priority?.icon)!)
+                            .frame(width: 20, height: 20, alignment: .center)
+                            .foregroundColor(.lightGreyColor)
+                    } else {
+                        PriorityPlaceholder()
+                    }
+                    Text(issue.status?.name ?? "")
                         .foregroundColor(.white)
                         .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
-                        .background(Color.blue)
+                        .background(Color(hex: issue.status?.color ?? "#cecece"))
                         .cornerRadius(7.0)
                     Spacer()
-                    Text("Due today")
-                        .font(.system(size: 14))
-                        .foregroundColor(.red)
+                    //Text("Due today")
+                      //  .font(.system(size: 14))
+                        //.foregroundColor(.red)
                 }
             }
         }
@@ -73,5 +78,13 @@ struct IssueTypePlaceholder: View {
         Image(systemName: "doc.plaintext")
             .resizable()
             .frame(width: 30, height: 30, alignment: .center)
+    }
+}
+
+struct PriorityPlaceholder: View {
+    var body: some View {
+        Image(systemName: "doc.plaintext")
+            .resizable()
+            .frame(width: 20, height: 20, alignment: .center)
     }
 }

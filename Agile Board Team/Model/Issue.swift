@@ -25,4 +25,6 @@ class Issue: Codable, Identifiable {
     let issueNumber: String
     
     var type: IssueType?
+    var priority: IssuePriority?
+    var status: IssueStatus?
 }

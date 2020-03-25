@@ -66,6 +66,9 @@
 		849DBC9D241B88D20026E23B /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 849DBC9C241B88D20026E23B /* SwiftUIRefresh */; };
 		849DBC9F241B8DEF0026E23B /* ProjectListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC9E241B8DEF0026E23B /* ProjectListModel.swift */; };
 		84ABC0E824286D9F0083EF34 /* NotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ABC0E724286D9F0083EF34 /* NotFoundView.swift */; };
+		84C55FE9242AEB5D0050DA53 /* IssuePriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FE8242AEB5D0050DA53 /* IssuePriority.swift */; };
+		84C55FEB242AF1910050DA53 /* IssueStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FEA242AF1910050DA53 /* IssueStatus.swift */; };
+		84C55FED242AF8730050DA53 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FEC242AF8730050DA53 /* Extension+UIColor.swift */; };
 		84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3724221A00008EA929 /* ErrorBannerView.swift */; };
 		84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3824221A00008EA929 /* ErrorView.swift */; };
 /* End PBXBuildFile section */
@@ -145,6 +148,9 @@
 		849DBC96241B6AA30026E23B /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
 		849DBC9E241B8DEF0026E23B /* ProjectListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListModel.swift; sourceTree = "<group>"; };
 		84ABC0E724286D9F0083EF34 /* NotFoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotFoundView.swift; path = ../Project/NotFoundView.swift; sourceTree = "<group>"; };
+		84C55FE8242AEB5D0050DA53 /* IssuePriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuePriority.swift; sourceTree = "<group>"; };
+		84C55FEA242AF1910050DA53 /* IssueStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueStatus.swift; sourceTree = "<group>"; };
+		84C55FEC242AF8730050DA53 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		84FFDD3724221A00008EA929 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorBannerView.swift; path = "Agile Board Team/Error/ErrorBannerView.swift"; sourceTree = SOURCE_ROOT; };
 		84FFDD3824221A00008EA929 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = "Agile Board Team/Error/ErrorView.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -248,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				840F26AD24188B490085FBA6 /* Extension+Color.swift */,
+				84C55FEC242AF8730050DA53 /* Extension+UIColor.swift */,
 				840FDB69241A370000C395E8 /* URLSession+Extension.swift */,
 				840FDB6B241A381800C395E8 /* URLSessionUploadTask+Extension.swift */,
 				8425B9EC2424C5E800AB9E98 /* UIApplication+Extension.swift */,
@@ -312,6 +319,8 @@
 				849DBC92241B6A280026E23B /* Data.swift */,
 				849AF7D82428FD2F00D00542 /* Issue.swift */,
 				8451D7ED242A642F000C1F56 /* IssueType.swift */,
+				84C55FE8242AEB5D0050DA53 /* IssuePriority.swift */,
+				84C55FEA242AF1910050DA53 /* IssueStatus.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -524,6 +533,7 @@
 				846ECCAA2419F05000C8DFA3 /* APILoginRequest.swift in Sources */,
 				8438B47C24236F4600E39464 /* URLSetting.swift in Sources */,
 				849DBC8A241B3EE30026E23B /* AppSession.swift in Sources */,
+				84C55FE9242AEB5D0050DA53 /* IssuePriority.swift in Sources */,
 				84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */,
 				84741C222420B1B9004F3663 /* MetaData.swift in Sources */,
 				8492CCCF24299DC1001D76DE /* SearchView.swift in Sources */,
@@ -535,6 +545,7 @@
 				848D53A9241B283E00BAB5E6 /* IssueListView.swift in Sources */,
 				8417CD1524227A0B0029B7E6 /* ImageModel.swift in Sources */,
 				8492CCD82429A75F001D76DE /* CircleProgressView.swift in Sources */,
+				84C55FEB242AF1910050DA53 /* IssueStatus.swift in Sources */,
 				849DBC91241B68CA0026E23B /* Project.swift in Sources */,
 				849DBC88241B3AD00026E23B /* MainView.swift in Sources */,
 				84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */,
@@ -552,6 +563,7 @@
 				8492CCD62429A669001D76DE /* LastRowView.swift in Sources */,
 				849DBC8C241B3FB90026E23B /* AppState.swift in Sources */,
 				84ABC0E824286D9F0083EF34 /* NotFoundView.swift in Sources */,
+				84C55FED242AF8730050DA53 /* Extension+UIColor.swift in Sources */,
 				844DF1082429B4B7001E29EB /* BaseListModel.swift in Sources */,
 				840FDB6A241A370000C395E8 /* URLSession+Extension.swift in Sources */,
 				849DBC86241B32180026E23B /* ViewRouter.swift in Sources */,

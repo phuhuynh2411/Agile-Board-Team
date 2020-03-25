@@ -44,7 +44,7 @@ struct IssueListView: View {
     
     func onAppear(_ issue: Issue) {
         guard issueListModel.isLastRow(id: issue.id) else { return }
-        issueListModel.loadData(byUsing: .loadMore)
+        issueListModel.loadMore()
     }
 }
 

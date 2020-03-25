@@ -24,7 +24,9 @@ struct RemoteImage : View {
         imageModel
             .image
             .map { Image(uiImage:$0).resizable() }
-            ?? Image(systemName: "photo").resizable()
+            ?? Image(systemName: "photo")
+                .resizable()
+                
     }
     
 }
