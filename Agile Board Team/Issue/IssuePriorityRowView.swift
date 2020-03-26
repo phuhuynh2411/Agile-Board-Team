@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct IssuePriorityRowView: View {
-    var priority: IssuePriority
+    @Binding var priority: IssuePriority?
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -17,8 +17,9 @@ struct IssuePriorityRowView: View {
                 .font(.system(size: 14))
                 .foregroundColor(.secondary)
             HStack {
-                if priority.icon != nil {
-                    RemoteImage(stringURL: priority.icon!)
+                if priority?.icon != nil {
+                    RemoteImage(stringURL: (priority?.icon!)!)
+                    //RemoteImage(stringURL: "")
                         .frame(width: 20, height: 20, alignment: .center)
                         .foregroundColor(.lightGreyColor)
                 } else {
@@ -26,7 +27,7 @@ struct IssuePriorityRowView: View {
                     .resizable()
                         .frame(width: 20, height: 20, alignment: .center)
                 }
-                Text(priority.name)
+                Text(priority!.name)
                     .font(.system(size: 16))
                 Spacer()
             }
@@ -34,8 +35,8 @@ struct IssuePriorityRowView: View {
     }
 }
 
-struct IssuePriorityRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        IssuePriorityRowView(priority: issueData[0].priority!)
-    }
-}
+//struct IssuePriorityRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        IssuePriorityRowView(priority: issueData[0].priority!)
+//    }
+//}

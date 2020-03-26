@@ -25,7 +25,7 @@ struct RemoteImage : View {
     var body: some View {
         imageModel
             .image
-            .map { Image(uiImage:$0).resizable() }
+            .map { Image(uiImage:$0).resizable().renderingMode(.original) }
             ?? placeholder
                 .resizable()
                 

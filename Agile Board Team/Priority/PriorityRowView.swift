@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PriorityRowView: View {
     var priority: IssuePriority
+    var isSelected = false
     
     var body: some View {
         HStack(spacing: 16) {
@@ -25,14 +26,17 @@ struct PriorityRowView: View {
             }
             Text(priority.name)
                 .font(.system(size: 17))
-            
             Spacer()
+            if isSelected {
+                Image(systemName: "checkmark")
+                    .foregroundColor(.green)
+            }
         }
     }
 }
 
 struct PriorityRowView_Previews: PreviewProvider {
     static var previews: some View {
-        PriorityRowView(priority: issueData[0].priority!)
+        PriorityRowView(priority: issueData[0].priority!, isSelected: true)
     }
 }

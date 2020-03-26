@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 class IssuePriority:Codable, Identifiable {
     let id: String

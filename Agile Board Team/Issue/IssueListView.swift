@@ -25,7 +25,7 @@ struct IssueListView: View {
                 NavigationBar()
                 List {
                     ForEach(issueListModel.isFiltering ? issueListModel.filtedItems : issueListModel.items) { (issue)  in
-                        NavigationLink(destination: IssueDetailView(issue: issue)) {
+                        NavigationLink(destination: IssueDetailView().environmentObject(IssueDetailModel(issue: issue)) ) {
                             IssueRowView(issue: issue).onAppear{
                                 self.onAppear(issue)
                             }

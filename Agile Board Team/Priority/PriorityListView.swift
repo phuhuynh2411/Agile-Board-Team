@@ -7,13 +7,13 @@
 //
 
 import SwiftUI
+import Combine
 
 struct PriorityListView: View {
+    
     @EnvironmentObject var viewModel: PriorityListModel
-     
-     init() {
-         UITableView.appearance().separatorStyle = .none
-     }
+    @Environment(\.presentationMode) var presentation
+    @Binding var priority: IssuePriority?
      
     var body: some View {
         VStack {
@@ -27,9 +27,7 @@ struct PriorityListView: View {
             PriorityNotFoundView()
             List {
                 ForEach(viewModel.isFiltering ? viewModel.filtedItems : viewModel.items) { (priority)  in
-                    PriorityRowView(priority: priority).onAppear {
-                        self.onAppear(priority)
-                    }
+                    self.PriorityButton(priority: priority)
                 }
                 
                 if viewModel.isLoadingMore {
@@ -50,11 +48,31 @@ struct PriorityListView: View {
          guard viewModel.isLastRow(id: priority.id) else { return }
          viewModel.loadMore()
      }
+    
+    private func PriorityButton(priority: IssuePriority) -> some View {
+        Button(action: {
+            self.presentation.wrappedValue.dismiss()
+            self.priority = priority
+        }) {
+            self.PriorityRow(priority: priority).onAppear {
+                self.onAppear(priority)
+            }
+        }
+    }
+    
+    private func PriorityRow(priority: IssuePriority) -> some View {
+        if let p = self.priority, p.id == priority.id {
+            return PriorityRowView(priority: priority, isSelected: true)
+        } else {
+            return PriorityRowView(priority: priority)
+        }
+    }
 }
 
 struct PriorityListView_Previews: PreviewProvider {
+    @State static var priority: IssuePriority? = issueData[0].priority
     static var previews: some View {
-        PriorityListView().environmentObject(PriorityListModel(priorities: priorityData))
+        PriorityListView(priority: $priority).environmentObject(PriorityListModel(priorities: priorityData))
     }
 }
 

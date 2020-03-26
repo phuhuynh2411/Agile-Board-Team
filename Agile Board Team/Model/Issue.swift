@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Combine
 
-class Issue: Codable, Identifiable {
+class Issue: Codable, Identifiable, ObservableObject {
     let id: String
     let projectId: String
     let typeId: String
