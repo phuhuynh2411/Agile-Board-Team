@@ -17,7 +17,6 @@ class PriorityListModel: BaseListModel<IssuePriority, PriorityListModel.Priority
         super.init()
         _ = self.objectWillChange.append(super.objectWillChange)
         
-        self.reload(animated: true)
     }
     
     init(priorities: [IssuePriority]) {

@@ -42,6 +42,9 @@ struct PriorityListView: View {
             
         }
         .overlay(CircleProgressView(display: $viewModel.isRefreshing))
+        .onAppear{
+            self.viewModel.reload(animated: true, whenEmpty: true)
+        }
     }
     
      func onAppear(_ priority: IssuePriority) {

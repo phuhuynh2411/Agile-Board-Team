@@ -12,12 +12,6 @@ import Combine
 class ProjectListModel: BaseListModel<Project, ProjectListModel.ProjectResponse> {
     override var url: URL { projectURL }
     
-    override init() {
-        super.init()
-        
-        self.reload(animated: true)
-    }
-    
     struct ProjectResponse: ResponseData {
         var currentPage: Int
         var data: [Project]

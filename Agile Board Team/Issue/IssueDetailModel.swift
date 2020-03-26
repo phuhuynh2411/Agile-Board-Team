@@ -8,13 +8,14 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class IssueDetailModel: ObservableObject {
     @Published var issue: Issue
-    @Published var priority: IssuePriority?
     
+    @Published var name: String = ""
+        
     init(issue: Issue) {
         self.issue = issue
-        self.priority = issue.priority
     }
 }

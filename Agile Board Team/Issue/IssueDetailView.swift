@@ -10,11 +10,12 @@ import SwiftUI
 
 struct IssueDetailView: View {
     @EnvironmentObject var modelView: IssueDetailModel
+    let priorityListModel = PriorityListModel()
     
     var body: some View {
-        List  {
+        List {
             HStack {
-                if modelView.issue.type?.icon != nil {
+                    if modelView.issue.type?.icon != nil {
                     RemoteImage(stringURL: (modelView.issue.type?.icon)!)
                         .frame(width: 16, height: 16, alignment: .center)
                         .foregroundColor(.lightGreyColor)
@@ -27,18 +28,8 @@ struct IssueDetailView: View {
                     .foregroundColor(.secondary)
                 Spacer()
             }
-            
-            HStack {
-                Text(modelView.issue.name)
-                    .font(.system(size: 17))
-                    .fontWeight(.semibold)
-                Spacer()
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .frame(width: 30, height: 30, alignment: .center)
-                    .foregroundColor(.lightGreyColor)
-                
-            }
+           
+            NameView(name: $modelView.issue.name)
             
             Button(action: {
                 
@@ -51,8 +42,7 @@ struct IssueDetailView: View {
                     .cornerRadius(20)
             }
             
-            Text(modelView.issue.description ?? "")
-                .font(.system(size: 17))
+            DescriptionView(description: $modelView.issue.description)
             
             if modelView.issue.type != nil {
                 IssueTypeRow(issueType: modelView.issue.type!)
@@ -84,5 +74,32 @@ struct IssueDetailView: View {
 struct IssueDetailView_Previews: PreviewProvider {
     static var previews: some View {
         IssueDetailView().environmentObject(IssueDetailModel(issue: issueData[0]))
+    }
+}
+
+struct NameView: View {
+    @Binding var name: String
+    
+    var body: some View {
+        HStack {
+            Text(self.name)
+                .font(.system(size: 17))
+                .fontWeight(.semibold)
+            Spacer()
+            Image(systemName: "person.circle.fill")
+                .resizable()
+                .frame(width: 30, height: 30, alignment: .center)
+                .foregroundColor(.lightGreyColor)
+            
+        }
+    }
+}
+
+struct DescriptionView: View {
+    @Binding var description: String?
+    
+    var body: some View {
+        Text(description ?? "")
+                     .font(.system(size: 17))
     }
 }

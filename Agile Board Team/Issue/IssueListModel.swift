@@ -10,14 +10,11 @@ import Foundation
 import Combine
 
 class IssueListModel: BaseListModel<Issue, IssueListModel.IssueResponse> {
-    
     override var url: URL { issueURL }
     
     override init() {
         super.init()
         // _ = self.objectWillChange.append(super.objectWillChange)
-        
-        self.reload(animated: true)
     }
     
     init(issues: [Issue]) {

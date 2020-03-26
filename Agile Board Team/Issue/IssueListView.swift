@@ -42,6 +42,8 @@ struct IssueListView: View {
                 .resignKeyboardOnDragGesture()
             }
             .overlay(CircleProgressView(display: $issueListModel.isRefreshing))
+        }.onAppear{
+            self.issueListModel.reload(animated: true, whenEmpty: true)
         }
     }
     

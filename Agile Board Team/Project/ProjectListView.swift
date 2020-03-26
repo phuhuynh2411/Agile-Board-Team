@@ -48,6 +48,9 @@ struct ProjectListView: View {
             }
             .overlay(CircleProgressView(display: $viewModel.isRefreshing))
         }
+        .onAppear{
+            self.viewModel.reload(animated: true, whenEmpty: true)
+        }
     }
     
    
