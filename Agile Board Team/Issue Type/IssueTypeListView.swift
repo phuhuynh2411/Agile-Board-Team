@@ -1,19 +1,19 @@
 //
-//  PriorityListView.swift
+//  IssueTypeListView.swift
 //  Agile Board Team
 //
-//  Created by Huynh Tan Phu on 3/25/20.
+//  Created by Huynh Tan Phu on 3/27/20.
 //  Copyright © 2020 Filesoft. All rights reserved.
 //
 
 import SwiftUI
 import Combine
 
-struct PriorityListView: View {
+struct IssueTypeListView: View {
     
-    @EnvironmentObject var viewModel: PriorityListModel
+    @EnvironmentObject var viewModel: IssueTypeListModel
     @Environment(\.presentationMode) var presentation
-    @Binding var priority: IssuePriority?
+    @Binding var issueType: IssueType?
      
     var body: some View {
         VStack {
@@ -24,10 +24,10 @@ struct PriorityListView: View {
             if viewModel.showCancelButton {
                 SearchView(search: $viewModel.search, showCancelButton: $viewModel.showCancelButton)
             }
-            PriorityNotFoundView()
+            IssueTypeNotFoundView()
             List {
-                ForEach(viewModel.isFiltering ? viewModel.filtedItems : viewModel.items) { (priority)  in
-                    self.PriorityButton(priority: priority)
+                ForEach(viewModel.isFiltering ? viewModel.filtedItems : viewModel.items) { (issueType)  in
+                    self.IssueTypeButton(issueType: issueType)
                 }
                 
                 if viewModel.isLoadingMore {
@@ -50,41 +50,40 @@ struct PriorityListView: View {
         }
     }
     
-     func onAppear(_ priority: IssuePriority) {
-         guard viewModel.isLastRow(id: priority.id) else { return }
+     func onAppear(_ issueType: IssueType) {
+         guard viewModel.isLastRow(id: issueType.id) else { return }
          viewModel.loadMore()
      }
     
-    private func PriorityButton(priority: IssuePriority) -> some View {
+    private func IssueTypeButton(issueType: IssueType) -> some View {
         Button(action: {
             self.presentation.wrappedValue.dismiss()
-            self.priority = priority
+            self.issueType = issueType
         }) {
-            self.PriorityRow(priority: priority).onAppear {
-                self.onAppear(priority)
+            self.IssueTypeRow(issueType: issueType).onAppear {
+                self.onAppear(issueType)
             }
         }
     }
     
-    private func PriorityRow(priority: IssuePriority) -> some View {
-        if let p = self.priority, p.id == priority.id {
-            return PriorityRowView(priority: priority, isSelected: true)
+    private func IssueTypeRow(issueType: IssueType) -> some View {
+        if let p = self.issueType, p.id == issueType.id {
+            return IssueTypeRowForListView(issueType: issueType, isSelected: true)
         } else {
-            return PriorityRowView(priority: priority)
+            return IssueTypeRowForListView(issueType: issueType)
         }
     }
 }
 
-struct PriorityListView_Previews: PreviewProvider {
-    @State static var priority: IssuePriority? = issueData[0].priority
+struct IssueTypeListView_Previews: PreviewProvider {
+    @State static var issueType: IssueType? = issueData[0].type
     static var previews: some View {
-        PriorityListView(priority: $priority).environmentObject(PriorityListModel(priorities: priorityData))
+        IssueTypeListView(issueType: $issueType).environmentObject(IssueTypeListModel(issueTypes: issueTypeData))
     }
 }
 
-
 private struct NavigationBar: View {
-    @EnvironmentObject var viewModel: PriorityListModel
+    @EnvironmentObject var viewModel: IssueTypeListModel
     
     var body: some View {
         
@@ -96,20 +95,20 @@ private struct NavigationBar: View {
     }
 }
 
-struct PriorityNotFoundView: View {
-    @EnvironmentObject var viewModel: PriorityListModel
+struct IssueTypeNotFoundView: View {
+    @EnvironmentObject var viewModel: IssueTypeListModel
     
     var body: some View {
         Group {
             if viewModel.emptySearchResult && viewModel.isFiltering {
-                NotFoundView(title: "Priority Not Found")
+                NotFoundView(title: "Issue type Not Found")
             }
         }
     }
 }
 
 private struct NavTrailingView: View {
-    @EnvironmentObject var viewModel: PriorityListModel
+    @EnvironmentObject var viewModel: IssueTypeListModel
     
     var body: some View {
    

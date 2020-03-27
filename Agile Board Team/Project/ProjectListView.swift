@@ -46,7 +46,10 @@ struct ProjectListView: View {
                 .resignKeyboardOnDragGesture()
                 
             }
-            .overlay(CircleProgressView(display: $viewModel.isRefreshing))
+            .overlay(
+                CircleProgressView(display: $viewModel.isRefreshing)
+                .frame(width: 30, height: 30, alignment: .center)
+            )
         }
         .onAppear{
             self.viewModel.reload(animated: true, whenEmpty: true)

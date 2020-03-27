@@ -14,6 +14,7 @@ protocol URLSetting {
     var projectURL: URL { get }
     var issueURL: URL { get }
     var issuePriorityURL: URL { get }
+    var issueTypeURL: URL { get }
 }
 
 extension URLSetting {
@@ -22,4 +23,5 @@ extension URLSetting {
     var projectURL: URL { baseURL.appendingPathComponent("api/v1/projects") }
     var issueURL: URL { baseURL.appendingPathComponent("api/v1/issues") }
     var issuePriorityURL: URL { baseURL.appendingPathComponent("api/v1/issues/priorities") }
+    var issueTypeURL: URL { baseURL.appendingPathComponent("api/v1/issues/types")}
 }

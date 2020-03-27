@@ -8,7 +8,11 @@
 
 import Foundation
 
-class IssueType: Codable {
+class IssueType: Codable, Identifiable, Equatable {
+    static func == (lhs: IssueType, rhs: IssueType) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     let id: String
     let icon: String?
     let name: String

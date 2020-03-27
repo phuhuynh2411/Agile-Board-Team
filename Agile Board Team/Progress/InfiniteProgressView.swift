@@ -13,33 +13,37 @@ private var timer: Timer?
 struct InfiniteProgressView: View {
     
     @State var isAnimating = false
-    @State var dash: CGFloat = 20
+    //@State var duration = 0.8
+    @State var trim1: (CGFloat, CGFloat) = (0, 0.25)
+    @State var trim2: (CGFloat, CGFloat) = (0.5, 0.75)
+    
+    @State private var rotationDegree = 0.0
+    private var timeCurveAnimation: Animation {
+        return Animation.timingCurve(0.6, 0.4, 0.4, 0.4, duration: 1.5)
+            .repeatForever(autoreverses: false)
+    }
     
     var body: some View {
         VStack {
-            Circle()
-                .strokeBorder(
-                    style: StrokeStyle(
-                        lineWidth: 3,
-                        lineCap: .round,
-                        dash: [self.dash]
-                        
-                    ), antialiased: false
-                )
-                .foregroundColor(.circleGray)
-
-                .frame(width: 30, height: 30, alignment: .center)
-                .rotationEffect(Angle(degrees: self.isAnimating ? 360 : 0))
-                .padding()
-                .onAppear {
-                    withAnimation(Animation.linear(duration: 0.8).repeatForever(autoreverses: false)) {
-                        self.isAnimating = true
-                    }
-                    
-                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-                        self.dash = self.dash == 20 ? 10 : 20
-                    }
-                }
+            ZStack{
+                Circle()
+                    .trim(from: trim1.0, to: trim1.1)
+                    .stroke(lineWidth: 3)
+                    .foregroundColor(.circleGray)
+                    //.frame(width: 30, height: 30, alignment: .center)
+                
+                Circle()
+                    .trim(from: trim2.0, to: trim2.1)
+                    .stroke(lineWidth: 3)
+                    .foregroundColor(.circleGray)
+                    //.frame(width: 30, height: 30, alignment: .center)
+            }
+        }
+        .rotationEffect(.degrees(rotationDegree))
+        .onAppear() {
+            withAnimation(self.timeCurveAnimation) {
+                self.rotationDegree = 1080.0
+            }
         }
     }
 }

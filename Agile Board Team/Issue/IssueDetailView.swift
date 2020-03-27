@@ -11,7 +11,7 @@ import SwiftUI
 struct IssueDetailView: View {
     @EnvironmentObject var modelView: IssueDetailModel
     let priorityListModel = PriorityListModel()
-    
+        
     var body: some View {
         List {
             HStack {
@@ -44,9 +44,7 @@ struct IssueDetailView: View {
             
             DescriptionView(description: $modelView.issue.description)
             
-            if modelView.issue.type != nil {
-                IssueTypeRow(issueType: modelView.issue.type!)
-            }
+            IssueTypeRow
             
             IssueProjectRowView(project: modelView.issue.project)
             
@@ -63,9 +61,18 @@ struct IssueDetailView: View {
     
     private var PriorityRow: some View {
         Group {
-            NavigationLink(destination: PriorityListView(priority:  self.$modelView.issue.priority)
+            NavigationLink(destination: PriorityListView(priority:  self.$modelView.editedPriority)
                 .environmentObject(PriorityListModel())) {
-                    IssuePriorityRowView(priority: self.$modelView.issue.priority)
+                    IssuePriorityRowView(priority: self.$modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
+            }
+        }
+    }
+    
+    private var IssueTypeRow: some View {
+        Group {
+            NavigationLink(destination: IssueTypeListView(issueType:  self.$modelView.editedIssueType)
+                .environmentObject(IssueTypeListModel())) {
+                    IssueTypeRowView(issueType: self.$modelView.issue.type, isUpdating: self.$modelView.isUpdatingIssueType)
             }
         }
     }

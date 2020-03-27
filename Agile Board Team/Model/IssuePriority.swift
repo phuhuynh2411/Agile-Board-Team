@@ -9,11 +9,17 @@
 import Foundation
 import Combine
 
-class IssuePriority:Codable, Identifiable {
+class IssuePriority:Codable, Identifiable, Equatable {
+    static func == (lhs: IssuePriority, rhs: IssuePriority) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     let id: String
     let icon: String?
     let name: String
     let description: String?
     let createdAt: Date
     let updatedAt: Date
+    
+    
 }

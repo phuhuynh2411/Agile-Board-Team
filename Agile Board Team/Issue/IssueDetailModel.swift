@@ -12,10 +12,49 @@ import SwiftUI
 
 class IssueDetailModel: ObservableObject {
     @Published var issue: Issue
+    var priorityStream: AnyCancellable?
+    var issueTypeStream: AnyCancellable?
     
-    @Published var name: String = ""
-        
+    @Published var editedPriority: IssuePriority?
+    @Published var isUpdatingPriority: Bool = false
+    
+    @Published var editedIssueType: IssueType?
+    @Published var isUpdatingIssueType: Bool = false
+    
     init(issue: Issue) {
         self.issue = issue
+        
+        self.editedPriority = issue.priority
+        self.editedIssueType  = issue.type
+        
+        self.priorityStream = $editedPriority
+            .compactMap { $0 != issue.priority ? $0 : nil }
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { (priority) in
+                print(priority.name)
+                
+                self.isUpdatingPriority = true
+                print(self.issue.priority?.name ?? "")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.issue.priority = priority
+                    self.isUpdatingPriority = false
+                }
+            })
+        
+        self.issueTypeStream = $editedIssueType
+            .compactMap { $0 != issue.type ? $0 : nil }
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { (issueType) in
+                print(issue.name)
+                
+                self.isUpdatingIssueType = true
+                print(self.issue.type?.name ?? "")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.issue.type = issueType
+                    self.isUpdatingIssueType = false
+                }
+            })
     }
 }

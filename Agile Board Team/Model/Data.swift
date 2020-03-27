@@ -12,6 +12,7 @@ import CoreLocation
 let projectData: [Project] = load("projects")
 let issueData: [Issue] = load("issues")
 let priorityData: [IssuePriority] = load("priorities")
+let issueTypeData: [IssueType] = load("issueTypes")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data

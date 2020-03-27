@@ -1,0 +1,52 @@
+[
+    {
+        "id": "7f6594e0-6e43-11ea-857f-eb29053ebfff",
+        "parent_id": null,
+        "status": 1,
+        "icon": "https://task.huuhienqt.dev/images/issue-type/story.png",
+        "name": "Story",
+        "description": "Necessitatibus voluptas odio ipsum ipsum. Ad aperiam libero sint dignissimos esse sunt.",
+        "created_at": "2020-03-25T02:51:16+00:00",
+        "updated_at": "2020-03-25T02:51:16+00:00"
+    },
+    {
+        "id": "7f65bd00-6e43-11ea-9acc-ef896ce37950",
+        "parent_id": null,
+        "status": 1,
+        "icon": "https://task.huuhienqt.dev/images/issue-type/task.png",
+        "name": "Task",
+        "description": "Asperiores voluptas deleniti quos odit qui praesentium aut. Mollitia aspernatur quod veniam qui eveniet minus dolorum. Explicabo in quia odit consectetur incidunt consectetur.",
+        "created_at": "2020-03-25T02:51:16+00:00",
+        "updated_at": "2020-03-25T02:51:16+00:00"
+    },
+    {
+        "id": "7f65ec00-6e43-11ea-bfe1-5904bac104f6",
+        "parent_id": null,
+        "status": 1,
+        "icon": "https://task.huuhienqt.dev/images/issue-type/epic.png",
+        "name": "Epic",
+        "description": "Numquam veritatis consequatur dignissimos dicta inventore. Assumenda nam non natus. Sit sunt ut qui aut temporibus neque dolor. Sunt ratione accusantium commodi at eum.",
+        "created_at": "2020-03-25T02:51:16+00:00",
+        "updated_at": "2020-03-25T02:51:16+00:00"
+    },
+    {
+        "id": "7f660700-6e43-11ea-aa6d-c11c81b4e6ec",
+        "parent_id": null,
+        "status": 1,
+        "icon": "https://task.huuhienqt.dev/images/issue-type/bug.png",
+        "name": "Bug",
+        "description": "Iusto occaecati sunt tempore autem sint aut quia at. Veritatis qui voluptatem id nam et. Aliquam odio mollitia ut deleniti. Molestiae laudantium aliquid inventore est totam perspiciatis.",
+        "created_at": "2020-03-25T02:51:16+00:00",
+        "updated_at": "2020-03-25T02:51:16+00:00"
+    },
+    {
+        "id": "7f662450-6e43-11ea-8793-4f145547ddbc",
+        "parent_id": null,
+        "status": 1,
+        "icon": "https://task.huuhienqt.dev/images/issue-type/sub-task.png",
+        "name": "Sub Task",
+        "description": "Molestias fuga suscipit numquam saepe. Aspernatur maxime repellendus consequatur sapiente. Culpa voluptate aspernatur vero odio minus voluptatem.",
+        "created_at": "2020-03-25T02:51:16+00:00",
+        "updated_at": "2020-03-25T02:51:16+00:00"
+    }
+]

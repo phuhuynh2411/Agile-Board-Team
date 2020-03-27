@@ -19,6 +19,7 @@ struct LastRowView: View {
                 .foregroundColor(.white)
             if self.isLoadingMore {
                 InfiniteProgressView().id(UUID().uuidString)
+                    .frame(width: 30, height: 30, alignment: .center)
             }
         }
     }

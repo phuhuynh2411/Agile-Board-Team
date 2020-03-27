@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840B052C242DAFFF00E30ED4 /* IssueTypeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B052B242DAFFF00E30ED4 /* IssueTypeListModel.swift */; };
+		840B052E242DB08000E30ED4 /* IssueTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B052D242DB08000E30ED4 /* IssueTypeListView.swift */; };
+		840B0530242DB27200E30ED4 /* issueTypes.json in Resources */ = {isa = PBXBuildFile; fileRef = 840B052F242DB27200E30ED4 /* issueTypes.json */; };
+		840B0532242DB2C400E30ED4 /* IssueTypeRowForListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B0531242DB2C400E30ED4 /* IssueTypeRowForListView.swift */; };
 		840F269424187C0B0085FBA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F269324187C0B0085FBA6 /* AppDelegate.swift */; };
 		840F269624187C0B0085FBA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F269524187C0B0085FBA6 /* SceneDelegate.swift */; };
 		840F269824187C0B0085FBA6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F269724187C0B0085FBA6 /* ContentView.swift */; };
@@ -79,7 +83,7 @@
 		84C55FEB242AF1910050DA53 /* IssueStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FEA242AF1910050DA53 /* IssueStatus.swift */; };
 		84C55FED242AF8730050DA53 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FEC242AF8730050DA53 /* Extension+UIColor.swift */; };
 		84C55FEF242AFC7D0050DA53 /* IssueDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FEE242AFC7D0050DA53 /* IssueDetailView.swift */; };
-		84C55FF1242B09BA0050DA53 /* IssueTypeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FF0242B09BA0050DA53 /* IssueTypeRow.swift */; };
+		84C55FF1242B09BA0050DA53 /* IssueTypeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FF0242B09BA0050DA53 /* IssueTypeRowView.swift */; };
 		84C55FF3242B0EA00050DA53 /* IssueProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FF2242B0EA00050DA53 /* IssueProjectRowView.swift */; };
 		84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3724221A00008EA929 /* ErrorBannerView.swift */; };
 		84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3824221A00008EA929 /* ErrorView.swift */; };
@@ -96,6 +100,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		840B052B242DAFFF00E30ED4 /* IssueTypeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTypeListModel.swift; sourceTree = "<group>"; };
+		840B052D242DB08000E30ED4 /* IssueTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTypeListView.swift; sourceTree = "<group>"; };
+		840B052F242DB27200E30ED4 /* issueTypes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = issueTypes.json; sourceTree = "<group>"; };
+		840B0531242DB2C400E30ED4 /* IssueTypeRowForListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTypeRowForListView.swift; sourceTree = "<group>"; };
 		840F269024187C0B0085FBA6 /* Agile Board Team.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Agile Board Team.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		840F269324187C0B0085FBA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		840F269524187C0B0085FBA6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,7 +181,7 @@
 		84C55FEA242AF1910050DA53 /* IssueStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueStatus.swift; sourceTree = "<group>"; };
 		84C55FEC242AF8730050DA53 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		84C55FEE242AFC7D0050DA53 /* IssueDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailView.swift; sourceTree = "<group>"; };
-		84C55FF0242B09BA0050DA53 /* IssueTypeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTypeRow.swift; sourceTree = "<group>"; };
+		84C55FF0242B09BA0050DA53 /* IssueTypeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTypeRowView.swift; sourceTree = "<group>"; };
 		84C55FF2242B0EA00050DA53 /* IssueProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueProjectRowView.swift; sourceTree = "<group>"; };
 		84FFDD3724221A00008EA929 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorBannerView.swift; path = "Agile Board Team/Error/ErrorBannerView.swift"; sourceTree = SOURCE_ROOT; };
 		84FFDD3824221A00008EA929 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = "Agile Board Team/Error/ErrorView.swift"; sourceTree = SOURCE_ROOT; };
@@ -198,6 +206,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		840B052A242DAFCE00E30ED4 /* Issue Type */ = {
+			isa = PBXGroup;
+			children = (
+				840B052B242DAFFF00E30ED4 /* IssueTypeListModel.swift */,
+				840B052D242DB08000E30ED4 /* IssueTypeListView.swift */,
+				840B0531242DB2C400E30ED4 /* IssueTypeRowForListView.swift */,
+			);
+			path = "Issue Type";
+			sourceTree = "<group>";
+		};
 		840F268724187C0B0085FBA6 = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +261,7 @@
 				8480614D2428AA2E00B143BA /* Board */,
 				848D53AC241B285A00BAB5E6 /* Issue */,
 				8480DFFB242BADF6002F8183 /* Priority */,
+				840B052A242DAFCE00E30ED4 /* Issue Type */,
 				848D53AD241B286500BAB5E6 /* Setting */,
 				846ECCA62419EDDD00C8DFA3 /* Model */,
 				840F269924187C0D0085FBA6 /* Assets.xcassets */,
@@ -410,7 +429,7 @@
 				84C55FEE242AFC7D0050DA53 /* IssueDetailView.swift */,
 				84BBD2D0242C46F500E9A8EF /* IssueDetailModel.swift */,
 				84316FAA242B1174002C0350 /* IssueAttachmentRowView.swift */,
-				84C55FF0242B09BA0050DA53 /* IssueTypeRow.swift */,
+				84C55FF0242B09BA0050DA53 /* IssueTypeRowView.swift */,
 				84C3234B242B6387007CB0CD /* IssueReporterView.swift */,
 				84316FA8242B105D002C0350 /* IssuePriorityRowView.swift */,
 			);
@@ -442,6 +461,7 @@
 				849DBC8E241B683E0026E23B /* projects.json */,
 				8480E002242BB419002F8183 /* priorities.json */,
 				849AF7D62428FD1600D00542 /* issues.json */,
+				840B052F242DB27200E30ED4 /* issueTypes.json */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -535,6 +555,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				849AF7D72428FD1600D00542 /* issues.json in Resources */,
+				840B0530242DB27200E30ED4 /* issueTypes.json in Resources */,
 				846ECCA52419BF7600C8DFA3 /* LoginError1.json in Resources */,
 				840F26A024187C0D0085FBA6 /* LaunchScreen.storyboard in Resources */,
 				8480E003242BB419002F8183 /* priorities.json in Resources */,
@@ -561,7 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84C55FF1242B09BA0050DA53 /* IssueTypeRow.swift in Sources */,
+				84C55FF1242B09BA0050DA53 /* IssueTypeRowView.swift in Sources */,
 				84204959241A7A9E001FE724 /* URLSessionMock.swift in Sources */,
 				840F269424187C0B0085FBA6 /* AppDelegate.swift in Sources */,
 				844DF10C2429BF28001E29EB /* RespondData.swift in Sources */,
@@ -575,6 +596,7 @@
 				849DBC95241B6A820026E23B /* ProjectListView.swift in Sources */,
 				849DBC9F241B8DEF0026E23B /* ProjectListModel.swift in Sources */,
 				84C55FEF242AFC7D0050DA53 /* IssueDetailView.swift in Sources */,
+				840B052E242DB08000E30ED4 /* IssueTypeListView.swift in Sources */,
 				8420495C241A7AE6001FE724 /* MockURLSessionUploadTask.swift in Sources */,
 				849DBC93241B6A280026E23B /* Data.swift in Sources */,
 				840F26A924187C3B0085FBA6 /* LoginView.swift in Sources */,
@@ -588,6 +610,7 @@
 				8492CCCF24299DC1001D76DE /* SearchView.swift in Sources */,
 				8425B9EF2424C5F500AB9E98 /* View+Extension.swift in Sources */,
 				840F269824187C0B0085FBA6 /* ContentView.swift in Sources */,
+				840B052C242DAFFF00E30ED4 /* IssueTypeListModel.swift in Sources */,
 				840F26B52418CBEE0085FBA6 /* ProjectView.swift in Sources */,
 				84741C202420B1A1004F3663 /* Entry.swift in Sources */,
 				840F26B72418DA8B0085FBA6 /* APIRequest.swift in Sources */,
@@ -624,6 +647,7 @@
 				840FDB6A241A370000C395E8 /* URLSession+Extension.swift in Sources */,
 				849DBC86241B32180026E23B /* ViewRouter.swift in Sources */,
 				846ECCA82419EDF400C8DFA3 /* User.swift in Sources */,
+				840B0532242DB2C400E30ED4 /* IssueTypeRowForListView.swift in Sources */,
 				840F26AB2418842D0085FBA6 /* AppTheme.swift in Sources */,
 				8492CCCD242995CB001D76DE /* IssueRowView.swift in Sources */,
 			);
