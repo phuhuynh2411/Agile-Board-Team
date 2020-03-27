@@ -13,24 +13,25 @@ struct IssuePriorityRowView: View {
     @Binding var isUpdating: Bool
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Priority")
+        HStack(spacing: 16) {
+            if priority?.icon != nil {
+                RemoteImage(stringURL: (priority?.icon!)!)
+                    .frame(width: 25, height: 25, alignment: .center)
+                    .foregroundColor(.lightGreyColor)
+            } else {
+                Image(systemName: "photo")
+                    .resizable()
+                    .frame(width: 25, height: 25, alignment: .center)
+            }
+            
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Priority")
                 .font(.system(size: 14))
                 .foregroundColor(.secondary)
-            HStack {
-                if priority?.icon != nil {
-                    RemoteImage(stringURL: (priority?.icon!)!)
-                        .frame(width: 20, height: 20, alignment: .center)
-                        .foregroundColor(.lightGreyColor)
-                } else {
-                    Image(systemName: "photo")
-                    .resizable()
-                        .frame(width: 16, height: 16, alignment: .center)
-                }
                 Text(priority!.name)
                     .font(.system(size: 16))
-                Spacer()
             }
+            Spacer()
         }.overlay(
             HStack {
                 Spacer()

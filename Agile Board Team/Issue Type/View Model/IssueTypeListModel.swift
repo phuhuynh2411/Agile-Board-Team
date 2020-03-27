@@ -11,11 +11,11 @@ import Combine
 
 class IssueTypeListModel: BaseListModel<IssueType, IssueTypeListModel.IssueTypeData> {
     override var url: URL { issueTypeURL }
+    @Published var selectedIssueType: IssueType?
     
     override init() {
         super.init()
         _ = self.objectWillChange.append(super.objectWillChange)
-        
     }
     
     init(issueTypes: [IssueType]) {

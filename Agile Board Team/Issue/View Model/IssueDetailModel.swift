@@ -12,22 +12,24 @@ import SwiftUI
 
 class IssueDetailModel: ObservableObject {
     @Published var issue: Issue
+    
     var priorityStream: AnyCancellable?
     var issueTypeStream: AnyCancellable?
     
-    @Published var editedPriority: IssuePriority?
     @Published var isUpdatingPriority: Bool = false
     
     @Published var editedIssueType: IssueType?
     @Published var isUpdatingIssueType: Bool = false
     
+    let priorityListModel = PriorityListModel()
+    let issueTypeListModel = IssueTypeListModel()
+    
     init(issue: Issue) {
         self.issue = issue
+        priorityListModel.selectedPriority = issue.priority
+        issueTypeListModel.selectedIssueType = issue.type
         
-        self.editedPriority = issue.priority
-        self.editedIssueType  = issue.type
-        
-        self.priorityStream = $editedPriority
+        self.priorityStream = priorityListModel.$selectedPriority
             .compactMap { $0 != issue.priority ? $0 : nil }
             .receive(on: RunLoop.main)
             .sink(receiveValue: { (priority) in
@@ -42,7 +44,7 @@ class IssueDetailModel: ObservableObject {
                 }
             })
         
-        self.issueTypeStream = $editedIssueType
+        self.issueTypeStream = issueTypeListModel.$selectedIssueType
             .compactMap { $0 != issue.type ? $0 : nil }
             .receive(on: RunLoop.main)
             .sink(receiveValue: { (issueType) in

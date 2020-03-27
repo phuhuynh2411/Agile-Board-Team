@@ -13,6 +13,8 @@ import Combine
 class PriorityListModel: BaseListModel<IssuePriority, PriorityListModel.PriorityData> {
     override var url: URL { issuePriorityURL }
     
+    @Published var selectedPriority: IssuePriority?
+    
     override init() {
         super.init()
         _ = self.objectWillChange.append(super.objectWillChange)

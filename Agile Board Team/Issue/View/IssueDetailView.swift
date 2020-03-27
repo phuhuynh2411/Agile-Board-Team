@@ -10,7 +10,6 @@ import SwiftUI
 
 struct IssueDetailView: View {
     @EnvironmentObject var modelView: IssueDetailModel
-    let priorityListModel = PriorityListModel()
         
     var body: some View {
         List {
@@ -61,8 +60,8 @@ struct IssueDetailView: View {
     
     private var PriorityRow: some View {
         Group {
-            NavigationLink(destination: PriorityListView(priority:  self.$modelView.editedPriority)
-                .environmentObject(PriorityListModel())) {
+            NavigationLink(destination: PriorityListView()
+                .environmentObject(self.modelView.priorityListModel)) {
                     IssuePriorityRowView(priority: self.$modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
             }
         }
@@ -70,12 +69,13 @@ struct IssueDetailView: View {
     
     private var IssueTypeRow: some View {
         Group {
-            NavigationLink(destination: IssueTypeListView(issueType:  self.$modelView.editedIssueType)
-                .environmentObject(IssueTypeListModel())) {
+            NavigationLink(destination: IssueTypeListView()
+                .environmentObject(modelView.issueTypeListModel)) {
                     IssueTypeRowView(issueType: self.$modelView.issue.type, isUpdating: self.$modelView.isUpdatingIssueType)
             }
         }
     }
+
 }
 
 struct IssueDetailView_Previews: PreviewProvider {

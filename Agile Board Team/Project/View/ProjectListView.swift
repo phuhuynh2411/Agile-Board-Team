@@ -12,10 +12,11 @@ import SwiftUIRefresh
 struct ProjectListView: View {
     
     @EnvironmentObject var viewModel: ProjectListModel
+    //@Binding var editedProject: Project?
     
-    init() {
-        UITableView.appearance().separatorStyle = .none
-    }
+//    init() {
+//        UITableView.appearance().separatorStyle = .none
+//    }
     
     var body: some View {
         NavigationView {

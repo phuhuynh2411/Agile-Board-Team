@@ -12,22 +12,24 @@ struct IssueReporterView: View {
     var reporter: IssueReporter
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Reporter")
+        HStack(spacing: 16) {
+            if reporter.avatar != nil {
+                RemoteImage(stringURL: reporter.avatar!, placeholder: Image(systemName: "person.circle.fill"))
+                    .frame(width: 25, height: 25, alignment: .center)
+                    .foregroundColor(.lightGreyColor)
+            } else {
+                Placeholder()
+            }
+            
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Reporter")
                 .font(.system(size: 14))
                 .foregroundColor(.secondary)
-            HStack {
-                if reporter.avatar != nil {
-                    RemoteImage(stringURL: reporter.avatar!, placeholder: Image(systemName: "person.circle.fill"))
-                        .frame(width: 20, height: 20, alignment: .center)
-                        .foregroundColor(.lightGreyColor)
-                } else {
-                    Placeholder()
-                }
                 Text(reporter.name)
                     .font(.system(size: 16))
-                Spacer()
+                
             }
+            Spacer()
         }
     }
 }
@@ -43,7 +45,7 @@ private struct Placeholder: View {
     var body: some View {
         Image(systemName: "person.circle.fill")
             .resizable()
-            .frame(width: 20, height: 20, alignment: .center)
+            .frame(width: 25, height: 25, alignment: .center)
             .foregroundColor(.lightGreyColor)
     }
 }
