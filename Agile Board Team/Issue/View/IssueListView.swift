@@ -14,39 +14,35 @@ struct IssueListView: View {
     var body: some View {
         
         NavigationView {
-            VStack {
-                if issueListModel.isFailed {
-                    ErrorBannerView(message: issueListModel.errorMessage, display: $issueListModel.isFailed)
-                }
-                if issueListModel.showCancelButton {
-                    SearchView(search: $issueListModel.search, showCancelButton: $issueListModel.showCancelButton)
-                }
-                IssueNotFoundView()
-                NavigationBar()
-                RefreshableScrollView(refreshing: self.$issueListModel.isPulling) {
-                    //List {
-                        ForEach(issueListModel.isFiltering ? issueListModel.filtedItems : issueListModel.items) { (issue)  in
-                            NavigationLink(destination: IssueDetailView().environmentObject(IssueDetailModel(issue: issue)) ) {
-                                IssueRowView(issue: issue).onAppear{
-                                    self.onAppear(issue)
+            GeometryReader { proxy in
+                VStack {
+                    IssueErrorView()
+                    IssueSearchView()
+                    IssueNotFoundView()
+                    NavigationBar()
+                    RefreshableScrollView(refreshing: self.$issueListModel.isPulling) {
+                        List {
+                            ForEach(self.issueListModel.isFiltering ? self.issueListModel.filtedItems : self.issueListModel.items) { (issue)  in
+                                NavigationLink(destination: IssueDetailView().environmentObject(IssueDetailModel(issue: issue)) ) {
+                                    IssueRowView(issue: issue).onAppear{
+                                        self.onAppear(issue)
+                                    }
                                 }
                             }
+                            if self.issueListModel.isLoadingMore {
+                                LastRowView(isLoadingMore: self.$issueListModel.isLoadingMore)
+                            }
                         }
-                        .padding(.leading)
-                        .padding(.trailing)
+                        .frame(height: proxy.frame(in: .global).height)
                         
-                        if issueListModel.isLoadingMore {
-                            LastRowView(isLoadingMore: $issueListModel.isLoadingMore)
-                        }
-                    //}
-                    
+                    }
+                    .resignKeyboardOnDragGesture()
                 }
-                .resignKeyboardOnDragGesture()
+                .overlay(
+                    CircleProgressView(display: self.$issueListModel.isRefreshing)
+                        .frame(width: 30, height: 30, alignment: .center)
+                )
             }
-            .overlay(
-                CircleProgressView(display: $issueListModel.isRefreshing)
-                .frame(width: 30, height: 30, alignment: .center)
-            )
         }.onAppear{
             self.issueListModel.reload(animated: true, whenEmpty: true)
         }
@@ -54,7 +50,7 @@ struct IssueListView: View {
     
     func onAppear(_ issue: Issue) {
         guard issueListModel.isLastRow(id: issue.id) else { return }
-        //issueListModel.loadMore()
+        issueListModel.loadMore()
     }
 }
 
@@ -109,5 +105,28 @@ private struct NavigationBar: View {
             .navigationBarTitle("Issues", displayMode: .inline)
             .navigationBarItems(trailing: NavTrailingView() )
             .navigationBarHidden(issueListModel.showCancelButton)
+    }
+}
+
+private struct IssueErrorView: View {
+    @EnvironmentObject var issueListModel: IssueListModel
+    
+    var body: some View {
+        Group {
+            if self.issueListModel.isFailed {
+                ErrorBannerView(message: self.issueListModel.errorMessage, display: self.$issueListModel.isFailed)
+            }
+        }
+    }
+}
+
+private struct IssueSearchView: View {
+    @EnvironmentObject var issueListModel: IssueListModel
+    var body: some View {
+        Group {
+            if self.issueListModel.showCancelButton {
+                SearchView(search: self.$issueListModel.search, showCancelButton: self.$issueListModel.showCancelButton)
+            }
+        }
     }
 }
