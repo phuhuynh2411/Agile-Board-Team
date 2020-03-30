@@ -34,9 +34,9 @@ struct IssueTypeListView: View {
                 }
                 
             }
-            .pullToRefresh(isShowing: $viewModel.isPulling) {
-                self.viewModel.reload(byUsing: .pull, animated: true)
-            }
+//            .pullToRefresh(isShowing: $viewModel.isPulling) {
+//                self.viewModel.reload(byUsing: .pull, animated: true)
+//            }
             .resignKeyboardOnDragGesture()
             
         }

@@ -23,21 +23,23 @@ struct IssueListView: View {
                 }
                 IssueNotFoundView()
                 NavigationBar()
-                List {
-                    ForEach(issueListModel.isFiltering ? issueListModel.filtedItems : issueListModel.items) { (issue)  in
-                        NavigationLink(destination: IssueDetailView().environmentObject(IssueDetailModel(issue: issue)) ) {
-                            IssueRowView(issue: issue).onAppear{
-                                self.onAppear(issue)
+                RefreshableScrollView(refreshing: self.$issueListModel.isPulling) {
+                    //List {
+                        ForEach(issueListModel.isFiltering ? issueListModel.filtedItems : issueListModel.items) { (issue)  in
+                            NavigationLink(destination: IssueDetailView().environmentObject(IssueDetailModel(issue: issue)) ) {
+                                IssueRowView(issue: issue).onAppear{
+                                    self.onAppear(issue)
+                                }
                             }
                         }
-                    }
+                        .padding(.leading)
+                        .padding(.trailing)
+                        
+                        if issueListModel.isLoadingMore {
+                            LastRowView(isLoadingMore: $issueListModel.isLoadingMore)
+                        }
+                    //}
                     
-                    if issueListModel.isLoadingMore {
-                        LastRowView(isLoadingMore: $issueListModel.isLoadingMore)
-                    }
-                }
-                .pullToRefresh(isShowing: $issueListModel.isPulling) {
-                    self.issueListModel.reload(byUsing: .pull, animated: true)
                 }
                 .resignKeyboardOnDragGesture()
             }
@@ -52,7 +54,7 @@ struct IssueListView: View {
     
     func onAppear(_ issue: Issue) {
         guard issueListModel.isLastRow(id: issue.id) else { return }
-        issueListModel.loadMore()
+        //issueListModel.loadMore()
     }
 }
 

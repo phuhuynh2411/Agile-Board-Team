@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -36,6 +36,7 @@
 		8421319724237466008716FE /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421319624237466008716FE /* NetworkModel.swift */; };
 		8425B9ED2424C5E800AB9E98 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425B9EC2424C5E800AB9E98 /* UIApplication+Extension.swift */; };
 		8425B9EF2424C5F500AB9E98 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425B9EE2424C5F500AB9E98 /* View+Extension.swift */; };
+		8430DC9E24318A6300CCD541 /* RefreashableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430DC9D24318A6300CCD541 /* RefreashableScrollView.swift */; };
 		84316FA9242B105D002C0350 /* IssuePriorityRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84316FA8242B105D002C0350 /* IssuePriorityRowView.swift */; };
 		84316FAB242B1174002C0350 /* IssueAttachmentRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84316FAA242B1174002C0350 /* IssueAttachmentRowView.swift */; };
 		8438B47C24236F4600E39464 /* URLSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8438B47B24236F4600E39464 /* URLSetting.swift */; };
@@ -72,7 +73,6 @@
 		849DBC93241B6A280026E23B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC92241B6A280026E23B /* Data.swift */; };
 		849DBC95241B6A820026E23B /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC94241B6A820026E23B /* ProjectListView.swift */; };
 		849DBC97241B6AA30026E23B /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC96241B6AA30026E23B /* ProjectRowView.swift */; };
-		849DBC9D241B88D20026E23B /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 849DBC9C241B88D20026E23B /* SwiftUIRefresh */; };
 		849DBC9F241B8DEF0026E23B /* ProjectListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC9E241B8DEF0026E23B /* ProjectListModel.swift */; };
 		84ABC0E824286D9F0083EF34 /* NotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ABC0E724286D9F0083EF34 /* NotFoundView.swift */; };
 		84BBD2D1242C46F500E9A8EF /* IssueDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBD2D0242C46F500E9A8EF /* IssueDetailModel.swift */; };
@@ -134,6 +134,7 @@
 		8421319624237466008716FE /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
 		8425B9EC2424C5E800AB9E98 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		8425B9EE2424C5F500AB9E98 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		8430DC9D24318A6300CCD541 /* RefreashableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreashableScrollView.swift; sourceTree = "<group>"; };
 		84316FA8242B105D002C0350 /* IssuePriorityRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuePriorityRowView.swift; sourceTree = "<group>"; };
 		84316FAA242B1174002C0350 /* IssueAttachmentRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAttachmentRowView.swift; sourceTree = "<group>"; };
 		8438B47B24236F4600E39464 /* URLSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSetting.swift; sourceTree = "<group>"; };
@@ -190,7 +191,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				849DBC9D241B88D20026E23B /* SwiftUIRefresh in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +423,7 @@
 				8492CCD52429A669001D76DE /* LastRowView.swift */,
 				8492CCD72429A75F001D76DE /* CircleProgressView.swift */,
 				84ABC0E724286D9F0083EF34 /* NotFoundView.swift */,
+				8430DC9D24318A6300CCD541 /* RefreashableScrollView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -616,7 +617,6 @@
 			);
 			name = "Agile Board Team";
 			packageProductDependencies = (
-				849DBC9C241B88D20026E23B /* SwiftUIRefresh */,
 			);
 			productName = "Agile Board Team";
 			productReference = 840F269024187C0B0085FBA6 /* Agile Board Team.app */;
@@ -670,7 +670,6 @@
 			);
 			mainGroup = 840F268724187C0B0085FBA6;
 			packageReferences = (
-				849DBC9B241B88D20026E23B /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
 			);
 			productRefGroup = 840F269124187C0B0085FBA6 /* Products */;
 			projectDirPath = "";
@@ -748,6 +747,7 @@
 				84741C202420B1A1004F3663 /* Entry.swift in Sources */,
 				840F26B72418DA8B0085FBA6 /* APIRequest.swift in Sources */,
 				84C55FF3242B0EA00050DA53 /* IssueProjectRowView.swift in Sources */,
+				8430DC9E24318A6300CCD541 /* RefreashableScrollView.swift in Sources */,
 				848D53A9241B283E00BAB5E6 /* IssueListView.swift in Sources */,
 				8417CD1524227A0B0029B7E6 /* ImageModel.swift in Sources */,
 				84BBD2D1242C46F500E9A8EF /* IssueDetailModel.swift in Sources */,
@@ -935,6 +935,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Agile Board Team/Agile Board Team.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Agile Board Team/Preview Content\"";
 				DEVELOPMENT_TEAM = 9RUFVFAF79;
 				ENABLE_PREVIEWS = YES;
@@ -946,7 +947,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "filesoft.co.Agile-Board-Team";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -959,6 +960,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Agile Board Team/Agile Board Team.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Agile Board Team/Preview Content\"";
 				DEVELOPMENT_TEAM = 9RUFVFAF79;
 				ENABLE_PREVIEWS = YES;
@@ -970,7 +972,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "filesoft.co.Agile-Board-Team";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1052,25 +1054,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		849DBC9B241B88D20026E23B /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/timbersoftware/SwiftUIRefresh.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.2;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		849DBC9C241B88D20026E23B /* SwiftUIRefresh */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 849DBC9B241B88D20026E23B /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */;
-			productName = SwiftUIRefresh;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 840F268824187C0B0085FBA6 /* Project object */;
 }

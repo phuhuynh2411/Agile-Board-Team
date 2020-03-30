@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import SwiftUIRefresh
+//import SwiftUIRefresh
 
 struct ProjectListView: View {
     
@@ -41,9 +41,9 @@ struct ProjectListView: View {
                     }
                     
                 }
-                .pullToRefresh(isShowing: $viewModel.isPulling) {
-                    self.viewModel.reload(byUsing: .pull, animated: true)
-                }
+                //.pullToRefresh(isShowing: $viewModel.isPulling) {
+                    //self.viewModel.reload(byUsing: .pull, animated: true)
+                //}
                 .resignKeyboardOnDragGesture()
                 
             }
