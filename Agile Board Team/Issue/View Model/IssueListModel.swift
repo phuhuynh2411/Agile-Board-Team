@@ -9,19 +9,20 @@
 import Foundation
 import Combine
 
-class IssueListModel: BaseListModel<Issue, IssueListModel.IssueResponse> {
+class IssueListModel: BaseListModel<Issue, IssueResponse> {
     override var url: URL { issueURL }
     
     override init() {
         super.init()
-        // _ = self.objectWillChange.append(super.objectWillChange)
+         //_ = self.objectWillChange.append(super.objectWillChange)
+        //self.reload()
     }
     
     init(issues: [Issue]) {
         super.init(items: issues)
     }
-    
-    struct IssueResponse: ResponseData {
-        var data: [Issue]
-    }
+}
+
+struct IssueResponse: ResponseData {
+    var data: [Issue]
 }

@@ -45,7 +45,7 @@ struct IssueTypeListView: View {
             .frame(width: 30, height: 30, alignment: .center)
         )
         .onAppear{
-            self.viewModel.reload(animated: true, whenEmpty: true)
+            //self.viewModel.reload(animated: true, whenEmpty: true)
         }
     }
     

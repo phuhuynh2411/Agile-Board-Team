@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -44,6 +44,7 @@
 		844DF1082429B4B7001E29EB /* BaseListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DF1072429B4B7001E29EB /* BaseListModel.swift */; };
 		844DF10C2429BF28001E29EB /* RespondData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DF10B2429BF28001E29EB /* RespondData.swift */; };
 		8451D7EE242A642F000C1F56 /* IssueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451D7ED242A642F000C1F56 /* IssueType.swift */; };
+		8455F6D5243CD4DE00925296 /* RefreshableList in Frameworks */ = {isa = PBXBuildFile; productRef = 8455F6D4243CD4DE00925296 /* RefreshableList */; };
 		846ECCA52419BF7600C8DFA3 /* LoginError1.json in Resources */ = {isa = PBXBuildFile; fileRef = 846ECCA42419BF7600C8DFA3 /* LoginError1.json */; };
 		846ECCA82419EDF400C8DFA3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846ECCA72419EDF400C8DFA3 /* User.swift */; };
 		846ECCAA2419F05000C8DFA3 /* APILoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846ECCA92419F05000C8DFA3 /* APILoginRequest.swift */; };
@@ -84,6 +85,7 @@
 		84C55FEF242AFC7D0050DA53 /* IssueDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FEE242AFC7D0050DA53 /* IssueDetailView.swift */; };
 		84C55FF1242B09BA0050DA53 /* IssueTypeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FF0242B09BA0050DA53 /* IssueTypeRowView.swift */; };
 		84C55FF3242B0EA00050DA53 /* IssueProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FF2242B0EA00050DA53 /* IssueProjectRowView.swift */; };
+		84F6D72C2432F83B00CF28FF /* RefreshableNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6D72B2432F83B00CF28FF /* RefreshableNavigationView.swift */; };
 		84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3724221A00008EA929 /* ErrorBannerView.swift */; };
 		84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3824221A00008EA929 /* ErrorView.swift */; };
 /* End PBXBuildFile section */
@@ -182,6 +184,7 @@
 		84C55FEE242AFC7D0050DA53 /* IssueDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailView.swift; sourceTree = "<group>"; };
 		84C55FF0242B09BA0050DA53 /* IssueTypeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTypeRowView.swift; sourceTree = "<group>"; };
 		84C55FF2242B0EA00050DA53 /* IssueProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueProjectRowView.swift; sourceTree = "<group>"; };
+		84F6D72B2432F83B00CF28FF /* RefreshableNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableNavigationView.swift; sourceTree = "<group>"; };
 		84FFDD3724221A00008EA929 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorBannerView.swift; path = "Agile Board Team/Error/ErrorBannerView.swift"; sourceTree = SOURCE_ROOT; };
 		84FFDD3824221A00008EA929 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = "Agile Board Team/Error/ErrorView.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -191,6 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8455F6D5243CD4DE00925296 /* RefreshableList in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +428,7 @@
 				8492CCD72429A75F001D76DE /* CircleProgressView.swift */,
 				84ABC0E724286D9F0083EF34 /* NotFoundView.swift */,
 				8430DC9D24318A6300CCD541 /* RefreashableScrollView.swift */,
+				84F6D72B2432F83B00CF28FF /* RefreshableNavigationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -617,6 +622,7 @@
 			);
 			name = "Agile Board Team";
 			packageProductDependencies = (
+				8455F6D4243CD4DE00925296 /* RefreshableList */,
 			);
 			productName = "Agile Board Team";
 			productReference = 840F269024187C0B0085FBA6 /* Agile Board Team.app */;
@@ -670,6 +676,7 @@
 			);
 			mainGroup = 840F268724187C0B0085FBA6;
 			packageReferences = (
+				8455F6D3243CD4DE00925296 /* XCRemoteSwiftPackageReference "RefreshableList" */,
 			);
 			productRefGroup = 840F269124187C0B0085FBA6 /* Products */;
 			projectDirPath = "";
@@ -754,6 +761,7 @@
 				8492CCD82429A75F001D76DE /* CircleProgressView.swift in Sources */,
 				84316FAB242B1174002C0350 /* IssueAttachmentRowView.swift in Sources */,
 				84C55FEB242AF1910050DA53 /* IssueStatus.swift in Sources */,
+				84F6D72C2432F83B00CF28FF /* RefreshableNavigationView.swift in Sources */,
 				849DBC91241B68CA0026E23B /* Project.swift in Sources */,
 				8480E001242BB00F002F8183 /* PriorityRowView.swift in Sources */,
 				849DBC88241B3AD00026E23B /* MainView.swift in Sources */,
@@ -940,7 +948,7 @@
 				DEVELOPMENT_TEAM = 9RUFVFAF79;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Agile Board Team/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -965,7 +973,7 @@
 				DEVELOPMENT_TEAM = 9RUFVFAF79;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Agile Board Team/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1054,6 +1062,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8455F6D3243CD4DE00925296 /* XCRemoteSwiftPackageReference "RefreshableList" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/phuhuynh2411/RefreshableList.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8455F6D4243CD4DE00925296 /* RefreshableList */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8455F6D3243CD4DE00925296 /* XCRemoteSwiftPackageReference "RefreshableList" */;
+			productName = RefreshableList;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 840F268824187C0B0085FBA6 /* Project object */;
 }

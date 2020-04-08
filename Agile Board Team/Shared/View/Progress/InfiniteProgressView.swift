@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-private var timer: Timer?
-
 struct InfiniteProgressView: View {
     
     @State var isAnimating = false

@@ -14,46 +14,51 @@ struct ProjectListView: View {
     @EnvironmentObject var viewModel: ProjectListModel
     //@Binding var editedProject: Project?
     
-//    init() {
-//        UITableView.appearance().separatorStyle = .none
-//    }
+    init() {
+        UITableView.appearance().separatorStyle = .none
+    }
     
     var body: some View {
         NavigationView {
-            VStack {
-                NavigationBar()
-                if viewModel.isFailed {
-                    ErrorBannerView(message: viewModel.errorMessage, display: $viewModel.isFailed)
-                }
-                if viewModel.showCancelButton {
-                    SearchView(search: $viewModel.search, showCancelButton: $viewModel.showCancelButton)
-                }
-                ProjectNotFoundView()
-                List {
-                    ForEach(viewModel.isFiltering ? viewModel.filtedItems : viewModel.items) { (project)  in
-                        ProjectRowView(project: project).onAppear {
-                            self.onAppear(project)
+            GeometryReader { proxy in
+                VStack {
+                    NavigationBar()
+                    if self.viewModel.isFailed {
+                        ErrorBannerView(message: self.viewModel.errorMessage, display: self.$viewModel.isFailed)
+                    }
+                    if self.viewModel.showCancelButton {
+                        SearchView(search: self.$viewModel.search, showCancelButton: self.$viewModel.showCancelButton)
+                    }
+                    ProjectNotFoundView()
+                    //RefreshableScrollView(refreshing: self.$viewModel.isPulling) {
+                    ScrollView {
+                        List {
+                            ForEach(self.viewModel.isFiltering ? self.viewModel.filtedItems : self.viewModel.items) { (project)  in
+                                ProjectRowView(project: project).onAppear {
+                                    self.onAppear(project)
+                                }
+                            }
+                            
+                            if self.viewModel.isLoadingMore {
+                                LastRowView(isLoadingMore: self.$viewModel.isLoadingMore)
+                            }
+                            
                         }
+                        //.frame(height: proxy.frame(in: .named("myStack")).height)
                     }
-                    
-                    if viewModel.isLoadingMore {
-                        LastRowView(isLoadingMore: $viewModel.isLoadingMore)
-                    }
+                    .frame(height: 500)
+                    .resignKeyboardOnDragGesture()
                     
                 }
-                //.pullToRefresh(isShowing: $viewModel.isPulling) {
-                    //self.viewModel.reload(byUsing: .pull, animated: true)
-                //}
-                .resignKeyboardOnDragGesture()
-                
+                .coordinateSpace(name: "myStack")
+                .overlay(
+                    CircleProgressView(display: self.$viewModel.isRefreshing)
+                        .frame(width: 30, height: 30, alignment: .center)
+                )
             }
-            .overlay(
-                CircleProgressView(display: $viewModel.isRefreshing)
-                .frame(width: 30, height: 30, alignment: .center)
-            )
         }
         .onAppear{
-            self.viewModel.reload(animated: true, whenEmpty: true)
+            //self.viewModel.reload(animated: true, whenEmpty: true)
         }
     }
     

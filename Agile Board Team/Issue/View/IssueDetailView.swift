@@ -43,11 +43,11 @@ struct IssueDetailView: View {
             
             DescriptionView(description: $modelView.issue.description)
             
-            IssueTypeRow
+            //IssueTypeRow
             
             IssueProjectRowView(project: modelView.issue.project)
             
-            PriorityRow
+            //PriorityRow
             
             if modelView.issue.supporter != nil {
                 IssueReporterView(reporter: modelView.issue.supporter!)
@@ -61,7 +61,7 @@ struct IssueDetailView: View {
     private var PriorityRow: some View {
         Group {
             NavigationLink(destination: PriorityListView()
-                .environmentObject(self.modelView.priorityListModel)) {
+                .environmentObject(PriorityListModel())) {
                     IssuePriorityRowView(priority: self.$modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
             }
         }
@@ -70,7 +70,7 @@ struct IssueDetailView: View {
     private var IssueTypeRow: some View {
         Group {
             NavigationLink(destination: IssueTypeListView()
-                .environmentObject(modelView.issueTypeListModel)) {
+                .environmentObject(IssueTypeListModel())) {
                     IssueTypeRowView(issueType: self.$modelView.issue.type, isUpdating: self.$modelView.isUpdatingIssueType)
             }
         }

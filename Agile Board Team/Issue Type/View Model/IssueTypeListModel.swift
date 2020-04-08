@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-class IssueTypeListModel: BaseListModel<IssueType, IssueTypeListModel.IssueTypeData> {
+class IssueTypeListModel: BaseListModel<IssueType, IssueTypeData> {
     override var url: URL { issueTypeURL }
     @Published var selectedIssueType: IssueType?
     
@@ -21,8 +21,8 @@ class IssueTypeListModel: BaseListModel<IssueType, IssueTypeListModel.IssueTypeD
     init(issueTypes: [IssueType]) {
         super.init(items: issueTypes)
     }
-    
-    struct IssueTypeData: ResponseData {
-        var data: [IssueType]
-    }
+}
+
+struct IssueTypeData: ResponseData {
+    var data: [IssueType]
 }

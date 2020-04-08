@@ -9,6 +9,6 @@
 import Foundation
 
 protocol ResponseData: Codable {
-    associatedtype ItemData:Codable
+    associatedtype ItemData: Codable
     var data: [ItemData] { get set }
 }

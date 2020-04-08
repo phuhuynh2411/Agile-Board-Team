@@ -16,7 +16,7 @@ class Issue: Codable, Identifiable {
     var priorityId: String
     var statusId: String
     var userId: String
-    var assigneeId: String
+    var assigneeId: String?
     var name: String
     var description: String?
     var startDate: Date?

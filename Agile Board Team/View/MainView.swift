@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct MainView: View {
+    //let issueListModel = IssueListModel()
+    
     var body: some View {
         TabView {
             ProjectListView().environmentObject(ProjectListModel())

@@ -9,13 +9,13 @@
 import SwiftUI
 import Combine
 
-class ProjectListModel: BaseListModel<Project, ProjectListModel.ProjectResponse> {
+class ProjectListModel: BaseListModel<Project, ProjectResponse> {
     override var url: URL { projectURL }
-    
-    struct ProjectResponse: ResponseData {
-        var currentPage: Int
-        var data: [Project]
-        var perPage: Int
-        var total: Int
-    }
+}
+
+struct ProjectResponse: ResponseData {
+    var currentPage: Int
+    var data: [Project]
+    var perPage: Int
+    var total: Int
 }

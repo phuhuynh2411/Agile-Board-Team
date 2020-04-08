@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import RefreshableList
 
 struct IssueListView: View {
     @EnvironmentObject var issueListModel: IssueListModel
@@ -14,44 +15,43 @@ struct IssueListView: View {
     var body: some View {
         
         NavigationView {
-            GeometryReader { proxy in
-                VStack {
-                    IssueErrorView()
-                    IssueSearchView()
-                    IssueNotFoundView()
-                    NavigationBar()
-                    RefreshableScrollView(refreshing: self.$issueListModel.isPulling) {
-                        List {
-                            ForEach(self.issueListModel.isFiltering ? self.issueListModel.filtedItems : self.issueListModel.items) { (issue)  in
-                                NavigationLink(destination: IssueDetailView().environmentObject(IssueDetailModel(issue: issue)) ) {
-                                    IssueRowView(issue: issue).onAppear{
-                                        self.onAppear(issue)
-                                    }
-                                }
-                            }
-                            if self.issueListModel.isLoadingMore {
-                                LastRowView(isLoadingMore: self.$issueListModel.isLoadingMore)
-                            }
+            VStack {
+                NavigationBar()
+                IssueErrorView()
+                IssueSearchView()
+               
+                RefreshableList(showRefreshView: self.$issueListModel.isPulling){
+                    ForEach(self.issueListModel.isFiltering ? self.issueListModel.filtedItems : self.issueListModel.items) { (issue)  in
+                        NavigationLink(destination: IssueDetailView().environmentObject(IssueDetailModel(issue: issue)) ) {
+                            IssueRowView(issue: issue)
                         }
-                        .frame(height: proxy.frame(in: .global).height)
-                        
                     }
-                    .resignKeyboardOnDragGesture()
+                    if self.issueListModel.isLoadingMore {
+                        LastRowView(isLoadingMore: self.$issueListModel.isLoadingMore)
+                    }
                 }
+                .onRefreshPerform {
+                    self.issueListModel.reload(byUsing: .pull)
+                }
+                .onLastPerform {
+                    self.issueListModel.loadMore()
+                }
+                .onAppear {
+                    self.issueListModel.reload(animated: true, whenEmpty: true)
+                }
+                .resignKeyboardOnDragGesture()
+                .overlay(
+                     IssueNotFoundView()
+                )
                 .overlay(
                     CircleProgressView(display: self.$issueListModel.isRefreshing)
                         .frame(width: 30, height: 30, alignment: .center)
                 )
+                
             }
-        }.onAppear{
-            self.issueListModel.reload(animated: true, whenEmpty: true)
         }
     }
     
-    func onAppear(_ issue: Issue) {
-        guard issueListModel.isLastRow(id: issue.id) else { return }
-        issueListModel.loadMore()
-    }
 }
 
 struct IssueListView_Previews: PreviewProvider {
@@ -62,11 +62,21 @@ struct IssueListView_Previews: PreviewProvider {
 
 struct IssueNotFoundView: View {
     @EnvironmentObject var issueListModel: IssueListModel
+    @State var opactiy: Double = 0
     
     var body: some View {
         Group {
             if issueListModel.emptySearchResult && issueListModel.isFiltering {
                 NotFoundView(title: "Issue Not Found")
+                    .opacity(self.opactiy)
+                    .onAppear {
+                        withAnimation (.easeInOut(duration: 2)){
+                            self.opactiy = 1
+                        }
+                }
+                .onDisappear{
+                    self.opactiy = 0
+                }
             }
         }
     }

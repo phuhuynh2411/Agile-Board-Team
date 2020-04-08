@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-class PriorityListModel: BaseListModel<IssuePriority, PriorityListModel.PriorityData> {
+class PriorityListModel: BaseListModel<IssuePriority, PriorityData> {
     override var url: URL { issuePriorityURL }
     
     @Published var selectedPriority: IssuePriority?
@@ -24,8 +24,8 @@ class PriorityListModel: BaseListModel<IssuePriority, PriorityListModel.Priority
     init(priorities: [IssuePriority]) {
         super.init(items: priorities)
     }
-    
-    struct PriorityData: ResponseData {
-        var data: [IssuePriority]
-    }
+}
+
+struct PriorityData: ResponseData {
+    var data: [IssuePriority]
 }
