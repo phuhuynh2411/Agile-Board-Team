@@ -122,11 +122,11 @@ private struct IssueErrorView: View {
     @EnvironmentObject var issueListModel: IssueListModel
     
     var body: some View {
-        Group {
-            if self.issueListModel.isFailed {
+        //Group {
+            //if self.issueListModel.isFailed {
                 ErrorBannerView(message: self.issueListModel.errorMessage, display: self.$issueListModel.isFailed)
-            }
-        }
+            //}
+        //}
     }
 }
 
