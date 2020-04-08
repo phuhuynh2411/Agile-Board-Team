@@ -14,7 +14,7 @@ struct LoginView: View {
     @ObservedObject var loginMV: LoginModel
     
     var body: some View {
-        ZStack {
+        ScrollView {
             VStack {
                 WelcomeText()
                 PersonImage()
@@ -30,10 +30,15 @@ struct LoginView: View {
                 }.disabled(!loginMV.isValidated)
             }
             .padding()
-            
-            if loginMV.isInprogress {
-                InfiniteProgressView()
-            }
+            .keyboardAwarePadding()
+            .overlay(
+                Group {
+                    if loginMV.isInprogress {
+                        InfiniteProgressView()
+                            .frame(width: 30, height: 30)
+                    }
+                }
+            )
         }
         
     }
@@ -61,7 +66,7 @@ struct PersonImage: View {
             .resizable()
             .frame(width: 100, height: 100, alignment: .center)
             .foregroundColor(.gray)
-            .padding(.bottom, 75)
+            .padding(.bottom, 60)
     }
 }
 
@@ -71,10 +76,11 @@ struct UserNameTextField: View {
     
     var body: some View {
         TextField("User name", text: $username)
-            .padding()
+            .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
             .background(Color.lightGreyColor)
             .cornerRadius(5)
             .padding(.bottom, 20)
+            .autocapitalization(.none)
     }
 }
 
@@ -83,7 +89,7 @@ struct PasswordSecureField: View {
     
     var body: some View {
         SecureField("Password", text: $password)
-            .padding()
+            .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
             .background(Color.lightGreyColor)
             .cornerRadius(5)
             .padding(.bottom, 20)
@@ -95,7 +101,7 @@ struct ButtonContentView: View {
     var body: some View {
         Text("LOGIN")
             .font(.headline)
-            .frame(width: 200, height: 60)
+            .frame(width: 150, height: 50)
             .foregroundColor(.white)
             .cornerRadius(15)
             .background(!disabled ? Color.gray : Color.green)

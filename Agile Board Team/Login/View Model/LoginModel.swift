@@ -64,6 +64,7 @@ class LoginModel: ObservableObject, NetworkModel {
                     self.errorMessage = error.localizedDescription
                 }
             }) { (entry) in
+                self.isInprogress = false
                 if entry.meta.success && entry.meta.statusCode == 200 {
                     self.isSucceeded = true
                     self.startSession(with: entry)

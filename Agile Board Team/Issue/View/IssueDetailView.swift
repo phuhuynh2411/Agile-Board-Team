@@ -43,11 +43,11 @@ struct IssueDetailView: View {
             
             DescriptionView(description: $modelView.issue.description)
             
-            //IssueTypeRow
+            IssueTypeRow
             
             IssueProjectRowView(project: modelView.issue.project)
             
-            //PriorityRow
+            PriorityRow
             
             if modelView.issue.supporter != nil {
                 IssueReporterView(reporter: modelView.issue.supporter!)
