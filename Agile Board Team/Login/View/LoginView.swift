@@ -12,9 +12,10 @@ import Combine
 struct LoginView: View {
     
     @ObservedObject var loginMV: LoginModel
+    @State var scrollAttribute = CustomScrollAttribute()
     
     var body: some View {
-        ScrollView {
+        CustomScrollView(attribute: $scrollAttribute) {
             VStack {
                 WelcomeText()
                 PersonImage()
@@ -30,6 +31,12 @@ struct LoginView: View {
                 }.disabled(!loginMV.isValidated)
             }
             .padding()
+            .keyboardAwarePadding { state in
+                switch state {
+                case .show: self.scrollAttribute.scrollToBottom()
+                case .hide: self.scrollAttribute.scrollToTop()
+                }
+            }
             
             .overlay(
                 Group {
@@ -40,7 +47,8 @@ struct LoginView: View {
                 }
             )
         }
-       .keyboardAwarePadding()
+       
+        
     }
 }
 

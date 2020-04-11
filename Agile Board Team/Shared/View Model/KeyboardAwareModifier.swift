@@ -11,6 +11,12 @@ import Combine
 
 struct KeyboardAwareModifier: ViewModifier {
     @State private var keyboardHeight: CGFloat = 0
+    typealias Action = (_ state: KeyboardState) -> Void
+    var action: Action
+    
+    public init(_ action: @escaping Action) {
+        self.action = action
+    }
 
     private var keyboardHeightPublisher: AnyPublisher<CGFloat, Never> {
         Publishers.Merge(
@@ -27,13 +33,26 @@ struct KeyboardAwareModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(.bottom, keyboardHeight)
-            //.offset(y: -self.keyboardHeight)
-            .onReceive(keyboardHeightPublisher) { self.keyboardHeight = $0 ; print(self.keyboardHeight )}
+            .onReceive(keyboardHeightPublisher) { value in
+                self.keyboardHeight = value
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    if value == 0 {
+                        self.action(.hide)
+                    } else {
+                        self.action(.show)
+                    }
+                }
+        }
+    }
+    
+    public enum KeyboardState {
+        case show
+        case hide
     }
 }
 
 extension View {
-    func keyboardAwarePadding() -> some View {
-        ModifiedContent(content: self, modifier: KeyboardAwareModifier())
+    func keyboardAwarePadding(_ action: @escaping KeyboardAwareModifier.Action) -> some View {
+        ModifiedContent(content: self, modifier: KeyboardAwareModifier(action))
     }
 }
