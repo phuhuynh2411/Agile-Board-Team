@@ -27,7 +27,8 @@ struct KeyboardAwareModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(.bottom, keyboardHeight)
-            .onReceive(keyboardHeightPublisher) { self.keyboardHeight = $0 }
+            //.offset(y: -self.keyboardHeight)
+            .onReceive(keyboardHeightPublisher) { self.keyboardHeight = $0 ; print(self.keyboardHeight )}
     }
 }
 

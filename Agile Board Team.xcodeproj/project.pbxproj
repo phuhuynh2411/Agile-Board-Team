@@ -86,6 +86,7 @@
 		84C55FF1242B09BA0050DA53 /* IssueTypeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FF0242B09BA0050DA53 /* IssueTypeRowView.swift */; };
 		84C55FF3242B0EA00050DA53 /* IssueProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FF2242B0EA00050DA53 /* IssueProjectRowView.swift */; };
 		84C8FD71243DCDB10074FBB5 /* KeyboardAwareModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8FD70243DCDB10074FBB5 /* KeyboardAwareModifier.swift */; };
+		84D7EFE52441A12400433EC7 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7EFE42441A12400433EC7 /* CustomScrollView.swift */; };
 		84F6D72C2432F83B00CF28FF /* RefreshableNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6D72B2432F83B00CF28FF /* RefreshableNavigationView.swift */; };
 		84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3724221A00008EA929 /* ErrorBannerView.swift */; };
 		84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3824221A00008EA929 /* ErrorView.swift */; };
@@ -186,6 +187,7 @@
 		84C55FF0242B09BA0050DA53 /* IssueTypeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTypeRowView.swift; sourceTree = "<group>"; };
 		84C55FF2242B0EA00050DA53 /* IssueProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueProjectRowView.swift; sourceTree = "<group>"; };
 		84C8FD70243DCDB10074FBB5 /* KeyboardAwareModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareModifier.swift; sourceTree = "<group>"; };
+		84D7EFE42441A12400433EC7 /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		84F6D72B2432F83B00CF28FF /* RefreshableNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableNavigationView.swift; sourceTree = "<group>"; };
 		84FFDD3724221A00008EA929 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorBannerView.swift; path = "Agile Board Team/Error/ErrorBannerView.swift"; sourceTree = SOURCE_ROOT; };
 		84FFDD3824221A00008EA929 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = "Agile Board Team/Error/ErrorView.swift"; sourceTree = SOURCE_ROOT; };
@@ -431,6 +433,7 @@
 				84ABC0E724286D9F0083EF34 /* NotFoundView.swift */,
 				8430DC9D24318A6300CCD541 /* RefreashableScrollView.swift */,
 				84F6D72B2432F83B00CF28FF /* RefreshableNavigationView.swift */,
+				84D7EFE42441A12400433EC7 /* CustomScrollView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				8420495C241A7AE6001FE724 /* MockURLSessionUploadTask.swift in Sources */,
 				849DBC93241B6A280026E23B /* Data.swift in Sources */,
 				840F26A924187C3B0085FBA6 /* LoginView.swift in Sources */,
+				84D7EFE52441A12400433EC7 /* CustomScrollView.swift in Sources */,
 				846ECCAA2419F05000C8DFA3 /* APILoginRequest.swift in Sources */,
 				8438B47C24236F4600E39464 /* URLSetting.swift in Sources */,
 				849DBC8A241B3EE30026E23B /* AppSession.swift in Sources */,

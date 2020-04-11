@@ -30,7 +30,7 @@ struct LoginView: View {
                 }.disabled(!loginMV.isValidated)
             }
             .padding()
-            .keyboardAwarePadding()
+            
             .overlay(
                 Group {
                     if loginMV.isInprogress {
@@ -40,9 +40,8 @@ struct LoginView: View {
                 }
             )
         }
-        
+       .keyboardAwarePadding()
     }
-    
 }
 
 struct LoginView_Previews: PreviewProvider {
@@ -53,7 +52,7 @@ struct LoginView_Previews: PreviewProvider {
 
 struct WelcomeText: View {
     var body: some View {
-        Text("Wellcome")
+        Text("Welcome")
             .font(.largeTitle)
             .fontWeight(.semibold)
             .padding()
@@ -66,7 +65,7 @@ struct PersonImage: View {
             .resizable()
             .frame(width: 100, height: 100, alignment: .center)
             .foregroundColor(.gray)
-            .padding(.bottom, 60)
+            .padding(.bottom, 40)
     }
 }
 
@@ -103,7 +102,7 @@ struct ButtonContentView: View {
             .font(.headline)
             .frame(width: 150, height: 50)
             .foregroundColor(.white)
-            .cornerRadius(15)
             .background(!disabled ? Color.gray : Color.green)
+            .cornerRadius(5)
     }
 }
