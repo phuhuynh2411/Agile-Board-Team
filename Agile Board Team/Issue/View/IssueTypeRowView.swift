@@ -56,11 +56,7 @@ private struct ProgressView: View {
     @Binding var isUpdating: Bool
     
     var body: some View {
-        Group {
-            if isUpdating {
-                InfiniteProgressView()
-                .frame(width: 20, height: 20, alignment: .center)
-            }
-        }
+        InfiniteProgressView()
+            .frame(width: 20, height: 20, alignment: .center)
     }
 }

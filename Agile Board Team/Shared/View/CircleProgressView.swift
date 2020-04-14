@@ -13,9 +13,7 @@ struct CircleProgressView: View {
     
     var body: some View {
         Group {
-            if display {
-                InfiniteProgressView()
-            }
+            InfiniteProgressView()
         }
     }
 }

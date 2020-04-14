@@ -13,42 +13,54 @@ struct LoginView: View {
     
     @ObservedObject var loginMV: LoginModel
     @State var scrollAttribute = CustomScrollAttribute()
+    @State private var isAnimating: Bool = false
     
     var body: some View {
-        CustomScrollView(attribute: $scrollAttribute) {
-            VStack {
-                WelcomeText()
-                PersonImage()
-                UserNameTextField(username: $loginMV.username)
-                PasswordSecureField(password: $loginMV.password)
-                
-                if loginMV.isFailed {
-                    ErrorView(errorMessage: loginMV.errorMessage)
+        ZStack {
+            CustomScrollView(attribute: $scrollAttribute){
+                VStack {
+                    WelcomeText()
+                    PersonImage()
+                    UserNameTextField(username: $loginMV.username)
+                    PasswordSecureField(password: $loginMV.password)
+                    
+                    if loginMV.isFailed {
+                        ErrorView(errorMessage: loginMV.errorMessage)
+                    }
+                    
+                    Button(action: {
+                        self.loginMV.signIn()
+                    }) {
+                        ButtonContentView(disabled: $loginMV.isValidated)
+                    }.disabled(!loginMV.isValidated)
+                    
                 }
-                
-                Button(action: { self.loginMV.signIn() }) {
-                    ButtonContentView(disabled: $loginMV.isValidated)
-                }.disabled(!loginMV.isValidated)
-            }
-            .padding()
-            .keyboardAwarePadding { state in
-                switch state {
-                case .show: self.scrollAttribute.scrollToBottom()
-                case .hide: self.scrollAttribute.scrollToTop()
+                .padding()
+                .keyboardAwarePadding { state in
+                    switch state {
+                    case .show: self.scrollAttribute.scrollToBottom()
+                    case .hide: self.scrollAttribute.scrollToTop()
+                    }
                 }
             }
             
-            .overlay(
-                Group {
-                    if loginMV.isInprogress {
-                        InfiniteProgressView()
-                            .frame(width: 30, height: 30)
-                    }
-                }
-            )
+            self.circularView
         }
-       
-        
+        .onReceive(loginMV.$isInprogress) { (value) in
+            withAnimation(.easeInOut(duration: 0.5)) {
+                self.isAnimating = value
+            }
+        }
+    }
+    
+    var circularView: some View {
+        Group {
+            if self.isAnimating {
+                InfiniteProgressView()
+                    .frame(width: 30, height: 30)
+                    .transition(.scale)
+            }
+        }
     }
 }
 
@@ -105,6 +117,7 @@ struct PasswordSecureField: View {
 
 struct ButtonContentView: View {
     @Binding var disabled: Bool
+        
     var body: some View {
         Text("LOGIN")
             .font(.headline)
