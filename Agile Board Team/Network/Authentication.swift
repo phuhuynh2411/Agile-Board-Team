@@ -10,7 +10,9 @@ import Foundation
 import Combine
 
 class Authentication: NetworkModel {
+    
     var entry: Entry<Authentication.ResponseData>?
+    static var shared = Authentication()
     
     private func buildLoginRequest(_ username: String, _ password: String) throws -> URLRequest {
         var request = self.postRequest(url: URLSetting.loginURL)
@@ -64,8 +66,17 @@ class Authentication: NetworkModel {
            var user: User
     }
     
-    enum LoginError: Error {
+    enum LoginError: Error, LocalizedError {
         case invalidCredential(String)
         case emptyToken
+        
+        var errorDescription: String? {
+            switch self {
+            case .invalidCredential(let errorMessage):
+                return NSLocalizedString(errorMessage, comment: "")
+            case .emptyToken:
+                return NSLocalizedString("The access token is empty.", comment: "")
+            }
+        }
     }
 }
