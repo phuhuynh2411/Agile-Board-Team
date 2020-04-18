@@ -8,12 +8,26 @@
 
 import XCTest
 @testable import Agile_Board_Team
+import Combine
 
 class TestAuthentication: XCTestCase {
     var sut: Authentication!
+     var loginNotification: AnyCancellable?
 
     override func setUpWithError() throws {
         sut = Authentication()
+        
+        // Test login notification
+        loginNotification = NotificationCenter.default.publisher(for: .didLoginSucceed)
+            .receive(on: RunLoop.main)
+            .map {$0.userInfo?[UserDefaultKey.accessToken] as! String
+        }
+        .sink(receiveCompletion: { (completion) in
+            print(completion)
+        }, receiveValue: { (value) in
+            print(value)
+            XCTAssertNotNil(value)
+        })
     }
 
     override func tearDownWithError() throws {
@@ -100,7 +114,7 @@ class TestAuthentication: XCTestCase {
                 XCTAssertEqual($0.accessToken, UserDefaults.standard.string(forKey: UserDefaultKey.accessToken) ?? "")
         }
 
-        wait(for: [expectation], timeout: 10.0)
+        wait(for: [expectation], timeout: 30.0)
         cancelableLoginStream.cancel()
     }
     

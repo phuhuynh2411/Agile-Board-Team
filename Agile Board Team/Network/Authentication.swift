@@ -56,6 +56,8 @@ class Authentication: NetworkModel {
         }
         // Save access token to the user default
         UserDefaults.standard.set(token, forKey: UserDefaultKey.accessToken)
+        // Post a notification
+        NotificationCenter.default.post(name: .didLoginSucceed, object: self, userInfo: [UserDefaultKey.accessToken: token])
         return Token(accessToken: token)
     }
     
@@ -79,4 +81,8 @@ class Authentication: NetworkModel {
             }
         }
     }
+}
+
+extension Notification.Name {
+    static let didLoginSucceed = Notification.Name("didLoginSucceed")
 }
