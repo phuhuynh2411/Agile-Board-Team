@@ -11,7 +11,7 @@ import SwiftUI
 import Combine
 
 class PriorityListModel: BaseListModel<IssuePriority, PriorityData> {
-    override var url: URL { issuePriorityURL }
+    override var url: URL { URLSetting.issuePriorityURL }
     
     @Published var selectedPriority: IssuePriority?
     

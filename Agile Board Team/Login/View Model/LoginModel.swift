@@ -46,7 +46,7 @@ class LoginModel: ObservableObject, NetworkModel {
     
     func signIn(animated: Bool = true) {
         if animated { self.isInprogress = true }
-        var request = self.post(url: loginURL)
+        var request = self.postRequest(url: URLSetting.loginURL)
         let json = [
             "email": username,
             "password": password

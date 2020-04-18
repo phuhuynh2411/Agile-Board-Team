@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 class IssueTypeListModel: BaseListModel<IssueType, IssueTypeData> {
-    override var url: URL { issueTypeURL }
+    override var url: URL { URLSetting.issueTypeURL }
     @Published var selectedIssueType: IssueType?
     
     override init() {

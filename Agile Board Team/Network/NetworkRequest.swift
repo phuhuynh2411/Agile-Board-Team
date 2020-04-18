@@ -14,10 +14,15 @@ private let fakeToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwcz
 protocol NetworkRequest {}
 
 extension NetworkRequest {
-    
+    #if DEBUG
     private var accessToken: String {
-        AppState.shared.session?.accessToken ?? fakeToken
+        UserDefaults.standard.string(forKey: UserDefaultKey.accessToken) ?? ""
     }
+    #else
+    private var accessToken: String {
+        UserDefaults.standard.string(forKey: UserDefaultKey.accessToken) ?? fakeToken
+    }
+    #endif
     
     var jsonDecoder: JSONDecoder {
         let decoder = JSONDecoder()
@@ -26,13 +31,13 @@ extension NetworkRequest {
         return decoder
     }
            
-    func post(url: URL, authen: Bool = false) -> URLRequest {
+    func postRequest(url: URL, authen: Bool = false) -> URLRequest {
         var request = self.request(url: url, authen: authen)
         request.httpMethod = "POST"
         return request
     }
     
-    func get(url: URL, authen: Bool = false) -> URLRequest {
+    func getRequest(url: URL, authen: Bool = false) -> URLRequest {
         var request = self.request(url: url, authen: authen)
         request.httpMethod = "GET"
         return request

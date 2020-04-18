@@ -94,7 +94,10 @@ struct UserNameTextField: View {
     @Binding var username: String
     
     var body: some View {
-        TextField("User name", text: $username)
+        TextField("User name",
+                  text: $username,
+                  onEditingChanged: { print($0) },
+                  onCommit: { print("on commit") })
             .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
             .background(Color.lightGreyColor)
             .cornerRadius(5)

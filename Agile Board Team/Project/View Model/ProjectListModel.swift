@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 class ProjectListModel: BaseListModel<Project, ProjectResponse> {
-    override var url: URL { projectURL }
+    override var url: URL { URLSetting.projectURL }
 }
 
 struct ProjectResponse: ResponseData {

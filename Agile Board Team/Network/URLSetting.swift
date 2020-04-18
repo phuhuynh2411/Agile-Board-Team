@@ -8,20 +8,11 @@
 
 import Foundation
 
-protocol URLSetting {
-    var baseURL: URL{ get }
-    var loginURL: URL { get }
-    var projectURL: URL { get }
-    var issueURL: URL { get }
-    var issuePriorityURL: URL { get }
-    var issueTypeURL: URL { get }
-}
-
-extension URLSetting {
-    var baseURL: URL { URL(string: "https://task.huuhienqt.dev")! }
-    var loginURL: URL { baseURL.appendingPathComponent("api/v1/login") }
-    var projectURL: URL { baseURL.appendingPathComponent("api/v1/projects") }
-    var issueURL: URL { baseURL.appendingPathComponent("api/v1/issues") }
-    var issuePriorityURL: URL { baseURL.appendingPathComponent("api/v1/issues/priorities") }
-    var issueTypeURL: URL { baseURL.appendingPathComponent("api/v1/issues/types")}
+class URLSetting {
+    static var baseURL: URL { URL(string: "https://task.huuhienqt.dev")! }
+    static var loginURL: URL { baseURL.appendingPathComponent("api/v1/login") }
+    static var projectURL: URL { baseURL.appendingPathComponent("api/v1/projects") }
+    static var issueURL: URL { baseURL.appendingPathComponent("api/v1/issues") }
+    static var issuePriorityURL: URL { baseURL.appendingPathComponent("api/v1/issues/priorities") }
+    static var issueTypeURL: URL { baseURL.appendingPathComponent("api/v1/issues/types")}
 }

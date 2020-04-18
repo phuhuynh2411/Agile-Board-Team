@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 class IssueListModel: BaseListModel<Issue, IssueResponse> {
-    override var url: URL { issueURL }
+    override var url: URL { URLSetting.issueURL }
     
     override init() {
         super.init()
