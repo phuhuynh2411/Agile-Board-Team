@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-class LoginModel: ObservableObject, NetworkModel {
+class LoginModel: ObservableObject {
     
     @Published var username = ""
     @Published var password = ""
@@ -20,12 +20,9 @@ class LoginModel: ObservableObject, NetworkModel {
     
     @Published var errorMessage = ""
     @Published var isInprogress = false
-    
-    let appState = AppState.shared
-    
+        
     var loginButtonStream: AnyCancellable?
     var loginStream: AnyCancellable?
-    var entry: Entry<LoginModel.ResponseData>?
     
     var validatedCredentials: AnyPublisher<(String, String)?, Never> {
         return $username.combineLatest($password) { username, password in
@@ -44,54 +41,24 @@ class LoginModel: ObservableObject, NetworkModel {
             })
     }
     
-    func signIn(animated: Bool = true) {
-        if animated { self.isInprogress = true }
-        var request = self.postRequest(url: URLSetting.loginURL)
-        let json = [
-            "email": username,
-            "password": password
-        ]
-        let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
-        request.httpBody = jsonData
-
-        self.loginStream = self.send(request: request)
+    func login() {
+        self.isInprogress = true
+        self.errorMessage = ""
+        
+        self.loginStream = Authentication.shared.login(username, password)
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { (completion) in
                 switch completion {
                 case .finished: break
                 case .failure(let error):
                     self.isFailed = true
                     self.errorMessage = error.localizedDescription
                 }
-            }) { (entry) in
                 self.isInprogress = false
-                if entry.meta.success && entry.meta.statusCode == 200 {
-                    self.isSucceeded = true
-                    self.startSession(with: entry)
-                } else {
-                    self.isFailed = true
-                    self.errorMessage = entry.meta.message
-                }
-        }
-    }
-    
-    func startSession(with entry: Entry<ResponseData>) {
-        guard let data = entry.data else { return }
-        let session = AppSession(
-                        accessToken: data.accessToken,
-                        tokenType: data.tokenType,
-                        expiresIn: data.expiresIn)
-        
-        self.appState.session = session
-        self.appState.user = data.user
-        
-        self.appState.viewRouter.managedView = .main
-    }
-    
-    struct ResponseData: Codable {
-        var accessToken: String
-        var tokenType: String
-        var expiresIn: Int
-        var user: User
+            }, receiveValue: { (token) in
+                self.isSucceeded = !token.accessToken.isEmpty
+                self.errorMessage = ""
+                print("The login was successful.")
+            })
     }
 }

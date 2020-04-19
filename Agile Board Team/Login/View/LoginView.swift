@@ -29,7 +29,7 @@ struct LoginView: View {
                     }
                     
                     Button(action: {
-                        self.loginMV.signIn()
+                        self.loginMV.login()
                     }) {
                         ButtonContentView(disabled: $loginMV.isValidated)
                     }.disabled(!loginMV.isValidated)
