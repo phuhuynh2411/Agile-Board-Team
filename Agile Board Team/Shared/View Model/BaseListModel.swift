@@ -19,13 +19,7 @@ class BaseListModel <T:Identifiable, ResponseType:ResponseData>: ObservableObjec
     
     @Published var errorMessage = ""
     @Published var isRefreshing = false
-    @Published var isPulling = false {
-        didSet {
-            if oldValue == false && isPulling == true {
-                self.reload(byUsing: .pull, animated: true)
-            }
-        }
-    }
+    @Published var isPulling = false
     
     @Published var isLoadingMore = false
     
@@ -47,14 +41,19 @@ class BaseListModel <T:Identifiable, ResponseType:ResponseData>: ObservableObjec
     var cancelableRequest: Cancellable?
     var url: URL { URLSetting.baseURL }
     
-     init() {
+    init() {
+        
         self.remoteSearchStream = $search
             .debounce(for: 0.5, scheduler: RunLoop.main)
             .removeDuplicates()
             .setFailureType(to: Error.self)
             .map { $0 }
             .flatMap { searchText in
-               self.search(page: 1, numberOfItems: self.numberOfItems, keyword: searchText)
+                self.search(page: 1, numberOfItems: self.numberOfItems, keyword: searchText)
+                .catch { error in
+                    Just(Entry.placeholder(message: error.localizedDescription))
+                                        .setFailureType(to: Error.self)
+                }
             }
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
@@ -96,7 +95,7 @@ class BaseListModel <T:Identifiable, ResponseType:ResponseData>: ObservableObjec
         
         self.isLoadingMore = true
         self.keyword = keyword
-        return self.searchData(from: self.url, page: 1, numberOfItems: self.numberOfItems, keyword: searchText)
+        return self.getData(from: self.url, page: 1, numberOfItems: self.numberOfItems, keyword: searchText)
     }
     
     private func resetPageNumber() {

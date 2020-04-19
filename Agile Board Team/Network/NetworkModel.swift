@@ -17,8 +17,8 @@ protocol NetworkModel: NetworkRequest {
 extension NetworkModel {
     
     func validate(_ data: Data, _ response: URLResponse) throws -> Data {
-        guard let httpResponse = response as? HTTPURLResponse else { throw APIError.invalidRespond }
-        guard (200...400).contains(httpResponse.statusCode) else { throw APIError.statusCode(httpResponse.statusCode)}
+        guard let _ = response as? HTTPURLResponse else { throw APIError.invalidRespond }
+        //guard (200...400).contains(httpResponse.statusCode) else { throw APIError.statusCode(httpResponse.statusCode)}
         return data
     }
     
@@ -31,32 +31,16 @@ extension NetworkModel {
             .eraseToAnyPublisher()
     }
     
-    func search(request: URLRequest) -> AnyPublisher<Entry<ResponseData>, Error> {
-        return send(request: request)
-            .catch { error in
-                Just(Entry.placeholder(message: error.localizedDescription))
-                    .setFailureType(to: Error.self)
-        }
-        .eraseToAnyPublisher()
-    }
-    
     func getData(from url: URL, page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> AnyPublisher<Entry<ResponseData>, Error> {
         // Create a URL with parameters
         let url = self.parasWith(url: url, page: page, numberOfItems: numberOfItems, keyword: keyword)
         // Create a get request
-        let request = self.getRequest(url: url)
+        let request = self.getRequest(url: url, authen: true)
         return send(request: request)
     }
     
     func postData() {
         
-    }
-    
-    func searchData(from url: URL, page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> AnyPublisher<Entry<ResponseData>, Error> {
-        let url = self.parasWith(url: url, page: page, numberOfItems: numberOfItems, keyword: keyword)
-        // Create a get request
-        let request = self.getRequest(url: url)
-        return search(request: request)
     }
     
     private func parasWith(url: URL, page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> URL {
