@@ -8,9 +8,7 @@
 
 import Foundation
 
-class AppState {
-    let viewRouter = ViewRouter.shared
-    
+class AppState {    
     var user: User?
     var session: AppSession?
     

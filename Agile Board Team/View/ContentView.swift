@@ -15,21 +15,13 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if self.contentMV.managedView == .main {
-                withAnimation(.easeIn){
-                    MainView()
-                }
-                
+                MainView().transition(.move(edge: .trailing))
             } else {
                 LoginView(loginMV: LoginModel())
                 //MainView()
             }
         }
     }
-}
-
-enum ManagedView {
-    case login
-    case main
 }
 
 struct ContentView_Previews: PreviewProvider {

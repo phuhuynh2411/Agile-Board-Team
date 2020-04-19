@@ -10,14 +10,24 @@ import SwiftUI
 import Combine
 
 class ViewRouter: ObservableObject {
-    
     @Published var managedView: ManagedView = .login
+    var loginStream: AnyCancellable?
     
-    static let shared = ViewRouter()
+    init() {
+        loginStream = NotificationCenter.default.publisher(for: .didLoginSucceed)
+            .receive(on: RunLoop.main)
+            .compactMap {$0.userInfo?[UserDefaultKey.accessToken] as? String
+        }
+        .sink(receiveValue: { (value) in
+            print("View router received notification value: \(value)")
+            withAnimation {
+                self.managedView = .main
+            }
+        })
+    }
     
     enum ManagedView {
         case login
         case main
     }
-    
 }
