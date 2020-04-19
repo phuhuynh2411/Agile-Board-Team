@@ -27,6 +27,7 @@ class BaseListModel <T:Identifiable, ResponseType:ResponseData>: ObservableObjec
     var numberOfItems = 15
     
     var remoteSearchStream: AnyCancellable?
+    var remoteSearchStream1: AnyCancellable?
     
     var isFiltering: Bool {
         self.search.count > 0
@@ -40,39 +41,17 @@ class BaseListModel <T:Identifiable, ResponseType:ResponseData>: ObservableObjec
     
     var cancelableRequest: Cancellable?
     var url: URL { URLSetting.baseURL }
-    
-    init() {
         
+    init() {
         self.remoteSearchStream = $search
             .debounce(for: 0.5, scheduler: RunLoop.main)
             .removeDuplicates()
-            .setFailureType(to: Error.self)
-            .map { $0 }
-            .flatMap { searchText in
-                self.search(page: 1, numberOfItems: self.numberOfItems, keyword: searchText)
-                .catch { error in
-                    Just(Entry.placeholder(message: error.localizedDescription))
-                                        .setFailureType(to: Error.self)
-                }
-            }
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished: break
-                case .failure(let error):
-                    self.isFailed = true
-                    self.errorMessage = error.localizedDescription
-                    self.isLoadingMore = false
-                }
-            }) { entry in
-                print(entry)
-                let foundItems = entry.data?.data ?? []
-                
-                self.filtedItems = foundItems as! [T]
-                self.isLoadingMore = false
-                self.searchPage = 1
-                self.emptySearchResult = foundItems.count == 0
-        }
+            .sink(receiveValue: { searchText in
+                self.search(page: 1, numberOfItems: self.numberOfItems, keyword: searchText)
+                    .receive(on: RunLoop.main)
+                    .subscribe(SearchSubscriber(self))
+            })
     }
     
     init(items: [T]) {
@@ -184,4 +163,41 @@ class BaseListModel <T:Identifiable, ResponseType:ResponseData>: ObservableObjec
         }
     }
     
+    class SearchSubscriber: Subscriber {
+        var listModel: BaseListModel
+        typealias Input = Entry<ResponseType>
+        typealias Failure = Error
+        
+        init(_ listModel: BaseListModel) {
+            self.listModel = listModel
+        }
+        
+        func receive(subscription: Subscription) {
+            print("Search subsriber received subscription.")
+            subscription.request(.unlimited)
+        }
+        
+        func receive(_ entry: Entry<ResponseType>) -> Subscribers.Demand {
+            print("Search subcriber received value.")
+            print(entry)
+            let foundItems = entry.data?.data ?? []
+            
+            listModel.filtedItems = foundItems as! [T]
+            listModel.isLoadingMore = false
+            listModel.searchPage = 1
+            listModel.emptySearchResult = foundItems.count == 0
+            return .unlimited
+        }
+        
+        func receive(completion: Subscribers.Completion<Error>) {
+            print("Search subscriber received completion.")
+            switch completion {
+            case .finished: break
+            case .failure(let error):
+                listModel.isFailed = true
+                listModel.errorMessage = error.localizedDescription
+                listModel.isLoadingMore = false
+            }
+        }
+    }
 }
