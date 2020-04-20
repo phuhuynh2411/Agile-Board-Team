@@ -11,13 +11,14 @@ import SwiftUI
 struct SearchView: View {
     @Binding var search: String
     @Binding var showCancelButton: Bool
+    var placeholder: String = "Search"
     
     var body: some View {
         
         HStack {
             HStack {
                 Image(systemName: "magnifyingglass")
-                TextField("Search project", text: $search)
+                TextField(self.placeholder, text: $search)
                 
                 Button(action: {
                     self.search = ""

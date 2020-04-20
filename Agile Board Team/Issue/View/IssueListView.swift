@@ -117,7 +117,7 @@ private struct NavTrailingView: View {
 
 private struct NavigationBar: View {
     @EnvironmentObject var issueListModel: IssueListModel
-    @State private var hide: Bool = true
+    @State private var hide: Bool = false
     
     var body: some View {
         Rectangle()
@@ -126,7 +126,7 @@ private struct NavigationBar: View {
             .navigationBarItems(trailing: NavTrailingView() )
             .navigationBarHidden(self.hide)
             .onReceive(self.issueListModel.$showCancelButton) { (value) in
-                if !value {
+                if !value && self.hide {
                     // Delay 0.5 second before showing the navigation bar
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         self.hide = value
@@ -146,6 +146,7 @@ private struct IssueErrorView: View {
         Group {
             if self.issueListModel.isFailed {
                 ErrorBannerView(message: self.issueListModel.errorMessage, display: self.$issueListModel.isFailed)
+                    .frame(height: 80)
             }
         }
     }
@@ -156,7 +157,10 @@ private struct IssueSearchView: View {
     var body: some View {
         Group {
             if self.issueListModel.showCancelButton {
-                SearchView(search: self.$issueListModel.search, showCancelButton: self.$issueListModel.showCancelButton.animation(.easeInOut(duration: 0.5)))
+                SearchView(
+                    search: self.$issueListModel.search,
+                    showCancelButton: self.$issueListModel.showCancelButton.animation(.easeInOut(duration: 0.5)),
+                    placeholder: "Search issue")
             }
         }
     }
