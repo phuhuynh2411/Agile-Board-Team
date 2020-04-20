@@ -99,7 +99,7 @@ private struct NavTrailingView: View {
    
         HStack (spacing: 25) {
             Button(action: {
-                withAnimation(.easeInOut(duration: 1)) {
+                withAnimation(.easeInOut(duration: 0.5)) {
                     self.issueListModel.showCancelButton = true
                 }
             }) {
@@ -117,14 +117,25 @@ private struct NavTrailingView: View {
 
 private struct NavigationBar: View {
     @EnvironmentObject var issueListModel: IssueListModel
+    @State private var hide: Bool = true
     
     var body: some View {
-        
         Rectangle()
             .frame(height: 0, alignment: .center)
             .navigationBarTitle("Issues", displayMode: .inline)
             .navigationBarItems(trailing: NavTrailingView() )
-            .navigationBarHidden(issueListModel.showCancelButton)
+            .navigationBarHidden(self.hide)
+            .onReceive(self.issueListModel.$showCancelButton) { (value) in
+                if !value {
+                    // Delay 0.5 second before showing the navigation bar
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.hide = value
+                    }
+                } else {
+                    self.hide = value
+                }
+        }
+        
     }
 }
 
@@ -145,7 +156,7 @@ private struct IssueSearchView: View {
     var body: some View {
         Group {
             if self.issueListModel.showCancelButton {
-                SearchView(search: self.$issueListModel.search, showCancelButton: self.$issueListModel.showCancelButton)
+                SearchView(search: self.$issueListModel.search, showCancelButton: self.$issueListModel.showCancelButton.animation(.easeInOut(duration: 0.5)))
             }
         }
     }
