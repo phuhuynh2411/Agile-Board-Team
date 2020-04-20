@@ -42,7 +42,7 @@ struct IssueListView: View {
                 }
                 .resignKeyboardOnDragGesture()
                 .overlay(IssueNotFoundView())
-                .overlay(self.reloadView)
+                .overlay(RefreshView(refreshingPublisher: self.issueListModel.$isRefreshing))
             }
         }
     }

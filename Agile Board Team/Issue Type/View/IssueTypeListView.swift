@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Combine
+import RefreshableList
 
 struct IssueTypeListView: View {
     
@@ -24,28 +25,25 @@ struct IssueTypeListView: View {
                 SearchView(search: $viewModel.search, showCancelButton: $viewModel.showCancelButton)
             }
             IssueTypeNotFoundView()
-            List {
-                ForEach(viewModel.isFiltering ? viewModel.filtedItems : viewModel.items) { (issueType)  in
+            RefreshableList(showRefreshView: $viewModel.isPulling) {
+                ForEach(self.viewModel.isFiltering ? self.viewModel.filtedItems : self.viewModel.items) { (issueType)  in
                     self.IssueTypeButton(issueType: issueType)
+                    .padding()
                 }
                 
-                if viewModel.isLoadingMore {
-                    LastRowView(isLoadingMore: $viewModel.isLoadingMore)
+                if self.viewModel.isLoadingMore {
+                    LastRowView(isLoadingMore: self.$viewModel.isLoadingMore)
                 }
-                
             }
-//            .pullToRefresh(isShowing: $viewModel.isPulling) {
-//                self.viewModel.reload(byUsing: .pull, animated: true)
-//            }
+            .onRefreshPerform {
+                self.viewModel.reload(byUsing: .pull, animated: true)
+            }
             .resignKeyboardOnDragGesture()
             
         }
-        .overlay(
-            CircleProgressView(display: $viewModel.isRefreshing)
-            .frame(width: 30, height: 30, alignment: .center)
-        )
+        .overlay(RefreshView(refreshingPublisher: viewModel.$isRefreshing))
         .onAppear{
-            //self.viewModel.reload(animated: true, whenEmpty: true)
+            self.viewModel.reload(animated: true, whenEmpty: true)
         }
     }
     
@@ -88,7 +86,7 @@ private struct NavigationBar: View {
         
         Rectangle()
             .frame(height: 0, alignment: .center)
-            .navigationBarTitle("Priority", displayMode: .inline)
+            .navigationBarTitle("Issue Type", displayMode: .inline)
             .navigationBarItems(trailing: NavTrailingView())
             .navigationBarHidden(viewModel.showCancelButton)
     }
