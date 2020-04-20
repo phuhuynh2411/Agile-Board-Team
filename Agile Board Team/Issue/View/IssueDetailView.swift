@@ -7,10 +7,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct IssueDetailView: View {
     @EnvironmentObject var modelView: IssueDetailModel
-        
+
     var body: some View {
         List {
             HStack {
@@ -43,11 +44,16 @@ struct IssueDetailView: View {
             
             DescriptionView(description: $modelView.issue.description)
             
-            IssueTypeRow
+            NavigationLink(destination: IssueTypeListView().environmentObject(IssueTypeListModel())) {
+                               IssueTypeRowView(issueType: self.$modelView.issue.type, isUpdating: self.$modelView.isUpdatingIssueType)
+                       }
             
             IssueProjectRowView(project: modelView.issue.project)
             
-            PriorityRow
+            NavigationLink(destination: PriorityListView()
+                .environmentObject(PriorityListModel())) {
+                    IssuePriorityRowView(priority: self.$modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
+            }
             
             if modelView.issue.supporter != nil {
                 IssueReporterView(reporter: modelView.issue.supporter!)
@@ -57,25 +63,6 @@ struct IssueDetailView: View {
         }
         
     }
-    
-    private var PriorityRow: some View {
-        Group {
-            NavigationLink(destination: PriorityListView()
-                .environmentObject(PriorityListModel())) {
-                    IssuePriorityRowView(priority: self.$modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
-            }
-        }
-    }
-    
-    private var IssueTypeRow: some View {
-        Group {
-            NavigationLink(destination: IssueTypeListView()
-                .environmentObject(IssueTypeListModel())) {
-                    IssueTypeRowView(issueType: self.$modelView.issue.type, isUpdating: self.$modelView.isUpdatingIssueType)
-            }
-        }
-    }
-
 }
 
 struct IssueDetailView_Previews: PreviewProvider {

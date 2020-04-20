@@ -15,7 +15,7 @@ class IssueTypeListModel: BaseListModel<IssueType, IssueTypeData> {
     
     override init() {
         super.init()
-        _ = self.objectWillChange.append(super.objectWillChange)
+        //_ = self.objectWillChange.append(super.objectWillChange)
     }
     
     init(issueTypes: [IssueType]) {

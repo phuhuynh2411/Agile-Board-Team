@@ -10,7 +10,7 @@
 import Foundation
 import Combine
 
-class BaseListModel <T:Identifiable, ResponseType:ResponseData>: ObservableObject, NetworkModel {
+class BaseListModel <T:Identifiable, ResponseType:ResponseData>: NetworkModel {
     
     @Published var isFailed = false
     @Published var search: String = ""
@@ -42,7 +42,7 @@ class BaseListModel <T:Identifiable, ResponseType:ResponseData>: ObservableObjec
     var url: URL { URLSetting.baseURL }
         
     init() {
-        self.remoteSearchStream = $search
+        self.remoteSearchStream = self.$search
             .debounce(for: 0.5, scheduler: RunLoop.main)
             .removeDuplicates()
             .sink(receiveValue: {

@@ -20,12 +20,10 @@ class IssueDetailModel: ObservableObject {
     
     @Published var editedIssueType: IssueType?
     @Published var isUpdatingIssueType: Bool = false
-    
-    //let priorityListModel = PriorityListModel()
-    //let issueTypeListModel = IssueTypeListModel()
-    
+        
     init(issue: Issue) {
         self.issue = issue
+        
         //priorityListModel.selectedPriority = issue.priority
         //issueTypeListModel.selectedIssueType = issue.type
         

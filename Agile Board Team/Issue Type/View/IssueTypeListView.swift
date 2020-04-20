@@ -74,12 +74,12 @@ struct IssueTypeListView: View {
     }
 }
 
-struct IssueTypeListView_Previews: PreviewProvider {
-    @State static var issueType: IssueType? = issueData[0].type
-    static var previews: some View {
-        IssueTypeListView().environmentObject(IssueTypeListModel(issueTypes: issueTypeData))
-    }
-}
+//struct IssueTypeListView_Previews: PreviewProvider {
+//    @State static var issueType: IssueType? = issueData[0].type
+//    static var previews: some View {
+//        IssueTypeListView().environmentObject(IssueTypeListModel(issueTypes: issueTypeData))
+//    }
+//}
 
 private struct NavigationBar: View {
     @EnvironmentObject var viewModel: IssueTypeListModel
