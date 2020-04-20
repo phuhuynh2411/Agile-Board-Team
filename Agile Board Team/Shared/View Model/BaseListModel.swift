@@ -27,7 +27,6 @@ class BaseListModel <T:Identifiable, ResponseType:ResponseData>: ObservableObjec
     var numberOfItems = 15
     
     var remoteSearchStream: AnyCancellable?
-    var remoteSearchStream1: AnyCancellable?
     
     var isFiltering: Bool {
         self.search.count > 0
@@ -46,9 +45,8 @@ class BaseListModel <T:Identifiable, ResponseType:ResponseData>: ObservableObjec
         self.remoteSearchStream = $search
             .debounce(for: 0.5, scheduler: RunLoop.main)
             .removeDuplicates()
-            .receive(on: RunLoop.main)
-            .sink(receiveValue: { searchText in
-                self.search(page: 1, numberOfItems: self.numberOfItems, keyword: searchText)
+            .sink(receiveValue: {
+                self.search(keyword: $0)
                     .receive(on: RunLoop.main)
                     .subscribe(SearchSubscriber(self))
             })
@@ -66,15 +64,15 @@ class BaseListModel <T:Identifiable, ResponseType:ResponseData>: ObservableObjec
         )
     }
     
-    private func search(page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> AnyPublisher<Entry<ResponseType>, Error> {
+    private func search(page: Int = 1, keyword: String) -> AnyPublisher<Entry<ResponseType>, Error> {
         self.emptySearchResult = false
-        guard let searchText = keyword, searchText.count > 0 else {
+        guard keyword.count > 0 else {
             return Empty(completeImmediately: false).eraseToAnyPublisher()
         }
         
         self.isLoadingMore = true
         self.keyword = keyword
-        return self.getData(from: self.url, page: 1, numberOfItems: self.numberOfItems, keyword: searchText)
+        return self.getData(from: self.url, page: 1, numberOfItems: self.numberOfItems, keyword: keyword)
     }
     
     private func resetPageNumber() {
@@ -173,31 +171,25 @@ class BaseListModel <T:Identifiable, ResponseType:ResponseData>: ObservableObjec
         }
         
         func receive(subscription: Subscription) {
-            print("Search subsriber received subscription.")
             subscription.request(.unlimited)
         }
         
         func receive(_ entry: Entry<ResponseType>) -> Subscribers.Demand {
-            print("Search subcriber received value.")
-            print(entry)
             let foundItems = entry.data?.data ?? []
-            
             listModel.filtedItems = foundItems as! [T]
-            listModel.isLoadingMore = false
             listModel.searchPage = 1
             listModel.emptySearchResult = foundItems.count == 0
             return .unlimited
         }
         
         func receive(completion: Subscribers.Completion<Error>) {
-            print("Search subscriber received completion.")
             switch completion {
             case .finished: break
             case .failure(let error):
                 listModel.isFailed = true
                 listModel.errorMessage = error.localizedDescription
-                listModel.isLoadingMore = false
             }
+            listModel.isLoadingMore = false
         }
     }
 }

@@ -11,6 +11,7 @@ import RefreshableList
 
 struct IssueListView: View {
     @EnvironmentObject var issueListModel: IssueListModel
+    @State private var isRefreshing: Bool = false
     
     var body: some View {
         
@@ -40,14 +41,23 @@ struct IssueListView: View {
                     self.issueListModel.reload(animated: true, whenEmpty: true)
                 }
                 .resignKeyboardOnDragGesture()
-                .overlay(
-                     IssueNotFoundView()
-                )
-                .overlay(
-                    CircleProgressView(display: self.$issueListModel.isRefreshing)
-                        .frame(width: 30, height: 30, alignment: .center)
-                )
-                
+                .overlay(IssueNotFoundView())
+                .overlay(self.reloadView)
+            }
+        }
+    }
+    
+    var reloadView: some View {
+        ZStack {
+            if self.isRefreshing {
+                InfiniteProgressView()
+                    .frame(width: 30, height: 30, alignment: .center)
+                    .transition(.scale)
+            }
+        }
+        .onReceive(self.issueListModel.$isRefreshing) { (value) in
+            withAnimation(.easeInOut) {
+                self.isRefreshing = value
             }
         }
     }
