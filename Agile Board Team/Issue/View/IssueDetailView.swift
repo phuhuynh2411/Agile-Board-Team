@@ -11,7 +11,7 @@ import Combine
 
 struct IssueDetailView: View {
     @EnvironmentObject var modelView: IssueDetailModel
-
+    
     var body: some View {
         List {
             HStack {
@@ -44,9 +44,9 @@ struct IssueDetailView: View {
             
             DescriptionView(description: $modelView.issue.description)
             
-            NavigationLink(destination: IssueTypeListView().environmentObject(IssueTypeListModel())) {
-                               IssueTypeRowView(issueType: self.$modelView.issue.type, isUpdating: self.$modelView.isUpdatingIssueType)
-                       }
+            NavigationLink(destination: IssueTypeListView().environmentObject(IssueTypeListModel(selectedIssueType: self.$modelView.selectedIssueType))) {
+                IssueTypeRowView(issueType: self.$modelView.issue.type, isShowing: self.$modelView.isUpdatingIssueType)
+            }
             
             IssueProjectRowView(project: modelView.issue.project)
             
@@ -54,22 +54,27 @@ struct IssueDetailView: View {
                 .environmentObject(PriorityListModel())) {
                     IssuePriorityRowView(priority: self.$modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
             }
-            
+
             if modelView.issue.supporter != nil {
                 IssueReporterView(reporter: modelView.issue.supporter!)
             }
             
             IssueAttachmentRowView()
+            
+//            Button("Tap me") {
+//                self.modelView.test.toggle()
+//            }
         }
+        
         
     }
 }
 
-struct IssueDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        IssueDetailView().environmentObject(IssueDetailModel(issue: issueData[0]))
-    }
-}
+//struct IssueDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        IssueDetailView(o)//.environmentObject(IssueDetailModel(issue: issueData[0]))
+//    }
+//}
 
 struct NameView: View {
     @Binding var name: String

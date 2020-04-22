@@ -7,10 +7,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct IssueTypeRowView: View {
     @Binding var issueType: IssueType?
-    @Binding var isUpdating: Bool
+    @Binding var isShowing: Bool
     
     var body: some View {
         HStack(spacing: 16) {
@@ -33,11 +34,16 @@ struct IssueTypeRowView: View {
                // Spacer()
             }
             Spacer()
+
         }
         .overlay(
             HStack {
                 Spacer()
-                ProgressView(isUpdating: self.$isUpdating).padding(.trailing, 16)
+                if self.isShowing {
+                    InfiniteProgressView()
+                    .frame(width: 20, height: 20, alignment: .center)
+                        .padding(.trailing, 16)
+                }
             }
         )
     }
@@ -48,15 +54,6 @@ struct IssueTypeRow_Previews: PreviewProvider {
     @State static var issueType: IssueType? = issueData[0].type
     
     static var previews: some View {
-        IssueTypeRowView(issueType: self.$issueType, isUpdating: self.$isUpdating)
-    }
-}
-
-private struct ProgressView: View {
-    @Binding var isUpdating: Bool
-    
-    var body: some View {
-        InfiniteProgressView()
-            .frame(width: 20, height: 20, alignment: .center)
+        IssueTypeRowView(issueType: self.$issueType, isShowing: self.$isUpdating)
     }
 }

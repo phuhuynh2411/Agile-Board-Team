@@ -18,14 +18,16 @@ class IssueDetailModel: ObservableObject {
     
     @Published var isUpdatingPriority: Bool = false
     
-    @Published var editedIssueType: IssueType?
+    var issueTypeListModel: IssueTypeListModel!
     @Published var isUpdatingIssueType: Bool = false
-        
+    @Published var selectedIssueType: IssueType!
+    
     init(issue: Issue) {
         self.issue = issue
+        self.selectedIssueType = issue.type
         
         //priorityListModel.selectedPriority = issue.priority
-        //issueTypeListModel.selectedIssueType = issue.type
+        //issueTypeListModel = IssueTypeListModel(selectedIssueType: issue.type)
         
 //        self.priorityStream = priorityListModel.$selectedPriority
 //            .compactMap { $0 != issue.priority ? $0 : nil }
@@ -42,19 +44,16 @@ class IssueDetailModel: ObservableObject {
 //                }
 //            })
         
-//        self.issueTypeStream = issueTypeListModel.$selectedIssueType
-//            .compactMap { $0 != issue.type ? $0 : nil }
-//            .receive(on: RunLoop.main)
-//            .sink(receiveValue: { (issueType) in
-//                print(issue.name)
-//
-//                self.isUpdatingIssueType = true
-//                print(self.issue.type?.name ?? "")
-//
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                    self.issue.type = issueType
-//                    self.isUpdatingIssueType = false
-//                }
-//            })
+        self.issueTypeStream = $selectedIssueType
+            .compactMap {$0 != issue.type ? $0 : nil}
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { (issueType) in
+                self.isUpdatingIssueType = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.issue.type = issueType
+                    self.isUpdatingIssueType = false
+                }
+            })
     }
 }

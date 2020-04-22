@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-protocol NetworkModel: NetworkRequest, ObservableObject {
+protocol NetworkModel: ObservableObject, NetworkRequest {
     associatedtype ResponseData: Codable
     var entry: Entry<ResponseData>? { get set }
 }

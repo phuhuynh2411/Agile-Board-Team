@@ -55,8 +55,8 @@ struct PriorityListView: View {
     
     private func PriorityButton(priority: IssuePriority) -> some View {
         Button(action: {
-            self.presentation.wrappedValue.dismiss()
             self.viewModel.selectedPriority = priority
+            self.presentation.wrappedValue.dismiss()
         }) {
             self.PriorityRow(priority: priority).onAppear {
                 self.onAppear(priority)

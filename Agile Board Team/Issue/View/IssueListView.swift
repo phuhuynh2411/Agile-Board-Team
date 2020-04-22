@@ -12,6 +12,7 @@ import RefreshableList
 struct IssueListView: View {
     @EnvironmentObject var issueListModel: IssueListModel
     @State private var isRefreshing: Bool = false
+    @State private var isPulling: Bool = false
     
     var body: some View {
         
@@ -21,9 +22,9 @@ struct IssueListView: View {
                 IssueErrorView()
                 IssueSearchView()
                
-                RefreshableList(showRefreshView: self.$issueListModel.isPulling){
+                RefreshableList(showRefreshView: self.$isPulling) {
                     ForEach(self.issueListModel.isFiltering ? self.issueListModel.filtedItems : self.issueListModel.items) { (issue)  in
-                        NavigationLink(destination: IssueDetailView().environmentObject(IssueDetailModel(issue: issue)) ) {
+                        NavigationLink(destination: IssueDetailView().environmentObject(IssueDetailModel(issue: issue))) {
                             IssueRowView(issue: issue)
                         }
                     }
@@ -37,38 +38,25 @@ struct IssueListView: View {
                 .onLastPerform {
                     self.issueListModel.loadMore()
                 }
-                .onAppear {
-                    self.issueListModel.reload(animated: true, whenEmpty: true)
-                }
                 .resignKeyboardOnDragGesture()
                 .overlay(IssueNotFoundView())
                 .overlay(RefreshView(refreshingPublisher: self.issueListModel.$isRefreshing))
+                .onAppear {
+                    self.issueListModel.reload(animated: true, whenEmpty: true)
+                }
+                .onReceive(self.issueListModel.$isPulling) { (value) in
+                    self.isPulling = value
+                }
             }
         }
     }
-    
-    var reloadView: some View {
-        ZStack {
-            if self.isRefreshing {
-                InfiniteProgressView()
-                    .frame(width: 30, height: 30, alignment: .center)
-                    .transition(.scale)
-            }
-        }
-        .onReceive(self.issueListModel.$isRefreshing) { (value) in
-            withAnimation(.easeInOut) {
-                self.isRefreshing = value
-            }
-        }
-    }
-    
 }
 
-struct IssueListView_Previews: PreviewProvider {
-    static var previews: some View {
-        IssueListView().environmentObject(IssueListModel(issues: issueData))
-    }
-}
+//struct IssueListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        IssueListView().environmentObject(IssueListModel(issues: issueData))
+//    }
+//}
 
 struct IssueNotFoundView: View {
     @EnvironmentObject var issueListModel: IssueListModel

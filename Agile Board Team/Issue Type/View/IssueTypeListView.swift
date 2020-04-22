@@ -25,7 +25,7 @@ struct IssueTypeListView: View {
                 SearchView(search: $viewModel.search, showCancelButton: $viewModel.showCancelButton)
             }
             IssueTypeNotFoundView()
-            RefreshableList(showRefreshView: $viewModel.isPulling) {
+            RefreshableList(showRefreshView: self.$viewModel.isPulling) {
                 ForEach(self.viewModel.isFiltering ? self.viewModel.filtedItems : self.viewModel.items) { (issueType)  in
                     self.IssueTypeButton(issueType: issueType)
                     .padding()
@@ -35,31 +35,24 @@ struct IssueTypeListView: View {
                     LastRowView(isLoadingMore: self.$viewModel.isLoadingMore)
                 }
             }
-            .onRefreshPerform {
-                self.viewModel.reload(byUsing: .pull, animated: true)
-            }
+//            .onRefreshPerform {
+//                self.viewModel.reload(byUsing: .pull, animated: true)
+//            }
             .resignKeyboardOnDragGesture()
             
         }
         .overlay(RefreshView(refreshingPublisher: viewModel.$isRefreshing))
-        .onAppear{
+        .onAppear {
             self.viewModel.reload(animated: true, whenEmpty: true)
         }
     }
-    
-     func onAppear(_ issueType: IssueType) {
-         guard viewModel.isLastRow(id: issueType.id) else { return }
-         viewModel.loadMore()
-     }
     
     private func IssueTypeButton(issueType: IssueType) -> some View {
         Button(action: {
             self.presentation.wrappedValue.dismiss()
             self.viewModel.selectedIssueType = issueType
         }) {
-            self.IssueTypeRow(issueType: issueType).onAppear {
-                self.onAppear(issueType)
-            }
+            self.IssueTypeRow(issueType: issueType)
         }
     }
     

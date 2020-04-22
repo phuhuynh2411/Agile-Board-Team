@@ -44,11 +44,11 @@
 		844DF1082429B4B7001E29EB /* BaseListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DF1072429B4B7001E29EB /* BaseListModel.swift */; };
 		844DF10C2429BF28001E29EB /* RespondData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DF10B2429BF28001E29EB /* RespondData.swift */; };
 		8451D7EE242A642F000C1F56 /* IssueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451D7ED242A642F000C1F56 /* IssueType.swift */; };
-		8455F6D5243CD4DE00925296 /* RefreshableList in Frameworks */ = {isa = PBXBuildFile; productRef = 8455F6D4243CD4DE00925296 /* RefreshableList */; };
 		845D003D244E053000216A86 /* RefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D003C244E053000216A86 /* RefreshView.swift */; };
 		846ECCA52419BF7600C8DFA3 /* LoginError1.json in Resources */ = {isa = PBXBuildFile; fileRef = 846ECCA42419BF7600C8DFA3 /* LoginError1.json */; };
 		846ECCA82419EDF400C8DFA3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846ECCA72419EDF400C8DFA3 /* User.swift */; };
 		846ECCAA2419F05000C8DFA3 /* APILoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846ECCA92419F05000C8DFA3 /* APILoginRequest.swift */; };
+		84704080244FE6C20041DFD7 /* RefreshableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8470407F244FE6C20041DFD7 /* RefreshableList.swift */; };
 		84741C1E2420B021004F3663 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84741C1D2420B021004F3663 /* LoginModel.swift */; };
 		84741C202420B1A1004F3663 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84741C1F2420B1A1004F3663 /* Entry.swift */; };
 		84741C222420B1B9004F3663 /* MetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84741C212420B1B9004F3663 /* MetaData.swift */; };
@@ -92,6 +92,8 @@
 		84D2846C244ABA6400623F05 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2846B244ABA6400623F05 /* UserDefaultKey.swift */; };
 		84D2846E244ABADF00623F05 /* TestAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2846D244ABADF00623F05 /* TestAuthentication.swift */; };
 		84D7EFE52441A12400433EC7 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7EFE42441A12400433EC7 /* CustomScrollView.swift */; };
+		84E2EDF32450379F00D5B5C8 /* RefreshableList in Frameworks */ = {isa = PBXBuildFile; productRef = 84E2EDF22450379F00D5B5C8 /* RefreshableList */; };
+		84E2EDF524503C0A00D5B5C8 /* IssueDetailModel+IssueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2EDF424503C0A00D5B5C8 /* IssueDetailModel+IssueType.swift */; };
 		84F6D72C2432F83B00CF28FF /* RefreshableNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6D72B2432F83B00CF28FF /* RefreshableNavigationView.swift */; };
 		84F932F324499B05007F12B8 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F932F224499B05007F12B8 /* RequestData.swift */; };
 		84F932F52449A279007F12B8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F932F42449A279007F12B8 /* APIError.swift */; };
@@ -157,6 +159,7 @@
 		846ECCA42419BF7600C8DFA3 /* LoginError1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoginError1.json; sourceTree = "<group>"; };
 		846ECCA72419EDF400C8DFA3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		846ECCA92419F05000C8DFA3 /* APILoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILoginRequest.swift; sourceTree = "<group>"; };
+		8470407F244FE6C20041DFD7 /* RefreshableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableList.swift; sourceTree = "<group>"; };
 		84741C1D2420B021004F3663 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		84741C1F2420B1A1004F3663 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		84741C212420B1B9004F3663 /* MetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaData.swift; sourceTree = "<group>"; };
@@ -200,6 +203,7 @@
 		84D2846B244ABA6400623F05 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		84D2846D244ABADF00623F05 /* TestAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAuthentication.swift; sourceTree = "<group>"; };
 		84D7EFE42441A12400433EC7 /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
+		84E2EDF424503C0A00D5B5C8 /* IssueDetailModel+IssueType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IssueDetailModel+IssueType.swift"; sourceTree = "<group>"; };
 		84F6D72B2432F83B00CF28FF /* RefreshableNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableNavigationView.swift; sourceTree = "<group>"; };
 		84F932F224499B05007F12B8 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		84F932F42449A279007F12B8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -212,7 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8455F6D5243CD4DE00925296 /* RefreshableList in Frameworks */,
+				84E2EDF32450379F00D5B5C8 /* RefreshableList in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +385,7 @@
 			children = (
 				8492CCD124299E54001D76DE /* IssueListModel.swift */,
 				84BBD2D0242C46F500E9A8EF /* IssueDetailModel.swift */,
+				84E2EDF424503C0A00D5B5C8 /* IssueDetailModel+IssueType.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -459,6 +464,7 @@
 			children = (
 				844DF1072429B4B7001E29EB /* BaseListModel.swift */,
 				84C8FD70243DCDB10074FBB5 /* KeyboardAwareModifier.swift */,
+				8470407F244FE6C20041DFD7 /* RefreshableList.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -649,7 +655,7 @@
 			);
 			name = "Agile Board Team";
 			packageProductDependencies = (
-				8455F6D4243CD4DE00925296 /* RefreshableList */,
+				84E2EDF22450379F00D5B5C8 /* RefreshableList */,
 			);
 			productName = "Agile Board Team";
 			productReference = 840F269024187C0B0085FBA6 /* Agile Board Team.app */;
@@ -703,7 +709,7 @@
 			);
 			mainGroup = 840F268724187C0B0085FBA6;
 			packageReferences = (
-				8455F6D3243CD4DE00925296 /* XCRemoteSwiftPackageReference "RefreshableList" */,
+				84E2EDF12450379F00D5B5C8 /* XCRemoteSwiftPackageReference "RefreshableList" */,
 			);
 			productRefGroup = 840F269124187C0B0085FBA6 /* Products */;
 			projectDirPath = "";
@@ -775,6 +781,7 @@
 				84C55FE9242AEB5D0050DA53 /* IssuePriority.swift in Sources */,
 				84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */,
 				84C3234E242B6572007CB0CD /* IssueReporter.swift in Sources */,
+				84E2EDF524503C0A00D5B5C8 /* IssueDetailModel+IssueType.swift in Sources */,
 				84741C222420B1B9004F3663 /* MetaData.swift in Sources */,
 				8492CCCF24299DC1001D76DE /* SearchView.swift in Sources */,
 				8425B9EF2424C5F500AB9E98 /* View+Extension.swift in Sources */,
@@ -797,6 +804,7 @@
 				849DBC88241B3AD00026E23B /* MainView.swift in Sources */,
 				84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */,
 				84C3234C242B6387007CB0CD /* IssueReporterView.swift in Sources */,
+				84704080244FE6C20041DFD7 /* RefreshableList.swift in Sources */,
 				848D53A5241B17F900BAB5E6 /* InfiniteProgressView.swift in Sources */,
 				840FDB6C241A381800C395E8 /* URLSessionUploadTask+Extension.swift in Sources */,
 				84741C1E2420B021004F3663 /* LoginModel.swift in Sources */,
@@ -1101,7 +1109,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8455F6D3243CD4DE00925296 /* XCRemoteSwiftPackageReference "RefreshableList" */ = {
+		84E2EDF12450379F00D5B5C8 /* XCRemoteSwiftPackageReference "RefreshableList" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/phuhuynh2411/RefreshableList.git";
 			requirement = {
@@ -1112,9 +1120,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8455F6D4243CD4DE00925296 /* RefreshableList */ = {
+		84E2EDF22450379F00D5B5C8 /* RefreshableList */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8455F6D3243CD4DE00925296 /* XCRemoteSwiftPackageReference "RefreshableList" */;
+			package = 84E2EDF12450379F00D5B5C8 /* XCRemoteSwiftPackageReference "RefreshableList" */;
 			productName = RefreshableList;
 		};
 /* End XCSwiftPackageProductDependency section */

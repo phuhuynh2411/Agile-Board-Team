@@ -15,7 +15,7 @@ class IssueType: Codable, Identifiable, Equatable {
     
     let id: String
     let icon: String?
-    let name: String
+    var name: String
     let description: String?
     let createdAt: Date
     let updatedDate: Date?

@@ -8,18 +8,15 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class IssueTypeListModel: BaseListModel<IssueType, IssueTypeData> {
     override var url: URL { URLSetting.issueTypeURL }
-    @Published var selectedIssueType: IssueType?
+    @Binding var selectedIssueType: IssueType?
     
-    override init() {
+    init(selectedIssueType: Binding<IssueType?>) {
+        self._selectedIssueType = selectedIssueType
         super.init()
-        //_ = self.objectWillChange.append(super.objectWillChange)
-    }
-    
-    init(issueTypes: [IssueType]) {
-        super.init(items: issueTypes)
     }
 }
 

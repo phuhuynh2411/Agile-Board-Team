@@ -10,7 +10,7 @@
 import Foundation
 import Combine
 
-class BaseListModel <T:Identifiable, ResponseType:ResponseData>: NetworkModel {
+class BaseListModel<T:Identifiable, ResponseType: ResponseData>: NetworkModel {
     
     @Published var isFailed = false
     @Published var search: String = ""
