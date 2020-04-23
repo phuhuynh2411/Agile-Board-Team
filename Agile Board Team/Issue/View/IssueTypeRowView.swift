@@ -10,8 +10,8 @@ import SwiftUI
 import Combine
 
 struct IssueTypeRowView: View {
-    @Binding var issueType: IssueType?
-    @Binding var isShowing: Bool
+    var issueType: IssueType?
+    var isShowing: Bool
     
     var body: some View {
         HStack(spacing: 16) {
@@ -50,10 +50,10 @@ struct IssueTypeRowView: View {
 }
 
 struct IssueTypeRow_Previews: PreviewProvider {
-    @State static var isUpdating: Bool = true
-    @State static var issueType: IssueType? = issueData[0].type
+    static var isUpdating: Bool = true
+    static var issueType: IssueType? = issueData[0].type
     
     static var previews: some View {
-        IssueTypeRowView(issueType: self.$issueType, isShowing: self.$isUpdating)
+        IssueTypeRowView(issueType: self.issueType, isShowing: self.isUpdating)
     }
 }

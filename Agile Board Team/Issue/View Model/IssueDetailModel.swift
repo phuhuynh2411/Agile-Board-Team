@@ -12,48 +12,20 @@ import SwiftUI
 
 class IssueDetailModel: ObservableObject {
     @Published var issue: Issue
+    @Published var isUpdating: Bool = false
     
-    var priorityStream: AnyCancellable?
-    var issueTypeStream: AnyCancellable?
+    var issueTypeModel: IssueDetailModel.IssueTypeModel!
     
-    @Published var isUpdatingPriority: Bool = false
-    
-    var issueTypeListModel: IssueTypeListModel!
-    @Published var isUpdatingIssueType: Bool = false
-    @Published var selectedIssueType: IssueType!
+    var forwardChange: AnyCancellable?
     
     init(issue: Issue) {
         self.issue = issue
-        self.selectedIssueType = issue.type
+        issueTypeModel = IssueTypeModel(issue: issue)
         
-        //priorityListModel.selectedPriority = issue.priority
-        //issueTypeListModel = IssueTypeListModel(selectedIssueType: issue.type)
-        
-//        self.priorityStream = priorityListModel.$selectedPriority
-//            .compactMap { $0 != issue.priority ? $0 : nil }
-//            .receive(on: RunLoop.main)
-//            .sink(receiveValue: { (priority) in
-//                print(priority.name)
-//
-//                self.isUpdatingPriority = true
-//                print(self.issue.priority?.name ?? "")
-//
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                    self.issue.priority = priority
-//                    self.isUpdatingPriority = false
-//                }
-//            })
-        
-        self.issueTypeStream = $selectedIssueType
-            .compactMap {$0 != issue.type ? $0 : nil}
-            .receive(on: RunLoop.main)
-            .sink(receiveValue: { (issueType) in
-                self.isUpdatingIssueType = true
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.issue.type = issueType
-                    self.isUpdatingIssueType = false
-                }
-            })
+        // Forward the changes from nested class
+        self.forwardChange = issueTypeModel.$isUpdating
+            .sink(receiveValue: { _issue in
+            self.objectWillChange.send()
+        })
     }
 }

@@ -6,8 +6,8 @@
 //  Copyright © 2020 Filesoft. All rights reserved.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 struct IssueDetailView: View {
     @EnvironmentObject var modelView: IssueDetailModel
@@ -44,16 +44,16 @@ struct IssueDetailView: View {
             
             DescriptionView(description: $modelView.issue.description)
             
-            NavigationLink(destination: IssueTypeListView().environmentObject(IssueTypeListModel(selectedIssueType: self.$modelView.selectedIssueType))) {
-                IssueTypeRowView(issueType: self.$modelView.issue.type, isShowing: self.$modelView.isUpdatingIssueType)
+            NavigationLink(destination: IssueTypeListView().environmentObject(IssueTypeListModel(selectedIssueType: self.$modelView.issueTypeModel.issueType))) {
+                IssueTypeRowView(issueType: self.modelView.issue.type, isShowing: self.modelView.issueTypeModel.isUpdating)
             }
             
             IssueProjectRowView(project: modelView.issue.project)
             
-            NavigationLink(destination: PriorityListView()
-                .environmentObject(PriorityListModel())) {
-                    IssuePriorityRowView(priority: self.$modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
-            }
+//            NavigationLink(destination: PriorityListView()
+//                .environmentObject(PriorityListModel())) {
+//                    IssuePriorityRowView(priority: self.$modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
+//            }
 
             if modelView.issue.supporter != nil {
                 IssueReporterView(reporter: modelView.issue.supporter!)
@@ -61,9 +61,9 @@ struct IssueDetailView: View {
             
             IssueAttachmentRowView()
             
-//            Button("Tap me") {
-//                self.modelView.test.toggle()
-//            }
+            Button("Tap me") {
+                self.modelView.isUpdating.toggle()
+            }
         }
         
         

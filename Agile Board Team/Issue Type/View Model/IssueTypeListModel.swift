@@ -12,10 +12,10 @@ import SwiftUI
 
 class IssueTypeListModel: BaseListModel<IssueType, IssueTypeData> {
     override var url: URL { URLSetting.issueTypeURL }
-    @Binding var selectedIssueType: IssueType?
+    var selectedIssueType: Binding<IssueType?>?
     
-    init(selectedIssueType: Binding<IssueType?>) {
-        self._selectedIssueType = selectedIssueType
+    init(selectedIssueType: Binding<IssueType?>? = nil) {
+        self.selectedIssueType = selectedIssueType
         super.init()
     }
 }

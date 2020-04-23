@@ -50,14 +50,14 @@ struct IssueTypeListView: View {
     private func IssueTypeButton(issueType: IssueType) -> some View {
         Button(action: {
             self.presentation.wrappedValue.dismiss()
-            self.viewModel.selectedIssueType = issueType
+            self.viewModel.selectedIssueType?.wrappedValue = issueType
         }) {
             self.IssueTypeRow(issueType: issueType)
         }
     }
     
     private func IssueTypeRow(issueType: IssueType) -> some View {
-        if let p = self.viewModel.selectedIssueType, p.id == issueType.id {
+        if let p = self.viewModel.selectedIssueType?.wrappedValue, p.id == issueType.id {
             return IssueTypeRowForListView(issueType: issueType, isSelected: true)
         } else {
             return IssueTypeRowForListView(issueType: issueType)
