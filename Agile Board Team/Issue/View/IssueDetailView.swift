@@ -15,7 +15,7 @@ struct IssueDetailView: View {
     var body: some View {
         List {
             HStack {
-                    if modelView.issue.type?.icon != nil {
+                if self.modelView.issue.type?.icon != nil {
                     RemoteImage(stringURL: (modelView.issue.type?.icon)!)
                         .frame(width: 16, height: 16, alignment: .center)
                         .foregroundColor(.lightGreyColor)
@@ -32,7 +32,7 @@ struct IssueDetailView: View {
             NameView(name: $modelView.issue.name)
             
             Button(action: {
-                
+
             }) {
                 Text(modelView.issue.status?.name.uppercased() ?? "")
                     .padding(EdgeInsets(top: 3, leading: 15, bottom: 3, trailing: 15))
@@ -44,8 +44,10 @@ struct IssueDetailView: View {
             
             DescriptionView(description: $modelView.issue.description)
             
-            NavigationLink(destination: IssueTypeListView().environmentObject(IssueTypeListModel(selectedIssueType: self.$modelView.issueTypeModel.issueType))) {
-                IssueTypeRowView(issueType: self.modelView.issue.type, isUpdating: self.modelView.issueTypeModel.isUpdating)
+            NavigationLink(destination: IssueTypeListView()
+                .environmentObject(IssueTypeListModel(selectedIssueType: self.$modelView.issue.type,
+                                                      willUpdated: self.modelView.issue))) {
+                                                        IssueTypeRowView(issueType: self.modelView.issue.type)
             }
             
             IssueProjectRowView(project: modelView.issue.project)
@@ -55,9 +57,9 @@ struct IssueDetailView: View {
 //                    IssuePriorityRowView(priority: self.modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
 //            }
 
-            if modelView.issue.supporter != nil {
-                IssueReporterView(reporter: modelView.issue.supporter!)
-            }
+//            if modelView.issue.supporter != nil {
+//                IssueReporterView(reporter: modelView.issue.supporter!)
+//            }
             
             IssueAttachmentRowView()
             

@@ -20,6 +20,7 @@ struct IssueTypeListView: View {
             NavigationBar()
             if viewModel.isFailed {
                 ErrorBannerView(message: viewModel.errorMessage, display: $viewModel.isFailed)
+                    .frame(height: 80)
             }
             if viewModel.showCancelButton {
                 SearchView(search: $viewModel.search, showCancelButton: $viewModel.showCancelButton)
@@ -30,14 +31,13 @@ struct IssueTypeListView: View {
                     self.IssueTypeButton(issueType: issueType)
                     .padding()
                 }
-                
                 if self.viewModel.isLoadingMore {
                     LastRowView(isLoadingMore: self.$viewModel.isLoadingMore)
                 }
             }
-//            .onRefreshPerform {
-//                self.viewModel.reload(byUsing: .pull, animated: true)
-//            }
+            .onRefreshPerform {
+                self.viewModel.reload(byUsing: .pull, animated: true)
+            }
             .resignKeyboardOnDragGesture()
             
         }
@@ -49,8 +49,9 @@ struct IssueTypeListView: View {
     
     private func IssueTypeButton(issueType: IssueType) -> some View {
         Button(action: {
-            self.presentation.wrappedValue.dismiss()
-            self.viewModel.selectedIssueType?.wrappedValue = issueType
+            self.viewModel.select(issueType) { (value) in
+                if value { self.presentation.wrappedValue.dismiss() }
+            }
         }) {
             self.IssueTypeRow(issueType: issueType)
         }

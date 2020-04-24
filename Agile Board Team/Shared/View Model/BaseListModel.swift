@@ -78,16 +78,23 @@ class BaseListModel<T:Identifiable, ResponseType: ResponseData>: ObservableObjec
     private func resetPageNumber() {
         if isFiltering {
             self.searchPage = 0
-            self.filtedItems.removeAll()
         } else {
             self.page = 0
+        }
+    }
+    
+    private func clearData() {
+        self.resetPageNumber()
+        if isFiltering {
+            self.filtedItems.removeAll()
+        } else {
             self.items.removeAll()
         }
     }
     
     func reload(byUsing progressType: ProgressType = .refresh, animated: Bool = false, whenEmpty: Bool = false) {
         if whenEmpty, self.items.count > 0 { return }
-        //self.resetPageNumber()
+        self.resetPageNumber()
         self.loadData(byUsing: progressType, animated: animated)
     }
     
@@ -108,7 +115,7 @@ class BaseListModel<T:Identifiable, ResponseType: ResponseData>: ObservableObjec
             }, receiveValue: { (entry) in
                 self.set(progressType, status: false)
                 if progressType == .refresh || progressType == .pull {
-                    self.resetPageNumber()
+                    self.clearData()
                 }
                 self.completed(with: entry)
             })
