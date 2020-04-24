@@ -11,7 +11,7 @@ import Combine
 
 struct IssueTypeRowView: View {
     var issueType: IssueType?
-    var isShowing: Bool
+    var isUpdating: Bool = false
     
     var body: some View {
         HStack(spacing: 16) {
@@ -39,7 +39,7 @@ struct IssueTypeRowView: View {
         .overlay(
             HStack {
                 Spacer()
-                if self.isShowing {
+                if self.isUpdating {
                     InfiniteProgressView()
                     .frame(width: 20, height: 20, alignment: .center)
                         .padding(.trailing, 16)
@@ -54,6 +54,6 @@ struct IssueTypeRow_Previews: PreviewProvider {
     static var issueType: IssueType? = issueData[0].type
     
     static var previews: some View {
-        IssueTypeRowView(issueType: self.issueType, isShowing: self.isUpdating)
+        IssueTypeRowView(issueType: self.issueType, isUpdating: self.isUpdating)
     }
 }

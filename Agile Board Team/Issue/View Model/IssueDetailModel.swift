@@ -12,7 +12,9 @@ import SwiftUI
 
 class IssueDetailModel: ObservableObject {
     @Published var issue: Issue
-    @Published var isUpdating: Bool = false
+    
+    @Published var isFailed: Bool = false
+    @Published var errorMessage: String = ""
     
     var issueTypeModel: IssueDetailModel.IssueTypeModel!
     
@@ -21,6 +23,10 @@ class IssueDetailModel: ObservableObject {
     init(issue: Issue) {
         self.issue = issue
         issueTypeModel = IssueTypeModel(issue: issue)
+        issueTypeModel.$error.sink { (error) in
+            self.isFailed = true
+            self.errorMessage = error?.localizedDescription ?? ""
+        }
         
         // Forward the changes from nested class
         self.forwardChange = issueTypeModel.$isUpdating

@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct IssuePriorityRowView: View {
-    @Binding var priority: IssuePriority?
-    @Binding var isUpdating: Bool
+    var priority: IssuePriority?
+    var isUpdating: Bool = false
     
     var body: some View {
         HStack(spacing: 16) {
@@ -35,27 +35,20 @@ struct IssuePriorityRowView: View {
         }.overlay(
             HStack {
                 Spacer()
-                ProgressView(isUpdating: self.$isUpdating).padding(.trailing, 16)
+                if self.isUpdating {
+                    InfiniteProgressView()
+                        .frame(width: 20, height: 20, alignment: .center)
+                        .padding(.trailing, 16)
+                }
             }
         )
     }
 }
 
 struct IssuePriorityRowView_Previews: PreviewProvider {
-    @State static var isUpdating: Bool = true
-    @State static var priority: IssuePriority? = issueData[0].priority
+    static var isUpdating: Bool = true
+    static var priority: IssuePriority? = issueData[0].priority
     static var previews: some View {
-        IssuePriorityRowView(priority: $priority, isUpdating: $isUpdating)
-    }
-}
-
-private struct ProgressView: View {
-    @Binding var isUpdating: Bool
-    
-    var body: some View {
-        
-        InfiniteProgressView()
-            .frame(width: 20, height: 20, alignment: .center)
-        
+        IssuePriorityRowView(priority: priority, isUpdating: isUpdating)
     }
 }

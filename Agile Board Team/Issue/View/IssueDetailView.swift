@@ -45,14 +45,14 @@ struct IssueDetailView: View {
             DescriptionView(description: $modelView.issue.description)
             
             NavigationLink(destination: IssueTypeListView().environmentObject(IssueTypeListModel(selectedIssueType: self.$modelView.issueTypeModel.issueType))) {
-                IssueTypeRowView(issueType: self.modelView.issue.type, isShowing: self.modelView.issueTypeModel.isUpdating)
+                IssueTypeRowView(issueType: self.modelView.issue.type, isUpdating: self.modelView.issueTypeModel.isUpdating)
             }
             
             IssueProjectRowView(project: modelView.issue.project)
             
 //            NavigationLink(destination: PriorityListView()
 //                .environmentObject(PriorityListModel())) {
-//                    IssuePriorityRowView(priority: self.$modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
+//                    IssuePriorityRowView(priority: self.modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
 //            }
 
             if modelView.issue.supporter != nil {
@@ -61,9 +61,6 @@ struct IssueDetailView: View {
             
             IssueAttachmentRowView()
             
-            Button("Tap me") {
-                self.modelView.isUpdating.toggle()
-            }
         }
         
         

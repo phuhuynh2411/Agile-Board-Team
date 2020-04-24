@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-protocol NetworkModel: ObservableObject, NetworkRequest {
+protocol NetworkModel: NetworkRequest {
     associatedtype ResponseData: Codable
     var entry: Entry<ResponseData>? { get set }
 }
@@ -19,6 +19,7 @@ extension NetworkModel {
     func validate(_ data: Data, _ response: URLResponse) throws -> Data {
         guard let _ = response as? HTTPURLResponse else { throw APIError.invalidRespond }
         //guard (200...400).contains(httpResponse.statusCode) else { throw APIError.statusCode(httpResponse.statusCode)}
+        self.printJSON(data: data)
         return data
     }
     

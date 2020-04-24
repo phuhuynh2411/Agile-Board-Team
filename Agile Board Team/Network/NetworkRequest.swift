@@ -43,6 +43,12 @@ extension NetworkRequest {
         return request
     }
     
+    func putRequest(url: URL, authen: Bool = false) -> URLRequest {
+        var request = self.request(url: url, authen: authen)
+        request.httpMethod = "PUT"
+        return request
+    }
+    
     private func request(url: URL, authen: Bool = false) -> URLRequest {
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
