@@ -16,7 +16,7 @@ class IssueAPI: NetworkModel {
         URLSetting.issueURL.appendingPathComponent(issue.id)
     }
         
-    init(issue: Issue) {
+    init(_ issue: Issue) {
         self.issue = issue
     }
     

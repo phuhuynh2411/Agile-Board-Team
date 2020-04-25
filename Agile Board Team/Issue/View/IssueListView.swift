@@ -8,12 +8,13 @@
 
 import SwiftUI
 import RefreshableList
+import Combine
 
 struct IssueListView: View {
     @EnvironmentObject var issueListModel: IssueListModel
     @State private var isRefreshing: Bool = false
     @State private var isPulling: Bool = false
-    
+        
     var body: some View {
         
         NavigationView {
@@ -23,9 +24,9 @@ struct IssueListView: View {
                 IssueSearchView()
                
                 RefreshableList(showRefreshView: self.$isPulling) {
-                    ForEach(self.issueListModel.isFiltering ? self.issueListModel.filtedItems : self.issueListModel.items) { (issue)  in
-                        NavigationLink(destination: IssueDetailView().environmentObject(IssueDetailModel(issue: issue))) {
-                            IssueRowView(issue: issue)
+                    ForEach(self.issueListModel.isFiltering ? self.issueListModel.filtedItems : self.issueListModel.items) { issue  in
+                        NavigationLink(destination: IssueDetailView(issue: issue).environmentObject(IssueDetailModel(issue))) {
+                            IssueRowView(issue)
                         }
                     }
                     if self.issueListModel.isLoadingMore {

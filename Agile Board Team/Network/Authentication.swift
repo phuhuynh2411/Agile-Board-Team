@@ -82,7 +82,3 @@ class Authentication: NetworkModel {
         }
     }
 }
-
-extension Notification.Name {
-    static let didLoginSucceed = Notification.Name("didLoginSucceed")
-}

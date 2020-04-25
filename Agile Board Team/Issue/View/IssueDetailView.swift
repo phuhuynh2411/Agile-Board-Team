@@ -11,47 +11,33 @@ import SwiftUI
 
 struct IssueDetailView: View {
     @EnvironmentObject var modelView: IssueDetailModel
+    @ObservedObject var issue: Issue
     
     var body: some View {
         List {
             HStack {
-                if self.modelView.issue.type?.icon != nil {
-                    RemoteImage(stringURL: (modelView.issue.type?.icon)!)
-                        .frame(width: 16, height: 16, alignment: .center)
-                        .foregroundColor(.lightGreyColor)
-                } else {
-                    IssueTypePlaceholder()
-                        .frame(width: 16, height: 16, alignment: .center)
-                }
-                Text(modelView.issue.issueNumber)
+                self.iconView
+                Text(issue.issueNumber)
                     .font(.system(size: 14))
                     .foregroundColor(.secondary)
                 Spacer()
             }
-           
-            NameView(name: $modelView.issue.name)
-            
-            Button(action: {
 
-            }) {
-                Text(modelView.issue.status?.name.uppercased() ?? "")
-                    .padding(EdgeInsets(top: 3, leading: 15, bottom: 3, trailing: 15))
-                    .foregroundColor(.white)
-                    .font(.system(size: 14))
-                    .background(Color.init(hex: modelView.issue.status?.color ?? "cecece"))
-                    .cornerRadius(20)
+            TitleView(name: issue.name)
+
+            Button(action: { }) {
+                issue.status.map {StatusView(status: $0)}
             }
-            
-            DescriptionView(description: $modelView.issue.description)
-            
+
+            DescriptionView(description: issue.description)
+
             NavigationLink(destination: IssueTypeListView()
-                .environmentObject(IssueTypeListModel(selectedIssueType: self.$modelView.issue.type,
-                                                      willUpdated: self.modelView.issue))) {
-                                                        IssueTypeRowView(issueType: self.modelView.issue.type)
+                .environmentObject(IssueTypeListModel(issue: self.modelView.issue))) {
+                    self.modelView.issue.type.map { IssueTypeRowView(issueType: $0) } // Unwrap optional issue type
             }
-            
-            IssueProjectRowView(project: modelView.issue.project)
-            
+
+            IssueProjectRowView(project: issue.project)
+//
 //            NavigationLink(destination: PriorityListView()
 //                .environmentObject(PriorityListModel())) {
 //                    IssuePriorityRowView(priority: self.modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
@@ -62,10 +48,20 @@ struct IssueDetailView: View {
 //            }
             
             IssueAttachmentRowView()
-            
         }
         
         
+    }
+    
+    private var iconView: some View {
+        guard let url = issue.type?.icon else {
+            return AnyView(IssueTypePlaceholder()
+            .frame(width: 16, height: 16, alignment: .center) )
+        }
+        
+        return AnyView(RemoteImage(stringURL: url)
+                .frame(width: 16, height: 16, alignment: .center)
+                .foregroundColor(.lightGreyColor))
     }
 }
 
@@ -75,8 +71,8 @@ struct IssueDetailView: View {
 //    }
 //}
 
-struct NameView: View {
-    @Binding var name: String
+struct TitleView: View {
+    var name: String
     
     var body: some View {
         HStack {
@@ -94,10 +90,24 @@ struct NameView: View {
 }
 
 struct DescriptionView: View {
-    @Binding var description: String?
+    var description: String?
     
     var body: some View {
         Text(description ?? "")
                      .font(.system(size: 17))
+    }
+}
+
+
+struct StatusView: View {
+    var status: IssueStatus
+    
+    var body: some View {
+        Text(status.name.uppercased())
+            .padding(EdgeInsets(top: 3, leading: 15, bottom: 3, trailing: 15))
+            .foregroundColor(.white)
+            .font(.system(size: 14))
+            .background(Color.init(hex: status.color))
+            .cornerRadius(20)
     }
 }

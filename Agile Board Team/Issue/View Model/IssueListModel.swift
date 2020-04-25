@@ -12,14 +12,10 @@ import Combine
 class IssueListModel: BaseListModel<Issue, IssueResponse> {
     override var url: URL { URLSetting.issueURL }
     
-//    override init() {
-//        super.init()
-//         _ = self.objectWillChange.append(super.objectWillChange)
-//    }
-//    
-//    init(issues: [Issue]) {
-//        super.init(items: issues)
-//    }
+    override init() {
+        super.init()
+         _ = self.objectWillChange.append(super.objectWillChange)
+    }
 }
 
 struct IssueResponse: ResponseData {

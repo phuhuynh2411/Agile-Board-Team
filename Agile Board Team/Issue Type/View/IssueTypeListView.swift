@@ -58,7 +58,7 @@ struct IssueTypeListView: View {
     }
     
     private func IssueTypeRow(issueType: IssueType) -> some View {
-        if let p = self.viewModel.selectedIssueType?.wrappedValue, p.id == issueType.id {
+        if let p = self.viewModel.issue?.type, p.id == issueType.id {
             return IssueTypeRowForListView(issueType: issueType, isSelected: true)
         } else {
             return IssueTypeRowForListView(issueType: issueType)

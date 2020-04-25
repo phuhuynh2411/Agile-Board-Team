@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct IssueRowView: View {
-    var issue: Issue
+    @ObservedObject var issue: Issue
     
-    init(issue: Issue){
+    init(_ issue: Issue){
         self.issue = issue
     }
     
@@ -57,11 +57,11 @@ struct IssueRowView: View {
     }
 }
 
-struct IssueRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        IssueRowView(issue: issueData[0])
-    }
-}
+//struct IssueRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        IssueRowView(issue: issueData[0])
+//    }
+//}
 
 struct IssueTypeView: View {
     var stringURL: String

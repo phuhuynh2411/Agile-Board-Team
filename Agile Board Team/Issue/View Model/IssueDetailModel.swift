@@ -11,9 +11,10 @@ import Combine
 import SwiftUI
 
 class IssueDetailModel: ObservableObject {
-    @Published var issue: Issue
-   
-    init(issue: Issue) {
+    var issue: Issue
+    
+    init(_ issue: Issue) {
         self.issue = issue
+
     }
 }
