@@ -13,6 +13,7 @@ struct IssueDetailView: View {
     @EnvironmentObject var modelView: IssueDetailModel
     @ObservedObject var issue: Issue
     
+    
     var body: some View {
         List {
             HStack {
@@ -22,14 +23,12 @@ struct IssueDetailView: View {
                     .foregroundColor(.secondary)
                 Spacer()
             }
+            
+            TitleButtonView(name: issue.name)
+            
+            StatusButtonView(status: issue.status)
 
-            TitleView(name: issue.name)
-
-            Button(action: { }) {
-                issue.status.map {StatusView(status: $0)}
-            }
-
-            DescriptionView(description: issue.description)
+            DescriptionButtonView(description: issue.description)
 
             NavigationLink(destination: IssueTypeListView()
                 .environmentObject(IssueTypeListModel(issue: self.modelView.issue))) {
@@ -71,6 +70,21 @@ struct IssueDetailView: View {
 //    }
 //}
 
+struct TitleButtonView: View {
+    var name: String
+    @State private var showDetail: Bool = false
+    
+    var body: some View {
+        Button(action: {
+            self.showDetail = true
+        }) {
+            TitleView(name: name)
+        }.sheet(isPresented: $showDetail) {
+            IssueTitleDescriptionView()
+        }
+    }
+}
+
 struct TitleView: View {
     var name: String
     
@@ -89,6 +103,21 @@ struct TitleView: View {
     }
 }
 
+struct DescriptionButtonView: View {
+    var description: String?
+    @State private var showDetail: Bool = false
+    
+    var body: some View {
+        Button(action: {
+            self.showDetail = true
+        }) {
+            DescriptionView(description: description)
+        }.sheet(isPresented: $showDetail) {
+            IssueTitleDescriptionView()
+        }
+    }
+}
+
 struct DescriptionView: View {
     var description: String?
     
@@ -98,6 +127,15 @@ struct DescriptionView: View {
     }
 }
 
+struct StatusButtonView: View {
+    var status: IssueStatus?
+    
+    var body: some View {
+        Button(action: { }) {
+            status.map {StatusView(status: $0)}
+        }
+    }
+}
 
 struct StatusView: View {
     var status: IssueStatus
