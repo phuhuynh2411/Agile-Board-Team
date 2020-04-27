@@ -9,13 +9,26 @@
 import SwiftUI
 
 struct IssueTitleDescriptionView: View {
+    @ObservedObject var issue: Issue
+        
     var body: some View {
-        Text("Title view")
+        NavigationView {
+            VStack(spacing: 16) {
+                TextField("Summary", text: self.$issue.name)
+                    .font(.system(size: 17, weight: .semibold, design: .default))
+                
+                TextField("Description", text: self.$issue.description.bound)
+                
+                Spacer()
+            }
+            .padding()
+            .navigationBarTitle("", displayMode: .inline)
+        }
     }
 }
 
 struct IssueTitleDescriptionView_Previews: PreviewProvider {
     static var previews: some View {
-        IssueTitleDescriptionView()
+        IssueTitleDescriptionView(issue: issueData[0])
     }
 }

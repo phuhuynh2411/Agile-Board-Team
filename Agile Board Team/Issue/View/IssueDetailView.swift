@@ -13,27 +13,17 @@ struct IssueDetailView: View {
     @EnvironmentObject var modelView: IssueDetailModel
     @ObservedObject var issue: Issue
     
-    
     var body: some View {
         List {
-            HStack {
-                self.iconView
-                Text(issue.issueNumber)
-                    .font(.system(size: 14))
-                    .foregroundColor(.secondary)
-                Spacer()
-            }
+            IssueIDView(issue: issue)
             
-            TitleButtonView(name: issue.name)
+            TitleButtonView(issue: issue)
             
             StatusButtonView(status: issue.status)
 
-            DescriptionButtonView(description: issue.description)
+            DescriptionButtonView(issue: issue)
 
-            NavigationLink(destination: IssueTypeListView()
-                .environmentObject(IssueTypeListModel(issue: self.modelView.issue))) {
-                    self.modelView.issue.type.map { IssueTypeRowView(issueType: $0) } // Unwrap optional issue type
-            }
+            IssueTypeButtonView(issue: self.issue)
 
             IssueProjectRowView(project: issue.project)
 //
@@ -51,6 +41,26 @@ struct IssueDetailView: View {
         
         
     }
+}
+
+//struct IssueDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        IssueDetailView(o)//.environmentObject(IssueDetailModel(issue: issueData[0]))
+//    }
+//}
+
+struct IssueIDView: View {
+    @ObservedObject var issue: Issue
+    
+    var body: some View {
+        HStack {
+            self.iconView
+            Text(issue.issueNumber)
+                .font(.system(size: 14))
+                .foregroundColor(.secondary)
+            Spacer()
+        }
+    }
     
     private var iconView: some View {
         guard let url = issue.type?.icon else {
@@ -64,23 +74,28 @@ struct IssueDetailView: View {
     }
 }
 
-//struct IssueDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        IssueDetailView(o)//.environmentObject(IssueDetailModel(issue: issueData[0]))
-//    }
-//}
+struct IssueTypeButtonView: View {
+    @ObservedObject var issue: Issue
+    
+    var body: some View {
+        NavigationLink(destination: IssueTypeListView()
+            .environmentObject(IssueTypeListModel(issue: self.issue))) {
+                self.issue.type.map { IssueTypeRowView(issueType: $0) } // Unwrap optional issue type
+        }
+    }
+}
 
 struct TitleButtonView: View {
-    var name: String
+    @ObservedObject var issue: Issue
     @State private var showDetail: Bool = false
     
     var body: some View {
         Button(action: {
             self.showDetail = true
         }) {
-            TitleView(name: name)
+            TitleView(name: self.issue.name)
         }.sheet(isPresented: $showDetail) {
-            IssueTitleDescriptionView()
+            IssueTitleDescriptionView(issue: issueData[0])
         }
     }
 }
@@ -104,16 +119,16 @@ struct TitleView: View {
 }
 
 struct DescriptionButtonView: View {
-    var description: String?
+    @ObservedObject var issue: Issue
     @State private var showDetail: Bool = false
     
     var body: some View {
         Button(action: {
             self.showDetail = true
         }) {
-            DescriptionView(description: description)
+            DescriptionView(description: issue.description)
         }.sheet(isPresented: $showDetail) {
-            IssueTitleDescriptionView()
+            IssueTitleDescriptionView(issue: self.issue)
         }
     }
 }
