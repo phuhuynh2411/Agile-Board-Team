@@ -25,7 +25,8 @@ struct LoginView: View {
                     PasswordSecureField(password: $loginMV.password)
                     
                     if loginMV.isFailed {
-                        ErrorView(errorMessage: loginMV.errorMessage)
+                        ErrorView(message: loginMV.errorMessage)
+                            .padding(.bottom, 16)
                     }
                     
                     Button(action: {

@@ -82,6 +82,8 @@
 		849DBC9F241B8DEF0026E23B /* ProjectListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849DBC9E241B8DEF0026E23B /* ProjectListModel.swift */; };
 		84A22DEE244A91ED00A7E4A1 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A22DED244A91ED00A7E4A1 /* Authentication.swift */; };
 		84ABC0E824286D9F0083EF34 /* NotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ABC0E724286D9F0083EF34 /* NotFoundView.swift */; };
+		84ABCA482456ECE300BA6A45 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ABCA472456ECE300BA6A45 /* ErrorView.swift */; };
+		84ABCA4A2456ECEE00BA6A45 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ABCA492456ECEE00BA6A45 /* ErrorBannerView.swift */; };
 		84BBD2D1242C46F500E9A8EF /* IssueDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBD2D0242C46F500E9A8EF /* IssueDetailModel.swift */; };
 		84C3234C242B6387007CB0CD /* IssueReporterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3234B242B6387007CB0CD /* IssueReporterView.swift */; };
 		84C3234E242B6572007CB0CD /* IssueReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3234D242B6572007CB0CD /* IssueReporter.swift */; };
@@ -104,8 +106,6 @@
 		84F6D72C2432F83B00CF28FF /* RefreshableNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6D72B2432F83B00CF28FF /* RefreshableNavigationView.swift */; };
 		84F932F324499B05007F12B8 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F932F224499B05007F12B8 /* RequestData.swift */; };
 		84F932F52449A279007F12B8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F932F42449A279007F12B8 /* APIError.swift */; };
-		84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3724221A00008EA929 /* ErrorBannerView.swift */; };
-		84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FFDD3824221A00008EA929 /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +200,8 @@
 		849DBC9E241B8DEF0026E23B /* ProjectListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListModel.swift; sourceTree = "<group>"; };
 		84A22DED244A91ED00A7E4A1 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		84ABC0E724286D9F0083EF34 /* NotFoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotFoundView.swift; sourceTree = "<group>"; };
+		84ABCA472456ECE300BA6A45 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = "Agile Board Team/Shared/View/ErrorView.swift"; sourceTree = SOURCE_ROOT; };
+		84ABCA492456ECEE00BA6A45 /* ErrorBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorBannerView.swift; path = "Agile Board Team/Shared/View/ErrorBannerView.swift"; sourceTree = SOURCE_ROOT; };
 		84BBD2D0242C46F500E9A8EF /* IssueDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailModel.swift; sourceTree = "<group>"; };
 		84C3234B242B6387007CB0CD /* IssueReporterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueReporterView.swift; sourceTree = "<group>"; };
 		84C3234D242B6572007CB0CD /* IssueReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
@@ -221,8 +223,6 @@
 		84F6D72B2432F83B00CF28FF /* RefreshableNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableNavigationView.swift; sourceTree = "<group>"; };
 		84F932F224499B05007F12B8 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		84F932F42449A279007F12B8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
-		84FFDD3724221A00008EA929 /* ErrorBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorBannerView.swift; path = "Agile Board Team/Error/ErrorBannerView.swift"; sourceTree = SOURCE_ROOT; };
-		84FFDD3824221A00008EA929 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = "Agile Board Team/Error/ErrorView.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,16 +371,6 @@
 			path = Mock;
 			sourceTree = "<group>";
 		};
-		84384A6C2422174200C8F492 /* Error */ = {
-			isa = PBXGroup;
-			children = (
-				84FFDD3724221A00008EA929 /* ErrorBannerView.swift */,
-				84FFDD3824221A00008EA929 /* ErrorView.swift */,
-			);
-			name = Error;
-			path = "../../Errỏ";
-			sourceTree = "<group>";
-		};
 		8451AD59242DEFD1006FD325 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -463,7 +453,6 @@
 			isa = PBXGroup;
 			children = (
 				848D53A6241B27C800BAB5E6 /* Progress */,
-				84384A6C2422174200C8F492 /* Error */,
 				8492CCCE24299DC1001D76DE /* SearchView.swift */,
 				8492CCD52429A669001D76DE /* LastRowView.swift */,
 				8492CCD72429A75F001D76DE /* CircleProgressView.swift */,
@@ -473,6 +462,8 @@
 				84D7EFE42441A12400433EC7 /* CustomScrollView.swift */,
 				845D003C244E053000216A86 /* RefreshView.swift */,
 				84D225F024568C9A00A10695 /* TextView.swift */,
+				84ABCA492456ECEE00BA6A45 /* ErrorBannerView.swift */,
+				84ABCA472456ECE300BA6A45 /* ErrorView.swift */,
 				84D225F224568D0000A10695 /* PlaceholderTextView.swift */,
 			);
 			path = View;
@@ -803,12 +794,12 @@
 				84D225F324568D0000A10695 /* PlaceholderTextView.swift in Sources */,
 				84D225CF2456742000A10695 /* Optional+Extension.swift in Sources */,
 				84C55FE9242AEB5D0050DA53 /* IssuePriority.swift in Sources */,
-				84FFDD3924221A00008EA929 /* ErrorBannerView.swift in Sources */,
 				84C3234E242B6572007CB0CD /* IssueReporter.swift in Sources */,
 				8475B7AB24517BEF0087CD69 /* IssueAPI+IssueType.swift in Sources */,
 				84E2EDF524503C0A00D5B5C8 /* IssueDetailModel+IssueType.swift in Sources */,
 				8420AFE324542E28007E6B6B /* IssueTitleDescriptionView.swift in Sources */,
 				84741C222420B1B9004F3663 /* MetaData.swift in Sources */,
+				84ABCA482456ECE300BA6A45 /* ErrorView.swift in Sources */,
 				8492CCCF24299DC1001D76DE /* SearchView.swift in Sources */,
 				8425B9EF2424C5F500AB9E98 /* View+Extension.swift in Sources */,
 				840F269824187C0B0085FBA6 /* ContentView.swift in Sources */,
@@ -829,10 +820,10 @@
 				8480E001242BB00F002F8183 /* PriorityRowView.swift in Sources */,
 				8485A7B02452D2580018E5E2 /* NotificationCenter+Extension.swift in Sources */,
 				849DBC88241B3AD00026E23B /* MainView.swift in Sources */,
-				84FFDD3A24221A00008EA929 /* ErrorView.swift in Sources */,
 				84C3234C242B6387007CB0CD /* IssueReporterView.swift in Sources */,
 				84704080244FE6C20041DFD7 /* RefreshableList.swift in Sources */,
 				848D53A5241B17F900BAB5E6 /* InfiniteProgressView.swift in Sources */,
+				84ABCA4A2456ECEE00BA6A45 /* ErrorBannerView.swift in Sources */,
 				840FDB6C241A381800C395E8 /* URLSessionUploadTask+Extension.swift in Sources */,
 				84741C1E2420B021004F3663 /* LoginModel.swift in Sources */,
 				84D2846A244A976900623F05 /* Token.swift in Sources */,

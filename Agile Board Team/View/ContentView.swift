@@ -17,8 +17,8 @@ struct ContentView: View {
             if self.contentMV.managedView == .main {
                 MainView().transition(.move(edge: .trailing))
             } else {
-                //LoginView(loginMV: LoginModel())
-                MainView()
+                LoginView(loginMV: LoginModel())
+                //MainView()
             }
         }
     }

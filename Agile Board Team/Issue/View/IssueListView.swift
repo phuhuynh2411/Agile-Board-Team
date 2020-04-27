@@ -19,8 +19,8 @@ struct IssueListView: View {
         
         NavigationView {
             VStack {
-                NavigationBar()
                 IssueErrorView()
+                NavigationBar()
                 IssueSearchView()
                
                 RefreshableList(showRefreshView: self.$isPulling) {
