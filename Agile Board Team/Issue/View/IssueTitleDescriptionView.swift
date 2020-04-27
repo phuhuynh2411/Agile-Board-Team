@@ -10,18 +10,19 @@ import SwiftUI
 
 struct IssueTitleDescriptionView: View {
     @ObservedObject var issue: Issue
+    @State private var descriptionSize: CGSize = .zero
+    @State private var summarySize: CGSize = .zero
         
     var body: some View {
         NavigationView {
-            VStack(spacing: 16) {
-                TextField("Summary", text: self.$issue.name)
-                    .font(.system(size: 17, weight: .semibold, design: .default))
+            List {
+                PlaceholderTextView("Summary", text: $issue.name,font: UIFont.systemFont(ofSize: 17, weight: .semibold), size: $summarySize)
+                    .frame(height: max(self.summarySize.height, 40))
                 
-                TextField("Description", text: self.$issue.description.bound)
+                PlaceholderTextView("Description", text: self.$issue.description.bound, size: $descriptionSize)
+                    .frame(height: max(descriptionSize.height, 100))
                 
-                Spacer()
             }
-            .padding()
             .navigationBarTitle("", displayMode: .inline)
         }
     }

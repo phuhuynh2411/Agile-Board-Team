@@ -12,6 +12,7 @@ struct TextView: UIViewRepresentable {
     @Binding var text: String
     var isScrollEnabled: Bool = true
     var font: UIFont? = UIFont.systemFont(ofSize: 17)
+    var size: Binding<CGSize>?
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(self)
@@ -22,13 +23,27 @@ struct TextView: UIViewRepresentable {
         uiTextView.isScrollEnabled = self.isScrollEnabled
         uiTextView.text = self.text
         uiTextView.font = self.font
+        // remove all UITextView's padding
+        uiTextView.textContainerInset = .zero
+        uiTextView.textContainer.lineFragmentPadding = 0
         // add text view delegate
         uiTextView.delegate = context.coordinator
+        
         return uiTextView
     }
     
     func updateUIView(_ uiTextView: UITextView, context: Context) {
         uiTextView.text = self.text
+        
+        // Compute the desired height for the content
+//        let fixedWidth = uiTextView.frame.size.width
+//        let newSize = uiTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+//
+        DispatchQueue.main.async {
+            self.size?.wrappedValue = uiTextView.contentSize
+            print(uiTextView.contentSize)
+        }
+        
     }
     
     typealias UIViewType = UITextView
@@ -40,8 +55,8 @@ struct TextView: UIViewRepresentable {
             self.control = control
         }
         
-        func textViewDidChange(_ textView: UITextView) {
-            control.text = textView.text
+        func textViewDidChange(_ uiTextView: UITextView) {
+            control.text = uiTextView.text
         }
     }
 }

@@ -9,28 +9,34 @@
 import SwiftUI
 
 struct PlaceholderTextView: View {
+    var placeholder: String = ""
     @Binding var text: String
     var isScrollEnabled: Bool = true
     var font: UIFont? = UIFont.systemFont(ofSize: 17)
+    var size: Binding<CGSize>?
     
-    var placeholder: String = ""
-    
+    init(_ placeholder: String = "", text: Binding<String>, isScrollEnabled: Bool = true, font: UIFont = UIFont.systemFont(ofSize: 17), size: Binding<CGSize>? = nil) {
+        self.placeholder = placeholder
+        self._text = text
+        self.isScrollEnabled = isScrollEnabled
+        self.font = font
+        self.size = size
+    }
+
     var body: some View {
         ZStack(alignment: .topLeading) {
-            TextView(text: $text, font: UIFont.systemFont(ofSize: 17))
-                .frame(height: 100)
+            TextView(text: $text, isScrollEnabled: self.isScrollEnabled, font: self.font, size: self.size)
             if text.isEmpty {
                 Text(self.placeholder)
                     .foregroundColor(.secondary)
-                    .offset(x: 5, y: 5)
             }
         }
     }
 }
 
 struct PlaceholderTextView_Previews: PreviewProvider {
-    @State static var text: String = "This is a testing"
+    @State static var text: String = ""
     static var previews: some View {
-        PlaceholderTextView(text: $text, placeholder: "Type something...")
+        PlaceholderTextView("Type something...", text: $text)
     }
 }
