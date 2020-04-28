@@ -20,20 +20,20 @@ struct IssueDetailView: View {
             
             TitleButtonView(issue: issue)
             
-            StatusButtonView(status: issue.status)
+            StatusButtonView(issue: self.issue)
 
             DescriptionButtonView(issue: issue)
 
             IssueTypeButtonView(issue: self.issue)
 
             IssueProjectRowView(project: issue.project)
-//
+
 //            NavigationLink(destination: PriorityListView()
 //                .environmentObject(PriorityListModel())) {
 //                    IssuePriorityRowView(priority: self.modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
 //            }
 
-//            if modelView.issue.supporter != nil {
+//            if issue.supporter != nil {
 //                IssueReporterView(reporter: modelView.issue.supporter!)
 //            }
             
@@ -146,14 +146,11 @@ struct DescriptionView: View {
 }
 
 struct StatusButtonView: View {
-    var status: IssueStatus?
-    @State private var showStatusList: Bool = false
+    @ObservedObject var issue: Issue
     
     var body: some View {
-        Button(action: {
-            self.showStatusList = true
-        }) {
-            status.map {StatusView(status: $0)}
+        NavigationLink(destination: IssueStatusListView().environmentObject(IssueStatusListModel(issue: self.issue))) {
+            issue.status.map {StatusView(status: $0)}
         }
     }
 }

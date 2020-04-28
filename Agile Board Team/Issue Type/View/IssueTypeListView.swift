@@ -29,7 +29,8 @@ struct IssueTypeListView: View {
             RefreshableList(showRefreshView: self.$viewModel.isPulling) {
                 ForEach(self.viewModel.isFiltering ? self.viewModel.filtedItems : self.viewModel.items) { (issueType)  in
                     self.IssueTypeButton(issueType: issueType)
-                    .padding()
+                        .padding(.bottom, 10)
+                        .padding(.top, 10)
                 }
                 if self.viewModel.isLoadingMore {
                     LastRowView(isLoadingMore: self.$viewModel.isLoadingMore)
@@ -86,7 +87,7 @@ private struct NavigationBar: View {
     }
 }
 
-struct IssueTypeNotFoundView: View {
+private struct IssueTypeNotFoundView: View {
     @EnvironmentObject var viewModel: IssueTypeListModel
     
     var body: some View {

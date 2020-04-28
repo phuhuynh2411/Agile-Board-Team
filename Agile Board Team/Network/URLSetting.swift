@@ -15,4 +15,5 @@ class URLSetting {
     static var issueURL: URL { baseURL.appendingPathComponent("api/v1/issues") }
     static var issuePriorityURL: URL { baseURL.appendingPathComponent("api/v1/issues/priorities") }
     static var issueTypeURL: URL { baseURL.appendingPathComponent("api/v1/issues/types")}
+    static var issueStatusURL: URL { baseURL.appendingPathComponent("/api/v1/issues/statuses")}
 }

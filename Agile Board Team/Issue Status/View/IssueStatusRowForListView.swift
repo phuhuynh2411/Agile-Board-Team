@@ -14,7 +14,10 @@ struct IssueStatusRowForListView: View {
     
     var body: some View {
         HStack(spacing: 16) {
-            self.icon
+            //self.icon
+            RoundedRectangle(cornerRadius: 7)
+                .frame(width: 30, height: 30)
+                .foregroundColor(Color.init(hex: issueStatus.color))
             
             Text(issueStatus.name)
                 .font(.system(size: 17))
@@ -38,13 +41,14 @@ struct IssueStatusRowForListView: View {
         .frame(width: 20, height: 20, alignment: .center)
         .foregroundColor(.lightGreyColor))
     }
+    
 }
 
 struct IssueStatusRowForListView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             IssueStatusRowForListView(issueStatus: issueStatusData[0], isSelected: true)
-            IssueStatusRowForListView(issueStatus: issueStatusData[0], isSelected: false)
+            IssueStatusRowForListView(issueStatus: issueStatusData[1], isSelected: false)
         }
     }
 }

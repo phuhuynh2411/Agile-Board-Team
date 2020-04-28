@@ -95,6 +95,7 @@
 		84C55FF3242B0EA00050DA53 /* IssueProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C55FF2242B0EA00050DA53 /* IssueProjectRowView.swift */; };
 		84C8FD71243DCDB10074FBB5 /* KeyboardAwareModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8FD70243DCDB10074FBB5 /* KeyboardAwareModifier.swift */; };
 		84CA9D402458067C004C50F9 /* issueStatuses.json in Resources */ = {isa = PBXBuildFile; fileRef = 84CA9D3F2458067C004C50F9 /* issueStatuses.json */; };
+		84CA9D4224580E49004C50F9 /* IssueAPI+IssueStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA9D4124580E49004C50F9 /* IssueAPI+IssueStatus.swift */; };
 		84D225CF2456742000A10695 /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D225CE2456742000A10695 /* Optional+Extension.swift */; };
 		84D225F124568C9A00A10695 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D225F024568C9A00A10695 /* TextView.swift */; };
 		84D225F324568D0000A10695 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D225F224568D0000A10695 /* PlaceholderTextView.swift */; };
@@ -221,6 +222,7 @@
 		84C55FF2242B0EA00050DA53 /* IssueProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueProjectRowView.swift; sourceTree = "<group>"; };
 		84C8FD70243DCDB10074FBB5 /* KeyboardAwareModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareModifier.swift; sourceTree = "<group>"; };
 		84CA9D3F2458067C004C50F9 /* issueStatuses.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = issueStatuses.json; sourceTree = "<group>"; };
+		84CA9D4124580E49004C50F9 /* IssueAPI+IssueStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IssueAPI+IssueStatus.swift"; sourceTree = "<group>"; };
 		84D225CE2456742000A10695 /* Optional+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extension.swift"; sourceTree = "<group>"; };
 		84D225F024568C9A00A10695 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		84D225F224568D0000A10695 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 				8475B7A8245151AC0087CD69 /* IssueAPI.swift */,
 				8475B7AA24517BEF0087CD69 /* IssueAPI+IssueType.swift */,
 				84EBD3762457C85000C29434 /* IssueAPI+TitleDescription.swift */,
+				84CA9D4124580E49004C50F9 /* IssueAPI+IssueStatus.swift */,
 				84D28469244A976900623F05 /* Token.swift */,
 				84D2846B244ABA6400623F05 /* UserDefaultKey.swift */,
 			);
@@ -905,6 +908,7 @@
 				849DBC86241B32180026E23B /* ViewRouter.swift in Sources */,
 				846ECCA82419EDF400C8DFA3 /* User.swift in Sources */,
 				84A22DEE244A91ED00A7E4A1 /* Authentication.swift in Sources */,
+				84CA9D4224580E49004C50F9 /* IssueAPI+IssueStatus.swift in Sources */,
 				840B0532242DB2C400E30ED4 /* IssueTypeRowForListView.swift in Sources */,
 				8492CCCD242995CB001D76DE /* IssueRowView.swift in Sources */,
 				84EBD3752457C43600C29434 /* TitleDescriptionModel.swift in Sources */,
