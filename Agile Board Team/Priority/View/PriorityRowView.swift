@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PriorityRowView: View {
+struct PriorityRowForListView: View {
     var priority: IssuePriority
     var isSelected = false
     
@@ -37,6 +37,6 @@ struct PriorityRowView: View {
 
 struct PriorityRowView_Previews: PreviewProvider {
     static var previews: some View {
-        PriorityRowView(priority: issueData[0].priority!, isSelected: true)
+        PriorityRowForListView(priority: issueData[0].priority!, isSelected: true)
     }
 }

@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Combine
+import RefreshableList
 
 struct PriorityListView: View {
     @EnvironmentObject var viewModel: PriorityListModel
@@ -23,52 +24,42 @@ struct PriorityListView: View {
                 SearchView(search: $viewModel.search, showCancelButton: $viewModel.showCancelButton)
             }
             PriorityNotFoundView()
-            List {
-                ForEach(viewModel.isFiltering ? viewModel.filtedItems : viewModel.items) { (priority)  in
-                    self.PriorityButton(priority: priority)
+            RefreshableList(showRefreshView: self.$viewModel.isPulling) {
+                ForEach(self.viewModel.isFiltering ? self.viewModel.filtedItems : self.viewModel.items) { priority in
+                    self.PriorityButtonView(priority)
+                        .padding(.bottom, 10)
+                        .padding(.top, 10)
                 }
-                
-                if viewModel.isLoadingMore {
-                    LastRowView(isLoadingMore: $viewModel.isLoadingMore)
-                }
-                
             }
-//            .pullToRefresh(isShowing: $viewModel.isPulling) {
-//                self.viewModel.reload(byUsing: .pull, animated: true)
-//            }
+            .onRefreshPerform {
+                self.viewModel.reload(byUsing: .pull, animated: true)
+            }
             .resignKeyboardOnDragGesture()
             
         }
-        .overlay(
-            CircleProgressView(display: $viewModel.isRefreshing)
-            .frame(width: 30, height: 30, alignment: .center)
-        )
+        .overlay(RefreshView(refreshingPublisher: viewModel.$isRefreshing))
         .onAppear{
             self.viewModel.reload(animated: true, whenEmpty: true)
         }
     }
     
-     func onAppear(_ priority: IssuePriority) {
-         guard viewModel.isLastRow(id: priority.id) else { return }
-         viewModel.loadMore()
-     }
-    
-    private func PriorityButton(priority: IssuePriority) -> some View {
+    private func PriorityButtonView(_ priority: IssuePriority) -> some View {
         Button(action: {
-            self.viewModel.selectedPriority = priority
-            self.presentation.wrappedValue.dismiss()
-        }) {
-            self.PriorityRow(priority: priority).onAppear {
-                self.onAppear(priority)
+            self.viewModel.select(priority) { dismissView in
+                if dismissView {
+                    self.presentation.wrappedValue.dismiss()
+                }
             }
+        }) {
+            self.PriorityRowView(priority)
         }
     }
     
-    private func PriorityRow(priority: IssuePriority) -> some View {
-        if let p = self.viewModel.selectedPriority, p.id == priority.id {
-            return PriorityRowView(priority: priority, isSelected: true)
+    private func PriorityRowView(_ priority: IssuePriority) -> some View {
+        if let p = self.viewModel.issue?.priority, p.id == priority.id {
+            return PriorityRowForListView(priority: priority, isSelected: true)
         } else {
-            return PriorityRowView(priority: priority)
+            return PriorityRowForListView(priority: priority)
         }
     }
 }

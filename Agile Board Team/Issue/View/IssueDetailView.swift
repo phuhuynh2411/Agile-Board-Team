@@ -28,14 +28,10 @@ struct IssueDetailView: View {
 
             IssueProjectRowView(project: issue.project)
 
-//            NavigationLink(destination: PriorityListView()
-//                .environmentObject(PriorityListModel())) {
-//                    IssuePriorityRowView(priority: self.modelView.issue.priority, isUpdating: self.$modelView.isUpdatingPriority)
-//            }
-
-//            if issue.supporter != nil {
-//                IssueReporterView(reporter: modelView.issue.supporter!)
-//            }
+            IssuePriorityButtonView(issue: self.issue)
+            
+            // Supporter
+            issue.supporter.map { IssueReporterView(reporter: $0) }
             
             IssueAttachmentRowView()
         }
@@ -165,5 +161,16 @@ struct StatusView: View {
             .font(.system(size: 14))
             .background(Color.init(hex: status.color))
             .cornerRadius(20)
+    }
+}
+
+struct IssuePriorityButtonView: View {
+    @ObservedObject var issue: Issue
+    
+    var body: some View {
+        NavigationLink(destination: PriorityListView()
+            .environmentObject(PriorityListModel(self.issue))) {
+                self.issue.priority.map {IssuePriorityRowView(priority: $0)}
+        }
     }
 }
