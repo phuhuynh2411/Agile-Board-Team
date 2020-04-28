@@ -12,7 +12,7 @@ import Combine
 class IssueAPI: NetworkModel {
     var entry: Entry<Issue>?
     let issue: Issue
-    var updateIssueTypeURL: URL {
+    var updateIssueURL: URL {
         URLSetting.issueURL.appendingPathComponent(issue.id)
     }
         

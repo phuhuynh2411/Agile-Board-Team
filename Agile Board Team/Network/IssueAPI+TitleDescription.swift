@@ -1,8 +1,8 @@
 //
-//  IssueAPI+IssueType.swift
+//  IssueAPI+TitleDescription.swift
 //  Agile Board Team
 //
-//  Created by Huynh Tan Phu on 4/23/20.
+//  Created by Huynh Tan Phu on 4/28/20.
 //  Copyright © 2020 Filesoft. All rights reserved.
 //
 
@@ -11,12 +11,14 @@ import Combine
 
 extension IssueAPI {
     
-    private func buildUpdateIssueTypeRequest(_ issueType: IssueType) -> URLRequest {
+    private func buildNameDescriptionRequest(_ name: String, _ description: String) -> URLRequest {
         print("URL: \(self.updateIssueURL)")
-        print("Issue Type ID: \(issueType.id)")
+        print("New Issue Name: \(name)")
+        print("New Issue Description: \(description)")
+        
         var request = self.putRequest(url: self.updateIssueURL, authen: true)
         
-        let jsonBody = IssueTypeRequest(typeId: issueType.id)
+        let jsonBody = NameDescriptionRequest(name: name, description: description)
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         guard let data = try? encoder.encode(jsonBody) else {
@@ -29,14 +31,16 @@ extension IssueAPI {
         return request
     }
     
-    func update(issueType: IssueType) -> AnyPublisher<Entry<Issue>, Error>{
-        let request = self.buildUpdateIssueTypeRequest(issueType)
+    func update(name: String, description: String) -> AnyPublisher<Entry<Issue>, Error>{
+        let request = self.buildNameDescriptionRequest(name, description)
         return self.send(request: request)
             .tryMap { try self.validateResponse(entry: $0) }
             .eraseToAnyPublisher()
     }
     
-    struct IssueTypeRequest: Codable {
-        let typeId: String
+    struct NameDescriptionRequest: Codable {
+        let name: String
+        let description: String
     }
+    
 }

@@ -97,7 +97,7 @@ struct TitleButtonView: View {
         }.sheet(isPresented: $showDetail, onDismiss: {
             print("Dismiss the title description view")
         }) {
-            IssueTitleDescriptionView()
+            IssueTitleDescriptionView().environmentObject(TitleDescriptionModel(self.issue))
         }
     }
 }

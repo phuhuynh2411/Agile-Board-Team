@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct IssueTitleDescriptionView: View {
-    @EnvironmentObject var modelView: TitleDescriptionModel
+    @EnvironmentObject var viewModel: TitleDescriptionModel
     
     @Environment(\.presentationMode) var presentation
     @State private var descriptionSize: CGSize = .zero
@@ -18,21 +18,31 @@ struct IssueTitleDescriptionView: View {
         
     var body: some View {
         NavigationView {
-            List {
-                PlaceholderTextView("Summary", text: $modelView.name,font: UIFont.systemFont(ofSize: 17, weight: .semibold), size: $summarySize)
-                    .frame(height: max(self.summarySize.height, 40))
+            VStack {
+                if viewModel.isFailed {
+                    ErrorBannerView(message: viewModel.errorMessage, display: $viewModel.isFailed)
+                        .frame(height: 80)
+                }
                 
-                PlaceholderTextView("Description", text: self.$modelView.description, size: $descriptionSize)
-                    .frame(height: max(descriptionSize.height, 100))
-                
+                List {
+                    PlaceholderTextView("Summary", text: $viewModel.name,font: UIFont.systemFont(ofSize: 17, weight: .semibold), size: $summarySize)
+                        .frame(height: max(self.summarySize.height, 40))
+                    
+                    PlaceholderTextView("Description", text: self.$viewModel.description, size: $descriptionSize)
+                        .frame(height: max(descriptionSize.height, 100))
+                    
+                }
+                .navigationBarTitle("", displayMode: .inline)
+                .navigationBarItems(leading: self.leadingNavView, trailing: self.trailingNavView)
+                .keyboardAwarePadding { _ in }
+                .overlay(RefreshView(refreshingPublisher: viewModel.$isUpdating))
             }
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarItems(leading: self.leadingNavView, trailing: self.trailingNavView)
-            .keyboardAwarePadding { _ in }
+            
         }
     }
     
     private var leadingNavView: some View {
+        // Close button
         Button(action: {
             self.presentation.wrappedValue.dismiss()
         }) {
@@ -41,8 +51,17 @@ struct IssueTitleDescriptionView: View {
     }
     
     private var trailingNavView: some View {
+        // Save button
         Button("Save"){
-            
+            self.saveButtonTapped()
+        }
+    }
+    
+    private func saveButtonTapped() {
+        self.viewModel.save { (dismissView) in
+            if dismissView {
+                self.presentation.wrappedValue.dismiss()
+            }
         }
     }
 }
