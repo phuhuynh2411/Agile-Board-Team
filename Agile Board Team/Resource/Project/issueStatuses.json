@@ -1,0 +1,32 @@
+[
+    {
+        "id": "36e92570-814b-11ea-a387-c9ef68f6cc07",
+        "name": "Todo",
+        "status": 1,
+        "icon": "Quo non autem voluptatem nulla.",
+        "color": "#ddd6da",
+        "description": "Velit consequatur recusandae quaerat dolore atque. Modi qui aut sed fuga sit et enim error. Dicta sit voluptates cumque fuga expedita.",
+        "created_at": "2020-04-18T08:04:23+00:00",
+        "updated_at": "2020-04-18T08:04:23+00:00"
+    },
+    {
+        "id": "36e947e0-814b-11ea-a617-dd82a2524474",
+        "name": "In Progress",
+        "status": 1,
+        "icon": "Laborum eum sed culpa nobis.",
+        "color": "#00bfff",
+        "description": "Impedit qui qui illum. Occaecati aut sunt praesentium debitis deserunt saepe amet. Adipisci cumque voluptatem explicabo corporis temporibus.",
+        "created_at": "2020-04-18T08:04:23+00:00",
+        "updated_at": "2020-04-18T08:04:23+00:00"
+    },
+    {
+        "id": "36e96c70-814b-11ea-bc21-e95a06afe305",
+        "name": "Done",
+        "status": 1,
+        "icon": "Accusantium ut inventore iusto non itaque.",
+        "color": "#66cdaa",
+        "description": "In ab illo est porro rem earum iusto. Occaecati harum dolores tenetur aliquam vero mollitia. Inventore illo dignissimos ut ad. Facilis aliquam nesciunt architecto est officiis dolores minus.",
+        "created_at": "2020-04-18T08:04:23+00:00",
+        "updated_at": "2020-04-18T08:04:23+00:00"
+    }
+]
