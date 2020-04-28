@@ -54,7 +54,7 @@ struct IssueTitleDescriptionView: View {
         // Save button
         Button("Save"){
             self.saveButtonTapped()
-        }
+        }.disabled(self.viewModel.disableSaveButton)
     }
     
     private func saveButtonTapped() {

@@ -18,20 +18,28 @@ class TitleDescriptionModel: ObservableObject {
     @Published var isFailed: Bool = false
     @Published var errorMessage: String = ""
     
-    var saveStream: AnyCancellable?
+    private var saveStream: AnyCancellable?
+    private var disableSaveButtonStream: AnyCancellable?
+    @Published var disableSaveButton: Bool = false
     
     init(_ issue: Issue) {
         self.issue = issue
         
         self.name = issue.name
         self.description = issue.description ?? ""
+        
+        self.disableSaveButtonStream = $name.combineLatest($description).sink(receiveValue: { (name, description) in
+            if name != issue.name || description != issue.description {
+                self.disableSaveButton = false
+            } else {
+                self.disableSaveButton = true
+            }
+        })
     }
     
-    func save(callback: @escaping (_ dismissView: Bool)-> Void) {
-        print("Save!")
-        
+    func save(callback: @escaping (_ dismissView: Bool)-> Void) {        
         // No changes on issue name and description, just needs to dismiss the view
-        guard issue.name != name || issue.description ?? "" != description else {
+        guard name != issue.name || description != issue.description else {
             callback(true)
             return
         }
