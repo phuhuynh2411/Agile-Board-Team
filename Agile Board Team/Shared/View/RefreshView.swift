@@ -15,15 +15,13 @@ struct RefreshView: View {
     var body: some View {
         ZStack {
             if self.isRefreshing {
-                withAnimation(Animation.easeInOut.delay(1)) {
-                    InfiniteProgressView()
-                        .frame(width: 30, height: 30, alignment: .center)
-                        .transition(.scale)
-                }
+                InfiniteProgressView()
+                    .frame(width: 30, height: 30, alignment: .center)
+                    .transition(.scale)
             }
         }
         .onReceive(self.refreshingPublisher) { (value) in
-            withAnimation(.easeInOut) {
+            withAnimation(value ? Animation.easeInOut.delay(1) : Animation.easeInOut) {
                 self.isRefreshing = value
             }
         }

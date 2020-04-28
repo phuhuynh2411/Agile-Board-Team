@@ -8,6 +8,7 @@
 
 import Combine
 import SwiftUI
+import PartialSheet
 
 struct IssueDetailView: View {
     @EnvironmentObject var modelView: IssueDetailModel
@@ -146,9 +147,12 @@ struct DescriptionView: View {
 
 struct StatusButtonView: View {
     var status: IssueStatus?
+    @State private var showStatusList: Bool = false
     
     var body: some View {
-        Button(action: { }) {
+        Button(action: {
+            self.showStatusList = true
+        }) {
             status.map {StatusView(status: $0)}
         }
     }
