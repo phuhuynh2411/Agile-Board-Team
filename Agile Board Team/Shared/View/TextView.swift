@@ -34,16 +34,9 @@ struct TextView: UIViewRepresentable {
     
     func updateUIView(_ uiTextView: UITextView, context: Context) {
         uiTextView.text = self.text
-        
-        // Compute the desired height for the content
-//        let fixedWidth = uiTextView.frame.size.width
-//        let newSize = uiTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-//
         DispatchQueue.main.async {
             self.size?.wrappedValue = uiTextView.contentSize
-            print(uiTextView.contentSize)
-        }
-        
+        }        
     }
     
     typealias UIViewType = UITextView

@@ -94,8 +94,10 @@ struct TitleButtonView: View {
             self.showDetail = true
         }) {
             TitleView(name: self.issue.name)
-        }.sheet(isPresented: $showDetail) {
-            IssueTitleDescriptionView(issue: issueData[0])
+        }.sheet(isPresented: $showDetail, onDismiss: {
+            print("Dismiss the title description view")
+        }) {
+            IssueTitleDescriptionView()
         }
     }
 }
@@ -128,7 +130,7 @@ struct DescriptionButtonView: View {
         }) {
             DescriptionView(description: issue.description)
         }.sheet(isPresented: $showDetail) {
-            IssueTitleDescriptionView(issue: self.issue)
+            IssueTitleDescriptionView().environmentObject(TitleDescriptionModel(self.issue))
         }
     }
 }
