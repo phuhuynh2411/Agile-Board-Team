@@ -15,6 +15,8 @@ struct IssueTitleDescriptionView: View {
     @State private var descriptionSize: CGSize = .zero
     @State private var summarySize: CGSize = .zero
     
+    @State private var showActionSheet: Bool = false
+    
         
     var body: some View {
         NavigationView {
@@ -36,6 +38,15 @@ struct IssueTitleDescriptionView: View {
                 .navigationBarItems(leading: self.leadingNavView, trailing: self.trailingNavView)
                 .keyboardAwarePadding { _ in }
                 .overlay(RefreshView(refreshingPublisher: viewModel.$isUpdating))
+                .actionSheet(isPresented: self.$showActionSheet) {
+                    ActionSheet(
+                        title: Text("Discard change"),
+                        message: Text("All changes you made will be lost. Are you sure to do that?"),
+                        buttons: [.cancel(Text("Cancel")),
+                                  .destructive(Text("Delete changes"),
+                                               action: {self.presentation.wrappedValue.dismiss()})
+                    ])
+                }
             }
             
         }
@@ -44,7 +55,7 @@ struct IssueTitleDescriptionView: View {
     private var leadingNavView: some View {
         // Close button
         Button(action: {
-            self.presentation.wrappedValue.dismiss()
+            self.cancelButtonTapped()
         }) {
             Image(systemName: "xmark.circle")
         }
@@ -63,6 +74,15 @@ struct IssueTitleDescriptionView: View {
                 self.presentation.wrappedValue.dismiss()
             }
         }
+    }
+    
+    private func cancelButtonTapped() {
+        guard !self.viewModel.disableSaveButton else {
+            self.presentation.wrappedValue.dismiss()
+            return
+        }
+        
+        self.showActionSheet = true
     }
 }
 
