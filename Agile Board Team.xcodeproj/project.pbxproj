@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		840A010124595E27000C53CB /* IssueAPI+IssueProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A010024595E27000C53CB /* IssueAPI+IssueProject.swift */; };
+		840A0106245965D3000C53CB /* IssueAssigneeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A0105245965D3000C53CB /* IssueAssigneeListView.swift */; };
+		840A0108245965E6000C53CB /* IssueAssigneeRowForListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A0107245965E6000C53CB /* IssueAssigneeRowForListView.swift */; };
+		840A010A245965F8000C53CB /* IssueAssigneeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A0109245965F8000C53CB /* IssueAssigneeListModel.swift */; };
 		840B052C242DAFFF00E30ED4 /* IssueTypeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B052B242DAFFF00E30ED4 /* IssueTypeListModel.swift */; };
 		840B052E242DB08000E30ED4 /* IssueTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B052D242DB08000E30ED4 /* IssueTypeListView.swift */; };
 		840B0530242DB27200E30ED4 /* issueTypes.json in Resources */ = {isa = PBXBuildFile; fileRef = 840B052F242DB27200E30ED4 /* issueTypes.json */; };
@@ -104,6 +107,7 @@
 		84D2846A244A976900623F05 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D28469244A976900623F05 /* Token.swift */; };
 		84D2846C244ABA6400623F05 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2846B244ABA6400623F05 /* UserDefaultKey.swift */; };
 		84D2846E244ABADF00623F05 /* TestAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2846D244ABADF00623F05 /* TestAuthentication.swift */; };
+		84D665F7245981B2000FB4A2 /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = 84D665F6245981B2000FB4A2 /* users.json */; };
 		84D7EFE52441A12400433EC7 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7EFE42441A12400433EC7 /* CustomScrollView.swift */; };
 		84E2EDF32450379F00D5B5C8 /* RefreshableList in Frameworks */ = {isa = PBXBuildFile; productRef = 84E2EDF22450379F00D5B5C8 /* RefreshableList */; };
 		84E2EDF524503C0A00D5B5C8 /* IssueDetailModel+IssueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2EDF424503C0A00D5B5C8 /* IssueDetailModel+IssueType.swift */; };
@@ -131,6 +135,9 @@
 
 /* Begin PBXFileReference section */
 		840A010024595E27000C53CB /* IssueAPI+IssueProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IssueAPI+IssueProject.swift"; sourceTree = "<group>"; };
+		840A0105245965D3000C53CB /* IssueAssigneeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAssigneeListView.swift; sourceTree = "<group>"; };
+		840A0107245965E6000C53CB /* IssueAssigneeRowForListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAssigneeRowForListView.swift; sourceTree = "<group>"; };
+		840A0109245965F8000C53CB /* IssueAssigneeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueAssigneeListModel.swift; sourceTree = "<group>"; };
 		840B052B242DAFFF00E30ED4 /* IssueTypeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTypeListModel.swift; sourceTree = "<group>"; };
 		840B052D242DB08000E30ED4 /* IssueTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTypeListView.swift; sourceTree = "<group>"; };
 		840B052F242DB27200E30ED4 /* issueTypes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = issueTypes.json; sourceTree = "<group>"; };
@@ -233,6 +240,7 @@
 		84D28469244A976900623F05 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		84D2846B244ABA6400623F05 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		84D2846D244ABADF00623F05 /* TestAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAuthentication.swift; sourceTree = "<group>"; };
+		84D665F6245981B2000FB4A2 /* users.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
 		84D7EFE42441A12400433EC7 /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		84E2EDF424503C0A00D5B5C8 /* IssueDetailModel+IssueType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IssueDetailModel+IssueType.swift"; sourceTree = "<group>"; };
 		84EBD3742457C43600C29434 /* TitleDescriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleDescriptionModel.swift; sourceTree = "<group>"; };
@@ -266,6 +274,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		840A01022459659E000C53CB /* Issue Assignee */ = {
+			isa = PBXGroup;
+			children = (
+				840A0103245965AE000C53CB /* Model */,
+				840A0104245965B3000C53CB /* View */,
+			);
+			path = "Issue Assignee";
+			sourceTree = "<group>";
+		};
+		840A0103245965AE000C53CB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				840A0109245965F8000C53CB /* IssueAssigneeListModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		840A0104245965B3000C53CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				840A0105245965D3000C53CB /* IssueAssigneeListView.swift */,
+				840A0107245965E6000C53CB /* IssueAssigneeRowForListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		840B052A242DAFCE00E30ED4 /* Issue Type */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +344,7 @@
 				8480DFFB242BADF6002F8183 /* Priority */,
 				840B052A242DAFCE00E30ED4 /* Issue Type */,
 				84EBD37D2457E89C00C29434 /* Issue Status */,
+				840A01022459659E000C53CB /* Issue Assignee */,
 				848D53AD241B286500BAB5E6 /* Setting */,
 				846ECCA62419EDDD00C8DFA3 /* Model */,
 				840F269924187C0D0085FBA6 /* Assets.xcassets */,
@@ -676,6 +711,7 @@
 				849AF7D62428FD1600D00542 /* issues.json */,
 				840B052F242DB27200E30ED4 /* issueTypes.json */,
 				84CA9D3F2458067C004C50F9 /* issueStatuses.json */,
+				84D665F6245981B2000FB4A2 /* users.json */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -804,6 +840,7 @@
 				840FDB68241A2AB600C395E8 /* LoginError2.json in Resources */,
 				840F26BB24193F0E0085FBA6 /* LoginSucceeded.json in Resources */,
 				84CA9D402458067C004C50F9 /* issueStatuses.json in Resources */,
+				84D665F7245981B2000FB4A2 /* users.json in Resources */,
 				840F26B92418DEE40085FBA6 /* Demo in Resources */,
 				840F269D24187C0D0085FBA6 /* Preview Assets.xcassets in Resources */,
 				840F269A24187C0D0085FBA6 /* Assets.xcassets in Resources */,
@@ -847,6 +884,7 @@
 				8420495C241A7AE6001FE724 /* MockURLSessionUploadTask.swift in Sources */,
 				849DBC93241B6A280026E23B /* Data.swift in Sources */,
 				840F26A924187C3B0085FBA6 /* LoginView.swift in Sources */,
+				840A010A245965F8000C53CB /* IssueAssigneeListModel.swift in Sources */,
 				84D7EFE52441A12400433EC7 /* CustomScrollView.swift in Sources */,
 				84EBD37C2457E3BC00C29434 /* SlideOverCard.swift in Sources */,
 				846ECCAA2419F05000C8DFA3 /* APILoginRequest.swift in Sources */,
@@ -862,6 +900,7 @@
 				8420AFE324542E28007E6B6B /* IssueTitleDescriptionView.swift in Sources */,
 				84CA9D4424586B27004C50F9 /* IssueAPI+IssuePriority.swift in Sources */,
 				84741C222420B1B9004F3663 /* MetaData.swift in Sources */,
+				840A0106245965D3000C53CB /* IssueAssigneeListView.swift in Sources */,
 				84ABCA482456ECE300BA6A45 /* ErrorView.swift in Sources */,
 				8492CCCF24299DC1001D76DE /* SearchView.swift in Sources */,
 				8425B9EF2424C5F500AB9E98 /* View+Extension.swift in Sources */,
@@ -899,6 +938,7 @@
 				8451D7EE242A642F000C1F56 /* IssueType.swift in Sources */,
 				8425B9ED2424C5E800AB9E98 /* UIApplication+Extension.swift in Sources */,
 				84C8FD71243DCDB10074FBB5 /* KeyboardAwareModifier.swift in Sources */,
+				840A0108245965E6000C53CB /* IssueAssigneeRowForListView.swift in Sources */,
 				8417CD13242279DD0029B7E6 /* ImageCache.swift in Sources */,
 				8438B47E2423702B00E39464 /* NetworkRequest.swift in Sources */,
 				84316FA9242B105D002C0350 /* IssuePriorityRowView.swift in Sources */,

@@ -14,6 +14,7 @@ let issueData: [Issue] = load("issues")
 let priorityData: [IssuePriority] = load("priorities")
 let issueTypeData: [IssueType] = load("issueTypes")
 let issueStatusData: [IssueStatus] = load("issueStatuses")
+let userData: [User] = load("users")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
