@@ -12,51 +12,63 @@ import RefreshableList
 struct ProjectListView: View {
     @EnvironmentObject var viewModel: ProjectListModel
     var navDisplayMode: NavigationBarItem.TitleDisplayMode = .large
+    var useDefaultNavView: Bool = true
     
-    init(navDisplayMode: NavigationBarItem.TitleDisplayMode = .large) {
+    init(navDisplayMode: NavigationBarItem.TitleDisplayMode = .large, useDefaultNavView: Bool = true) {
         UITableView.appearance().separatorStyle = .none
         self.navDisplayMode = navDisplayMode
+        self.useDefaultNavView = useDefaultNavView
     }
     
     var body: some View {
-        NavigationView {
-            VStack {
-                if self.viewModel.showCancelButton {
-                    SearchView(search: self.$viewModel.search, showCancelButton: self.$viewModel.showCancelButton)
+        Group {
+            if self.useDefaultNavView {
+                NavigationView {
+                    self.content
                 }
-                if self.viewModel.isFailed {
-                    ErrorBannerView(message: self.viewModel.errorMessage, display: self.$viewModel.isFailed)
-                    frame(height: 80)
-                }
-                
-                ProjectNotFoundView()
-                RefreshableList(showRefreshView: $viewModel.isPulling) {
-                    ForEach(self.viewModel.isFiltering ? self.viewModel.filtedItems : self.viewModel.items) { project in
-                        ProjectRowView(project: project, isSelected: self.viewModel.project != nil ? true : false)
-                    }
-                    if self.viewModel.isLoadingMore {
-                        LastRowView(isLoadingMore: self.$viewModel.isLoadingMore)
-                    }
-                }
-                .onRefreshPerform {
-                    self.viewModel.reload(byUsing: .pull, animated: true)
-                }
-                .onLastPerform {
-                    self.viewModel.loadMore()
-                }
-                .resignKeyboardOnDragGesture()
-                
-                Spacer()
+            } else {
+                self.content
             }
-            .overlay(RefreshView(refreshingPublisher: viewModel.$isRefreshing))
-            .onAppear {
-                self.viewModel.reload(animated: true, whenEmpty: true)
-            }
-            
-            .navigationBarTitle("Projects", displayMode: self.navDisplayMode)
-            .navigationBarItems(trailing: NavTrailingView() )
-            .navigationBarHidden(viewModel.showCancelButton)
         }
+    }
+    
+    private var content: some View {
+        VStack {
+             if self.viewModel.showCancelButton {
+                 SearchView(search: self.$viewModel.search, showCancelButton: self.$viewModel.showCancelButton)
+             }
+             if self.viewModel.isFailed {
+                 ErrorBannerView(message: self.viewModel.errorMessage, display: self.$viewModel.isFailed)
+                 frame(height: 80)
+             }
+             
+             ProjectNotFoundView()
+             RefreshableList(showRefreshView: $viewModel.isPulling) {
+                 ForEach(self.viewModel.isFiltering ? self.viewModel.filtedItems : self.viewModel.items) { project in
+                     ProjectButtonView(project: project)
+                 }
+                 if self.viewModel.isLoadingMore {
+                     LastRowView(isLoadingMore: self.$viewModel.isLoadingMore)
+                 }
+             }
+             .onRefreshPerform {
+                 self.viewModel.reload(byUsing: .pull, animated: true)
+             }
+             .onLastPerform {
+                 self.viewModel.loadMore()
+             }
+             .resignKeyboardOnDragGesture()
+             
+             Spacer()
+         }
+         .overlay(RefreshView(refreshingPublisher: viewModel.$isRefreshing))
+         .onAppear {
+             self.viewModel.reload(animated: true, whenEmpty: true)
+         }
+         
+         .navigationBarTitle("Projects", displayMode: self.navDisplayMode)
+         .navigationBarItems(trailing: NavTrailingView() )
+         .navigationBarHidden(viewModel.showCancelButton)
     }
 }
 
@@ -101,3 +113,30 @@ private struct NavTrailingView: View {
         }
     }
 }
+
+
+struct ProjectButtonView: View {
+    @ObservedObject var project: Project
+    @EnvironmentObject var viewModel: ProjectListModel
+     @Environment(\.presentationMode) var presentation
+    
+    var body: some View {
+        Button(action: {
+            self.viewModel.select(self.project) { dismissView in
+                if dismissView {
+                    self.presentation.wrappedValue.dismiss()
+                }
+            }
+        }) {
+            self.projectRowView
+        }
+    }
+    
+    private var projectRowView: some View {
+        guard let p = viewModel.project, p.id == project.id else {
+            return AnyView(ProjectRowView(project: project, isSelected: false))
+        }
+        return AnyView(ProjectRowView(project: project, isSelected: true))
+    }
+}
+

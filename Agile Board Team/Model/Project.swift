@@ -9,7 +9,11 @@
 import Foundation
 import Combine
 
-class Project: Codable, Identifiable, ObservableObject {
+class Project: Codable, Identifiable, ObservableObject, Equatable {
+    static func == (lhs: Project, rhs: Project) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     @Published var id: String
     @Published var categoryId: String?
     @Published var status: Int

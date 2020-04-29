@@ -28,7 +28,7 @@ struct IssueDetailView: View {
             
             IssuePriorityButtonView(issue: self.issue)
             
-            IssueProjectButtonView(project: issue.project)
+            IssueProjectButtonView(issue: self.issue)
             
             // Supporter
             issue.supporter.map { IssueReporterView(reporter: $0) }
@@ -177,12 +177,12 @@ struct IssuePriorityButtonView: View {
 
 
 private struct IssueProjectButtonView: View {
-    @ObservedObject var project: Project
+    @ObservedObject var issue: Issue
     
     var body: some View {
-        NavigationLink(destination: ProjectListView(navDisplayMode: .inline)
-            .environmentObject(ProjectListModel(self.project))) {
-                IssueProjectRowView(project: project)
+        NavigationLink(destination: ProjectListView(navDisplayMode: .inline, useDefaultNavView: false)
+            .environmentObject(ProjectListModel(self.issue.project, issue: self.issue))) {
+                IssueProjectRowView(project: self.issue.project)
         }
     }
 }

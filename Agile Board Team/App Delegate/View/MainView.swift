@@ -13,6 +13,7 @@ struct MainView: View {
     
     var body: some View {
         TabView {
+            
             ProjectListView().environmentObject(ProjectListModel())
                 .tabItem {
                     Image(systemName: "folder")

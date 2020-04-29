@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840A010124595E27000C53CB /* IssueAPI+IssueProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A010024595E27000C53CB /* IssueAPI+IssueProject.swift */; };
 		840B052C242DAFFF00E30ED4 /* IssueTypeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B052B242DAFFF00E30ED4 /* IssueTypeListModel.swift */; };
 		840B052E242DB08000E30ED4 /* IssueTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B052D242DB08000E30ED4 /* IssueTypeListView.swift */; };
 		840B0530242DB27200E30ED4 /* issueTypes.json in Resources */ = {isa = PBXBuildFile; fileRef = 840B052F242DB27200E30ED4 /* issueTypes.json */; };
@@ -129,6 +130,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		840A010024595E27000C53CB /* IssueAPI+IssueProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IssueAPI+IssueProject.swift"; sourceTree = "<group>"; };
 		840B052B242DAFFF00E30ED4 /* IssueTypeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTypeListModel.swift; sourceTree = "<group>"; };
 		840B052D242DB08000E30ED4 /* IssueTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTypeListView.swift; sourceTree = "<group>"; };
 		840B052F242DB27200E30ED4 /* issueTypes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = issueTypes.json; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 				84EBD3762457C85000C29434 /* IssueAPI+TitleDescription.swift */,
 				84CA9D4124580E49004C50F9 /* IssueAPI+IssueStatus.swift */,
 				84CA9D4324586B27004C50F9 /* IssueAPI+IssuePriority.swift */,
+				840A010024595E27000C53CB /* IssueAPI+IssueProject.swift */,
 				84D28469244A976900623F05 /* Token.swift */,
 				84D2846B244ABA6400623F05 /* UserDefaultKey.swift */,
 			);
@@ -826,6 +829,7 @@
 				84C55FF1242B09BA0050DA53 /* IssueTypeRowView.swift in Sources */,
 				84204959241A7A9E001FE724 /* URLSessionMock.swift in Sources */,
 				840F269424187C0B0085FBA6 /* AppDelegate.swift in Sources */,
+				840A010124595E27000C53CB /* IssueAPI+IssueProject.swift in Sources */,
 				844DF10C2429BF28001E29EB /* RespondData.swift in Sources */,
 				840F26AE24188B490085FBA6 /* Extension+Color.swift in Sources */,
 				8421319724237466008716FE /* NetworkModel.swift in Sources */,
