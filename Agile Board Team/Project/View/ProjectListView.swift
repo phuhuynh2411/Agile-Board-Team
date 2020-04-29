@@ -7,12 +7,10 @@
 //
 
 import SwiftUI
-//import SwiftUIRefresh
+import RefreshableList
 
 struct ProjectListView: View {
-    
     @EnvironmentObject var viewModel: ProjectListModel
-    //@Binding var editedProject: Project?
     
     init() {
         UITableView.appearance().separatorStyle = .none
@@ -20,45 +18,42 @@ struct ProjectListView: View {
     
     var body: some View {
         NavigationView {
-            GeometryReader { proxy in
-                VStack {
-                    NavigationBar()
-                    if self.viewModel.isFailed {
-                        ErrorBannerView(message: self.viewModel.errorMessage, display: self.$viewModel.isFailed)
-                    }
-                    if self.viewModel.showCancelButton {
-                        SearchView(search: self.$viewModel.search, showCancelButton: self.$viewModel.showCancelButton)
-                    }
-                    ProjectNotFoundView()
-                    //RefreshableScrollView(refreshing: self.$viewModel.isPulling) {
-                    ScrollView {
-                        List {
-                            ForEach(self.viewModel.isFiltering ? self.viewModel.filtedItems : self.viewModel.items) { (project)  in
-                                ProjectRowView(project: project).onAppear {
-                                    self.onAppear(project)
-                                }
-                            }
-                            
-                            if self.viewModel.isLoadingMore {
-                                LastRowView(isLoadingMore: self.$viewModel.isLoadingMore)
-                            }
-                            
-                        }
-                        //.frame(height: proxy.frame(in: .named("myStack")).height)
-                    }
-                    .frame(height: 500)
-                    .resignKeyboardOnDragGesture()
-                    
+            VStack {
+                if self.viewModel.showCancelButton {
+                    SearchView(search: self.$viewModel.search, showCancelButton: self.$viewModel.showCancelButton)
                 }
-                .coordinateSpace(name: "myStack")
-                .overlay(
-                    CircleProgressView(display: self.$viewModel.isRefreshing)
-                        .frame(width: 30, height: 30, alignment: .center)
-                )
+                if self.viewModel.isFailed {
+                    ErrorBannerView(message: self.viewModel.errorMessage, display: self.$viewModel.isFailed)
+                    frame(height: 80)
+                }
+                
+                ProjectNotFoundView()
+                RefreshableList(showRefreshView: $viewModel.isPulling) {
+                    ForEach(self.viewModel.isFiltering ? self.viewModel.filtedItems : self.viewModel.items) { project in
+                        ProjectRowView(project: project)
+                    }
+                    if self.viewModel.isLoadingMore {
+                        LastRowView(isLoadingMore: self.$viewModel.isLoadingMore)
+                    }
+                }
+                .onRefreshPerform {
+                    self.viewModel.reload(byUsing: .pull, animated: true)
+                }
+                .onLastPerform {
+                    self.viewModel.loadMore()
+                }
+                .resignKeyboardOnDragGesture()
+                
+                Spacer()
             }
-        }
-        .onAppear{
-            //self.viewModel.reload(animated: true, whenEmpty: true)
+            .overlay(RefreshView(refreshingPublisher: viewModel.$isRefreshing))
+            .onAppear {
+                self.viewModel.reload(animated: true, whenEmpty: true)
+            }
+            
+            .navigationBarTitle("Projects", displayMode: .large)
+            .navigationBarItems(trailing: NavTrailingView() )
+            .navigationBarHidden(viewModel.showCancelButton)
         }
     }
     
@@ -108,18 +103,5 @@ private struct NavTrailingView: View {
                 Image(systemName: "plus")
             }
         }
-    }
-}
-
-private struct NavigationBar: View {
-    @EnvironmentObject var viewModel: ProjectListModel
-    
-    var body: some View {
-        
-        Rectangle()
-            .frame(height: 0, alignment: .center)
-            .navigationBarTitle("Projects", displayMode: .large)
-            .navigationBarItems(trailing: NavTrailingView() )
-            .navigationBarHidden(viewModel.showCancelButton)
     }
 }

@@ -25,10 +25,10 @@ struct IssueDetailView: View {
             DescriptionButtonView(issue: issue)
 
             IssueTypeButtonView(issue: self.issue)
-
-            IssueProjectRowView(project: issue.project)
-
+            
             IssuePriorityButtonView(issue: self.issue)
+            
+            IssueProjectRowView(project: issue.project)
             
             // Supporter
             issue.supporter.map { IssueReporterView(reporter: $0) }
