@@ -11,6 +11,13 @@ import Combine
 
 class ProjectListModel: BaseListModel<Project, ProjectResponse> {
     override var url: URL { URLSetting.projectURL }
+    
+    var project: Project?
+    
+    init(_ project: Project? = nil) {
+        self.project = project
+        super.init()
+    }
 }
 
 struct ProjectResponse: ResponseData {

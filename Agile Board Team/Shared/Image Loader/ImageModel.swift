@@ -24,9 +24,4 @@ class ImageModel: ObservableObject {
             .receive(on: RunLoop.main, options: .none)
             .assign(to: \.image, on: self)
     }
-    
-    deinit {
-        print("Deinit \(#file)")
-        self.cacheSubscription?.cancel()
-    }
 }

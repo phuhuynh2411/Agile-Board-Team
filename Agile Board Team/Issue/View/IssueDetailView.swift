@@ -28,7 +28,7 @@ struct IssueDetailView: View {
             
             IssuePriorityButtonView(issue: self.issue)
             
-            IssueProjectRowView(project: issue.project)
+            IssueProjectButtonView(project: issue.project)
             
             // Supporter
             issue.supporter.map { IssueReporterView(reporter: $0) }
@@ -171,6 +171,18 @@ struct IssuePriorityButtonView: View {
         NavigationLink(destination: PriorityListView()
             .environmentObject(PriorityListModel(self.issue))) {
                 self.issue.priority.map {IssuePriorityRowView(priority: $0)}
+        }
+    }
+}
+
+
+private struct IssueProjectButtonView: View {
+    @ObservedObject var project: Project
+    
+    var body: some View {
+        NavigationLink(destination: ProjectListView(navDisplayMode: .inline)
+            .environmentObject(ProjectListModel(self.project))) {
+                IssueProjectRowView(project: project)
         }
     }
 }

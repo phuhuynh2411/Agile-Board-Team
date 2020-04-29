@@ -11,9 +11,11 @@ import RefreshableList
 
 struct ProjectListView: View {
     @EnvironmentObject var viewModel: ProjectListModel
+    var navDisplayMode: NavigationBarItem.TitleDisplayMode = .large
     
-    init() {
+    init(navDisplayMode: NavigationBarItem.TitleDisplayMode = .large) {
         UITableView.appearance().separatorStyle = .none
+        self.navDisplayMode = navDisplayMode
     }
     
     var body: some View {
@@ -30,7 +32,7 @@ struct ProjectListView: View {
                 ProjectNotFoundView()
                 RefreshableList(showRefreshView: $viewModel.isPulling) {
                     ForEach(self.viewModel.isFiltering ? self.viewModel.filtedItems : self.viewModel.items) { project in
-                        ProjectRowView(project: project)
+                        ProjectRowView(project: project, isSelected: self.viewModel.project != nil ? true : false)
                     }
                     if self.viewModel.isLoadingMore {
                         LastRowView(isLoadingMore: self.$viewModel.isLoadingMore)
@@ -51,16 +53,10 @@ struct ProjectListView: View {
                 self.viewModel.reload(animated: true, whenEmpty: true)
             }
             
-            .navigationBarTitle("Projects", displayMode: .large)
+            .navigationBarTitle("Projects", displayMode: self.navDisplayMode)
             .navigationBarItems(trailing: NavTrailingView() )
             .navigationBarHidden(viewModel.showCancelButton)
         }
-    }
-    
-   
-    func onAppear(_ project: Project) {
-        guard viewModel.isLastRow(id: project.id) else { return }
-        viewModel.loadMore()
     }
 }
 
@@ -90,7 +86,7 @@ private struct NavTrailingView: View {
    
         HStack (spacing: 25) {
             Button(action: {
-                withAnimation(.easeInOut(duration: 1)) {
+                withAnimation(.easeInOut(duration: 0.5)) {
                     self.viewModel.showCancelButton = true
                 }
             }) {

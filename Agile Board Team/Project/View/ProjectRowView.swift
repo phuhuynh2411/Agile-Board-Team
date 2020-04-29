@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ProjectRowView: View {
     @State var project: Project
+    var isSelected: Bool = false
     
     var body: some View {
         HStack(spacing: 10) {
@@ -28,6 +29,10 @@ struct ProjectRowView: View {
                 
             }
             Spacer()
+            if isSelected {
+                Image(systemName: "checkmark")
+                    .foregroundColor(.green)
+            }
         }
         //.padding()
         .frame(height: 60)
@@ -36,7 +41,10 @@ struct ProjectRowView: View {
 
 struct ProjectRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectRowView(project: projectData[0])
+        VStack {
+            ProjectRowView(project: projectData[0])
+            ProjectRowView(project: projectData[0], isSelected: true)
+        }
     }
 }
 
