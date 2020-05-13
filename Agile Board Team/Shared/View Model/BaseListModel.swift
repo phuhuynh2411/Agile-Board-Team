@@ -17,7 +17,7 @@ class BaseListModel<T:Identifiable, ResponseType: ResponseData>: ObservableObjec
     @Published var showCancelButton = false
     @Published var emptySearchResult = false
     
-    @Published var errorMessage = ""
+    var errorMessage = ""
     @Published var isRefreshing = false
     @Published var isPulling = false
     

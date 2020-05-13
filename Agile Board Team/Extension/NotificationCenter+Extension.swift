@@ -11,4 +11,5 @@ import Foundation
 extension Notification.Name {
     static let didLoginSucceed = Notification.Name("didLoginSucceed")
     static let issueDidChange = Notification.Name("issueDidChange")
+    static let statusCode401 = Notification.Name("statusCode401")
 }

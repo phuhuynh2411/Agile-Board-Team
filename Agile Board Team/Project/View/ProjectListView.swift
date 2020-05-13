@@ -39,7 +39,7 @@ struct ProjectListView: View {
              }
              if self.viewModel.isFailed {
                  ErrorBannerView(message: self.viewModel.errorMessage, display: self.$viewModel.isFailed)
-                 frame(height: 80)
+                    .frame(height: 80)
              }
              
              ProjectNotFoundView()
@@ -65,7 +65,7 @@ struct ProjectListView: View {
          .onAppear {
              self.viewModel.reload(animated: true, whenEmpty: true)
          }
-         
+
          .navigationBarTitle("Projects", displayMode: self.navDisplayMode)
          .navigationBarItems(trailing: NavTrailingView() )
          .navigationBarHidden(viewModel.showCancelButton)

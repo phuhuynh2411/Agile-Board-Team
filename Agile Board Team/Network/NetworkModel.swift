@@ -17,8 +17,12 @@ protocol NetworkModel: NetworkRequest {
 extension NetworkModel {
     
     func validate(_ data: Data, _ response: URLResponse) throws -> Data {
-        guard let _ = response as? HTTPURLResponse else { throw APIError.invalidRespond }
-        //guard (200...400).contains(httpResponse.statusCode) else { throw APIError.statusCode(httpResponse.statusCode)}
+        guard let httpResponse = response as? HTTPURLResponse else { throw APIError.invalidRespond }
+        
+        guard httpResponse.statusCode != 401 else {
+            NotificationCenter.default.post(name: .statusCode401, object: self)
+            throw APIError.statusCode(httpResponse.statusCode)
+        }
         self.printJSON(data: data)
         return data
     }

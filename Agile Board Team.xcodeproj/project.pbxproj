@@ -39,6 +39,7 @@
 		8420495C241A7AE6001FE724 /* MockURLSessionUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420495B241A7AE6001FE724 /* MockURLSessionUploadTask.swift */; };
 		8420AFE324542E28007E6B6B /* IssueTitleDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420AFE224542E28007E6B6B /* IssueTitleDescriptionView.swift */; };
 		8421319724237466008716FE /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421319624237466008716FE /* NetworkModel.swift */; };
+		8423D067246BDFEA00524716 /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8423D066246BDFEA00524716 /* URLProtocolMock.swift */; };
 		8425B9ED2424C5E800AB9E98 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425B9EC2424C5E800AB9E98 /* UIApplication+Extension.swift */; };
 		8425B9EF2424C5F500AB9E98 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425B9EE2424C5F500AB9E98 /* View+Extension.swift */; };
 		8430DC9E24318A6300CCD541 /* RefreashableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430DC9D24318A6300CCD541 /* RefreashableScrollView.swift */; };
@@ -172,6 +173,7 @@
 		8420495B241A7AE6001FE724 /* MockURLSessionUploadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionUploadTask.swift; sourceTree = "<group>"; };
 		8420AFE224542E28007E6B6B /* IssueTitleDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTitleDescriptionView.swift; sourceTree = "<group>"; };
 		8421319624237466008716FE /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
+		8423D066246BDFEA00524716 /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
 		8425B9EC2424C5E800AB9E98 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		8425B9EE2424C5F500AB9E98 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		8430DC9D24318A6300CCD541 /* RefreashableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreashableScrollView.swift; sourceTree = "<group>"; };
@@ -312,7 +314,6 @@
 		840F268724187C0B0085FBA6 = {
 			isa = PBXGroup;
 			children = (
-				84D2846D244ABADF00623F05 /* TestAuthentication.swift */,
 				840F269224187C0B0085FBA6 /* Agile Board Team */,
 				840FDB58241A27E000C395E8 /* Agile Board TeamTests */,
 				840F269124187C0B0085FBA6 /* Products */,
@@ -403,7 +404,9 @@
 		840FDB58241A27E000C395E8 /* Agile Board TeamTests */ = {
 			isa = PBXGroup;
 			children = (
+				84D2846D244ABADF00623F05 /* TestAuthentication.swift */,
 				840FDB5B241A27E000C395E8 /* Info.plist */,
+				8423D066246BDFEA00524716 /* URLProtocolMock.swift */,
 			);
 			path = "Agile Board TeamTests";
 			sourceTree = "<group>";
@@ -968,6 +971,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84D2846E244ABADF00623F05 /* TestAuthentication.swift in Sources */,
+				8423D067246BDFEA00524716 /* URLProtocolMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

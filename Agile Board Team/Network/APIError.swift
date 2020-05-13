@@ -17,3 +17,16 @@ enum APIError: Error {
     case invalidEndPoint
     case statusCode(Int)
 }
+
+extension APIError: LocalizedError {
+
+    var errorDescription: String? {
+        switch self {
+        case .statusCode(let code):
+            guard code == 401 else { return "" }
+            return NSLocalizedString("Session timeout. Need to re-login", comment: "")
+        default: return ""
+        }
+    }
+    
+}
