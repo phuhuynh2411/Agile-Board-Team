@@ -12,7 +12,7 @@ import Combine
 class IssueListModel: BaseListModel<Issue, IssueResponse> {
     override var url: URL { URLSetting.issueURL }
     
-    override init() {
+    init() {
         super.init()
          _ = self.objectWillChange.append(super.objectWillChange)
     }

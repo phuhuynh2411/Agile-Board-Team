@@ -24,6 +24,11 @@ extension NetworkRequest {
     }
     #endif
     
+    var defaultHeaders: [String: String] {[
+        "Content-Type": "application/json",
+        "cache-control": "no-cache",
+        ]}
+    
     var jsonDecoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
@@ -49,9 +54,9 @@ extension NetworkRequest {
         return request
     }
     
-    private func request(url: URL, authen: Bool = false) -> URLRequest {
+    private func request(url: URL, authen: Bool = false, headers: [String: String]? = nil) -> URLRequest {
         var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.allHTTPHeaderFields = (headers != nil) ? headers : self.defaultHeaders
         if authen {
             request.setValue("Bearer \(self.accessToken)", forHTTPHeaderField: "Authorization")
         }

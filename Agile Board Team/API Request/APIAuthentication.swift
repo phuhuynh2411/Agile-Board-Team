@@ -1,23 +1,17 @@
 //
-//  Authentication.swift
+//  APIAuthentication.swift
 //  Agile Board Team
 //
-//  Created by Huynh Tan Phu on 4/18/20.
+//  Created by Huynh Tan Phu on 5/20/20.
 //  Copyright © 2020 Filesoft. All rights reserved.
 //
 
 import Foundation
 import Combine
 
-class Authentication: NetworkModel {
+class APIAuthentication: API <APIAuthentication.ResponseData> {
     
-    var entry: Entry<Authentication.ResponseData>?
-    var publisher: APISessionDataPublisher
-    static var shared = Authentication()
-    
-    init(publisher: APISessionDataPublisher = APISessionDataPublisher()) {
-        self.publisher = publisher
-    }
+    static var shared = APIAuthentication()
     
     private func buildLoginRequest(_ username: String, _ password: String) throws -> URLRequest {
         var request = self.postRequest(url: URLSetting.loginURL)
@@ -48,32 +42,40 @@ class Authentication: NetworkModel {
     
     func login(_ username: String, _ password: String) -> AnyPublisher<Token, Error> {
         return postLogin(username, password) // Entry/ Error
-            .tryMap { try self.validateLogin(entry: $0) }
+            .tryMap { try self.validate(entry: $0) }
             .eraseToAnyPublisher()
     }
     
-    private func validateLogin(entry: Entry<ResponseData>) throws -> Token {
+    private func validate(entry: Entry<ResponseData>) throws -> Token {
         guard entry.meta.success, entry.meta.statusCode == 200 else {
-            throw LoginError.invalidCredential(entry.meta.message)
+            throw AuthenticationError.invalidCredential(entry.meta.message)
         }
         guard let token = entry.data?.accessToken else {
-            throw LoginError.emptyToken
+            throw AuthenticationError.emptyToken
         }
+        self.completeAuthentication(with: token)
+        
+        return Token(accessToken: token)
+    }
+    
+    private func completeAuthentication(with token: String) {
         // Save access token to the user default
         UserDefaults.standard.set(token, forKey: UserDefaultKey.accessToken)
         // Post a notification
         NotificationCenter.default.post(name: .didLoginSucceed, object: self, userInfo: [UserDefaultKey.accessToken: token])
-        return Token(accessToken: token)
     }
     
+    // MARK: - ResponseData
     struct ResponseData: Codable {
-           var accessToken: String
-           var tokenType: String
-           var expiresIn: Int
-           var user: User
+        var accessToken: String
+        var tokenType: String
+        var expiresIn: Int
+        var user: User
     }
     
-    enum LoginError: Error, LocalizedError {
+    // MARK: - Authentication Error
+    
+    enum AuthenticationError: Error, LocalizedError {
         case invalidCredential(String)
         case emptyToken
         

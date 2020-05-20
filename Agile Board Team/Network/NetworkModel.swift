@@ -12,6 +12,7 @@ import Combine
 protocol NetworkModel: NetworkRequest {
     associatedtype ResponseData: Codable
     var entry: Entry<ResponseData>? { get set }
+    var publisher: APISessionDataPublisher { get set }
 }
 
 extension NetworkModel {
@@ -28,8 +29,7 @@ extension NetworkModel {
     }
     
     func send(request: URLRequest) -> AnyPublisher<Entry<ResponseData>, Error> {
-        return URLSession
-            .shared
+        return publisher
             .dataTaskPublisher(for: request)
             .tryMap { try self.validate($0.data, $0.response) }
             .decode(type: Entry<ResponseData>.self, decoder: self.jsonDecoder )

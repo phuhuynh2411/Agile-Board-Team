@@ -15,9 +15,11 @@ class IssueAPI: NetworkModel {
     var updateIssueURL: URL {
         URLSetting.issueURL.appendingPathComponent(issue.id)
     }
+    var publisher: APISessionDataPublisher
         
-    init(_ issue: Issue) {
+    init(_ issue: Issue, publisher: APISessionDataPublisher = APISessionDataPublisher()) {
         self.issue = issue
+        self.publisher = publisher
     }
     
     internal func validateResponse(entry: Entry<Issue>) throws -> Entry<Issue> {

@@ -8,10 +8,6 @@
 
 import Foundation
 
-class Token: Codable {
+struct Token: Codable {
     var accessToken: String
-    
-    init(accessToken: String) {
-        self.accessToken = accessToken
-    }
 }

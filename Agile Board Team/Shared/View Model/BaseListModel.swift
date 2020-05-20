@@ -40,8 +40,11 @@ class BaseListModel<T:Identifiable, ResponseType: ResponseData>: ObservableObjec
     
     var cancelableRequest: Cancellable?
     var url: URL { URLSetting.baseURL }
+    var publisher: APISessionDataPublisher
         
-    init() {
+    init(publisher: APISessionDataPublisher = APISessionDataPublisher()) {
+        self.publisher = publisher
+        
         self.remoteSearchStream = self.$search
             .debounce(for: 0.5, scheduler: RunLoop.main)
             .removeDuplicates()
@@ -52,8 +55,9 @@ class BaseListModel<T:Identifiable, ResponseType: ResponseData>: ObservableObjec
             })
     }
     
-    init(items: [T]) {
+    init(items: [T], publisher: APISessionDataPublisher = APISessionDataPublisher()) {
         self.items = items
+        self.publisher = publisher
     }
     
     private func get()->AnyPublisher<Entry<ResponseType>, Error> {
