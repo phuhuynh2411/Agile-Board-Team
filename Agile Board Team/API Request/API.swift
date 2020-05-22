@@ -9,8 +9,6 @@
 import Foundation
 import Combine
 
-
-
 class API <ResponseData: Codable> {
     /// Default header for each request
     var defaultHeaders = [
@@ -28,14 +26,6 @@ class API <ResponseData: Codable> {
     
     var timeoutInterval: TimeInterval = 10.0
     var publisher: APISessionDataPublisher = APISessionDataPublisher()
-    
-    /// Access token
-    #if DEBUG
-    var accessToken = UserDefaults.standard.string(forKey: UserDefaultKey.accessToken) ?? ""
-    #else
-    let fakeToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvdGFzay5odXVoaWVucXQuZGV2XC9hcGlcL3YxXC9sb2dpbiIsImlhdCI6MTU4Nzk1MTYyOSwiZXhwIjoxNTg4NTU2NDI5LCJuYmYiOjE1ODc5NTE2MjksImp0aSI6IjFlczlhcDROS1lGWDlxVHAiLCJzdWIiOiIzNmU3NTkyMC04MTRiLTExZWEtYjQyZS05ZjIyMzYwZTVkZGUiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Tdr51v3TO4CqyuMrCUyoRsR9Ebsm2-8qaawPhEe7VY0"
-    var accessToken = UserDefaults.standard.string(forKey: UserDefaultKey.accessToken) ?? fakeToken
-    #endif
         
     internal func postRequest(url: URL, authen: Bool = false) -> URLRequest {
         var request = self.request(url: url, authen: authen)
@@ -55,23 +45,24 @@ class API <ResponseData: Codable> {
         return request
     }
     
-    private func request(url: URL, authen: Bool = false, headers: [String: String]? = nil) -> URLRequest {
+    private func request(url: URL, authen: Bool = false) -> URLRequest {
         var request = URLRequest(url: url)
-        request.allHTTPHeaderFields = (headers != nil) ? headers : self.defaultHeaders
+        request.allHTTPHeaderFields = self.defaultHeaders
         request.timeoutInterval = timeoutInterval
         if authen {
-            request.setValue("Bearer \(self.accessToken)", forHTTPHeaderField: "Authorization")
+            guard let token = TokenManager.shared.getToken() else { return request }
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
         return request
     }
 
-    internal func printJSON(data: Data?) {
+    private func printJSON(data: Data?) {
         if let data = data, let dataString = String(data: data, encoding: .utf8) {
             print(dataString)
         }
     }
     
-    func validate(_ data: Data, _ response: URLResponse) throws -> Data {
+    private func validate(_ data: Data, _ response: URLResponse) throws -> Data {
         guard let httpResponse = response as? HTTPURLResponse else { throw APIError.invalidRespond }
         
         guard httpResponse.statusCode != 401 else {

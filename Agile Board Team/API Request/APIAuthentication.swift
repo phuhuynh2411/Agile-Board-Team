@@ -60,7 +60,7 @@ class APIAuthentication: API <APIAuthentication.ResponseData> {
     
     private func completeAuthentication(with token: String) {
         // Save access token to the user default
-        UserDefaults.standard.set(token, forKey: UserDefaultKey.accessToken)
+        TokenManager.shared.setToken(token)
         // Post a notification
         NotificationCenter.default.post(name: .didLoginSucceed, object: self, userInfo: [UserDefaultKey.accessToken: token])
     }

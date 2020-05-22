@@ -31,4 +31,11 @@ class Mock {
     let networkError = NSError(domain: "NSURLErrorDomain",
                                code: -1004, //kCFURLErrorCannotConnectToHost
                                userInfo: nil)
+    
+    let invalidEmail = "invalid@gmail.com"
+    let invalidPassword = "invalidPassword"
+    
+    let token = "testingToken"
+    
+    let testURL = URL(string: "http://localhost:8080")!
 }

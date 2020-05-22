@@ -121,8 +121,10 @@ import Combine
 //}
 
 class TestAuthentication: XCTestCase {
+    private var apiAuthentication: APIAuthentication!
+    
     override func setUp() {
-        
+        apiAuthentication = APIAuthentication()
     }
     
     override func tearDown() {
