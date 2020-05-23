@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-class APIAuthentication: API <APIAuthentication.ResponseData> {
+class APIAuthentication: API <Entry<APIAuthentication.ResponseData>> {
     
     static var shared = APIAuthentication()
     

@@ -60,5 +60,15 @@ class Fixture {
         }
     """
     
-    struct DummyCodable: Codable {}
+    struct DummyCodable: Codable {
+        let id: String
+    }
+    
+    static let dummyResponse = """
+    {
+        "id": "empty"
+    }
+    """
+    
+    static let emptyJSON = ""
 }

@@ -37,5 +37,8 @@ class Mock {
     
     let token = "testingToken"
     
-    let testURL = URL(string: "http://localhost:8080")!
+    let testURL = URL(string: "http://localhost")!
+    var testRequest: URLRequest {
+        URLRequest(url: testURL)
+    }
 }

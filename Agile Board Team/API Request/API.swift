@@ -24,7 +24,10 @@ class API <ResponseData: Codable> {
         return decoder
     }
     
+    // A request timeout
     var timeoutInterval: TimeInterval = 10.0
+    
+    // A publisher that does the request
     var publisher: APISessionDataPublisher = APISessionDataPublisher()
         
     internal func postRequest(url: URL, authen: Bool = false) -> URLRequest {
@@ -62,7 +65,7 @@ class API <ResponseData: Codable> {
         }
     }
     
-    private func validate(_ data: Data, _ response: URLResponse) throws -> Data {
+    internal func validate(_ data: Data, _ response: URLResponse) throws -> Data {
         guard let httpResponse = response as? HTTPURLResponse else { throw APIError.invalidRespond }
         
         guard httpResponse.statusCode != 401 else {
@@ -73,33 +76,47 @@ class API <ResponseData: Codable> {
         return data
     }
     
-    internal func send(request: URLRequest) -> AnyPublisher<Entry<ResponseData>, Error> {
+    internal func send(request: URLRequest) -> AnyPublisher<ResponseData, Error> {
         return publisher
             .dataTaskPublisher(for: request)
             .tryMap { try self.validate($0.data, $0.response) }
-            .decode(type: Entry<ResponseData>.self, decoder: self.defaultJSONDecoder )
+            .decode(type: ResponseData.self, decoder: self.defaultJSONDecoder )
             .eraseToAnyPublisher()
     }
     
-    internal func getData(from url: URL, page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> AnyPublisher<Entry<ResponseData>, Error> {
+    internal func getData(from url: URL, page: Int? = nil, limit: Int? = nil, keyword: String? = nil) -> AnyPublisher<ResponseData, Error> {
         // Create a URL with parameters
-        let url = self.parasWith(url: url, page: page, numberOfItems: numberOfItems, keyword: keyword)
+        let url = self.addQueryItems(page: page, limit: limit, keyword: keyword, to: url)
         // Create a get request
         let request = self.getRequest(url: url, authen: true)
         return send(request: request)
     }
     
-    private func parasWith(url: URL, page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> URL {
+    /**
+     Add query items with page number, a number of items and keyword to the URL
+     - parameter page: the page number
+     - parameter limit: a number of items
+     - parameter keyword: a search criteria
+     - parameter url: the URL that will be included the query items
+    
+     - Returns: A new URL included the query items
+     */
+    internal func addQueryItems(page: Int? = nil, limit: Int? = nil, keyword: String? = nil, to url: URL) -> URL {
         var urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         urlComponent.queryItems = []
         if let page = page {
             urlComponent.queryItems?.append(URLQueryItem(name: "page", value: "\(page)"))
         }
-        if let numberOfItems = numberOfItems {
-            urlComponent.queryItems?.append(URLQueryItem(name: "limit", value: "\(numberOfItems)") )
+        if let limit = limit {
+            urlComponent.queryItems?.append(URLQueryItem(name: "limit", value: "\(limit)") )
         }
         if let keyword = keyword {
             urlComponent.queryItems?.append(URLQueryItem(name: "keyword", value: "\(keyword)") )
+        }
+        
+        // Remove an extra question mark at the end of the URL if the query item is empty.
+        if urlComponent.queryItems?.count == 0 {
+            urlComponent.queryItems = nil
         }
         
         return urlComponent.url!

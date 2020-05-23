@@ -8,14 +8,27 @@
 
 import XCTest
 @testable import Agile_Board_Team
+import Combine
 
 class APITest: XCTestCase {
     private var api: API<Fixture.DummyCodable>!
     private var mock: Mock!
+    private var timeout: TimeInterval = 1.0
+    
+    private var customPublisher: APISessionDataPublisher!
     
     override func setUp() {
         api = API<Fixture.DummyCodable>()
         mock = Mock()
+        
+        // Create a custom URL session
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [URLProtocolMock.self]
+        let session = URLSession(configuration: config)
+        
+        // Change API's publisher to the custom publishers
+        self.customPublisher = APISessionDataPublisher(session: session)
+        api.publisher = customPublisher
     }
     
     override func tearDown() {
@@ -110,5 +123,135 @@ class APITest: XCTestCase {
         let request1 = api.putRequest(url: mock.testURL, authen: true)
         XCTAssertNotNil(request1.allHTTPHeaderFields!["Authorization"])
         XCTAssertEqual(request1.allHTTPHeaderFields!["Authorization"], "Bearer \(mock.token)")
+    }
+    
+    func testValidate() {
+        // 1. The response is not http response
+        let dumpmyData = Data()
+        XCTAssertThrowsError(try api.validate(dumpmyData, URLResponse()), "Throw APIError.inValidResponse") { (error) in
+            XCTAssertEqual(error as! APIError, APIError.invalidRespond)
+        }
+        
+        // 2. Invalid response 401
+        XCTAssertThrowsError(try api.validate(dumpmyData, mock.invalidResponse401!), "Invalid response 401") { (error) in
+            XCTAssertEqual(error as! APIError, APIError.statusCode(401))
+        }
+        
+        // 3. Valid response, and returns data
+        XCTAssertNoThrow(try api.validate(dumpmyData, mock.validResponse!), "No throw, and returns data")
+    }
+    
+    func testSend() {
+        // Setup fixture
+        URLProtocolMock.testURLs = [mock.testURL: Data(Fixture.dummyResponse.utf8)]
+        
+        // 1. Valid response
+        URLProtocolMock.response = mock.validResponse
+        let publisher = api.send(request: mock.testRequest)
+        
+        let validTest = evalValidResponseTest(publisher: publisher)
+        wait(for: validTest.expectations, timeout: self.timeout)
+        validTest.cancellable?.cancel()
+        
+        // 2. Invalid response due to invalid http response
+        URLProtocolMock.response = mock.invalidResponse
+        let publisher2 = api.send(request: mock.testRequest)
+        let invalidTest = evalInvalidResponseTest(publisher: publisher2)
+        wait(for: invalidTest.expectations, timeout: self.timeout)
+        invalidTest.cancellable?.cancel()
+        
+        // 3. Invalid respponse due to invalid data
+        URLProtocolMock.testURLs = [mock.testURL: Data(Fixture.emptyJSON.utf8)]
+        URLProtocolMock.response = mock.validResponse
+        let publisher3 = api.send(request: mock.testRequest)
+        let invalidTest2 = evalInvalidResponseTest(publisher: publisher3)
+        wait(for: invalidTest2.expectations, timeout: self.timeout)
+        invalidTest2.cancellable?.cancel()
+        
+        // 4. Invalid response due to network error
+        URLProtocolMock.testURLs = [mock.testURL: Data(Fixture.dummyResponse.utf8)]
+        URLProtocolMock.error = mock.networkError
+        let publisher4 = api.send(request: mock.testRequest)
+        let invalidTest3 = evalInvalidResponseTest(publisher: publisher4)
+        wait(for: invalidTest3.expectations, timeout: self.timeout)
+        invalidTest3.cancellable?.cancel()
+        
+    }
+    
+    func testAddQueryItem() {
+        // 1. page = 1, limit = 1, keyword = keyword
+        let url = api.addQueryItems(page: 1, limit: 1, keyword: "keyword", to: mock.testURL)
+        XCTAssertEqual(url.absoluteString, "\(mock.testURL)?page=1&limit=1&keyword=keyword" )
+        
+        // 2. empty query items
+        let url1 = api.addQueryItems(to: mock.testURL)
+        XCTAssertEqual(url1.absoluteString, "\(mock.testURL)" )
+        
+        // 3. only page = 1
+        let url2 = api.addQueryItems(page: 1, to: url)
+        XCTAssertEqual(url2.absoluteString, "\(mock.testURL)?page=1" )
+        
+        // 4. only limit = 1
+        let url3 = api.addQueryItems(limit: 1, to: url)
+        XCTAssertEqual(url3.absoluteString, "\(mock.testURL)?limit=1" )
+        
+        // 5. only keyword = keyword
+        let url4 = api.addQueryItems(keyword: "keyword", to: url)
+        XCTAssertEqual(url4.absoluteString, "\(mock.testURL)?keyword=keyword" )
+    }
+    
+    func evalValidResponseTest<T:Publisher>(publisher: T?) -> (expectations:[XCTestExpectation], cancellable: AnyCancellable?) {
+        XCTAssertNotNil(publisher)
+        
+        let expectationFinished = expectation(description: "finished")
+        let expectationReceive = expectation(description: "receiveValue")
+        let expectationFailure = expectation(description: "failure")
+        expectationFailure.isInverted = true
+        
+        let cancellable = publisher?.sink (receiveCompletion: { (completion) in
+            switch completion {
+            case .failure(let error):
+                print("--TEST ERROR--")
+                print(error.localizedDescription)
+                print("------")
+                expectationFailure.fulfill()
+            case .finished:
+                expectationFinished.fulfill()
+            }
+        }, receiveValue: { response in
+            XCTAssertNotNil(response)
+            print(response)
+            expectationReceive.fulfill()
+        })
+        return (expectations: [expectationFinished, expectationReceive, expectationFailure],
+                cancellable: cancellable)
+    }
+    
+    func evalInvalidResponseTest<T:Publisher>(publisher: T?) -> (expectations:[XCTestExpectation], cancellable: AnyCancellable?) {
+        XCTAssertNotNil(publisher)
+        
+        let expectationFinished = expectation(description: "Invalid.finished")
+        expectationFinished.isInverted = true
+        let expectationReceive = expectation(description: "Invalid.receiveValue")
+        expectationReceive.isInverted = true
+        let expectationFailure = expectation(description: "Invalid.failure")
+        
+        let cancellable = publisher?.sink (receiveCompletion: { (completion) in
+            switch completion {
+            case .failure(let error):
+                print("--TEST FULFILLED--")
+                print(error.localizedDescription)
+                print("------")
+                expectationFailure.fulfill()
+            case .finished:
+                expectationFinished.fulfill()
+            }
+        }, receiveValue: { response in
+            XCTAssertNotNil(response)
+            print(response)
+            expectationReceive.fulfill()
+        })
+         return (expectations: [expectationFinished, expectationReceive, expectationFailure],
+                       cancellable: cancellable)
     }
 }
