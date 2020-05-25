@@ -12,32 +12,29 @@ import Combine
 class APIAuthentication: API <Entry<APIAuthentication.ResponseData>> {
     
     static var shared = APIAuthentication()
+    private var loginURL: URL
     
-    private func buildLoginRequest(_ username: String, _ password: String) throws -> URLRequest {
-        var request = self.postRequest(url: URLSetting.loginURL)
+    init(loginURL: URL = URLSetting.loginURL) {
+        self.loginURL = loginURL
+    }
+    
+    private func buildLoginRequest(_ username: String, _ password: String) -> URLRequest {
+        var request = self.postRequest(url: self.loginURL)
         let json = [
             "email": username,
             "password": password
         ]
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: json, options: []) else {
-            throw APIError.invalidJSON
-        }
+        let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
         request.httpBody = jsonData
         
         return request
     }
     
     private func postLogin(_ username: String, _ password: String) -> AnyPublisher<Entry<ResponseData>, Error> {
-        return Future<URLRequest, Error> { promise in
-            do {
-                let request = try self.buildLoginRequest(username, password)
-                promise(.success(request))
-            } catch {
-                promise(.failure(error))
-            }
-        }
-        .flatMap { self.send(request: $0) }
-        .eraseToAnyPublisher()
+        let request =  self.buildLoginRequest(username, password)
+        
+        return self.send(request: request)
+            .eraseToAnyPublisher()
     }
     
     func login(_ username: String, _ password: String) -> AnyPublisher<Token, Error> {
@@ -46,11 +43,11 @@ class APIAuthentication: API <Entry<APIAuthentication.ResponseData>> {
             .eraseToAnyPublisher()
     }
     
-    private func validate(entry: Entry<ResponseData>) throws -> Token {
+    internal func validate(entry: Entry<ResponseData>) throws -> Token {
         guard entry.meta.success, entry.meta.statusCode == 200 else {
             throw AuthenticationError.invalidCredential(entry.meta.message)
         }
-        guard let token = entry.data?.accessToken else {
+        guard let token = entry.data?.accessToken, !token.isEmpty else {
             throw AuthenticationError.emptyToken
         }
         self.completeAuthentication(with: token)
@@ -70,12 +67,12 @@ class APIAuthentication: API <Entry<APIAuthentication.ResponseData>> {
         var accessToken: String
         var tokenType: String
         var expiresIn: Int
-        var user: User
+        //var user: User
     }
     
     // MARK: - Authentication Error
     
-    enum AuthenticationError: Error, LocalizedError {
+    enum AuthenticationError: Error, LocalizedError, Equatable {
         case invalidCredential(String)
         case emptyToken
         

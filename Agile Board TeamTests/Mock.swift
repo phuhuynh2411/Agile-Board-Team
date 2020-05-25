@@ -19,7 +19,7 @@ class Mock {
                                         httpVersion: nil,
                                         headerFields: nil)
     
-    let validResponseWithFullParas = HTTPURLResponse(url: URL(string: "http://localhost?page=1&limit=1&keyword=keyword")!,
+    let validResponseWithFullParas = HTTPURLResponse(url: URL(string: "http://localhost:8080?page=1&limit=1&keyword=keyword")!,
                                         statusCode: 200,
                                         httpVersion: nil,
                                         headerFields: nil)
@@ -33,17 +33,24 @@ class Mock {
                                              httpVersion: nil,
                                              headerFields: nil)
     
+    let invalidResponse400 = HTTPURLResponse(url: URL(string: "http://localhost:8080")!,
+                                             statusCode: 400,
+                                             httpVersion: nil,
+                                             headerFields: nil)
+    
     let networkError = NSError(domain: "NSURLErrorDomain",
                                code: -1004, //kCFURLErrorCannotConnectToHost
                                userInfo: nil)
     
     let invalidEmail = "invalid@gmail.com"
     let invalidPassword = "invalidPassword"
+    let validEmail = "valid@gmail.com"
+    let validPassword = "validPassword"
     
     let token = "testingToken"
     
-    let testURL = URL(string: "http://localhost")!
-    let testURLFullParas = URL(string: "http://localhost?page=1&limit=1&keyword=keyword")!
+    let testURL = URL(string: "http://localhost:8080")!
+    let testURLFullParas = URL(string: "http://localhost:8080?page=1&limit=1&keyword=keyword")!
     var testRequest: URLRequest {
         URLRequest(url: testURL)
     }

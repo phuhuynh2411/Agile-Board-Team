@@ -122,67 +122,103 @@ import Combine
 
 class TestAuthentication: XCTestCase {
     private var apiAuthentication: APIAuthentication!
+    private var mock: Mock!
+    private var timeout: TimeInterval = 1.0
+    private var loginStream: AnyCancellable?
     
     override func setUp() {
-        apiAuthentication = APIAuthentication()
+        mock = Mock()
+        apiAuthentication = APIAuthentication(loginURL: mock.testURL)
+        
+        // Configue a custom URLSession
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [URLProtocolMock.self]
+        // create a custom session
+        let session = URLSession(configuration: config)
+        let customPublisher = APISessionDataPublisher(session: session)
+        apiAuthentication.publisher = customPublisher
     }
     
     override func tearDown() {
-        
+        mock = nil
+        apiAuthentication = nil
     }
     
-    func evalValidResponseTest<T:Publisher>(publisher: T?) -> (expectations:[XCTestExpectation], cancellable: AnyCancellable?) {
-        XCTAssertNotNil(publisher)
+    func testLogin() {
+        // Setup fixture
+        URLProtocolMock.testURLs = [mock.testURL: Data(Fixture.failureAuthentication400.utf8)]
+        URLProtocolMock.response = mock.invalidResponse400
         
-        let expectationFinished = expectation(description: "finished")
-        let expectationReceive = expectation(description: "receiveValue")
-        let expectationFailure = expectation(description: "failure")
-        expectationFailure.isInverted = true
+        // 1. Empty user name and empty password
+        let publisher = apiAuthentication.login("", "")
+        let invalidResponse = PublisherHelper.shared.evalInvalidResponseTest(publisher: publisher)
+        wait(for: invalidResponse.expectations, timeout: timeout)
+        invalidResponse.cancellable?.cancel()
         
-        let cancellable = publisher?.sink (receiveCompletion: { (completion) in
-            switch completion {
-            case .failure(let error):
-                print("--TEST ERROR--")
-                print(error.localizedDescription)
-                print("------")
-                expectationFailure.fulfill()
-            case .finished:
-                expectationFinished.fulfill()
-            }
-        }, receiveValue: { response in
-            XCTAssertNotNil(response)
-            print(response)
-            expectationReceive.fulfill()
-        })
-        return (expectations: [expectationFinished, expectationReceive, expectationFailure],
-                cancellable: cancellable)
+        // 2. Empty user name, not empty password
+        let publisher2 = apiAuthentication.login("", "notEmptyPassword")
+        let invalidResponse2 = PublisherHelper.shared.evalInvalidResponseTest(publisher: publisher2)
+        wait(for: invalidResponse2.expectations, timeout: timeout)
+        invalidResponse2.cancellable?.cancel()
+        
+        // 3. Not empty user name, empty password
+        let publisher3 = apiAuthentication.login("invalidUserName", "")
+        let invalidResponse3 = PublisherHelper.shared.evalInvalidResponseTest(publisher: publisher3)
+        wait(for: invalidResponse3.expectations, timeout: timeout)
+        invalidResponse3.cancellable?.cancel()
+        
+        // 4. Invalid user name and password
+        let publisher4 = apiAuthentication.login("invalidUsername", "invalidPassword")
+        let invalidResponse4 = PublisherHelper.shared.evalInvalidResponseTest(publisher: publisher4)
+        wait(for: invalidResponse4.expectations, timeout: timeout)
+        invalidResponse4.cancellable?.cancel()
     }
     
-    func evalInvalidResponseTest<T:Publisher>(publisher: T?) -> (expectations:[XCTestExpectation], cancellable: AnyCancellable?) {
-        XCTAssertNotNil(publisher)
-        
-        let expectationFinished = expectation(description: "Invalid.finished")
-        expectationFinished.isInverted = true
-        let expectationReceive = expectation(description: "Invalid.receiveValue")
-        expectationReceive.isInverted = true
-        let expectationFailure = expectation(description: "Invalid.failure")
-        
-        let cancellable = publisher?.sink (receiveCompletion: { (completion) in
-            switch completion {
-            case .failure(let error):
-                print("--TEST FULFILLED--")
-                print(error.localizedDescription)
-                print("------")
-                expectationFailure.fulfill()
-            case .finished:
-                expectationFinished.fulfill()
-            }
-        }, receiveValue: { response in
-            XCTAssertNotNil(response)
-            print(response)
-            expectationReceive.fulfill()
+    func testLogin2() {
+        // Make sure the didLoginSucceed notification is sent
+        let loginExpectation = expectation(description: "Login stream")
+        loginStream = NotificationCenter.default.publisher(for: .didLoginSucceed)
+            .receive(on: RunLoop.main)
+            .compactMap {$0.userInfo?[UserDefaultKey.accessToken] as? String
+        }
+        .sink(receiveValue: { (value) in
+            print("View router received notification value: \(value)")
+            XCTAssertEqual(value, self.mock.token)
+            loginExpectation.fulfill()
         })
-         return (expectations: [expectationFinished, expectationReceive, expectationFailure],
-                       cancellable: cancellable)
+        
+        // 5. Valid user name and valid password
+        // Setup fixture
+        URLProtocolMock.testURLs = [mock.testURL: Data(Fixture.successAuthentication.utf8)]
+        URLProtocolMock.response = mock.validResponse
+        // Change userdefault domain
+        TokenManager.shared = TokenManager(userDefault: UserDefaults(suiteName: #file)!)
+        TokenManager.shared.userDefault.removePersistentDomain(forName: #file)
+        
+        let publisher5 = apiAuthentication.login(mock.validEmail, mock.validPassword)
+        let validResponse = PublisherHelper.shared.evalValidResponseTest(publisher: publisher5)
+        wait(for: validResponse.expectations, timeout: timeout)
+        validResponse.cancellable?.cancel()
+        // Make sure the token is set
+        XCTAssertNotNil(TokenManager.shared.getToken())
+        if let token = TokenManager.shared.getToken() {
+            XCTAssertEqual("testingToken", token)
+        }
+        
+        wait(for: [loginExpectation], timeout: 10)
     }
+    
+    func testValidate() {
+        // 1. Invalid credentials
+        XCTAssertThrowsError(try apiAuthentication.validate(entry: Fixture.invalidCredential401), "") { (error) in
+            XCTAssertEqual(error as! APIAuthentication.AuthenticationError, APIAuthentication.AuthenticationError.invalidCredential(""))
+        }
+        
+        // 2. Empty access token
+        XCTAssertThrowsError(try apiAuthentication.validate(entry: Fixture.emptyAccessToken200), "") { (error) in
+            print(error.localizedDescription)
+            XCTAssertEqual(error as! APIAuthentication.AuthenticationError, APIAuthentication.AuthenticationError.emptyToken)
+        }
+    }
+    
 }

@@ -61,18 +61,18 @@ class API <ResponseData: Codable> {
 
     private func printJSON(data: Data?) {
         if let data = data, let dataString = String(data: data, encoding: .utf8) {
-            print(dataString)
+            print("RESPONSE DATA: \(dataString)")
         }
     }
     
     internal func validate(_ data: Data, _ response: URLResponse) throws -> Data {
+        self.printJSON(data: data)
         guard let httpResponse = response as? HTTPURLResponse else { throw APIError.invalidRespond }
         
         guard httpResponse.statusCode != 401 else {
             NotificationCenter.default.post(name: .statusCode401, object: self)
             throw APIError.statusCode(httpResponse.statusCode)
         }
-        self.printJSON(data: data)
         return data
     }
     
