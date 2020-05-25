@@ -133,6 +133,7 @@
 		84F6D72C2432F83B00CF28FF /* RefreshableNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F6D72B2432F83B00CF28FF /* RefreshableNavigationView.swift */; };
 		84F932F324499B05007F12B8 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F932F224499B05007F12B8 /* RequestData.swift */; };
 		84F932F52449A279007F12B8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F932F42449A279007F12B8 /* APIError.swift */; };
+		84FCDD65247B6AFA00CFDEFC /* PublisherHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FCDD64247B6AFA00CFDEFC /* PublisherHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -276,6 +277,7 @@
 		84F6D72B2432F83B00CF28FF /* RefreshableNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableNavigationView.swift; sourceTree = "<group>"; };
 		84F932F224499B05007F12B8 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		84F932F42449A279007F12B8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		84FCDD64247B6AFA00CFDEFC /* PublisherHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -434,6 +436,7 @@
 				84531C25247627CE005CC6AA /* JSONDecoder_DateDecodingStrategy+Extension.swift */,
 				84531C2724762FA0005CC6AA /* JSONDecoder_KeyDecodingStrategy+Extension.swift */,
 				84596D472477810D00D3A2AD /* TokenManagerTest.swift */,
+				84FCDD64247B6AFA00CFDEFC /* PublisherHelper.swift */,
 				840FDB5B241A27E000C395E8 /* Info.plist */,
 			);
 			path = "Agile Board TeamTests";
@@ -1015,6 +1018,7 @@
 				84531C2424761C0A005CC6AA /* APITest.swift in Sources */,
 				84596D482477810D00D3A2AD /* TokenManagerTest.swift in Sources */,
 				84D13AFF2474E94A005515E3 /* Fixture.swift in Sources */,
+				84FCDD65247B6AFA00CFDEFC /* PublisherHelper.swift in Sources */,
 				84531C2824762FA0005CC6AA /* JSONDecoder_KeyDecodingStrategy+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

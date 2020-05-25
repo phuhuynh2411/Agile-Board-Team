@@ -19,6 +19,11 @@ class Mock {
                                         httpVersion: nil,
                                         headerFields: nil)
     
+    let validResponseWithFullParas = HTTPURLResponse(url: URL(string: "http://localhost?page=1&limit=1&keyword=keyword")!,
+                                        statusCode: 200,
+                                        httpVersion: nil,
+                                        headerFields: nil)
+    
     let invalidResponse300 = HTTPURLResponse(url: URL(string: "http://localhost:8080")!,
                                            statusCode: 300,
                                            httpVersion: nil,
@@ -38,6 +43,7 @@ class Mock {
     let token = "testingToken"
     
     let testURL = URL(string: "http://localhost")!
+    let testURLFullParas = URL(string: "http://localhost?page=1&limit=1&keyword=keyword")!
     var testRequest: URLRequest {
         URLRequest(url: testURL)
     }

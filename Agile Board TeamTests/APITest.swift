@@ -33,6 +33,9 @@ class APITest: XCTestCase {
     
     override func tearDown() {
         self.api = nil
+        URLProtocolMock.response = nil
+        URLProtocolMock.error = nil
+        URLProtocolMock.testURLs = [:]
     }
     
     func testDefaultHeader() {
@@ -149,14 +152,14 @@ class APITest: XCTestCase {
         URLProtocolMock.response = mock.validResponse
         let publisher = api.send(request: mock.testRequest)
         
-        let validTest = evalValidResponseTest(publisher: publisher)
+        let validTest = PublisherHelper.shared.evalValidResponseTest(publisher: publisher)
         wait(for: validTest.expectations, timeout: self.timeout)
         validTest.cancellable?.cancel()
         
         // 2. Invalid response due to invalid http response
         URLProtocolMock.response = mock.invalidResponse
         let publisher2 = api.send(request: mock.testRequest)
-        let invalidTest = evalInvalidResponseTest(publisher: publisher2)
+        let invalidTest = PublisherHelper.shared.evalInvalidResponseTest(publisher: publisher2)
         wait(for: invalidTest.expectations, timeout: self.timeout)
         invalidTest.cancellable?.cancel()
         
@@ -164,7 +167,7 @@ class APITest: XCTestCase {
         URLProtocolMock.testURLs = [mock.testURL: Data(Fixture.emptyJSON.utf8)]
         URLProtocolMock.response = mock.validResponse
         let publisher3 = api.send(request: mock.testRequest)
-        let invalidTest2 = evalInvalidResponseTest(publisher: publisher3)
+        let invalidTest2 = PublisherHelper.shared.evalInvalidResponseTest(publisher: publisher3)
         wait(for: invalidTest2.expectations, timeout: self.timeout)
         invalidTest2.cancellable?.cancel()
         
@@ -172,7 +175,7 @@ class APITest: XCTestCase {
         URLProtocolMock.testURLs = [mock.testURL: Data(Fixture.dummyResponse.utf8)]
         URLProtocolMock.error = mock.networkError
         let publisher4 = api.send(request: mock.testRequest)
-        let invalidTest3 = evalInvalidResponseTest(publisher: publisher4)
+        let invalidTest3 = PublisherHelper.shared.evalInvalidResponseTest(publisher: publisher4)
         wait(for: invalidTest3.expectations, timeout: self.timeout)
         invalidTest3.cancellable?.cancel()
         
@@ -198,6 +201,17 @@ class APITest: XCTestCase {
         // 5. only keyword = keyword
         let url4 = api.addQueryItems(keyword: "keyword", to: url)
         XCTAssertEqual(url4.absoluteString, "\(mock.testURL)?keyword=keyword" )
+    }
+    
+    func testGetData() {
+        
+        URLProtocolMock.testURLs = [mock.testURLFullParas: Data(Fixture.dummyResponse.utf8)]
+        URLProtocolMock.response = mock.validResponseWithFullParas
+        
+        let publisher = api.getData(from: mock.testURL, page: 1, limit: 1, keyword: "keyword")
+        let validResponse = PublisherHelper.shared.evalValidResponseTest(publisher: publisher)
+        wait(for: validResponse.expectations, timeout: timeout)
+        validResponse.cancellable?.cancel()
     }
     
     func evalValidResponseTest<T:Publisher>(publisher: T?) -> (expectations:[XCTestExpectation], cancellable: AnyCancellable?) {

@@ -87,7 +87,7 @@ class API <ResponseData: Codable> {
     internal func getData(from url: URL, page: Int? = nil, limit: Int? = nil, keyword: String? = nil) -> AnyPublisher<ResponseData, Error> {
         // Create a URL with parameters
         let url = self.addQueryItems(page: page, limit: limit, keyword: keyword, to: url)
-        // Create a get request
+        // Create a get request from a url, embed the access token
         let request = self.getRequest(url: url, authen: true)
         return send(request: request)
     }
