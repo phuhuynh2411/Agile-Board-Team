@@ -84,9 +84,9 @@ class API <ResponseData: Codable> {
             .eraseToAnyPublisher()
     }
     
-    internal func getData(from url: URL, page: Int? = nil, limit: Int? = nil, keyword: String? = nil) -> AnyPublisher<ResponseData, Error> {
+    internal func getData(from url: URL, page: Int? = nil, limit: Int? = nil, search: String? = nil) -> AnyPublisher<ResponseData, Error> {
         // Create a URL with parameters
-        let url = self.addQueryItems(page: page, limit: limit, keyword: keyword, to: url)
+        let url = self.addQueryItems(page: page, limit: limit, search: search, to: url)
         // Create a get request from a url, embed the access token
         let request = self.getRequest(url: url, authen: true)
         return send(request: request)
@@ -101,7 +101,7 @@ class API <ResponseData: Codable> {
     
      - Returns: A new URL included the query items
      */
-    internal func addQueryItems(page: Int? = nil, limit: Int? = nil, keyword: String? = nil, to url: URL) -> URL {
+    internal func addQueryItems(page: Int? = nil, limit: Int? = nil, search: String? = nil, to url: URL) -> URL {
         var urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         urlComponent.queryItems = []
         if let page = page {
@@ -110,8 +110,8 @@ class API <ResponseData: Codable> {
         if let limit = limit {
             urlComponent.queryItems?.append(URLQueryItem(name: "limit", value: "\(limit)") )
         }
-        if let keyword = keyword {
-            urlComponent.queryItems?.append(URLQueryItem(name: "keyword", value: "\(keyword)") )
+        if let search = search {
+            urlComponent.queryItems?.append(URLQueryItem(name: "search", value: "\(search)") )
         }
         
         // Remove an extra question mark at the end of the URL if the query item is empty.

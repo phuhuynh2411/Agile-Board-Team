@@ -115,11 +115,21 @@ class Fixture {
         let entry: Entry<APIAuthentication.ResponseData> = Entry(meta: meta, data: data)
         return entry
     }
-    
+
     static var emptyAccessToken200: Entry<APIAuthentication.ResponseData> {
            let meta = MetaData(success: true, statusCode: 200, message: "", errors: nil)
            let data: APIAuthentication.ResponseData = APIAuthentication.ResponseData(accessToken: "", tokenType: "", expiresIn: 0)
            let entry: Entry<APIAuthentication.ResponseData> = Entry(meta: meta, data: data)
            return entry
     }
+    
+    static let unauthorizedResponse401 = """
+    {
+        "meta": {
+            "success": false,
+            "statusCode": 401,
+            "message": "Unauthorized"
+        }
+    }
+    """
 }

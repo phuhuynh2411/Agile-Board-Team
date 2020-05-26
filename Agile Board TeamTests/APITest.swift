@@ -183,8 +183,8 @@ class APITest: XCTestCase {
     
     func testAddQueryItem() {
         // 1. page = 1, limit = 1, keyword = keyword
-        let url = api.addQueryItems(page: 1, limit: 1, keyword: "keyword", to: mock.testURL)
-        XCTAssertEqual(url.absoluteString, "\(mock.testURL)?page=1&limit=1&keyword=keyword" )
+        let url = api.addQueryItems(page: 1, limit: 1, search: "keyword", to: mock.testURL)
+        XCTAssertEqual(url.absoluteString, "\(mock.testURL)?page=1&limit=1&search=keyword" )
         
         // 2. empty query items
         let url1 = api.addQueryItems(to: mock.testURL)
@@ -199,8 +199,8 @@ class APITest: XCTestCase {
         XCTAssertEqual(url3.absoluteString, "\(mock.testURL)?limit=1" )
         
         // 5. only keyword = keyword
-        let url4 = api.addQueryItems(keyword: "keyword", to: url)
-        XCTAssertEqual(url4.absoluteString, "\(mock.testURL)?keyword=keyword" )
+        let url4 = api.addQueryItems(search: "keyword", to: url)
+        XCTAssertEqual(url4.absoluteString, "\(mock.testURL)?search=keyword" )
     }
     
     func testGetData() {
@@ -208,7 +208,7 @@ class APITest: XCTestCase {
         URLProtocolMock.testURLs = [mock.testURLFullParas: Data(Fixture.dummyResponse.utf8)]
         URLProtocolMock.response = mock.validResponseWithFullParas
         
-        let publisher = api.getData(from: mock.testURL, page: 1, limit: 1, keyword: "keyword")
+        let publisher = api.getData(from: mock.testURL, page: 1, limit: 1, search: "keyword")
         let validResponse = PublisherHelper.shared.evalValidResponseTest(publisher: publisher)
         wait(for: validResponse.expectations, timeout: timeout)
         validResponse.cancellable?.cancel()

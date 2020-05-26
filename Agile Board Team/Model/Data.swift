@@ -40,6 +40,23 @@ func load<T: Decodable>(_ filename: String) -> T {
     }
 }
 
+func loadData(_ filename: String) -> Data {
+    let data: Data
+    
+    guard let path = Bundle.main.path(forResource: filename, ofType: "json")
+        else {
+            fatalError("Couldn't find \(filename) in main bundle.")
+    }
+    
+    do {
+        data = try Data(contentsOf:  URL(fileURLWithPath: path), options: .mappedIfSafe)
+    } catch {
+        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
+    }
+    
+   return data
+}
+
 final class ImageStore {
     typealias _ImageDictionary = [String: CGImage]
     fileprivate var images: _ImageDictionary = [:]

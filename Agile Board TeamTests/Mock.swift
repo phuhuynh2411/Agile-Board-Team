@@ -46,12 +46,15 @@ class Mock {
     let invalidPassword = "invalidPassword"
     let validEmail = "valid@gmail.com"
     let validPassword = "validPassword"
+    let testErrorDescription = "testError"
     
     let token = "testingToken"
     
     let testURL = URL(string: "http://localhost:8080")!
-    let testURLFullParas = URL(string: "http://localhost:8080?page=1&limit=1&keyword=keyword")!
+    let testURLFullParas = URL(string: "http://localhost:8080?page=1&limit=1&search=keyword")!
     var testRequest: URLRequest {
         URLRequest(url: testURL)
     }
+    
+    let testSearch = "testSearch"
 }
