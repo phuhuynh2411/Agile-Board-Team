@@ -28,7 +28,7 @@ extension APIIssue {
         let request = buildGetIssuesRequest()
         return self.send(request: request)
             .tryMap { try self.validate(entry: $0 ) }
-            .compactMap { $0.data?.issue }
+            .compactMap { $0.data?.data }
             .eraseToAnyPublisher()
     }
 }

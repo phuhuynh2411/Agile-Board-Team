@@ -13,14 +13,14 @@ extension Fixture {
     
     static var issueEntryResponse401: Entry<APIIssue.ResponseData> {
         let meta = MetaData(success: false, statusCode: 401, message: "", errors: nil)
-        let data: APIIssue.ResponseData = APIIssue.ResponseData(issue: [])
+        let data: APIIssue.ResponseData = APIIssue.ResponseData(data: [])
         let entry: Entry<APIIssue.ResponseData> = Entry(meta: meta, data: data)
         return entry
     }
     
     static var issueEntryResponse200: Entry<APIIssue.ResponseData> {
         let meta = MetaData(success: false, statusCode: 200, message: "", errors: nil)
-        let data: APIIssue.ResponseData = APIIssue.ResponseData(issue: [])
+        let data: APIIssue.ResponseData = APIIssue.ResponseData(data: [])
         let entry: Entry<APIIssue.ResponseData> = Entry(meta: meta, data: data)
         return entry
     }

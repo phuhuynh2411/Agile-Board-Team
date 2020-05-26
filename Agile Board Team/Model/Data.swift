@@ -40,10 +40,10 @@ func load<T: Decodable>(_ filename: String) -> T {
     }
 }
 
-func loadData(_ filename: String) -> Data {
+func loadData(_ filename: String, bundle: Bundle = .main) -> Data {
     let data: Data
     
-    guard let path = Bundle.main.path(forResource: filename, ofType: "json")
+    guard let path = bundle.path(forResource: filename, ofType: "json")
         else {
             fatalError("Couldn't find \(filename) in main bundle.")
     }

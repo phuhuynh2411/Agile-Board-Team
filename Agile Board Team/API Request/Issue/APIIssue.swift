@@ -10,11 +10,11 @@ import Foundation
 
 class APIIssue: API<Entry<APIIssue.ResponseData>> {
     var url: URL
-    var page: Int
-    var limit: Int
+    var page: Int?
+    var limit: Int?
     var search: String?
         
-    init(url: URL = URLSetting.issueURL, page: Int = 1, limit: Int = 1, search: String? = nil) {
+    init(url: URL = URLSetting.issueURL, page: Int? = 1, limit: Int? = 1, search: String? = nil) {
         self.url = url
         self.page = page
         self.limit = limit
@@ -22,7 +22,7 @@ class APIIssue: API<Entry<APIIssue.ResponseData>> {
     }
     
     struct ResponseData: Codable {
-        let issue: [Issue]
+        let data: [Issue]
     }
     
     internal func validate(entry: Entry<APIIssue.ResponseData>) throws -> Entry<APIIssue.ResponseData> {

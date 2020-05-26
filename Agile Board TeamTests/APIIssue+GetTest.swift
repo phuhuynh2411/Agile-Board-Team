@@ -13,10 +13,16 @@ import XCTest
 class APIIssueGetTest: XCTestCase {
     private var mock: Mock!
     private var apiIssue: APIIssue!
+    private var timeout: TimeInterval = 1.0
     
     override func setUp() {
         self.mock = Mock()
         self.apiIssue = APIIssue()
+        
+        apiIssue.url = mock.testURL
+        apiIssue.page = 1
+        apiIssue.limit = 1
+        apiIssue.search = mock.testSearch
         
         // Create a custom URLSession
         let config = URLSessionConfiguration.ephemeral
@@ -37,7 +43,33 @@ class APIIssueGetTest: XCTestCase {
     
     func testGetIssues() {
         // Setup fixture
-        URLProtocolMock.testURLs = [mock.testURL: loadData("issues")]
+        URLProtocolMock.testURLs = [mock.testURL: loadData("testingIssues", bundle: Bundle(for: Mock.self))]
+        URLProtocolMock.response = mock.validResponse
+        apiIssue.page = nil
+        apiIssue.limit = nil
+        apiIssue.search = nil
+        
+        // 1. Valid response
+        let publisher = apiIssue.getIssues()
+        let validResponse = PublisherHelper.shared.evalValidResponseTest(publisher: publisher)
+        wait(for: validResponse.expectations, timeout: timeout)
+        validResponse.cancellable?.cancel()
+        
+        // 2. Invaid response due to invaid data
+        URLProtocolMock.testURLs = [mock.testURL: Data(Fixture.dummyResponse.utf8)]
+        URLProtocolMock.response = mock.invalidResponse
+        let publisher2 = apiIssue.getIssues()
+        let invalidResponse2 = PublisherHelper.shared.evalInvalidResponseTest(publisher: publisher2)
+        wait(for: invalidResponse2.expectations, timeout: timeout)
+        invalidResponse2.cancellable?.cancel()
+        
+        // 4. Invalid response due to network error
+        URLProtocolMock.testURLs = [mock.testURL: Data(Fixture.dummyResponse.utf8)]
+        URLProtocolMock.error = mock.networkError
+        let publisher3 = apiIssue.getIssues()
+        let invalidResponse3 = PublisherHelper.shared.evalInvalidResponseTest(publisher: publisher3)
+        wait(for: invalidResponse3.expectations, timeout: timeout)
+        invalidResponse3.cancellable?.cancel()
     }
     
     func testBuildGetIssueRequest() {
@@ -49,5 +81,4 @@ class APIIssueGetTest: XCTestCase {
         let request = apiIssue.buildGetIssuesRequest()
         XCTAssertEqual(request.url?.absoluteString, "\(mock.testURL)?page=1&limit=1&search=\(mock.testSearch)")
     }
-    
 }
