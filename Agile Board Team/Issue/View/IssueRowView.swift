@@ -28,7 +28,7 @@ struct IssueRowView: View {
                 Text(self.issue.name)
                     .font(.system(size: 17))
                 HStack {
-                    Text(issue.issueNumber)
+                    Text(issue.issueNumber ?? "")
                         .foregroundColor(.secondary)
                         .font(.system(size: 14))
                     // Priority

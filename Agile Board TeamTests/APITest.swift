@@ -214,6 +214,42 @@ class APITest: XCTestCase {
         validResponse.cancellable?.cancel()
     }
     
+    func testGenericSend() {
+        // Setup fixture
+        URLProtocolMock.testURLs = [mock.testURL: Data(Fixture.dummyResponse.utf8)]
+        
+        // 1. Valid response
+        URLProtocolMock.response = mock.validResponse
+        let publisher: AnyPublisher<Fixture.DummyCodable, Error> = api.send(request: mock.testRequest)
+        
+        let validTest = PublisherHelper.shared.evalValidResponseTest(publisher: publisher)
+        wait(for: validTest.expectations, timeout: self.timeout)
+        validTest.cancellable?.cancel()
+        
+        // 2. Invalid response due to invalid http response
+        URLProtocolMock.response = mock.invalidResponse
+        let publisher2: AnyPublisher<Fixture.DummyCodable, Error> = api.send(request: mock.testRequest)
+        let invalidTest = PublisherHelper.shared.evalInvalidResponseTest(publisher: publisher2)
+        wait(for: invalidTest.expectations, timeout: self.timeout)
+        invalidTest.cancellable?.cancel()
+        
+        // 3. Invalid respponse due to invalid data
+        URLProtocolMock.testURLs = [mock.testURL: Data(Fixture.emptyJSON.utf8)]
+        URLProtocolMock.response = mock.validResponse
+        let publisher3: AnyPublisher<Fixture.DummyCodable, Error> = api.send(request: mock.testRequest)
+        let invalidTest2 = PublisherHelper.shared.evalInvalidResponseTest(publisher: publisher3)
+        wait(for: invalidTest2.expectations, timeout: self.timeout)
+        invalidTest2.cancellable?.cancel()
+        
+        // 4. Invalid response due to network error
+        URLProtocolMock.testURLs = [mock.testURL: Data(Fixture.dummyResponse.utf8)]
+        URLProtocolMock.error = mock.networkError
+        let publisher4: AnyPublisher<Fixture.DummyCodable, Error> = api.send(request: mock.testRequest)
+        let invalidTest3 = PublisherHelper.shared.evalInvalidResponseTest(publisher: publisher4)
+        wait(for: invalidTest3.expectations, timeout: self.timeout)
+        invalidTest3.cancellable?.cancel()
+    }
+    
     func evalValidResponseTest<T:Publisher>(publisher: T?) -> (expectations:[XCTestExpectation], cancellable: AnyCancellable?) {
         XCTAssertNotNil(publisher)
         

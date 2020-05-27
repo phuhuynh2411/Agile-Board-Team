@@ -36,6 +36,6 @@ struct IssueProjectRowView: View {
 
 struct IssueProjectRowView_Previews: PreviewProvider {
     static var previews: some View {
-        IssueProjectRowView(project: issueData[0].project)
+        IssueProjectRowView(project: issueData[0].project!)
     }
 }

@@ -24,6 +24,14 @@ class API <ResponseData: Codable> {
         return decoder
     }
     
+    /// Default JSONEncoder for the API
+    var defaultJSONEncoder: JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        return encoder
+    }
+    
     // A request timeout
     var timeoutInterval: TimeInterval = 10.0
     
@@ -81,6 +89,14 @@ class API <ResponseData: Codable> {
             .dataTaskPublisher(for: request)
             .tryMap { try self.validate($0.data, $0.response) }
             .decode(type: ResponseData.self, decoder: self.defaultJSONDecoder )
+            .eraseToAnyPublisher()
+    }
+    
+    internal func send<T: Codable> (request: URLRequest) -> AnyPublisher<T, Error> {
+        return publisher
+            .dataTaskPublisher(for: request)
+            .tryMap { try self.validate($0.data, $0.response) }
+            .decode(type: T.self, decoder: self.defaultJSONDecoder )
             .eraseToAnyPublisher()
     }
     

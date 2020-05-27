@@ -52,7 +52,7 @@ struct IssueIDView: View {
     var body: some View {
         HStack {
             self.iconView
-            Text(issue.issueNumber)
+            Text(issue.issueNumber ?? "")
                 .font(.system(size: 14))
                 .foregroundColor(.secondary)
             Spacer()
@@ -182,7 +182,7 @@ private struct IssueProjectButtonView: View {
     var body: some View {
         NavigationLink(destination: ProjectListView(navDisplayMode: .inline, useDefaultNavView: false)
             .environmentObject(ProjectListModel(self.issue.project, issue: self.issue))) {
-                IssueProjectRowView(project: self.issue.project)
+                self.issue.project.map{ IssueProjectRowView(project: $0) }
         }
     }
 }

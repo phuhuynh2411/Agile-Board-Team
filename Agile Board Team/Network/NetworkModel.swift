@@ -36,6 +36,14 @@ extension NetworkModel {
             .eraseToAnyPublisher()
     }
     
+    func send<T: Codable>(request: URLRequest) -> AnyPublisher<T, Error> {
+        return publisher
+            .dataTaskPublisher(for: request)
+            .tryMap { try self.validate($0.data, $0.response) }
+            .decode(type: T.self, decoder: self.jsonDecoder )
+            .eraseToAnyPublisher()
+    }
+    
     func getData(from url: URL, page: Int? = nil, numberOfItems: Int? = nil, keyword: String? = nil) -> AnyPublisher<Entry<ResponseData>, Error> {
         // Create a URL with parameters
         let url = self.parasWith(url: url, page: page, numberOfItems: numberOfItems, keyword: keyword)

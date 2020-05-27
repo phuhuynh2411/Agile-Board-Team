@@ -34,10 +34,13 @@ class APIIssue: API<Entry<APIIssue.ResponseData>> {
     
     enum IssueAPIError: Error, LocalizedError, Equatable {
         case failure(String)
+        case fieldRequired(String)
         
         var errorDescription: String? {
             switch self {
             case .failure(let errorMessage):
+                return NSLocalizedString(errorMessage, comment: "")
+            case .fieldRequired(let errorMessage):
                 return NSLocalizedString(errorMessage, comment: "")
             }
         }

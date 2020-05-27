@@ -11,9 +11,9 @@ import Combine
 
 class Issue: Codable, Identifiable, ObservableObject {
     @Published var id: String
-    @Published var projectId: String
-    @Published var typeId: String
-    @Published var priorityId: String
+    @Published var projectId: String?
+    @Published var typeId: String?
+    @Published var priorityId: String?
     @Published var statusId: String
     @Published var userId: String
     @Published var assigneeId: String?
@@ -21,22 +21,22 @@ class Issue: Codable, Identifiable, ObservableObject {
     @Published var description: String?
     @Published var startDate: Date?
     @Published var endDate: Date?
-    @Published var createdAt: Date
-    @Published var updatedAt: Date
-    @Published var issueNumber: String
+    @Published var createdAt: Date?
+    @Published var updatedAt: Date?
+    @Published var issueNumber: String?
     
     @Published var type: IssueType?
     @Published var priority: IssuePriority?
     @Published var status: IssueStatus?
-    @Published var project: Project
+    @Published var project: Project?
     @Published var supporter: IssueReporter?
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
-        projectId = try container.decode(String.self, forKey: .projectId)
-        typeId = try container.decode(String.self, forKey: .typeId)
-        priorityId = try container.decode(String.self, forKey: .priorityId)
+        projectId = try? container.decode(String.self, forKey: .projectId)
+        typeId = try? container.decode(String.self, forKey: .typeId)
+        priorityId = try? container.decode(String.self, forKey: .priorityId)
         statusId = try container.decode(String.self, forKey: .statusId)
         userId = try container.decode(String.self, forKey: .userId)
         assigneeId = try? container.decode(String.self, forKey: .assigneeId)
@@ -45,13 +45,13 @@ class Issue: Codable, Identifiable, ObservableObject {
         description = try? container.decode(String.self, forKey: .description)
         startDate = try? container.decode(Date.self, forKey: .startDate)
         endDate = try? container.decode(Date.self, forKey: .endDate)
-        createdAt = try container.decode(Date.self, forKey: .createdAt)
-        updatedAt = try container.decode(Date.self, forKey: .updatedAt)
-        issueNumber = try container.decode(String.self, forKey: .issueNumber)
+        createdAt = try? container.decode(Date.self, forKey: .createdAt)
+        updatedAt = try? container.decode(Date.self, forKey: .updatedAt)
+        issueNumber = try? container.decode(String.self, forKey: .issueNumber)
         type = try? container.decode(IssueType.self, forKey: .type)
         priority = try? container.decode(IssuePriority.self, forKey: .priority)
         status = try? container.decode(IssueStatus.self, forKey: .status)
-        project = try container.decode(Project.self, forKey: .project)
+        project = try? container.decode(Project.self, forKey: .project)
         supporter = try? container.decode(IssueReporter.self, forKey: .supporter)
         
     }
