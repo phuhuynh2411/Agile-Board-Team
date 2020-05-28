@@ -56,6 +56,12 @@ class API <ResponseData: Codable> {
         return request
     }
     
+    internal func deleteRequest(url: URL, authen: Bool = false) -> URLRequest {
+        var request = self.request(url: url, authen: authen)
+        request.httpMethod = "DELETE"
+        return request
+    }
+    
     private func request(url: URL, authen: Bool = false) -> URLRequest {
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = self.defaultHeaders

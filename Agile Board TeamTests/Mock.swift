@@ -50,7 +50,7 @@ class Mock {
     
     let token = "testingToken"
     
-    let testURL = URL(string: "http://localhost:8080")!
+    var testURL = URL(string: "http://localhost:8080")!
     let testURLFullParas = URL(string: "http://localhost:8080?page=1&limit=1&search=keyword")!
     var testRequest: URLRequest {
         URLRequest(url: testURL)

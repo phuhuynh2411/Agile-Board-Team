@@ -24,4 +24,15 @@ extension Fixture {
         let entry: Entry<APIIssue.ResponseData> = Entry(meta: meta, data: data)
         return entry
     }
+    
+    static var deleteIssueResponseJSON = """
+    {
+        "meta": {
+            "success": true,
+            "statusCode": 200,
+            "message": "Delete issues success"
+        }
+    }
+    """
+    
 }

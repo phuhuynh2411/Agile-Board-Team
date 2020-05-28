@@ -304,4 +304,12 @@ class APITest: XCTestCase {
          return (expectations: [expectationFinished, expectationReceive, expectationFailure],
                        cancellable: cancellable)
     }
+    
+    func testDeleteRequest() {
+        let request = api.deleteRequest(url: mock.testURL)
+        // 1. make sure the http method is DELETE
+        XCTAssertEqual(request.httpMethod!, "DELETE")
+        // 2. make sure the url is correct
+        XCTAssertEqual(request.url?.absoluteString, "\(mock.testURL)")
+    }
 }
