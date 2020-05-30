@@ -27,7 +27,7 @@ extension APIIssue {
     }
     
     private func replace(entry: Entry<DeleteIssueResponse>, with issue: Issue) -> Issue {
-        return issue
+           return issue
     }
     
     struct DeleteIssueResponse: Codable {}

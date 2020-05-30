@@ -99,4 +99,11 @@ extension Mock {
         let entry: Entry<APIIssue.AddResponse> = Entry(meta: meta, data: data)
         return entry
     }
+    
+    var validUPdateIssueRepsonse: Entry<APIIssue.AddResponse> {
+        let meta = MetaData(success: true, statusCode: 200, message: "", errors: nil)
+        let data: APIIssue.AddResponse = APIIssue.AddResponse(data: validIssue)
+        let entry: Entry<APIIssue.AddResponse> = Entry(meta: meta, data: data)
+        return entry
+    }
 }
