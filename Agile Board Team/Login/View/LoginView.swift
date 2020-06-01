@@ -45,22 +45,7 @@ struct LoginView: View {
                 }
             }
             
-            self.circularView
-        }
-        .onReceive(loginMV.$isInprogress) { (value) in
-            withAnimation(.easeInOut(duration: 0.5)) {
-                self.isAnimating = value
-            }
-        }
-    }
-    
-    var circularView: some View {
-        Group {
-            if self.isAnimating {
-                InfiniteProgressView()
-                    .frame(width: 30, height: 30)
-                    .transition(.scale)
-            }
+            RefreshView(refreshingPublisher: self.loginMV.$isInprogress)
         }
     }
 }

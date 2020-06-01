@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct RootView: View {
     
-   @EnvironmentObject var contentMV: ViewRouter
+   @EnvironmentObject var contentMV: RootViewModel
     
     var body: some View {
         ZStack {
@@ -25,6 +25,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(ViewRouter())
+        RootView().environmentObject(RootViewModel())
     }
 }

@@ -45,7 +45,7 @@ class LoginModel: ObservableObject {
         self.isInprogress = true
         self.errorMessage = ""
         
-        self.loginStream = Authentication.shared.login(username, password)
+        self.loginStream = APIAuthentication.shared.login(username, password)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { (completion) in
                 switch completion {

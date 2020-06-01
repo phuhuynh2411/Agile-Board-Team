@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 
-class ViewRouter: ObservableObject {
+class RootViewModel: ObservableObject {
     @Published var managedView: ManagedView = .login
     var loginStream: AnyCancellable?
     var reloginStream: AnyCancellable?
