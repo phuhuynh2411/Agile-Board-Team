@@ -33,8 +33,10 @@ class IssueTypeListModel: BaseListModel<IssueType, IssueTypeData> {
         // Start progress bar
         self.isRefreshing = true
         
-        let issueAPI = IssueAPI(issue)
-        self.updateIssueTypeStream = issueAPI.update(issueType: issueType)
+        let issueAPI = APIIssue()
+        let updateIssueRequest = UpdateIssueRequest(typeId: issueType.id)
+        
+        self.updateIssueTypeStream = issueAPI.updateIssue(id: issue.id, requestBody: updateIssueRequest)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { (completion) in
                 self.isRefreshing = false

@@ -59,5 +59,5 @@ class Mock {
     
     let testSearch = "testSearch"
     
-    let updateIssue = UpdateIssueRequest(projectId: "1", parentId: "1", categoryId: "1", typeId: "1", priorityId: "1", statusId: "1", assigneedId: "1", name: "name", description: "des", startDate: Date(timeIntervalSince1970: 1), endDate: Date(timeIntervalSince1970: 1))
+    let updateIssue = UpdateIssueRequest(projectId: "1", parentId: "1", categoryId: "1", typeId: "1", priorityId: "1", statusId: "1", assigneeId: "1", name: "name", description: "des", startDate: Date(timeIntervalSince1970: 1), endDate: Date(timeIntervalSince1970: 1))
 }

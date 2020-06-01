@@ -31,7 +31,8 @@ extension IssueAPI {
     
     func update(issueType: IssueType) -> AnyPublisher<Entry<Issue>, Error>{
         let request = self.buildUpdateIssueTypeRequest(issueType)
-        return self.send(request: request)
+        let response: AnyPublisher<Entry<Issue>, Error> = self.send(request: request)
+        return response
             .tryMap { try self.validateResponse(entry: $0) }
             .eraseToAnyPublisher()
     }

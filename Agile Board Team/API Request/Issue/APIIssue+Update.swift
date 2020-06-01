@@ -20,9 +20,9 @@ extension APIIssue {
     
     func updateIssue(id: String, requestBody: UpdateIssueRequest) -> AnyPublisher<Issue, Error> {
         let request = buildUpdateIssueRequest(id: id, requestBody: requestBody)
-        let response: AnyPublisher<Entry<UpdateIssueResponse>, Error> = send(request: request)
+        let response: AnyPublisher<Entry<Issue>, Error> = send(request: request)
         
-        return response.compactMap {$0.data?.data }
+        return response.compactMap { $0.data }
             .eraseToAnyPublisher()
     }
 

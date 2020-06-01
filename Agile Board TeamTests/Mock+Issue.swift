@@ -100,10 +100,10 @@ extension Mock {
         return entry
     }
     
-    var validUPdateIssueRepsonse: Entry<APIIssue.AddResponse> {
+    var validUpdateIssueRepsonse: Entry<Issue> {
         let meta = MetaData(success: true, statusCode: 200, message: "", errors: nil)
-        let data: APIIssue.AddResponse = APIIssue.AddResponse(data: validIssue)
-        let entry: Entry<APIIssue.AddResponse> = Entry(meta: meta, data: data)
+        let data = self.validIssue
+        let entry: Entry<Issue> = Entry(meta: meta, data: data)
         return entry
     }
 }

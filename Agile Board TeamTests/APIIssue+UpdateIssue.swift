@@ -48,7 +48,7 @@ class APIIssueUpdateIssue: XCTestCase {
     }
     
     func testUpdateIssue() {
-        URLProtocolMock.testURLs = [mock.testURL.appendingPathComponent(mock.validIssue.id): try! apiIssue.defaultJSONEncoder.encode(mock.validUPdateIssueRepsonse)]
+        URLProtocolMock.testURLs = [mock.testURL.appendingPathComponent(mock.validIssue.id): try! apiIssue.defaultJSONEncoder.encode(mock.validUpdateIssueRepsonse)]
         URLProtocolMock.response = mock.validResponse
         // 1. Valid response
         let publisher = apiIssue.updateIssue(id: mock.validIssue.id, requestBody: mock.updateIssue)
